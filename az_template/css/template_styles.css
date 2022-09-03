@@ -1,0 +1,616 @@
+/*
+  $Id: template_styles.css,v 1.0 17:37:59 06/17/2009  
+
+  Cascading Stylesheets for AlgoZone template
+
+  Copyright (c) 2009 AlgoZone, Inc (www.algozone.com)
+
+*/
+
+
+/*------------------------------------------*/
+/*             Common Css                   */
+/*------------------------------------------*/
+BODY {
+  font-size:12px;
+  font-family:Arial, Helvetica, sans-serif;
+  color:#000;
+  margin: 0px;
+  background-color:#f5f5f5;
+  background-image:url(../images/az_grid.gif);
+  background-repeat:repeat-x;
+  background-position:top ;
+  line-height:16px
+}
+
+CHECKBOX, INPUT, RADIO, SELECT {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 11px;
+  color:#000000;
+  padding:1px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+TEXTAREA {
+  width: 90%;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 11px;
+  color:#000000;
+}
+
+FORM {
+	display: inline;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+
+/*------------------------------------------*/
+/*             Coomon Css End               */
+/*------------------------------------------*/
+
+
+
+/*------------------------------------------*/
+/*             Helper Css                   */
+/*------------------------------------------*/
+.clear{
+	clear:both;
+	height:0;
+	line-height:0;
+	font-size:0;
+}
+.fL{float:left}
+.fR{float:right}
+
+.f_left { float:left}
+.f_right { float:right}
+
+.t_left { text-align:left}
+.t_right { text-align:right}
+
+.width50p { width:50% }
+.no_overflow { overflow:hidden}
+/*------------------------------------------*/
+/*             Helper Css END               */
+/*------------------------------------------*/
+
+
+/*------------------------------------------*/
+/*             Main Struct                  */
+/*------------------------------------------*/
+.wrapper{
+	margin:auto auto;
+}
+.az_main_container_side_l{
+	float: left;
+	width:15px;
+	height: 1px;
+}
+.az_main_container_side_r{
+    float: left;
+	width:15px;
+	height: 1px;
+}
+.az_main_container{
+	width:966px;
+	text-align:left;
+	clear:both
+	
+}
+/*------------------------------------------*/
+/*             Main Struct END              */
+/*------------------------------------------*/
+
+
+/*------------------------------------------*/
+/*             Header                       */
+/*------------------------------------------*/
+.az_info_bar{
+}
+.az_info_bar_1, .az_info_bar_2, .az_info_bar_3, .az_info_bar_4{
+   vertical-align:middle;
+}
+.az_info_bar_1 td, .az_info_bar_2 td, .az_info_bar_3 td, .az_info_bar_4 td{
+	vertical-align:middle
+}
+.az_info_bar_1{
+    width: 364px;
+}
+.az_info_bar_2{
+    width: 240px;
+}
+.az_info_bar_3{
+    width: 240px;
+}
+.az_info_bar_4{
+    width: 310px;
+	background:none;
+	text-align:left;
+}
+/********************** additional infobar ***************************/
+.az_info_bar1{
+    height: 60px;
+}
+.az_info_bar1_1, .az_info_bar1_2, .az_info_bar1_3, .az_info_bar1_4{
+   height: 60px;
+   display:table-cell;
+   vertical-align:middle;
+}
+.az_info_bar1_1 td, .az_info_bar1_2 td, .az_info_bar1_3 td, .az_info_bar1_4 td{
+	vertical-align:middle
+}
+.az_info_bar1_1{
+    width: 15px;
+	background: url(../images/az_navbox_left.gif) no-repeat ; 
+}
+.az_info_bar1_2{
+    width: 200px;
+	background: url(../images/az_navbox_mid.gif) repeat-x ; 
+}
+.az_info_bar1_3{
+	background: url(../images/az_navbox_mid.gif) repeat-x ; 
+    width:738px;
+}
+.az_info_bar1_4{
+    width: 17px;
+	background: url(../images/az_navbox_right.gif) no-repeat ; 
+}
+/********************** additional infobar ***************************/
+
+
+.az_main_header{
+    height: 197px;    
+}
+.az_header_left{
+    width: 12px;
+    height: 197px;	
+	background: url(../images/az_menubox_left.gif) no-repeat ; 
+    float: left;
+}
+.az_header_logo{
+    height: 197px;
+    width: 945px;
+    float: left;		
+}
+.az_header_banner{display:none;}
+.az_header_right{
+    float: left;	
+    width: 13px;
+    height: 197px;	
+	background: url(../images/az_menubox_right.gif) no-repeat ; 
+}
+.az_header_bottom {
+	background:transparent url(../images/az_header_bottom_bg.jpg) no-repeat ;
+	height:120px;
+	width:970px;
+}
+
+
+/*------------------------------------------*/
+/*             Header Css END               */
+/*------------------------------------------*/
+	
+
+/*------------------------------------------*/
+/*             Content Css                  */
+/*------------------------------------------*/
+.az_main_content{
+	margin:26px 0px 26px 0px;
+	background:url(../images/az_main_content_bg.gif) left top repeat-y
+}
+.main_page .az_main_content{
+	background: none;
+	margin:0;
+	width:966px;
+}
+.az_left_bar{
+    width: 239px;
+    float: left;
+}
+.az_left_bar_inner{
+    padding:0px 0px 0px 17px
+}
+.az_site_content{
+    float: left;
+    width: 696px;
+}
+.main_page .az_site_content{
+    float: none;
+	width:966px;
+}
+.az_site_content_inner{
+	padding:0;
+}
+/*------------------------------------------*/
+/*             Content Css End              */
+/*------------------------------------------*/
+
+
+
+/*------------------------------------------*/
+/*        az_infobox Left Css               */
+/*------------------------------------------*/
+.az_left_bar .az_box_new, .az_box_other {
+	width:194px;
+}
+.az_left_bar .az_box_bottom_new {
+	margin-bottom:33px;
+}
+
+.az_left_bar .boxContents,  .az_box_other .boxContents{
+	padding:20px 0px 20px 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#000;
+	text-align: left
+}
+
+.az_left_bar .boxTitle, .az_left_bar .boxTitle a {
+	line-height:24px;
+	color:#000;
+	font-size:22px;
+	font-family:SignikaLight
+}
+.az_left_bar .boxTitle a:hover {
+	color:#000
+}
+
+
+.az_box_other .boxContents {
+	text-align:center
+}
+
+
+/*------------------------------------------*/
+/*            az_infobox Left Css END       */
+/*------------------------------------------*/
+
+/*------------------------------------------*/
+/*            buttons 				        */
+/*------------------------------------------*/
+.az-template-submit {
+  border:none;
+  padding:0;
+  background:none;
+  overflow:visible;
+  cursor:pointer;
+  width:auto !important;
+  width:0;
+  white-space:nowrap;
+  text-decoration: none
+}
+
+.az-template-button {
+  white-space:nowrap;
+  position:relative;
+   text-decoration: none
+}
+
+.azbutton {
+	border:none;
+	border:0 none;
+	padding:0;	
+	margin:0 !important;
+	background:none;
+	overflow:visible;
+	cursor:pointer;
+	vertical-align:top;
+    text-decoration: none
+}
+.az-button-left, .az-button-middle, .az-button-right, 
+.az-button-left2, .az-button-middle2, .az-button-right2{
+	font-family: Arial, Helvetica, sans-serif;
+    font-size:12px;
+    color:#ffffff;
+    padding:0;
+    margin:0;
+    vertical-align: middle;
+    display:inline-block;  
+    cursor:pointer;
+    text-decoration:none;
+}
+
+
+
+.az-button-left2, 
+.azbutton_left2, 
+.azbutton_left{
+   width:2px;
+   height:18px;
+   background-color:#a2a2a2;
+}
+.az-template-submit .az-button-left, .az-button-left {
+   background-color:#a2a2a2;
+   width:2px;
+   height:18px;
+}
+
+
+.az-button-middle2, .azbutton_mid2, .az-template-submit .az-button-middle, .az-button-middle, .azbutton_mid {
+   white-space:nowrap;
+   background-color:#3581f1;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height:18px;
+    font-size:9px;
+    color:#ffffff;
+	text-transform:uppercase;
+	padding-left:5px;
+	padding-right:5px
+}
+
+.az-template-submit .az-button-middle {
+    font-size:9px;
+	line-height:18px;
+    color:#ffffff;
+   text-decoration:none;
+}
+.az-button-right2, .azbutton_right2, .az-template-submit .az-button-right, .az-button-right, .azbutton_right {
+   background-color:#a2a2a2;
+   width:2px;
+   height:18px;
+}
+
+.azbutton_mid, .azbutton_mid2{
+	font-family: Arial, Helvetica, sans-serif;
+    font-size:12px;
+    color:#ffffff;
+    font-weight: normal;
+	white-space:nowrap;
+	cursor:pointer;
+	
+}
+.az-button-text, .az-button-text:hover {
+   text-align:center;
+   display:block;
+   text-decoration:none
+}
+
+/*------------------------------------------*/
+/*            buttons 				        */
+/*------------------------------------------*/
+
+
+/*------------------------------------------*/
+/*        az_infobox CONTENT Css            */
+/*------------------------------------------*/
+.az_site_content .az_box_new {
+}
+.az_site_content .az_box_bottom_new {
+	margin-bottom:0px;
+}
+.az_site_content .az_box_cont_new {
+}
+.az_site_content .az_box_cont_l_new {
+	background: url(../images/az_ibox_left.gif) top left repeat-y ;
+}
+.az_site_content .az_box_cont_m_new {
+	background:#F1F1F1 none repeat scroll 0 0;
+}
+.az_site_content .az_box_cont_r_new {
+	background: url(../images/az_ibox_right.gif) top right repeat-y ;
+	padding:0 1px;
+}
+.az_site_content .boxContents {
+	font-family:Tahoma,Verdana,Arial,sans-serif;
+	font-size:10px;
+	color:#ffd8de
+}
+
+.az_site_content .az_box_top_new {
+}
+.az_site_content .az_box_top_l_new {
+    background:url(../images/az_ibox_header_left.gif) top left no-repeat;
+}
+.az_site_content .az_box_top_m_new {
+	background:url(../images/az_ibox_header_mid.gif) top left repeat-x;
+}
+.az_site_content .az_box_top_r_new {
+	background:url(../images/az_ibox_header_right.gif) top right no-repeat;
+	padding:0 10px 0 11px;
+}
+
+.az_site_content .az_box_bottom_new {
+}
+.az_site_content .az_box_bottom_l_new {
+	background: url(../images/az_ibox_footer_left.gif) no-repeat  left bottom;
+}
+.az_site_content .az_box_bottom_m_new {
+	background:#F1F1F1 url(../images/az_ibox_footer_mid.gif) left bottom repeat-x;
+    height:7px;
+}
+.az_site_content .az_box_bottom_r_new {
+	background:url(../images/az_ibox_footer_right.gif) right bottom no-repeat;
+	padding:0 8px 0 8px;
+	
+}
+/*------------------------------------------*/
+/*            az_infobox CONTENT Css END    */
+/*------------------------------------------*/
+
+
+/*------------------------------------------*/
+/*             product box Css              */
+/*------------------------------------------*/
+.productBox_Top, .productBox_Bottom { 
+	font-size:0;
+	line-height:0;
+}
+
+.productBoxTop {
+	background:url(../images/az_pbox_ver.gif) top repeat-x;
+	background-color: #edf4fb;
+}
+.productBoxBottom {
+	background:url(../images/az_pbox_ver.gif) bottom repeat-x;
+	background-color: #edf4fb;
+}
+.productBoxL {
+	background:url(../images/az_pbox_ver.gif) left repeat-y;
+	width: 1px;
+}
+.productBoxC {
+	background-color: #edf4fb;
+}
+.productBoxR {
+}
+
+/* az_productbox settings */
+.az_pbox_new {
+	width:232px;
+	margin:0px 0px 30px 0px;
+}
+/* eof: az_productbox settings */
+
+/*------------------------------------------*/
+/*             product box Css END          */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*             Template Css                 */
+/*------------------------------------------*/
+
+.topboxText1{
+	font:11px/13px Tahoma;
+	color:#000
+}
+
+#sitelink {
+	color:#004061;
+	font-family:Tahoma, Arial, Helvetica;
+	font-size:11px;
+	margin-left:10px;
+}
+#sitelink:hover {
+	color:#004061;
+	text-decoration:underline;
+}
+
+.az_cartbox_mid {
+	background:#fff;
+}
+
+.top-search {width:200px;}
+.top-search td { text-align:left;}
+
+
+.az_header_bottom div{
+	font:normal 11px Tahoma;	
+	color:#fff;
+	padding: 40px 0 0 40px;
+	width:300px;
+}
+
+.az_header_bottom a {
+	color:#fff;
+	font-weight:bold;
+	text-decoration:underline;
+}
+.az_header_bottom a:hover {
+	text-decoration:none;
+}
+
+.az_footer_cards{
+	float:right
+}
+.az_footer_note{
+	width:200px;
+	padding:0 10px;
+}
+.az_footer_note, .az_footer_note a {
+	font-size:10px;
+	color:#FFF;
+}
+.az_footer_note a {
+	text-decoration:underline
+}
+.az_footer_menu_tb{
+	float:left
+}
+
+ul.pagenav {
+	list-style:none;
+	padding:0;
+	margin:0 0 0 20px;
+	float:left;
+}
+ul.pagenav li {
+	float:left;
+	font-family:Tahoma;
+	font-size:11px;
+	font-weight:normal;
+	background:url(../images/az_bullet1.gif) left 3px no-repeat;
+	padding:4px 0 4px 22px;
+	margin-right:20px;
+}
+
+ul.pagenav a {
+	color:#1e364f;
+	text-transform:lowercase;
+	text-decoration:underline;
+}
+ul.pagenav a:hover {
+	color: #8ba2b7;
+}
+
+
+.az_cat_nav, .az_cat_nav2 {
+	color:#004061;
+	text-align:left;
+	margin-bottom:4px;
+}
+.az_cat_nav2 .subcat {
+	margin-left:15px;
+}
+.az_cat_nav a, .az_cat_nav2 a {
+	color:#2a2a2a;
+	font-size:12px;
+	font-weight: normal;
+	text-decoration: none;
+}
+.az_cat_nav a:hover, .az_cat_nav2 a:hover {
+	color:#333333;
+	text-decoration:underline
+}
+.az_cat_nav2 a {
+	font-weight:normal;
+}
+
+.az_cat_nav_sel{color:#218596}
+
+.az_nav {
+	margin-bottom:4px;
+	text-indent:8px;
+	text-align:left;
+}
+
+a.az_sidebox_link {
+	color:#536475;
+	font-size:12px;
+	font-weight:bold;
+	text-transform:lowercase;
+}
+
+span.cartTitle {
+    font:bold 11px/13px Tahoma;
+    color:#232323;
+}
+span.cartItems {
+	font-weight:bold;
+	color:#567695;
+}
+span.cartPrice {
+    font:11px/13px Arial, Helvetica, sans-serif;
+    color:#98524f;
+}
+
+/*------------------------------------------*/
+/*             Template Css End             */
+/*-------------------_ -----------------------*/

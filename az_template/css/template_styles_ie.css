@@ -1,0 +1,38 @@
+/*
+  $Id: template_styles.css,v 1.0 17:37:59 06/17/2009  
+
+  Cascading Stylesheets for oscommerce and AlgoZone template
+  Cart Specific CSS
+
+  Copyright (c) 2009 AlgoZone, Inc (www.algozone.com)
+
+*/
+
+.az_info_bar_1, .az_info_bar_2, .az_info_bar_3, .az_info_bar_4{
+   float:left;
+}
+.az_info_bar1_1, .az_info_bar1_2, .az_info_bar1_3, .az_info_bar1_4{
+   float:left;
+}
+.az_product_list_review, .az_product_list_price{
+	float:left;
+}
+.vertical-align, .az_footer_note_wrapper {
+	margin-top: expression(((this.parentElement.offsetHeight/2)-(parseInt(this.offsetHeight)/2) -2) <0 ? "0" : (this.parentElement.offsetHeight/2)-(parseInt(this.offsetHeight)/2) -2 +'px');
+}
+.az_footer_note .vertical-align {
+	margin-top: 0;
+}
+
+.az-button-text {display:block;}
+
+.az_footer_cards{
+	float:left;
+}
+.az_footer_note{
+	float:left;
+}
+.az_footer_menu_tb{
+	float:left;
+}
+
