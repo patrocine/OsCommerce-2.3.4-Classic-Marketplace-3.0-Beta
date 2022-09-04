@@ -1,0 +1,60 @@
+<?php
+/*
+  $Id$
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2010 osCommerce
+
+  Released under the GNU General Public License
+*/
+
+  require(DIR_WS_INCLUDES . 'counter.php');
+?>
+<div class="grid_24 ui-widget infoBoxContainer">
+
+  <div class="ui-widget-header infoBoxHeading ui-corner-all" style="text-align: right; font-size: 11px; ">
+
+<a href="<?php echo tep_href_link('advanced_search.php')?>"><?php echo IMAGE_BUTTON_SEARCH?></a><?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?>| <?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?><a href="<?php echo tep_href_link('reviews.php')?>"><?php echo IMAGE_BUTTON_REVIEWS?></a><?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?>|<?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?><?php if (tep_session_is_registered('customer_id')) {
+?><a href="<?php echo tep_href_link('account.php')?>"><?php echo HEADER_TITLE_MY_ACCOUNT?></a><?php } else
+{ ?><a href="<?php echo tep_href_link('create_account.php')?>"><?php echo HEADER_TITLE_CREATE_ACCOUNT?></a><?php }
+?><?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?>|<?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?><?php if (tep_session_is_registered('customer_id')) {
+?><a href="<?php echo tep_href_link('logoff.php')?>"><?php echo HEADER_TITLE_LOGOFF?></a><?php } else
+{ ?><a href="<?php echo tep_href_link('login.php')?>"><?php echo HEADER_TITLE_LOGIN?></a><?php }
+?><?php echo tep_draw_separator('pixel_trans.gif', '15', '1'); ?>
+   </div>
+</div>
+
+
+
+<?php echo STORE_NAME_ADDRESS; ?>
+
+    </div>
+
+    </td>
+
+  </tr>
+
+  <tr>
+      </div>
+
+    </td>
+
+  </tr>
+
+  <tr>
+    <td width="100%" height="61">
+
+    <p align="center"><br /><small><a href="http://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=<?php echo STORE_NAME; ?>&amp;sll=-48.922499,4.21875&amp;sspn=179.032439,172.96875&amp;ie=UTF8&amp;hq=<?php echo STORE_NAME; ?>&amp;hnear=&amp;t=h&amp;ll=28.393269,-16.519269&amp;spn=0.555264,0.1146" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+  </tr>
+<table border="0" width="100%" id="table1">
+	<tr>
+		<td>
+		<p align="center"><iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.es/maps/ms?msa=0&amp;msid=207055544977917953960.0004c6e54a3b3fa880c65&amp;ie=UTF8&amp;t=h&amp;ll=28.41639,-16.548843&amp;spn=0.013211,0.018282&amp;z=15&amp;output=embed"></iframe><br /><small><a href="http://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=<?php echo STORE_NAME; ?>&amp;sll=-48.922499,4.21875&amp;sspn=179.032439,172.96875&amp;ie=UTF8&amp;hq=<?php echo STORE_NAME; ?>&amp;hnear=&amp;t=h&amp;ll=28.393269,-16.519269&amp;spn=0.555264,0.1146" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+$('.productListTable tr:nth-child(even)').addClass('alt');
+</script>

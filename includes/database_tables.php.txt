@@ -1,0 +1,1 @@
+ define('TABLE_PRODUCTS_GROUPS', 'products_groups');
