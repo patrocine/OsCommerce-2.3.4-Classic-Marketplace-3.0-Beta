@@ -1,0 +1,4 @@
+  if (tep_admin_check_boxes('patrocine.php') == true) {
+    require(DIR_WS_BOXES . 'patrocine.php');
+  }
+  

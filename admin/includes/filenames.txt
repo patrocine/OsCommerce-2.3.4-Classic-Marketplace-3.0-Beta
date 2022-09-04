@@ -1,0 +1,4 @@
+
+define('TABLE_LOGINRADIUS_SETTING', 'loginradius_setting');
+  define('FILENAME_SOCIALLOGINANDSOCIALSHARE', 'socialloginandsocialshare.php');
+

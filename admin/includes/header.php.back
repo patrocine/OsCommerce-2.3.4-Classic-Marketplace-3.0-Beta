@@ -1,0 +1,26 @@
+<?php
+/*
+  $Id$
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2008 osCommerce
+
+  Released under the GNU General Public License
+*/
+
+  if ($messageStack->size > 0) {
+    echo $messageStack->output();
+  }
+?>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, '', 'NONSSL') . '">' . tep_image(DIR_WS_IMAGES . 'oscommerce.png', 'osCommerce Online Merchant v' . tep_get_version()) . '</a>'; ?></td>
+  </tr>
+  <tr class="headerBar">
+    <td class="headerBarContent">&nbsp;&nbsp;<?php echo '<a href="' . tep_href_link('index.php', '', 'NONSSL') . '" class="headerLink">' . 'PRINCIPAL ' . '<a href="' . tep_href_link('create_order_tienda.php', '', 'NONSSL') . '" class="headerLink">' . '(Crear - ' . '<a href="' . tep_href_link('orders_tienda.php', '', 'NONSSL') . '" class="headerLink">' . 'Localizar)' . '</a> &nbsp;|&nbsp; <a href="' . 'conceptos_stock.php' . '" class="headerLink">' . 'Stock en Almacen' . '</a> &nbsp;|&nbsp; <a href="whos_online.php" class="headerLink">' . 'Ver Clientes Online' . '</a>'; ?></td>
+    <td class="headerBarContent" align="right"><?php echo (tep_session_is_registered('admin') ? 'Logged in as: ' . $admin['username']  . ' (<a href="' . tep_href_link(FILENAME_LOGIN, 'action=logoff') . '" class="headerLink">Logoff</a>)' : ''); ?>&nbsp;&nbsp;</td>
+  </tr>
+</table>
