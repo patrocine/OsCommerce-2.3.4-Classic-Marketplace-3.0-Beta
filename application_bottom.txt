@@ -1,3 +1,0 @@
-// al final
-   <?php require('social_sharing_footer.php'); ?>
-
