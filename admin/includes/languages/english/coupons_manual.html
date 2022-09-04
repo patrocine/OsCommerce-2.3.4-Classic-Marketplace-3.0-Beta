@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Como utilizar el modulo de codigos de cupones de descuento</title>
+<style type="text/css">
+<!--
+.tableBorder {
+	border: 1px solid #333333;
+}
+body {
+	font-family: Tahoma, "Trebuchet MS", Verdana, Arial, sans-serif;
+	font-size: 10pt;
+}
+.code {
+	font-family: "Courier New", Courier, mono;
+	font-size: 10pt;
+	background-color: #FFFFCC;
+	border: 1px solid #333333;
+	overflow: auto;
+	margin: 5px;
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+}
+h3 {
+	font-family: Tahoma, "Trebuchet MS", Verdana, Arial, sans-serif;
+	font-size: 14pt;
+	font-weight: bolder;
+	font-variant: normal;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #333333;
+	border-left-width: 10px;
+	border-left-style: solid;
+	border-left-color: #333333;
+	padding-left: 10px;
+	margin-top: 50px;
+}
+h2 {
+	font-family: Tahoma, "Trebuchet MS", Verdana, Arial, sans-serif;
+	font-size: 16pt;
+	font-weight: bolder;
+	color: #99CCCC;
+	background-color: #333333;
+	text-align: center;
+	padding: 5px;
+}
+h4 {
+	font-family: Tahoma, "Trebuchet MS", Verdana, Arial, sans-serif;
+	font-size: 14pt;
+	font-weight: bolder;
+	font-style: italic;
+}
+li {
+	margin-bottom: 10px;
+}
+.notice {
+	background-color: #BFDFFF;
+	padding: 2px;
+	border: 1px solid #666666;
+	margin: 20px;
+	width: 95%;
+}
+.style1 {color: #0000FF}
+-->
+</style>
+</head>
+
+<body>
+<h2>Como utilizar el modulo de codigos de cupones de descuento</h2>
+<h3>Contenidos:</h3>
+<ul>
+  <li><a href="#configure">Configuracion del modulo	Total del pedido</a></li>
+  <li><a href="#creating">Creacion de codigos de cupones de descuento</a>
+    <ul>
+      <li><a href="#fields">Explicacion de los campos</a>
+      </li>
+    </ul>
+  </li>
+  <ul>
+    <li><a href="#exclusions">Exclusiones</a></li>
+  </ul>
+  <li><a href="#support">Soporte</a></li>
+</ul>
+<h3><a name="configure"></a>Configuracion del modulo Total del pedido</h3>
+ <p>Para configurar el modulo de codigos de cupones de descuento, ir a <strong>Modulos -&gt; Totalizacion -&gt; Cupones de descuento</strong> del admin de su sitio web. Haga click en el boton <strong>Edit</strong> del lado derecho de la pantalla para editar las opciones de configuracion. Las explicaciones para cada opcion se indican a continuacion:</p>
+ <ul><li><strong>Habilitar cupon de descuento?</strong>     <br>
+   Establezca esta opcion en true para utilizar el modulo de cupones de descuento. Si se configura en false, el cuadro de codigo promocional de descuento no aparecera en la pagina de pedir el pago    </li>
+   <li><strong>Ordenar pedidos</strong>     <br>
+   Ponga esto en un valor unico. El modulo Total de cada pedido debe tener un unico orden o no se muestra correctamente</li>
+   <li><strong>Pantalla de descuento con signo menos (-)?</strong>     <br>
+   Esta opcion en true hara que se muestre en pantalla el descuento con un signo menos en la confirmacion del pedido, factura, etc. Si esto se establece en false, la linea de descuento simplemente mostrar la cantidad de descuento sin signo menos delante  </li>
+   <li><strong>Mostrar subtotal con descuento aplicado?</strong>     <br>
+     Establezca esta opcion en true para mostrar el subtotal con el descuento aplicado. Si esta opcion se establece en true, se establece el orden de clasificacion para que los cupones de descuento se muestren antes del subtotal en el pedido. De este modo:
+       <br>
+       <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableBorder">
+         <tr>
+           <td align="right">Producto Doodle x 1:&nbsp;&nbsp;&nbsp;</td>
+           <td>$25.00</td>
+         </tr>
+         <tr>
+           <td align="right">&nbsp;Cupon de descuento XYZ aplicado:&nbsp;&nbsp;&nbsp;</td>
+           <td>-$5.00</td>
+         </tr>
+         <tr>
+           <td align="right">Subtotal:&nbsp;&nbsp;&nbsp;</td>
+           <td>$20.00</td>
+         </tr>
+         <tr>
+           <td align="right">Impuestos:&nbsp;&nbsp;&nbsp;</td>
+           <td>&nbsp;&nbsp;$1.39</td>
+         </tr>
+         <tr>
+           <td align="right">Total:&nbsp;&nbsp;&nbsp;</td>
+           <td>$21.39</td>
+         </tr>
+       </table>
+       <br>
+         Si esta opcion se establece en false, el descuento no se aplicara al subtotal final. En este caso, tendra que establecer el orden de clasificacion de los cupones de descuento para que se muestre despues del subtotal en el pedido. De este modo:
+         <br>
+         <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableBorder">
+           <tr>
+             <td align="right">Producto Doodle x 1:&nbsp;&nbsp;&nbsp;</td>
+             <td>$25.00</td>
+           </tr>
+           <tr>
+             <td align="right">Subtotal:&nbsp;&nbsp;&nbsp;</td>
+             <td>$25.00</td>
+           </tr>
+           <tr>
+             <td align="right">&nbsp;Cupon de descuento XYZ aplicado:&nbsp;&nbsp;&nbsp;</td>
+             <td>-$5.00</td>
+           </tr>
+           <tr>
+             <td align="right">Impuestos:&nbsp;&nbsp;&nbsp;</td>
+             <td>&nbsp;&nbsp;$1.39</td>
+           </tr>
+           <tr>
+             <td align="right">Total:&nbsp;&nbsp;&nbsp;</td>
+             <td>$21.39</td>
+           </tr>
+         </table>
+   </li>
+   <li><strong>Excluir productos en oferta?</strong><br>
+     Si esto se establece en true, los descuentos no se aplicaran a los productos actualmente marcados como ofertas </li>
+   <li><strong>Longitud aleatoria del codigo</strong><br>
+     Cuando decide crear un nuevo cupon, el modulo de cupones de descuento crea una cadena aleatoria de letras y numeros. Esto establecer la duracion de los controles de los codigos generados al azar </li>
+   <li><strong>Mostrar total de descuento para cada grupo de impuestos?</strong> <br>
+     Los cupones de descuento se aplican a cada producto por separado con el fin de calcular correctamente los impuestos, si hay varios grupos de impuestos (por ejemplo impuestos locales y nacionales). Ponga esto en true para mostrar el descuento aplicado a cada grupo fiscal. Establezcer en false para combinar el descuento y mostrar como un solo total. Si utiliza solo una clase de impuestos, este valor se ignora. Si tiene varias clases de impuestos tendra que considerar como desea que aparezcan. Por ejemplo, este es la forma en que la pagina de confirmacion, el e-mail de confirmacion y la factura aparece un pedido con varias clases de impuestos si este valor se establece en true:
+  <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableBorder">
+    <tr>
+      <td align="right">Subtotal:&nbsp;&nbsp;&nbsp;</td>
+      <td>$25.00</td>
+    </tr>
+    <tr>
+      <td align="left">&nbsp;Cupon de descuento XYZ aplicado (Impuestos nacionales):&nbsp;</td>
+      <td>-$2.30</td>
+    </tr>
+    <tr>
+      <td align="right">&nbsp;Cupon de descuento XYZ aplicado (Impuestos locales):&nbsp;&nbsp;&nbsp;</td>
+      <td>-$2.70</td>
+    </tr>
+    <tr>
+      <td align="right">Impuestos:&nbsp;&nbsp;&nbsp;</td>
+      <td>&nbsp;&nbsp;$1.39</td>
+    </tr>
+    <tr>
+      <td align="right">Total:&nbsp;&nbsp;&nbsp;</td>
+      <td>$21.39</td>
+    </tr>
+  </table>
+  <br>
+      Y asi es como aparece el mismo pedido cuando se configura en false:
+      <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableBorder">
+     <tr>
+       <td align="right">Subtotal:&nbsp;&nbsp;&nbsp;</td>
+       <td>$25.00</td>
+     </tr>
+     <tr>
+       <td align="right">&nbsp;Cupon de descuento XYZ aplicado:&nbsp;&nbsp;&nbsp;</td>
+       <td>-$5.00</td>
+     </tr>
+     <tr>
+       <td align="right">Impuestos:&nbsp;&nbsp;&nbsp;</td>
+       <td>&nbsp;&nbsp;$1.39</td>
+     </tr>
+     <tr>
+       <td align="right">Total:&nbsp;&nbsp;&nbsp;</td>
+       <td>$21.39</td>
+     </tr>
+   </table>
+   </li>
+   <li><strong>Permitir pedido negativo?</strong> <br>
+     Configure esto en false para evitar que las cantidades totales sean negativas. Esto puede ocurrir si crea un cupon de descuento sin precio minimo </li>
+   <li><b>Utilice el archivo de idioma para mostrar el formato de cadenas?</b><br>
+     Cuando haya varios idiomas y desee que el descuento aparezca en el idioma seleccionado por el cliente en el total final, tendra que volver a configurar esta opcion a true y editar el archivo includes/languages/<em>su idioma</em>/modules/order_total/ot_discount_coupon.php. Si utiliza un solo idioma, puede definir en falsa y utilizar la configuracion de visualizacion <strong>Mostrar Total del pedido</strong> para el pedido total. Si este campo esta establecido en true, entonces el valor la configuracion de visualizacion <strong>Mostrar Total del pedido</strong> sera ignorado  </li>
+   <li><strong>Formato de visualizacion del Total del pedido</strong>    <br>
+     Utilice este ajuste para cambiar la forma y el formato en que los cupones de descuento del pedido se mostrara en la pagina de confirmacion de compra, el e-mail de confirmacion y la factura. Puede insertar las variables dinamicas para mostrar datos tales como el codigo utilizado o el tanto por ciento de descuento. Por ejemplo, un formato de visualizacion de &quot;<span class="style1">Cupon de descuento [code] para [discount_amount] aplicado</span>&quot; que mostrara la factura como:
+   <table border="0" align="center" cellpadding="0" cellspacing="0" class="tableBorder">
+         <tr>
+           <td align="right">Subtotal:&nbsp;&nbsp;&nbsp;</td>
+           <td>$25.00</td>
+         </tr>
+         <tr>
+           <td align="right"><span class="style1">&nbsp;Cupon de descuento XYZ para 20% aplicado</span>:&nbsp;&nbsp;&nbsp;</td>
+           <td>-$5.00</td>
+         </tr>
+         <tr>
+           <td align="right">Impuestos:&nbsp;&nbsp;&nbsp;</td>
+           <td>&nbsp;&nbsp;$1.39</td>
+         </tr>
+         <tr>
+           <td align="right">Total:&nbsp;&nbsp;&nbsp;</td>
+           <td>$21.39</td>
+         </tr>
+     </table>
+     <br>
+     Lista de variables disponibles:
+       <ul> 
+         <li>[code] codigo</li>
+         <li>[coupon_desc] cupon de descuento</li>
+         <li>[discount_amount] cantidad de descuento</li>
+         <li>[min_order] pedido minimo</li>
+         <li>[number_available] numero disponible</li>
+         <li>[tax_desc] descuento en los impuestos
+           </p>
+         </li>
+       </ul>
+   </li>
+   <li><strong>Modo depuracion</strong><br>
+     Ponga esto en true para mostrar alguna informacion util de depuracion en checkout_confirmation.php. Para ver la informacion de depuracion, vea el codigo fuente en su navegador. La informacion de depuracion se ha mostrado en el interior de las etiquetas HTML &quot;&lt;!-- Discount Coupons DEBUG&quot; y &quot;End Discount Coupons DEBUG--&gt;&quot; en la parte superior de ese archivo  </li>
+<p class="notice"><strong>Tenga en cuenta:</strong> Cuando el modo depuracion es &quot;on&quot; (establecido en true), los mensajes de error no funcionan - el usuario no va a ser redirigido a la pantalla de pago cuando hay un error  </span>
+ </ul>
+ <h3><a name="creating"></a>Creacion de codigos de cupones de descuento</h3>
+ <p>Acceda a su administrador y vaya a la seccion <strong>Catalogo -&gt; Cupones de Descuentos</strong>. Haga click en el boton <strong>Nuevo Cupon</strong> para crear un nuevo codigo de cupon de descuento. El unico campo que se requiere es la cantidad de descuento</p>
+ <p>Una vez que haya creado un codigo de cupon de descuento puede distribuirlo en cualquier formato. La unica informacion que un cliente tendra para utilizar un codigo de cupon es la que ha especificado cuando se crea el cupon. Puede enviar los codigos en los boletines de noticias, confirmaciones de pedido, etc </p>
+ <p>Los descuentos se muestran en el total en la confirmacion de pedido del cliente, en el historial de pedidos del cliente y en todos los pedidos del admin </p>
+ <p>Descuentos se aplican ANTES de impuestos </p>
+ <h4><a name="fields"></a>Explicacion de los campos: </h4>
+ <ul>
+   <li> <strong>Codigo del cupone</strong>     <br>
+     Este es el codigo que le dara a los clientes para que lo introduzcan durante el proceso de compra. Puede consistir de caracteres alfanumericos de hasta 32 caracteres de longitud. Si deja este campo en blanco, un codigo alfanumerico aleatorio se generara. Vea <strong>Longitud aleatoria del codigo</strong> en <a href="#configure">Configuracion del modulo	Total del pedido</a> para modificar la longitud de los codigos generados al azar. Este campo no puede ser modificado en los cupones ya existentes </li>
+   <li><strong>Descripcion</strong><br>
+     Esta es una breve descripcion para ayudarle a administrar sus cupones. El contenido de este campo no se muestra al cliente a menos que eliga mostrar en el formato de totalizacion. Vea <strong>Formato de visualizacion del Total del pedido</strong> en <a href="#configure">Configuracion del modulo Total del pedido</a></li>
+   <li><strong>Importe de descuento</strong><br>
+     La cantidad de descuento sera aplicable al pedido<br>
+     <p class="notice">- Para porcentaje de descuentos introduzca la cantidad como decimal. Por ejemplo <strong>.15</strong> en lugar de 15 o 15% para un descuento del 15% <br>
+   - Para descuentos fijos introduzca la cantidad exactamente como desee que aparezca. Por ejemplo <strong>10</strong> para 10 euros de descuento <br>
+   - Para descuentos en los gastos de envio introduzca el porcentaje de descuento que se desea ofrecer. Por ejemplo <strong>1</strong> para envio gratis, <strong>.5</strong> para 50% off shipping</p> 
+   </li>
+   <li><strong>Tipo de descuento</strong><br>
+     Seleccione el tipo de descuento. Asegurese de que su importe esta en el formato correcto para el tipo de descuento que ha elegido </li>
+   <li> <strong>Fecha de inicio</strong><br>
+     Introduzca una fecha de inicio si desea limitar a los clientes cuando pueden comenzar a usar este cupon. Puede dejar este campo vacio para permitir a los clientes usar el cupon desde el mismo momento en que se cree</li>
+   <li><strong>Fecha de finalizacion</strong><br>
+     Introduzca una fecha de finalizacion si desea limitar el tiempo en que los clientes pueden utilizar este cupon. Puede dejar este campo vacio para permitir a los clientes usar el cupon siempre y cuando lo deseen
+	 <p class="notice">Fecha de inicio y fecha de finalizacion debe ser en el mismo formato que se especifica en el formato admin/includes/languages/espanol.php (o el idioma principal de su administracion)</p>
+   </li>
+   <li><strong>Max Uso</strong><br>
+     Introduzca el numero maximo de veces que cada cliente puede usar este cupon. Si no ingresa un valor o si introduce 0, al cliente se le permitira usar este cupon un numero ilimitado de veces</li>
+   <li><strong>Pedido minimo</strong><br>
+     Introduzca el subtotal del pedido minimo que un cliente debe tener antes de que puede usar este cupon. Si no ingresa un valor o si introduzca 0, no habra un minimo necesario para este cupon</li>
+   <li><strong>Tipo de pedido minimo</strong><br>
+     Seleccione la restriccion del tipo de pedido minima que desea utilizar. Si selecciona Precio Total del pedido minimo total necesario para que un cliente pueda usar el cupon sera el valor inscrito en el campo pedido minimo. Si selecciona la cantidad de productos, el numero minimo de elementos necesarios para un cliente pueda usar el cupon sera el valor inscrito en el campo pedido minimo </li>
+   <li><strong>Numero disponible</strong>     <br>
+     Introduzca el numero total de cupones disponibles. Puede usar esto para limitar el numero de veces que el cupon puede ser utilizado en toda la tienda. Por ejemplo, esto puede ser usado para dar un descuento a los primeros 200 clientes en un dia en particular </li>
+ </ul>
+ <h4><a name="exclusions" id="exclusions"></a>Exclusiones</h4>
+ <p>Usted tiene la capacidad para gestionar los productos excluidos de las categorias, fabricantes, clientes y zonas de envio para cada cupon que cree. A los clientes no se notifica que un producto esta excluido a menos que el total/cantidad de productos incluidos no cumpla el requisito de pedido minimo para el cupon. En ese caso en particular no se dara aviso de los elementos que estan excluidos. Si crea cupones con exclusiones se recomienda comunicar por adelantado a los clientes los productos que estan excluidos para evitar confusiones</p>
+ <p>Debe crear un cupon antes de que pueda gestionar las exclusiones del cupon. Vea la seccion sobre <a href="#creating">Creacion de codigos de cupones de descuento</a> para obtener ayuda </p>
+  <p>Acceda a su administrador y vaya a <strong>Catalogo -&gt; Cupones de descuento</strong>. Seleccione el cupon con el que desea gestionar las exclusiones. En el cuadro en la parte derecha de la pantalla vera seis botones: editar, eliminar las exclusiones de productos, fabricantes excluidos, categorias excluidas, clientes excluidos y las zonas de envio excluidas. Haga clic en el boton para cada tipo de exclusiones que desee crear</p>
+ <p>Las cuatro pantallas de exclusiones trabajan de manera similar. En la caja de la izquierda aparecera una lista (productos/fabricantes/categorias/clientes) para que el cupon NO se excluya. En la caja de la derecha aparecera una lista (productos/fabricantes/categorias/clientes) para que el cupon quede excluido. Utilice los botones ubicados entre ambas cajas para mover de un cuadro a otro. Haga clic en guardar cuando haya terminado o los cambios no se guardaran</p>
+ <p class="notice">Si un producto se encuentra en <em>cualquier</em> categoria excluida, sera considerado un producto excluido. Por ejemplo, un producto se encuentra en la categoria 1 y en la categoria 2. La categoria 1 es una categoria excluida. Incluso si un cliente ve un producto en la categoria 2 y lo añade a su carrito, el producto seguira siendo considerado excluido porque se excluye la categoria 1</p>
+ <p>Puede editar los campos que se muestran en los cuadros de exclusiones editando el siguiente codigo a partir de la linea 17 de admin/coupons_exclusions.php:</p>
+ <pre class="code">
+  /**********************************************/
+  //alternar entre true/false para determinar los campos que se muestran en la lista de productos en el mismo orden en que se enumeran a continuacion
+
+  $display_fields = array(
+                          'categories' => array( 'c.categories_id' => false,
+                                                 'cd.categories_name' => true ),
+                                                 
+                          'customers' => array( 'c.customers_id' => false,
+                                                'CONCAT( c.customers_firstname, CONCAT( " ", c.customers_lastname ) ) AS name' => true,
+                                                'c.customers_email_address' => false ),
+
+                          'manufacturers' => array( 'm.manufacturers_id' => false,
+                                                    //'mi.manufacturers_url' => false,
+                                                    'm.manufacturers_name' => true ),
+
+                          'products' => array( 'p.products_id' => false,
+                                               'p.products_model' => false,
+                                               'pd.products_name' => true,
+                                               'p.products_price' => false ) );
+
+  //separador de los campos de la lista
+  $separator = ' :: ';
+
+  //categorias excluidas
+  //separador para los nombres de las categorias
+  $category_separator = '->';
+  //alternar true/false para determinar si hay que mostrar todo el camino de la categoria
+  $category_path = true;
+  //end category exclusions
+
+  /**********************************************/</pre>
+ <p>Puede impedir que un campo de edicion que se muestra por que es true o false en el array $display_fields. Los otros ajustes modifican los caracteres utilizados para separar varios campos en los cuadros de las exclusiones</p>
+ <h3><a name="support"></a>Soporte</h3>
+ <p>Puede encontrar apoyo a esta contribucion en <a href="http://forums.oscommerce.com/index.php?showtopic=213019">http://forums.oscommerce.com/index.php?showtopic=213019</a> (Foro de usuarios OSCommerce).<strong> Lea los problemas comunes en el archivo install.html o en anteriores post para ver si su problema o pregunta ya ha sido contestada. </strong>Si publica sobre los problemas con las exclusiones o los calculos, en el conjunto <strong>Modo depuracion</strong> de <a href="#configure">Configuracion del modulo Total del pedido</a> leera que hacer para capturar la informacion de depuracion e incluirla en su post </p>
+ <p>Correcciones de errores y nuevas versiones se añaden a la contribucion en la pagina <a href="http://www.oscommerce.com/community/contributions,4269">http://www.oscommerce.com/community/contributions,4269</a></p>
+ <br><br>
+ <P align="right">Traducido el 21 de Abril de 2009 por Alfonso Gonzalez <a href="mailto: reflex.ocasion@yahoo.es">Reflex Ocasion</a></p>
+ <br><br>
+</body>
+</html>
