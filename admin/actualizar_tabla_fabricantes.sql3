@@ -1,0 +1,55 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 14-07-2014 a las 21:33:39
+-- Versión del servidor: 5.0.95
+-- Versión de PHP: 5.4.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `admin_infodemsa2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `products_fabricantes`
+--
+
+DROP TABLE IF EXISTS `products_fabricantes`;
+CREATE TABLE IF NOT EXISTS `products_fabricantes` (
+  `id` int(11) NOT NULL auto_increment,
+  `products_reemplazar_este` varchar(255) NOT NULL,
+  `products_reemplazar_poreste` varchar(255) NOT NULL,
+  `concepto` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `products_fabricantes`
+--
+
+REPLACE INTO `products_fabricantes` (`id`, `products_reemplazar_este`, `products_reemplazar_poreste`, `concepto`) VALUES
+(1, 'KINGSTON', 'Kingston Technology', 'cambio');
+REPLACE INTO `products_fabricantes` (`id`, `products_reemplazar_este`, `products_reemplazar_poreste`, `concepto`) VALUES
+(2, 'WESTERNDIGITAL', '', 'eliminar');
+REPLACE INTO `products_fabricantes` (`id`, `products_reemplazar_este`, `products_reemplazar_poreste`, `concepto`) VALUES
+(3, 'WD', 'Western Digital', 'cambio');
+REPLACE INTO `products_fabricantes` (`id`, `products_reemplazar_este`, `products_reemplazar_poreste`, `concepto`) VALUES
+(4, 'SMART', '', 'eliminar');
+REPLACE INTO `products_fabricantes` (`id`, `products_reemplazar_este`, `products_reemplazar_poreste`, `concepto`) VALUES
+(5, 'Mustek', '', 'eliminar');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
