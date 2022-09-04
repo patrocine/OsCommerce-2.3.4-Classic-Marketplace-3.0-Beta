@@ -1,0 +1,383 @@
+<?php
+/*
+  $Id$
+
+  osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Copyright (c) 2010 osCommerce
+
+  Released under the GNU General Public License
+*/
+
+  $listing_split = new splitPageResults($listing_sql, MAX_DISPLAY_SEARCH_RESULTS, 'p.products_id');
+?>
+
+  <div class="contentText">
+
+<?php
+  if ( ($listing_split->number_of_rows > 0) && ( (PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3') ) ) {
+?>
+
+    <div>
+      <span style="float: right;"><?php echo TEXT_RESULT_PAGE . ' ' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></span>
+
+      <span><?php echo $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></span>
+    </div>
+
+    <br />
+
+<?php
+  }
+
+  $prod_list_contents = '<div class="ui-widget infoBoxContainer">' .
+                        '  <div class="ui-widget-header ui-corner-top infoBoxHeading">' .
+                        '    <table border="0" width="100%" cellspacing="0" cellpadding="2" class="productListingHeader">' .
+                        '      <tr>';
+
+  for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
+    $lc_align = '';
+
+    switch ($column_list[$col]) {
+      case 'PRODUCT_LIST_MODEL':
+        $lc_text = TABLE_HEADING_MODEL;
+        $lc_align = '';
+        break;
+      case 'PRODUCT_LIST_NAME':
+        $lc_text = TABLE_HEADING_PRODUCTS;
+        $lc_align = '';
+        break;
+      case 'PRODUCT_LIST_MANUFACTURER':
+        $lc_text = TABLE_HEADING_MANUFACTURER;
+        $lc_align = '';
+        break;
+      case 'PRODUCT_LIST_PRICE':
+        $lc_text = TABLE_HEADING_PRICE;
+        $lc_align = 'right';
+        break;
+      case 'PRODUCT_LIST_QUANTITY':
+        $lc_text = TABLE_HEADING_QUANTITY;
+        $lc_align = 'right';
+        break;
+      case 'PRODUCT_LIST_WEIGHT':
+        $lc_text = TABLE_HEADING_WEIGHT;
+        $lc_align = 'right';
+        break;
+      case 'PRODUCT_LIST_IMAGE':
+        $lc_text = TABLE_HEADING_IMAGE;
+        $lc_align = 'center';
+        break;
+      case 'PRODUCT_LIST_BUY_NOW':
+        $lc_text = TABLE_HEADING_BUY_NOW;
+        $lc_align = 'center';
+        break;
+    }
+
+    if ( ($column_list[$col] != 'PRODUCT_LIST_BUY_NOW') && ($column_list[$col] != 'PRODUCT_LIST_IMAGE') ) {
+      $lc_text = tep_create_sort_heading($HTTP_GET_VARS['sort'], $col+1, $lc_text);
+    }
+
+    $prod_list_contents .= '        <td' . (tep_not_null($lc_align) ? ' align="' . $lc_align . '"' : '') . '>' . $lc_text . '</td>';
+  }
+
+  $prod_list_contents .= '      </tr>' .
+                         '    </table>' .
+                         '  </div>';
+
+  if ($listing_split->number_of_rows > 0) {
+    $rows = 0;
+    $listing_query = tep_db_query($listing_split->sql_query);
+
+    $prod_list_contents .= '  <div class="ui-widget-content ui-corner-bottom productListTable">' .
+                           '    <table border="0" width="100%" cellspacing="0" cellpadding="2" class="productListingData">';
+
+    while ($listing = tep_db_fetch_array($listing_query)) {
+      $rows++;
+
+      $prod_list_contents .= '      <tr>';
+
+      for ($col=0, $n=sizeof($column_list); $col<$n; $col++) {
+        switch ($column_list[$col]) {
+          case 'PRODUCT_LIST_MODEL':
+            $prod_list_contents .= '        <td>' . $listing['products_model'] . '</td>';
+            break;
+          case 'PRODUCT_LIST_NAME':
+            if (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
+              $prod_list_contents .= '        <td><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'] . '&products_id=' . $listing['products_id']) . '">' . $listing['products_name'] . '</a></td>';
+            } else {
+              $prod_list_contents .= '        <td><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing['products_id']) . '">' . $listing['products_name'] . '</a></td>';
+            }
+            break;
+          case 'PRODUCT_LIST_MANUFACTURER':
+            $prod_list_contents .= '        <td><a href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $listing['manufacturers_id']) . '">' . $listing['manufacturers_name'] . '</a></td>';
+            break;
+          case 'PRODUCT_LIST_PRICE':
+            if (tep_not_null($listing['specials_new_products_price'])) {
+              $prod_list_contents .= '        <td align="right"><del>' .  $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</del>&nbsp;&nbsp;<span class="productSpecialPrice">' . $currencies->display_price($listing['specials_new_products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</span></td>';
+            } else {
+              $prod_list_contents .= '        <td align="right">' . $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</td>';
+            }
+            break;
+          case 'PRODUCT_LIST_QUANTITY':
+            $prod_list_contents .= '        <td align="right">' . $listing['products_quantity'] . '</td>';
+            break;
+          case 'PRODUCT_LIST_WEIGHT':
+            $prod_list_contents .= '        <td align="right">' . $listing['products_weight'] . '</td>';
+            break;
+          case 'PRODUCT_LIST_IMAGE':
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+
+
+ // Dependiendo del número de stock nos dira la disponibilidad del producto.
+//}else{
+
+
+    //  $facebook = '<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.euroconsolas.com/euroconsolas/spain/product_info.php?products_id=' . $listing['products_id'] . '&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>';
+
+     //--------------------
+
+
+ if ($listing['stock_nivel'] == 1){
+      $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"> <img border="0" src="images/otros/stock-100.jpg"> </p>';
+    ?>
+
+
+   <?php
+
+}
+
+if ($listing['stock_nivel'] == 3){
+      $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/stock-50.jpg"> </p>';
+
+
+   }
+if ($listing['stock_nivel'] == 4){
+      $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/stock-100.jpg"> </p>';
+   }
+if ($listing['stock_nivel'] == 5){
+      $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/stock_17_02.jpg"> </p>';
+   }
+   // productos euroconsolas
+if ($listing['stock_nivel'] == 6){
+                                                                                                                                                                    $time =  time();//+ 1000000;
+               // si el producto no tiene tiempo este se actualiza por primera vez y si este es rabazado en 48horas también actualiza los productos con los datos de stock mas recientes.
+         $proveedor_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $listing['products_id'] . "' and time_proveedores <= '" . $time . "'");
+         if ($proveedor = tep_db_fetch_array($proveedor_values)){
+
+ //   $sumar_presupuestos_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.presupuestos and a.admin_groups_id=6";
+ //   $sumar_presupuestos_sales_query = tep_db_query($sumar_presupuestos_sales_raw);
+ //   $sumar_presupuestos= tep_db_fetch_array($sumar_presupuestos_sales_query);
+
+
+   // $sumar_entregado_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.entregas_stock and a.admin_groups_id=6";
+   // $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+   // $sumar_entregado_total= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+    $sumar_entregado_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.entregas_stock and a.admin_groups_id=6 and a.admin_id = 14";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_entregado_total= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+    $sumar_mercancia_entregado_procesando_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.status_entregas and a.admin_groups_id=6 and a.admin_id = 14";
+    $sumar_mercancia_entregado_procesando_sales_query = tep_db_query($sumar_mercancia_entregado_procesando_sales_raw);
+    $sumar_mercancia_entregado_procesando= tep_db_fetch_array($sumar_mercancia_entregado_procesando_sales_query);
+
+    $sumar_retirado_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $product_info['products_id'] . "'and o.orders_status =a.retirarado and a.admin_groups_id=6 and a.admin_id = 14";
+    $sumar_retirado_sales_query = tep_db_query($sumar_retirado_sales_raw);
+    $sumar_retirado= tep_db_fetch_array($sumar_retirado_sales_query);
+
+
+
+ //   $sumar_no_recogido_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.no_recogido and a.admin_groups_id=6";
+ //   $sumar_no_recogido_sales_query = tep_db_query($sumar_no_recogido_sales_raw);
+ //   $sumar_no_recogido= tep_db_fetch_array($sumar_no_recogido_sales_query);
+
+    $sumar_pagado_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.pagado and a.admin_groups_id=6";
+    $sumar_pagado_total_sales_query = tep_db_query($sumar_pagado_total_sales_raw);
+    $sumar_pagado_total= tep_db_fetch_array($sumar_pagado_total_sales_query);
+
+    $sumar_cobrados_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.cobrado and a.admin_groups_id=6";
+    $sumar_cobrados_total_sales_query = tep_db_query($sumar_cobrados_total_sales_raw);
+    $sumar_cobrados_total= tep_db_fetch_array($sumar_cobrados_total_sales_query);
+
+    $sumar_pagado_transferencia_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.pagado_transferencia and a.admin_groups_id=6";
+    $sumar_pagado_transferencia_sales_query = tep_db_query($sumar_pagado_transferencia_sales_raw);
+    $sumar_pagado_transferencia= tep_db_fetch_array($sumar_pagado_transferencia_sales_query);
+
+    $sumar_paypal_enviado_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.paypal_enviado and a.admin_groups_id=6";
+    $sumar_paypal_enviado_sales_query = tep_db_query($sumar_paypal_enviado_sales_raw);
+    $sumar_paypal_enviado= tep_db_fetch_array($sumar_paypal_enviado_sales_query);
+
+    $sumar_pendiente_entrada_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status = a.pendiente_entrada and a.admin_groups_id=6";
+    $sumar_pendiente_entrada_total_sales_query = tep_db_query($sumar_pendiente_entrada_total_sales_raw);
+    $sumar_pendiente_entrada_total= tep_db_fetch_array($sumar_pendiente_entrada_total_sales_query);
+
+
+    $sumar_credito_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status = a.credito and a.admin_groups_id=6";
+    $sumar_credito_sales_query = tep_db_query($sumar_credito_sales_raw);
+    $sumar_credito= tep_db_fetch_array($sumar_credito_sales_query);
+
+
+    $sumar_pagos_procesando_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $listing['products_id'] . "'and o.orders_status =a.status_liquidacion and a.admin_groups_id=6";
+    $sumar_pagos_procesando_sales_query = tep_db_query($sumar_pagos_procesando_sales_raw);
+    $sumar_pagos_procesando= tep_db_fetch_array($sumar_pagos_procesando_sales_query);
+
+       //+ $sumar_no_recogido['value']
+    $entradas_os = $sumar_entregado_total['value'];
+
+      // $sumar_presupuestos['value']
+    $salidas_os = $sumar_pagos_procesando['value'] + $sumar_credito['value'] + $sumar_retirado['value'] + $sumar_cobrados_total['value'] + $sumar_pagado_total['value'] + $sumar_pagado_transferencia['value'] + $sumar_paypal_enviado['value']; //+ $sumar_pendiente_entrada_total['value'];
+
+
+   $stock_euroconsolas =  $entradas_os - $salidas_os;
+
+
+       $time1 = mktime(1, 1, 1, date("m"), date("d"), date("Y"));
+      $oldday1 = date("Y-m-d", $time1);
+
+           $sql_data_array = array('time_proveedores' => time()+rand(1,130000),
+                                   'time_entradasysalidas' => $entradas_os - $salidas_os,
+                                   'products_balance_stock' => $stock_euroconsolas * $listing['products_price'],
+                                   'time_ultimaactualizacion' => $oldday1,
+                                   'time_pendiente_entrada_total' => $sumar_pendiente_entrada_total['value'],
+                                   'time_entregado' => $sumar_entregado_total['value'],
+                                   'time_mercancia_entregado_procesando' => $sumar_mercancia_entregado_procesando['value'],
+                                   'time_paypal_enviado' => $sumar_paypal_enviado['value'],
+                                   'time_pagado_transferencia' => $sumar_pagado_transferencia['value'],
+                                   'time_no_recogido' => $sumar_no_recogido['value'],
+                                   'time_cobrados' => $sumar_cobrados_total['value'],
+                                   'time_pagado' => $sumar_pagado_total['value'],);
+
+     tep_db_perform(TABLE_PRODUCTS, $sql_data_array, 'update', "products_id = '" . $listing['products_id'] . "'");
+
+ }
+
+    if ($listing['time_entradasysalidas'] <= 0 ){
+
+   $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/aprovisionandose.jpg"> </p> Unidades en Stock: '. number_format($listing['time_entradasysalidas'], 0, '.', '').'  </p> Pendiente de Entrada: '. $listing['time_mercancia_entregado_procesando'];
+
+}else{
+
+   $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/stock-100.jpg"> </p> Unidades en Stock: '. number_format($listing['time_entradasysalidas'], 0, '.', '').'  </p> Pendiente de Entrada: '. $listing['time_mercancia_entregado_procesando'];
+
+}
+ //  }
+
+
+}
+      /*
+    $esta_pedido_values = mysql_query("select * from " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'admin' . " a, " . TABLE_ORDERS_PRODUCTS . " op, " . 'proveedor' . " pr where o.orders_id = op.orders_id and op.products_id = '" . $listing['products_id'] . "' and p.products_id = '" . $listing['products_id'] . "' and o.customers_id = pr.cuenta and o.orders_status = 111 and op.products_quantity >= 1");
+   if ($esta_pedido = mysql_fetch_array($esta_pedido_values)){
+
+           $pedido_proveedor = '<p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1" color="#FF0000"><b>Próximamente Disponible en Stock</b></font> </p>';
+ }else{
+    $pedido_proveedor = '....';
+}
+                    */
+
+       //  $dondeesta = '<font color=#FF0000> de</font>';
+            $dondeesta_db_query = tep_db_query("select * from " . TABLE_WHOS_ONLINE . " where session_id = '" . tep_session_id() . "'");
+   $dondeesta_db = tep_db_fetch_array($dondeesta_db_query);
+
+  if ($dondeesta_db['dondeesta']){
+
+          $products_dondeesta_query = tep_db_query("select * from " . 'products_donde_esta' . " where products_id = '" . $listing['products_id'] . "' and login_id = '" . 1 . "'");
+   if   ($products_dondeesta = tep_db_fetch_array($products_dondeesta_query)){
+
+
+  $text_dondeesta = '<font color=#FF0000> ' . $products_dondeesta['donde_esta'] . '</font>';
+}
+}else{
+}
+
+         if  ($listing['products_regladeprecios'] == 4){
+
+          $oportunidad = '<font color=#FF0000> (Oportunidad)</font>';
+
+                 }else if ($listing['costo'] == 2){
+
+             $oportunidad = '<font color=#FF0000> (Oportunidad)</font>';
+
+              }else if ($listing['products_regladeprecios'] == 1 and $listing['products_price'] >= 150){
+
+              $oportunidad = '<font color=#FF0000> (Oportunidad)</font>';
+
+
+                      }else{
+                 $oportunidad = '';
+           }
+
+           if ($listing['referencia_fabricante']){
+    $ficha_producto =  'Ficha';
+    }else{
+    $ficha_producto =  '';
+                             }
+
+     // status agotado
+if ($listing['products_status'] == 0){
+     $texto_stock = '<p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/stock-agotado.jpg"></p>';
+}else{
+           } // fin agotado
+
+
+
+
+
+
+           if (isset($HTTP_GET_VARS['manufacturers_id'])  && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
+              $prod_list_contents .= '        <td align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'] . '&products_id=' . $listing['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $listing['products_image'], $listing['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . $texto_stock . '</a></td>';
+            } else {
+              $prod_list_contents .= '        <td align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, ($cPath ? 'cPath=' . $cPath . '&' : '') . 'products_id=' . $listing['products_id']) . '">' . tep_image(DIR_WS_IMAGES . $listing['products_image'], $listing['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . $texto_stock . '</a></td>';
+            }
+            break;
+          case 'PRODUCT_LIST_BUY_NOW':
+            $prod_list_contents .= '        <td align="center">' . tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id'])) . '</td>';
+            break;
+        }
+      }
+
+      $prod_list_contents .= '      </tr>';
+    }
+
+    $prod_list_contents .= '    </table>' .
+                           '  </div>' .
+                           '</div>';
+
+    echo $prod_list_contents;
+  } else {
+?>
+
+    <p><?php echo TEXT_NO_PRODUCTS; ?></p>
+
+<?php
+  }
+
+  if ( ($listing_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3')) ) {
+?>
+
+    <br />
+
+    <div>
+      <span style="float: right;"><?php echo TEXT_RESULT_PAGE . ' ' . $listing_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></span>
+
+      <span><?php echo $listing_split->display_count(TEXT_DISPLAY_NUMBER_OF_PRODUCTS); ?></span>
+    </div>
+
+<?php
+  }
+?>
+
+  </div>
