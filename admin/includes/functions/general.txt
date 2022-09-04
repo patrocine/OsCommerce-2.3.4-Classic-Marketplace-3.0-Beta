@@ -1,0 +1,12 @@
+  function tep_array_merge($array1, $array2, $array3 = '') {
+    if ($array3 == '') $array3 = array();
+    if (function_exists('array_merge')) {
+      $array_merged = array_merge($array1, $array2, $array3);
+    } else {
+      while (list($key, $val) = each($array1)) $array_merged[$key] = $val;
+      while (list($key, $val) = each($array2)) $array_merged[$key] = $val;
+      if (sizeof($array3) > 0) while (list($key, $val) = each($array3)) $array_merged[$key] = $val;
+    }
+
+    return (array) $array_merged;
+  }
