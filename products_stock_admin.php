@@ -1,0 +1,65 @@
+var saludo=""+
+"<?php
+if (file_exists('includes/local/configure.php')) include('includes/local/configure.php');
+  require('includes/configure.php');
+   require(DIR_WS_FUNCTIONS . 'database.php');
+  tep_db_connect() or die('Unable to connect to database server!');
+  
+  
+  
+   $products_model_stock = $_GET['products_model_stock'];
+$almacen = $_GET['almacen'];
+$web = $_GET['web'];
+$status_agotado = $_GET['status_agotado'];
+$status_stock = $_GET['status_stock'];
+$status_pendiente = $_GET['status_pendiente'];
+
+ $query = mysql_query("SELECT ps.products_stock_real, ps.products_stock_pendiente, ps.products_stock_min FROM `products` p,  " . 'products_stock' . " ps WHERE  p.products_id = ps.products_id and products_model='" . $products_model_stock . "' and stock_nivel = 6");
+if ($products = mysql_fetch_array($query)){
+
+   if ($products['products_stock_real'] <=0){
+   //  $imagen_stock = ' </p> <p style=margin-top: 0; margin-bottom: 0><img border=0 src=images/otros/pagotado.png> ';
+    // $text_stock = ' ' . $status_agotado;
+}else{
+    // $imagen_stock = ' </p> <p style=margin-top: 0; margin-bottom: 0><img border=0 src=images/otros/pdisponible.png> ';
+ $text_stock = '<a target=_blank href='.$web.'product_info.php?products_id='.$products_model_stock.'><font color=#008000>'.$status_stock.'</a>';
+
+ // $text_stock = ' '.$status_stock.'</a>';
+
+    }
+
+
+
+
+?>"+
+ 
+"<?php
+
+    if (PERMISO_INFO_STOCK == 'True'){
+
+//echo $imagen_stock . $almacen . ' Stock: ' . number_format($products['time_entradasysalidas'], 0, '.', '') . ' Pcs.' . ' Pendiente: ' . $products['time_mercancia_entregado_procesando'] . ' Pcs.';
+                          }else{
+
+              if  ($products['products_stock_pendiente'] >= 1 and $products['products_stock_real'] <= 0 ){
+//echo ' </p> <p style=margin-top: 0; margin-bottom: 0><img border=0 src=images/otros/ppendiente.png> ' . $almacen . $status_pendiente;
+}else{
+
+echo $imagen_stock . $almacen . $text_stock . ' ('.$products['products_stock_real'].')';
+
+}
+
+                      }
+
+
+
+
+?>"+
+
+    
+
+    
+"<?php } ?></font>";
+
+document.write(saludo);
+
+
