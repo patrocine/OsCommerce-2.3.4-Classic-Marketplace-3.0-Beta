@@ -1,0 +1,8 @@
+Entra en el admin
+Configuracion/Barcode Rendering 
+
+Width 210
+Height 37
+
+
+CONFIGURACION 65 ETIQUETAS
