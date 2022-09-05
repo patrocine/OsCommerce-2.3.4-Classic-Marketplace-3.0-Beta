@@ -59,26 +59,68 @@
 
 
 
-            $z .= '<p style="margin-top: 0; margin-bottom: 0"><b>'.'MERKAPLACE'.'</b></p>';
 
-    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "'");
+    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
    while ($tiendas = mysql_fetch_array($tiendas_values)){
- $z .= '<p style="margin-top: 0; margin-bottom: 0"><b><a href="'.$tiendas['url_web'].'">'.$tiendas['nombre_sector'].'->>'.$tiendas['nombre'].'</a></b></p>';
-
-           }
-
-       echo '1';
 
 
+       ?>
+       
+       
+<?php  $a .='<hr size="15" noshade color="#000000">' ;?>
 
 
-              
+<?php  $a .='<tr>' ;?>
+<?php  $a .='<td colspan="2">'; ?>
+<?php  $a .='  <p align="center"><b><font size="4">'. '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</font></b></td>'; ?>
+<?php  $a .='</tr>'; ?>
+<?php  $a .='<tr>'; ?>
+<?php  $a .='<td width="100%" colspan="2">'; ?>
+<?php  $a .='<p align="center"><b><font size="4">'. $tiendas['nombre'].'</font></b></td></p>' ;?>
+<?php  $a .='</tr>' ;?>
+<?php  $a .='<tr>'; ?>
+<?php  $a .='<td width="6%"><b>Empresa:</b></td>' ;?>
+<?php  $a .='<td width="94%"><b>&nbsp;'.$tiendas['nombre_sector'].'</b></td></p>'; ?>
+<?php  $a .='</tr>'; ?>
+<?php  $a .='<tr>' ;?>
+<?php  $a .='<td colspan="2">'; ?>
+<?php  $a .='<p align="center"><b>Ubicación: '.$tiendas['nombre_ciudad'].'</b></td></p>' ?>
+<?php  $a .='</tr>' ?>
+<?php  $a .='<tr>' ?>
+<?php  $a .='<td colspan="2">' ?>
+<?php  $a .='	<p align="right"><b><a href="'.$tiendas['url_web'] .'"><font size="3">Visitar Merkaplace-&gt;&gt;</font></a></b></td>' ?>
+<?php  $a .='</tr>' ?>
+<?php  $a .='</tr>' ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+ <?php
+
+
+
+     }
               
               
               
 	  $infobox = new azInfoBox();
       $infobox->azSetBoxHeading(MODULE_BOXES_EMPRESABANNER_BOX_TITLE);
-      $infobox->azSetBoxContent(' <td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$z.'</td>' . '</a><br />');
+      $infobox->azSetBoxContent(' <td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);
               

@@ -68,7 +68,7 @@ while ($products_image = mysql_fetch_array($query)){
    } // fin ref_fabricante
 
 
-
+$products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . number_format($products_image['products_price'], 2, ",", ".") . '€</a></font></p>';
 
 
                          // Total CON EL DESCUENTO DEL PRODUCTO

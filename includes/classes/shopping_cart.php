@@ -282,6 +282,17 @@ $customer_group_id = tep_db_fetch_array($customer_group_query);
           
           
 
+
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$products_id . "' and products_descuento_onoff = '" . 0 . "'");
+      if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
+
+              if ($products_porcentage['products_descuento'] <> 0){
+              $descuento_insert = $products_porcentage['products_descuento'];
+                $product['products_price'] = $product['products_price'] *$descuento_insert/100+$product['products_price'];
+         }}
+
+
+
                          // Total CON EL DESCUENTO DEL PRODUCTO
                               if ($customer_id <> 0 OR DESCUENTO_CLIENTE <> 0){
        $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$products_id . "' and products_descuento_onoff = '" . 0 . "'");
@@ -315,8 +326,16 @@ $customer_group_id = tep_db_fetch_array($customer_group_query);
 
          
          
-         
-         
+
+    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $products_id . "' and pdc_unidades <= '" .  $qty . "' order by pdc_unidades desc");
+    if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+
+
+              $product['products_price'] = $pdc_precio_final['pdc_price_final'];
+
+
+                                                           }
+
          
          
          
@@ -398,7 +417,7 @@ if ($customer_group_id['customers_group_id'] != 0){
       global $languages_id;
                   global $customer_id;
 
-      
+
       
 
       if (!is_array($this->contents)) return false;
@@ -412,7 +431,13 @@ if ($customer_group_id['customers_group_id'] != 0){
           
 
          
-         
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$products_id . "' and products_descuento_onoff = '" . 0 . "'");
+      if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
+
+              if ($products_porcentage['products_descuento'] <> 0){
+              $descuento_insert = $products_porcentage['products_descuento'];
+                $products['products_price'] = $products['products_price'] *$descuento_insert/100+$products['products_price'];
+         }}
          
          //descuento en el producto
                  if ($customer_id){
@@ -425,6 +450,10 @@ if ($customer_group_id['customers_group_id'] != 0){
          }
          
       }else{
+
+
+
+
 
                  // calula el //descuento de del cliente
        $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $customer_id  . "' and customers_porcentage <> '" . 0 . "'");
@@ -456,7 +485,14 @@ if ($customer_group_id['customers_group_id'] != 0){
       
       
       
-      
+    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $products_id . "' and pdc_unidades <= '" .  $this->contents[$products_id]['qty']. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+
+
+              $products['products_price'] = $pdc_precio_final['pdc_price_final'];
+
+
+                                                           }
       
       
       

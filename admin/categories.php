@@ -219,7 +219,7 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
           tep_reset_cache_block('also_purchased');
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&pID=' . $products_id));
+        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $new_parent_id . '&pID=' . $products_id.'&action=new_product'));
         break;
       case 'insert_product':
       case 'update_product':
@@ -271,6 +271,21 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
 				tep_db_query($Query);
 
                                           }
+
+
+
+  if ($HTTP_POST_VARS['pdc_unidades']){
+  
+      $sql_data_array = array(//Comment out line you don't need
+							'pdc_products_id' => $HTTP_GET_VARS['pID'],
+							'pdc_unidades' => $HTTP_POST_VARS['pdc_unidades'],
+                            'pdc_price_final' => $HTTP_POST_VARS['pdc_price_final']);
+     tep_db_perform('products_descuento_cantidad', $sql_data_array);
+
+  
+  }
+
+
 
 
 
@@ -472,7 +487,17 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
           tep_reset_cache_block('also_purchased');
         }
 
-        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id));
+
+     if ($HTTP_POST_VARS['pdc_unidades']){
+  tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id.'&action=new_product'));
+
+ }else{
+
+       tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id.''));
+
+
+
+   }
         break;
       case 'copy_to_confirm':
         if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['categories_id'])) {
@@ -516,7 +541,12 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
           }
         }
 
+
+
         tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $categories_id . '&pID=' . $products_id));
+        
+        
+        
         break;
     }
   }
@@ -981,6 +1011,10 @@ function showPiDelConfirm(piId) {
    $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .   $HTTP_GET_VARS['pID'] . "'");
     $pro_special = mysql_fetch_array($pro_special_values);
 
+
+
+
+
 ?>
 
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -1004,6 +1038,64 @@ function showPiDelConfirm(piId) {
           <tr>
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+
+
+
+           <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+
+            <td class="main"><?php echo 'Descuento por Cantidades '; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('pdc_unidades', $pInfo->pdc_unidades); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'Precios' . '<a href="'. 'categories.php?del_pdc=' . 'action' . '&pID=' .  $HTTP_GET_VARS['pID'].'&action=new_product' . '"> ->> Eliminar Todo' ; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('pdc_price_final', $pInfo->pdc_price_final); ?></td>
+          </tr>
+
+          <tr>
+           <tr>
+
+
+<?php
+
+        if ($HTTP_GET_VARS['del_pdc'] == 'action'){
+
+ tep_db_query("delete from " . 'products_descuento_cantidad' . " where pdc_products_id = '" . $HTTP_GET_VARS['pID'] . "' ");
+
+
+    }
+        if ($HTTP_GET_VARS['del_pdc_unidad'] == 'action'){
+
+ tep_db_query("delete from " . 'products_descuento_cantidad' . " where pdc_id = '" . $HTTP_GET_VARS['pdc_id'] . "' ");
+
+
+    }
+
+   $pdc_consulta_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .   $HTTP_GET_VARS['pID'] . "' order by pdc_unidades ASC");
+  while  ($pdc_consulta = mysql_fetch_array($pdc_consulta_values)){
+
+
+ ?>
+
+
+           <tr>
+           <td class="main"><?php echo 'Cantidad: '. $pdc_consulta['pdc_unidades'] . ' precio: '. $pdc_consulta['pdc_price_final'] . '<a href="'. 'categories.php?del_pdc_unidad=' . 'action' . '&pID=' .  $HTTP_GET_VARS['pID'].'&action=new_product'.'&pdc_id=' . $pdc_consulta['pdc_id']. '"> ->> Eliminar'; ?></td>
+          </tr>
+   </tr>
+
+          
+          
+ <?php } ?>
+          
+
+           <tr>
+           <td class="main"></td>
+          </tr>
+          <tr>
+           <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+
+
             <td class="main"><?php echo 'Activar Oferta (1) Desactivar Oferta (0) Borrar Oferta (2) '; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_specials_onoff', $pro_special['status']); ?></td>
           </tr>

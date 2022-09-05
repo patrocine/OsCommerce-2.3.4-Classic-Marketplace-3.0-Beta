@@ -318,10 +318,16 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
            <img border="0" src="<?php echo DIR_WS_CATALOG . DIR_WS_IMAGES . $affiliate_sales['products_image']; ?>" width="70"></a></td>
            
               <td class="dataTableContent"><?php echo $affiliate_sales['products_model'] . ' / ' . $affiliate_sales['products_model_2']; ?></a></td>
+<td class="dataTableContent" align="left"><?php echo $affiliate_sales['products_name']; ?></td>
 
 
               <td class="dataTableContent"><a target="_blank" href="/product_info.php?products_id=<?php echo $affiliate_sales['products_id']; ?>">
            <?php echo 'Tienda'; ?></a></td>
+           
+           
+   <td class="dataTableContent"><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link('consultar_stock_tiendas.php?products_id=' . $affiliate_sales['products_id']) . '\')">'    ."          ".'Reponer'."</td>\n"; ?></td>
+
+           
 
 <?php
 
@@ -336,10 +342,14 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
   <td width="1%"><font size="1" face="Verdana"><?php echo $stock_exteriors ?></font></td>
 
  <?php } ?>
-           
               <td class="dataTableContent"><?php echo $affiliate_sales['products_stock_real'] . '| ' . $affiliate_sales['products_stock_pendiente'] . '| ' . $affiliate_sales['products_stock_min'] . '| ' . $affiliate_sales['products_stock_obs']; ?></td>
              <td class="dataTableContent"><?php echo $affiliate_sales['products_stock_real']; ?><?php echo $affiliate_sales['products_id']; ?></td>
              <td class="dataTableContent"><?php echo '<a href="javascript:popupWindow(\'' . tep_href_link('consultar_stock_tiendas.php?products_id=' . $affiliate_sales['products_id']) . '\')">'    ."          ".'Stock'."</td>\n"; ?></td>
+
+
+   <td class="dataTableContent"><a target="_blank" href="<?php echo 'categories.php?pID=' . $affiliate_sales['products_id'] . '&action=new_product'; ?>">
+           <?php echo 'Editar'; ?></a></td>
+
           <td class="dataTableContent" align="left"><?php echo $affiliate_sales['donde_esta']; ?></td>
           <td class="dataTableContent" align="left"><?php echo $affiliate_sales['products_name']; ?></td>
           <td class="dataTableContent" align="left"><p>

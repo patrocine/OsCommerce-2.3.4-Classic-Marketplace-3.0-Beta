@@ -440,6 +440,7 @@ $login_transferencia_procesando = $scs['transferencia_procesando'];
 $login_procesando_paypal = $scs['procesando_paypal'];
 $login_cambio_procesando = $scs['cambio_procesando'];
 $customer_cc = $scs['tienda_cuenta_cliente'];
+$mercancia_entregado_procesando = $scs['mercancia_entregado_procesando'];
 
  if ($login_id_remoto){
     $log_id =  $login_id_remoto;

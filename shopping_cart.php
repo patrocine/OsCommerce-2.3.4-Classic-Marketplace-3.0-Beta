@@ -11,7 +11,7 @@
 */
 
   require("includes/application_top.php");
-             //  require('mobile_version_cart.php');
+
   if ($cart->count_contents() > 0) {
     include(DIR_WS_CLASSES . 'payment.php');
     $payment_modules = new payment;
@@ -71,44 +71,11 @@
 <?php
 
     for ($i=0, $n=sizeof($products); $i<$n; $i++) {
-
-
-               $pro_id_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products[$i]['id'] . "'");
-               $pro_id= mysql_fetch_array($pro_id_values);
-
-
-               $ref_fabricante_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $pro_id['codigo_proveedor'] . "'");
-               $ref_fabricante= mysql_fetch_array($ref_fabricante_values);
-
-      if ($ref_fabricante['proveedor_ruta_images']){
-
-
-     $image_sc = $ref_fabricante['proveedor_ruta_images'] . $products[$i]['image'];
-  }else{
-
-// si en la imagan el nombre empieza por http:// pues elimina la ruta actual para que la imagen del producto siempre se vea.
-   if (ereg("^http://", $products[$i]['image']) ) {
-   
-      $image_sc = '' . $products[$i]['image'];
-}else{
-
-      $image_sc = DIR_WS_IMAGES . $products[$i]['image'];
-
-  }
-
-
-   } // fin ref_fabricante
-
-
-
-
-
-
       echo '      <tr>';
 
       $products_name = '<table border="0" cellspacing="2" cellpadding="2">' .
                        '  <tr>' .
-                       '    <td align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image($image_sc, $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
+                       '    <td align="center"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '">' . tep_image(DIR_WS_IMAGES . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
                        '    <td valign="top"><a href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']) . '"><strong>' . $products[$i]['name'] . '</strong></a>';
 
       if (STOCK_CHECK == 'true') {
@@ -127,11 +94,7 @@
         }
       }
 
-      $products_name .= '<br /><br />
-	  <div class="f_left padding_sc_1">' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) .'</div>
-	  <div class="f_left padding_sc_2">'. tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh') . '</div>
-	  <div class="f_left padding_sc_3">&nbsp;&nbsp;&nbsp;or <a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'products_id=' . $products[$i]['id'] . '&action=remove_product') . '">remove</a></div>
-	  <div class="clear"></div>';
+      $products_name .= '<br /><br />' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="4"') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . tep_draw_button(IMAGE_BUTTON_UPDATE, 'refresh') . '&nbsp;&nbsp;&nbsp;or <a href="' . tep_href_link(FILENAME_SHOPPING_CART, 'products_id=' . $products[$i]['id'] . '&action=remove_product') . '">remove</a>';
 
       $products_name .= '    </td>' .
                         '  </tr>' .

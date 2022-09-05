@@ -38,6 +38,7 @@ if(mysql_fetch_row($result) == false) {
                                                       'aut' => $HTTP_POST_VARS['aut'],
                                                       'url_web' => $HTTP_POST_VARS['url_web'],
                                                       'nombre_sector' => $HTTP_POST_VARS['nombre_sector'],
+                                                      'nombre_ciudad' => $HTTP_POST_VARS['nombre_ciudad'],
                                                       'url_enlace' => $HTTP_POST_VARS['url_enlace'],
                                                      );
 
@@ -68,6 +69,7 @@ tep_redirect('affiliate_empresa_banner.php');
                                                       'aut' => $HTTP_POST_VARS['aut'],
                                                       'url_web' => $HTTP_POST_VARS['url_web'],
                                                       'nombre_sector' => $HTTP_POST_VARS['nombre_sector'],
+                                                      'nombre_ciudad' => $HTTP_POST_VARS['nombre_ciudad'],
                                                       'url_enlace' => $HTTP_POST_VARS['url_enlace'],
                                                       'url_empresa_catalog' => $HTTP_POST_VARS['url'],);
                tep_db_perform('affiliate_compartir_empresas', $sql_data_array);
@@ -287,6 +289,7 @@ tep_redirect('affiliate_empresa_banner.php');
       $url_web = HTTP_SERVER . DIR_WS_CATALOG;
       $nombre = STORE_NAME;
       $nombre_sector = NOMBRE_SECTOR;
+      $nombre_ciudad = NOMBRE_CIUDAD_TIENDA;
       $email = STORE_OWNER_EMAIL_ADDRESS;
 
 
@@ -330,10 +333,11 @@ tep_redirect('affiliate_empresa_banner.php');
     <td width="20%" align="center"><?php echo $selec['url_enlace']; ?>&nbsp;</td>
     <td width="33%" align="center"><?php echo $selec['url_empresa_catalog']; ?>&nbsp;</td>
     <td width="7%" align="center"><?php echo $selec['numero_productos'] ?>&nbsp;</td>
+    <td width="7%" align="center"><?php echo $selec['nombre_ciudad'] ?>&nbsp;</td>
     <td width="7%" align="center"><?php echo $selec['nombre_sector'] ?>&nbsp;</td>
      <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?actualizar=ok&id_banners=' . $selec['id_banners']; ?>">Editar</a></p></td>
    <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?borrar=ok&id_banners=' . $selec['id_banners']; ?>">Borrar</a></p></td>
-   <td width="10%" align="center"><p><?php  echo ' <td class="smallText" align="center"><br><script language="javascript" src="'. $selec['url_enlace'].'?linkbanner='.$image_sc.'&linkenlace='.$image_en.'&url_web='.$url_web.'&nombre='.$nombre.'&nombre_sector='.$nombre_sector.'&email='.$email.'"> </script></td>' . '</a><br />';
+   <td width="10%" align="center"><p><?php  echo ' <td class="smallText" align="center"><br><script language="javascript" src="'. $selec['url_enlace'].'?linkbanner='.$image_sc.'&linkenlace='.$image_en.'&url_web='.$url_web.'&nombre='.$nombre.'&nombre_sector='.$nombre_sector.'&nombre_ciudad='.$nombre_ciudad.'&email='.$email.'"> </script></td>' . '</a><br />';
 
    ?></a></p></td>
     </tr>

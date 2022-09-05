@@ -182,6 +182,22 @@ $lafechaalta = $mifechaalta[3] . "/" . $mifechaalta[2] . "/" . $mifechaalta[1];
     
 
 
+$products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+
+
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
+      if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
+
+
+              $customers_porcentage = $products_porcentage['products_descuento'].'%';
+
+            $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+
+
+                                             }
+
+
 
 
                          // Total CON EL DESCUENTO DEL PRODUCTO
@@ -189,13 +205,31 @@ $lafechaalta = $mifechaalta[3] . "/" . $mifechaalta[2] . "/" . $mifechaalta[1];
        $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
       if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
 
-
+                                      if ($customer_id){
               $customers_porcentage = $products_porcentage['products_descuento'].'%';
               
             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="5"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                     }
       }else{
 
 
@@ -206,30 +240,34 @@ $lafechaalta = $mifechaalta[3] . "/" . $mifechaalta[2] . "/" . $mifechaalta[1];
       $customers_porcentage = $customers_porcentage['customers_porcentage'].'%';
       
             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="5"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
 
       
  }else{
 
-
-      $customers_porcentage = DESCUENTO_CLIENTE;
+     $customers_porcentage = DESCUENTO_CLIENTE;
               if (DESCUENTO_CLIENTE <> 0){
             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="5"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</b></font></span>';
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</b></font></span>';
+
+
+
+
+
                                   }
 
 
-}
 
 
 
   }
+
          } // Total CON EL DESCUENTO DEL PRODUCTO
 
     $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .  (int)$HTTP_GET_VARS['products_id'] . "' and status = 1");
     if ($pro_special = mysql_fetch_array($pro_special_values)){
 
-         $products_price = ' <font color="#FF0000" size="5"><b><s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span>' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+         $products_price = ' <font color="#FF0000" size="3"><b><s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span>' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
                                                            }
 
 if ($customers_porcentage == 0){
@@ -240,6 +278,37 @@ if ($customers_porcentage == 0){
 
 
 
+}
+
+
+    $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .  (int)$HTTP_GET_VARS['products_id'] . "' and status = 1");
+    if ($pro_special = mysql_fetch_array($pro_special_values)){
+
+         $products_price = ' <font color="#FF0000" size="3"><b><s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span>' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+                                                           }
+
+
+
+
+    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $product_info['products_id'] . "' order by pdc_unidades asc");
+    while ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+
+            $pdc_price_final .= '<p style="margin-top: 0; margin-bottom: 0"> <font size="3">+'.$pdc_precio_final['pdc_unidades'].' Pcs ->></s>
+              <font color="#FF0000" size="3"><b>' . $pdc_precio_final['pdc_price_final'] . '€</b></font></span></p>';
+              
+              
+            if ($products_price <> $product_info['products_price']){
+
+$products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+
+
+            }
+              
+              
+              
+              
+
+                                                           }
 ?>
 
 <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
@@ -250,7 +319,7 @@ if ($customers_porcentage == 0){
    if ($product_info['products_price'] <> 0 or $customer_group_price['customers_group_price'] <> 0){
 
        //'<p><font style="font-size: 24pt; font-weight: 700">'.
-  echo $products_price;//.'</font><font color="#FF0000" size="6"><b> '.$customers_porcentage.'</b></font></p>';
+  echo ''.$products_price . '<p style="margin-top: 0; margin-bottom: 0">' . $pdc_price_final . '</p>';//.'</font><font color="#FF0000" size="6"><b> '.$customers_porcentage.'</b></font></p>';
   
 
                    }
