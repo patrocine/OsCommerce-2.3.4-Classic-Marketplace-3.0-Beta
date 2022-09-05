@@ -1,5 +1,0 @@
-
-
-
-define('TABLE_LOGINRADIUS_SETTING', 'loginradius_setting');
-
