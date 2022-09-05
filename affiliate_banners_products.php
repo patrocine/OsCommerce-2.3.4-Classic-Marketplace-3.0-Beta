@@ -129,17 +129,17 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
                        
 ?>"+
 
-
+        "        <hr size=15 noshade color=#000000> "+
 "<table border=0 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100%>"+
 "<tr>"+
 "<td width=100%>"+
-"<p align=center style=margin-top: 0; margin-bottom: 0> <p align=center><?php echo '<a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php' . '?ref=' . $affiliate_id . '&products_id=' . $products_image['products_id'] . '><img border=0 src='. $image_sc .' width=100 alt=></p>'; ?></td></p> "+
+"<p align=center style=margin-top: -10; margin-bottom: 0> <p align=center><?php echo '<a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php' . '?ref=' . $affiliate_id . '&products_id=' . $products_image['products_id'] . '><img border=0 src='. $image_sc .' width=100 alt=></p>'; ?></td></p> "+
 "  <tr>  "+
 "    <td width=100%> "+
-"    <p align=center style=margin-top: 0; margin-bottom: 0><?php echo '<p><p align=center><font face=Verdana size=1 ><a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='.$affiliate_id.'&products_id=' . $products_image['products_id'] . '>' . $nombre_producto . '</a></font></p>'; ?></td> "+
+"    <p align=center style=margin-top: -10; margin-bottom: 0><?php echo '<p><p align=center><font face=Verdana size=1 ><a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='.$affiliate_id.'&products_id=' . $products_image['products_id'] . '>' . $nombre_producto . '</a></font></p>'; ?></td> "+
 "  </tr>"+
 "    <td width=100%> "+
-"    <p align=center style=margin-top: 0; margin-bottom: 0><?php echo $products_price; ?> </td>"+
+"    <p align=center style=margin-top: -10; margin-bottom: 0><?php echo $products_price; ?> </td>"+
 "  </tr>"+
 
 

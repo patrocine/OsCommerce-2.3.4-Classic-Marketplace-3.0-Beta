@@ -154,17 +154,17 @@
       ),
       array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000">Stock</font></b>',
+        'title' => '<b><font color="#008000"></font></b>',
         'link' => 'orders_tienda.php?status='.$entregas_stock
       ),
      array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000">Cobrado</font></b>',
+        'title' => '<b><font color="#008000"></font></b>',
         'link' => 'orders_tienda.php?status='.$cobrado
       ),
      array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000">Pagado</font></b>',
+        'title' => '<b><font color="#008000"></font></b>',
         'link' => 'orders_tienda.php?status='.$pagado
       ),
       array(

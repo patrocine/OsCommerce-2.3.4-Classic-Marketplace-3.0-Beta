@@ -106,6 +106,60 @@ jQuery(".gallery2").jCarouselLite({
 			<div class="main_part_title bestseller_title"><?php echo 'MERKAPLACE 3.0'; ?></div> <?php
 
 
+
+
+
+    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
+   if ($tiendas = mysql_fetch_array($tiendas_values)){
+           ?>
+
+
+
+
+
+
+<hr size="15" noshade color="#000000">
+
+
+<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td colspan="2">
+		<p align="center"><b><font size="4"><?php echo '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></font></b></td>
+	</tr>
+	<tr>
+		<td width="100%" colspan="2">
+		<p align="center"><b><font size="4"><?php echo $tiendas['nombre'] ?></font></b></td>
+>	</tr>
+	<tr>
+		<td width="6%"><b>Empresa:</b></td>
+		<td width="94%"><b>&nbsp;<?php echo $tiendas['nombre_sector'] ?></b></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<b>Ubicación: <?php echo $tiendas['nombre_ciudad'] ?></b></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		<p align="right"><b><a href="<?php echo $tiendas['url_web'] ?>"><font size="3">Visitar Merkaplace
+		-&gt;&gt;</font></a></b></td>
+	</tr>
+</table>
+
+
+                   <?php
+           }
+
+
+
+
+
+
+
+
+
+
+
+
         echo ' <td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$z.'</td>' . '</a><br />';
 
 

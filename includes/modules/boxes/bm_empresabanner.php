@@ -115,12 +115,75 @@
 
 
      }
+     
+     
+     
+    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
+   if ($tiendas = mysql_fetch_array($tiendas_values)){
+
+
+       ?>
+
+
+<?php  $b .='<hr size="15" noshade color="#000000">' ;?>
+
+
+<?php  $b .='<tr>' ;?>
+<?php  $b .='<td colspan="2">'; ?>
+<?php  $b .='  <p align="center"><b><font size="4">'. '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</font></b></td>'; ?>
+<?php  $b .='</tr>'; ?>
+<?php  $b .='<tr>'; ?>
+<?php  $b .='<td width="100%" colspan="2">'; ?>
+<?php  $b .='<p align="center"><b><font size="4">'. $tiendas['nombre'].'</font></b></td></p>' ;?>
+<?php  $b .='</tr>' ;?>
+<?php  $b .='<tr>'; ?>
+<?php  $b .='<td width="6%"><b>Empresa:</b></td>' ;?>
+<?php  $b .='<td width="94%"><b>&nbsp;'.$tiendas['nombre_sector'].'</b></td></p>'; ?>
+<?php  $b .='</tr>'; ?>
+<?php  $b .='<tr>' ;?>
+<?php  $b .='<td colspan="2">'; ?>
+<?php  $b .='<p align="center"><b>Ubicación: '.$tiendas['nombre_ciudad'].'</b></td></p>' ?>
+<?php  $b .='</tr>' ?>
+<?php  $b .='<tr>' ?>
+<?php  $b .='<td colspan="2">' ?>
+<?php  $b .='	<p align="right"><b><a href="'.$tiendas['url_web'] .'"><font size="3">Visitar Merkaplace-&gt;&gt;</font></a></b></td>' ?>
+<?php  $b .='</tr>' ?>
+<?php  $b .='</tr>' ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <?php
+
+
+
+     }
+
+     
+     
+     
+     
               
               
               
 	  $infobox = new azInfoBox();
       $infobox->azSetBoxHeading(MODULE_BOXES_EMPRESABANNER_BOX_TITLE);
-      $infobox->azSetBoxContent(' <td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
+      $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);
               
