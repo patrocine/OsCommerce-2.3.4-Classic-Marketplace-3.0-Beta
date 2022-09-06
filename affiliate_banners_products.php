@@ -164,7 +164,7 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
 
 
 
-"    <p align=center style=margin-top: 0; margin-bottom: 0>	Enlace del Banner <?php  echo HTTP_SERVER . DIR_WS_HTTP_CATALOG . '/enlace.php' ?> </td></a> ";
+"    <p align=center style=margin-top: 0; margin-bottom: 0>	Enlace del Banner <?php  echo HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'enlace.php' ?> </td></a> ";
 
 
 
