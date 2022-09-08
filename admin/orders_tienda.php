@@ -100,12 +100,34 @@ if (isset($HTTP_POST_VARS['submit'])){
     $comments = "Batch status update";
     if ($check_status['orders_status'] != $status) {
 
+
+     $id_factura_ultimo_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_ultimo = mysql_fetch_array($id_factura_ultimo_values);
+
+
                             if ($pagado == tep_db_input($status) or $status_liquidacion == tep_db_input($status)){
 
     $pro_last_modified_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID . "'");
     $pro_last_modified = mysql_fetch_array($pro_last_modified_values);
     
+
+    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID .  "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura = mysql_fetch_array($id_factura_values);
+
+
+         if ($pagado == tep_db_input($status)){
+	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
+					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
+					WHERE orders_id = '" . (int)$this_orderID . "' ");
+                                          }
+
+
+
+
+
                             if ($pro_last_modified['orders_status'] == $pagado or $pro_last_modified['orders_status'] == $status_liquidacion){
+
+
           tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = '" . $pro_last_modified['last_modified'] . "' where orders_id = '" . (int)$this_orderID . "'");
                                                                                    }else{
         tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = now() where orders_id = '" . (int)$this_orderID . "'");

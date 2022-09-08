@@ -185,17 +185,27 @@ $lafechaalta = $mifechaalta[3] . "/" . $mifechaalta[2] . "/" . $mifechaalta[1];
 $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
 
 
-       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
       if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
 
 
               $customers_porcentage = $products_porcentage['products_descuento'].'%';
+  $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="6"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+           $price_descpro = $product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'];
 
-            $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+            if ($price_descpro == $product_info['products_price']){
+
+$products_price = '<font color="#000000" size="6"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+        }
+
+}else{
+
+     $products_price = '<font color="#000000" size="6"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+
+}
 
 
-                                             }
 
 
 

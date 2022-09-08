@@ -429,6 +429,17 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
   
   
 		             if ($_POST['status']){ //evita que cuando caduque secion se altere el status.
+               
+               
+               
+               
+
+               
+               
+               
+               
+               
+               
 		// 1.1 UPDATE ORDER INFO #####
 		$UpdateOrders = "UPDATE " . TABLE_ORDERS . " set
 			customers_name = '" . tep_db_input(stripslashes($_POST['update_customer_name'])) . "',
@@ -441,7 +452,7 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 			customers_country = '" . tep_db_input(stripslashes($_POST['update_customer_country'])) . "',
 			customers_telephone = '" . tep_db_input($_POST['update_customer_telephone']) . "',
 			customers_email_address = '" . tep_db_input($_POST['update_customer_email_address']) . "',";
-		
+
 		$UpdateOrders .= "billing_name = '" . tep_db_input(stripslashes($_POST['update_billing_name'])) . "',
 			billing_company = '" . tep_db_input(stripslashes($_POST['update_billing_company'])) . "',
 			billing_street_address = '" . tep_db_input(stripslashes($_POST['update_billing_street_address'])) . "',
@@ -463,18 +474,85 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 			cc_type = '" . tep_db_input($_POST['update_info_cc_type']) . "',
 			cc_owner = '" . tep_db_input($_POST['update_info_cc_owner']) . "',
 			cc_number = '" . tep_db_input($_POST['update_info_cc_number']) . "',
-            last_modified = '" . date ("Y-m-d H:i:s") . "',
-            cc_expires = '" . tep_db_input($_POST['update_info_cc_expires']) . "',
-			orders_status = '" . tep_db_input($_POST['status']) . "'";
+            cc_expires = '" . tep_db_input($_POST['update_info_cc_expires']) . "'";
 
                //last_modified = '" . date ("Y-m-d H:i:s") . "',
 
-		
 		$UpdateOrders .= " where orders_id = '" . tep_db_input($_GET['oID']) . "';";
 
 		tep_db_query($UpdateOrders);
 		$order_updated = true;
-  
+
+
+    $pro_last_modified_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "'");
+    $pro_last_modified = mysql_fetch_array($pro_last_modified_values);
+
+    $id_factura_ultimo_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_ultimo = mysql_fetch_array($id_factura_ultimo_values);
+    
+
+                             
+
+                                   //status pagado y pagos procesando bloqueados
+                           if ($pagado == $_POST['status'] or $status_liquidacion == $_POST['status']){
+
+
+                            if ($pro_last_modified['orders_status'] == $pagado or $pro_last_modified['orders_status'] == $status_liquidacion){
+
+
+    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura = mysql_fetch_array($id_factura_values);
+
+
+      if ($id_factura['factura_id']){
+
+            }else{
+                if ($pagado == $_POST['status']){
+	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
+					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
+					WHERE orders_id = '" . $oID . "' ");
+                              }
+
+                                                              ;
+                  }
+
+
+
+
+
+          tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified = '" . $pro_last_modified['last_modified'] . "' where orders_id = '" . $oID . "'");
+
+
+
+
+
+                                                                                   }else{
+        tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified = '" . date ("Y-m-d H:i:s") . "' where orders_id = '" . $oID . "'");
+                                                         }
+                                                         
+
+                                                              }else{
+
+   if ($pro_last_modified['orders_status'] <> $pagado or $pro_last_modified['orders_status'] <> $status_liquidacion){
+
+
+
+}ELSE{
+           tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified ='" . date ("Y-m-d H:i:s") . "' where orders_id = '" . $oID . "'");
+
+ }
+
+
+}
+
+
+
+
+
+
+
+
+
 
                                     // actualiza las observaciones en la ficha del cliente
                            
