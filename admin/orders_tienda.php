@@ -2019,6 +2019,7 @@ function uncheckAll(){
 <td></td>
                 <td class="dataTableHeadingContent"><?php echo 'Certf'; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php echo 'Factura'; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo 'Atencion'; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo 'Monetario'; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER_TOTAL; ?></td>
@@ -2044,7 +2045,7 @@ function uncheckAll(){
 
       $status = tep_db_prepare_input($_GET['status_produc']);
       $orders_query_raw = "select o.orders_id, o.admin_level_usuario, o.customers_name, o.certificado, o.orders_medas, orders_cambio_dev,
-                         o.payment_method, o.delivery_name, o.date_purchased,
+                         o.payment_method, o.factura_id, o.delivery_name, o.date_purchased,
                          o.last_modified, o.currency, o.currency_value,
                          s.orders_status_name, ot.text as order_total
                          from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s, " . TABLE_ORDERS_PRODUCTS . " op where
@@ -2057,10 +2058,10 @@ function uncheckAll(){
                      
     } elseif (isset($_GET['status'])) {
       $status = tep_db_prepare_input($_GET['status']);
-      $orders_query_raw = "select o.orders_id, o.admin_level_usuario, o.delivery_name, o.certificado, o.orders_medas, orders_cambio_dev, o.proveedor_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total' group by o.orders_id order by o.last_modified DESC";
+      $orders_query_raw = "select o.orders_id, o.factura_id, o.admin_level_usuario, o.delivery_name, o.certificado, o.orders_medas, orders_cambio_dev, o.proveedor_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total' group by o.orders_id order by o.last_modified DESC";
 
  } elseif  (isset($_GET['status_keywoards']) and isset($_GET['keywoards'])){
-   $orders_query_raw = "select o.orders_status, o.admin_level_usuario, o.certificado, o.orders_medas, orders_cambio_dev, o.orders_id,o.proveedor_id, o.customers_telephone, o.delivery_name, o.billing_name, o.delivery_name, o.customers_email_address, o.customers_state, o.customers_postcode, o.customers_name, o.customers_id, o.customers_city, o.customers_street_address, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_STATUS . " s on o.orders_status = s.orders_status_id where
+   $orders_query_raw = "select o.orders_status, o.factura_id, o.admin_level_usuario, o.certificado, o.orders_medas, orders_cambio_dev, o.orders_id,o.proveedor_id, o.customers_telephone, o.delivery_name, o.billing_name, o.delivery_name, o.customers_email_address, o.customers_state, o.customers_postcode, o.customers_name, o.customers_id, o.customers_city, o.customers_street_address, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_STATUS . " s on o.orders_status = s.orders_status_id where
                      o.customers_name like '%" . tep_db_input($keywoards) . "%' and o.orders_status = '" . $_GET['status_keywoards'] . "'
                      or o.delivery_name like '%" . tep_db_input($keywoards) . "%' and o.orders_status = '" . $_GET['status_keywoards'] . "'
                      or o.orders_id like '%" . tep_db_input($keywoards) . "%'   and o.orders_status = '" . $_GET['status_keywoards'] . "'
@@ -2083,7 +2084,7 @@ function uncheckAll(){
                      
  } elseif (isset($_GET['keywoards'])){
 
-   $orders_query_raw = "select o.orders_status, o.admin_level_usuario, o.certificado, o.orders_medas, orders_cambio_dev, o.orders_id,o.proveedor_id, o.customers_telephone, o.delivery_name, o.billing_name, o.delivery_name, o.customers_email_address, o.customers_state, o.customers_postcode, o.customers_name, o.customers_id, o.customers_city, o.customers_street_address, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_STATUS . " s on o.orders_status = s.orders_status_id where
+   $orders_query_raw = "select o.orders_status, o.factura_id, o.admin_level_usuario, o.certificado, o.orders_medas, orders_cambio_dev, o.orders_id,o.proveedor_id, o.customers_telephone, o.delivery_name, o.billing_name, o.delivery_name, o.customers_email_address, o.customers_state, o.customers_postcode, o.customers_name, o.customers_id, o.customers_city, o.customers_street_address, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_STATUS . " s on o.orders_status = s.orders_status_id where
                      o.customers_name like '%" . tep_db_input($keywoards) . "%'
                      or o.delivery_name like '%" . tep_db_input($keywoards) . "%'
                      or o.orders_id like '%" . tep_db_input($keywoards) . "%'
@@ -2123,7 +2124,7 @@ function uncheckAll(){
 
 
 } else{
-   $orders_query_raw = "select o.orders_id, o.admin_level_usuario, o.orders_status, o.certificado, o.orders_medas, orders_cambio_dev, o.customers_name, o.proveedor_id, o.delivery_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' and s.tienda = '" . $code_admin . "' and o.orders_status <> '" . 7 . "'  group by o.orders_id order by o.orders_id DESC";
+   $orders_query_raw = "select o.orders_id, o.factura_id, o.admin_level_usuario, o.orders_status, o.certificado, o.orders_medas, orders_cambio_dev, o.customers_name, o.proveedor_id, o.delivery_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' and s.tienda = '" . $code_admin . "' and o.orders_status <> '" . 7 . "'  group by o.orders_id order by o.orders_id DESC";
 
 
 }
@@ -2240,7 +2241,8 @@ function uncheckAll(){
 
 
                       ?>
-                <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo 'Atcion: ' . $orders['admin_level_usuario'] ; ?></td>
+               <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo  $orders['factura_id']; ?></td>
+                  <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo 'Atcion: ' . $orders['admin_level_usuario'] ; ?></td>
 
                     <?php
 

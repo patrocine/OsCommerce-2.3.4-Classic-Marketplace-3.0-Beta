@@ -490,6 +490,8 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
     $id_factura_ultimo_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
     $id_factura_ultimo = mysql_fetch_array($id_factura_ultimo_values);
     
+    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura = mysql_fetch_array($id_factura_values);
 
                              
 
@@ -500,21 +502,8 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
                             if ($pro_last_modified['orders_status'] == $pagado or $pro_last_modified['orders_status'] == $status_liquidacion){
 
 
-    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
-    $id_factura = mysql_fetch_array($id_factura_values);
 
 
-      if ($id_factura['factura_id']){
-
-            }else{
-                if ($pagado == $_POST['status']){
-	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
-					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
-					WHERE orders_id = '" . $oID . "' ");
-                              }
-
-                                                              ;
-                  }
 
 
 
@@ -529,7 +518,17 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
                                                                                    }else{
         tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified = '" . date ("Y-m-d H:i:s") . "' where orders_id = '" . $oID . "'");
                                                          }
-                                                         
+      if ($id_factura['factura_id']){
+
+            }else{
+                if ($pagado == $_POST['status']){
+	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
+					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
+					WHERE orders_id = '" . $oID . "' ");
+                              }
+
+
+                  }
 
                                                               }else{
 
@@ -537,7 +536,28 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 
 
 
+
+
+
+   if ($pro_last_modified['orders_status'] == $pagado or $pro_last_modified['orders_status'] == $status_liquidacion){
+   }else{
+          tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified ='" . date ("Y-m-d H:i:s") . "' where orders_id = '" . $oID . "'");
+
+
+
+
+
+
+
+
+     }
+
 }ELSE{
+
+
+
+
+
            tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . $_POST['status'] . "', last_modified ='" . date ("Y-m-d H:i:s") . "' where orders_id = '" . $oID . "'");
 
  }
