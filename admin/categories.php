@@ -1672,19 +1672,26 @@ $('#products_date_available').datepicker({
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+
+            
+            
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
-            <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+            
+            
+            
+            
+            <td align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="smallText" align="right">
+                <td class="smallText" align="left">
 <?php
-    echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
+   echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
     echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
     echo tep_hide_session_id() . '</form>';
 ?>
                 </td>
               </tr>
               <tr>
-                <td class="smallText" align="right">
+                <td class="smallText" align="left">
 <?php
     echo tep_draw_form('goto', FILENAME_CATEGORIES, '', 'get');
     echo HEADING_TITLE_GOTO . ' ' . tep_draw_pull_down_menu('cPath', tep_get_category_tree(), $current_category_id, 'onchange="this.form.submit();"');
@@ -1706,6 +1713,33 @@ $('#products_date_available').datepicker({
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
+
+       $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $HTTP_GET_VARS['search'] . "' or codigo_barras = '" . $HTTP_GET_VARS['search'] . "'");
+      if ($newproducts = tep_db_fetch_array($newproducts_values)){
+
+
+    }else{
+
+         ?>
+        <script type="text/javascript">
+
+       var pagina = 'categories.php<? echo '?cPath=' . $categories['parent_id'] .'&pID=' . $products_id.'&action=new_product';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+    <?php
+
+}
+
     $categories_count = 0;
     $rows = 0;
     if (isset($HTTP_GET_VARS['search'])) {
@@ -1729,6 +1763,9 @@ $('#products_date_available').datepicker({
         $cInfo_array = array_merge($categories, $category_childs, $category_products);
         $cInfo = new objectInfo($cInfo_array);
       }
+      
+      
+      
 
       if (isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id) ) {
         echo '              <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href=\'' . tep_href_link(FILENAME_CATEGORIES, tep_get_path($categories['categories_id'])) . '\'">' . "\n";
