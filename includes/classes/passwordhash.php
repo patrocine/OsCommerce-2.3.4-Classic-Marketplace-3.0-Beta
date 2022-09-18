@@ -46,29 +46,39 @@ class PasswordHash {
 			$this->random_state .= getmypid();
 	}
 
-	function get_random_bytes($count)
-	{
-		$output = '';
-		if (@is_readable('/dev/urandom') &&
-		    ($fh = @fopen('/dev/urandom', 'rb'))) {
-			$output = fread($fh, $count);
-			fclose($fh);
-		}
+function get_random_bytes($count)
+    {
+        $output = '';
+        if (@is_readable('/dev/urandom') &&
+            ($fh = @fopen('/dev/urandom', 'rb'))) {
+            if (function_exists('stream_set_read_buffer')) {
+                stream_set_read_buffer($fh, 0);
+            }
+            $output = fread($fh, $count);
+            fclose($fh);
+        } elseif ( function_exists('openssl_random_pseudo_bytes') ) {
+            $output = openssl_random_pseudo_bytes($count, $orpb_secure);
 
-		if (strlen($output) < $count) {
-			$output = '';
-			for ($i = 0; $i < $count; $i += 16) {
-				$this->random_state =
-				    md5(microtime() . $this->random_state);
-				$output .=
-				    pack('H*', md5($this->random_state));
-			}
-			$output = substr($output, 0, $count);
-		}
+            if ( $orpb_secure != true ) {
+                $output = '';
+            }
+        } elseif (defined('MCRYPT_DEV_URANDOM')) {
+            $output = mcrypt_create_iv($count, MCRYPT_DEV_URANDOM);
+        }
 
-		return $output;
-	}
+        if (strlen($output) < $count) {
+            $output = '';
+            for ($i = 0; $i < $count; $i += 16) {
+                $this->random_state =
+                    md5(microtime() . $this->random_state);
+                $output .=
+                    pack('H*', md5($this->random_state));
+            }
+            $output = substr($output, 0, $count);
+        }
 
+        return $output;
+    }
 	function encode64($input, $count)
 	{
 		$output = '';
