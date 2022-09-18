@@ -103,7 +103,7 @@ jQuery(".gallery2").jCarouselLite({
 
 	<div class="main_part_right_box">
 		<div class="main_part_right_box_pad">
-			<div class="main_part_title bestseller_title"><?php echo 'MERKAPLACE 3.0'; ?></div> <?php
+			<div class="main_part_title bestseller_title"> <a href="https://oscommerce.com"><img src="/images/logo_oscommerce.png"></a></div> <?php
 
 
 

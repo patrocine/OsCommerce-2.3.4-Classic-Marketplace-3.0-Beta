@@ -182,7 +182,7 @@
               
               
 	  $infobox = new azInfoBox();
-      $infobox->azSetBoxHeading(MODULE_BOXES_EMPRESABANNER_BOX_TITLE);
+      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' . '');
       $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);

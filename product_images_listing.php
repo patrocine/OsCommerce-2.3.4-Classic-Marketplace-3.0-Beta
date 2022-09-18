@@ -195,7 +195,7 @@ $product['image']			=       '<a href="'. $ref_fabricante['proveedor_ruta_images'
               $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "' and almacenpro = '" . 0 . "'");
        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
      ?>
-                  <?php  $texto_stock = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_info_patrocine.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $products_model_stock .'&almacen=' . $product_compartir['nombre_publico']  .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
+                  <?php  $texto_stock .= '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_info_patrocine.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $products_model_stock .'&almacen=' . $product_compartir['nombre_publico']  .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
                              ?>
                                     <?php
 

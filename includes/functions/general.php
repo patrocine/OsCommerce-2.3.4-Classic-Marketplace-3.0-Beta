@@ -1371,4 +1371,22 @@
       return str_replace($from, $to, $string);
     }
   }
+  
+  
+  function tep_info_image($image, $alt, $width = '', $height = '') {
+    if (tep_not_null($image) && (file_exists(DIR_WS_IMAGES .$image)) ) {
+      $image = tep_image(DIR_WS_IMAGES .$image, $alt, $width, $height);
+    } else {
+      $image = TEXT_IMAGE_NONEXISTENT;
+    }
+
+    return $image;
+  }
+
+  
+  
+  
+  
+  
+  
 ?>

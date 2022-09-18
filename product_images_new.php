@@ -11,7 +11,7 @@
 
 //$product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 
-$product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+ $product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
 
 
 
@@ -129,9 +129,15 @@ $product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . 'no-f
 
 }else{
 
+
+
+
          if (@getimagesize(DIR_WS_IMAGES . $new_products['products_image'])) {
 
- $product['image']			= tep_image(DIR_WS_IMAGES . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+//   $product['image']			= tep_image(DIR_WS_IMAGES . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+ $product['image']	=     tep_info_image($new_products['products_image'], $new_products['products_name'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT);
+
+
       require(TMPL_DIR. 'templ_product_box.php');
 
 

@@ -154,20 +154,25 @@
       ),
       array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000"></font></b>',
+        'title' => '</b><b><font color="#008000">Stock</font></b>',
         'link' => 'orders_tienda.php?status='.$entregas_stock
       ),
      array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000"></font></b>',
+        'title' => '<b><font color="#008000">Cobrado</font></b>',
         'link' => 'orders_tienda.php?status='.$cobrado
       ),
      array(
         'code' => $orders_tienda,
-        'title' => '<b><font color="#008000"></font></b>',
+        'title' => '<b><font color="#008000">Pagos Procesando</font></b>',
+        'link' => 'orders_tienda.php?status='.$status_liquidacion
+      ),
+           array(
+        'code' => $orders_tienda,
+        'title' => '<b><font color="#008000">Pagado</font></b>',
         'link' => 'orders_tienda.php?status='.$pagado
       ),
-      array(
+     array(
         'code' => $edit_orders_tienda,
         'title' => '',
         'link' => ''

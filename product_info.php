@@ -13,6 +13,8 @@
   require('includes/application_top.php');
 
         $pro_mo = $_GET['products_id'] ;
+        
+        
              require('mobile_version_info.php');
 
   require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);

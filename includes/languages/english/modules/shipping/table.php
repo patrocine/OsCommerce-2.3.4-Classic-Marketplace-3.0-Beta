@@ -10,9 +10,9 @@
   Released under the GNU General Public License
 */
 
-define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Tabla de tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Tabla de tarifas');
-define('MODULE_SHIPPING_TABLE_TEXT_WAY', '');
+define('MODULE_SHIPPING_TABLE_TEXT_TITLE', 'Reparto dentro de la localidad');
+define('MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION', 'Reparto dentro de la localidad');
+define('MODULE_SHIPPING_TABLE_TEXT_WAY', 'Envío dentro de la localidad');
 define('MODULE_SHIPPING_TABLE_TEXT_WEIGHT', 'Peso');
 define('MODULE_SHIPPING_TABLE_TEXT_AMOUNT', 'Total');
 ?>

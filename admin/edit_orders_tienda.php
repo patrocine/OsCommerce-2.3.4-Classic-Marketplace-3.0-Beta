@@ -5,6 +5,7 @@
     $cambio_monetario = $_POST['cambio_monetario'];
     $codigobarras_inv = $_POST['codigobarras_inv'];
     $codigobarras = $_POST['codigobarras'];
+    $new_product = $_POST['new_product'];
     $unidades = $_POST['unidades'];
     $productoid = $_GET['productoid'];
     $prueba_notif = $_GET['prueba_notif'];
@@ -58,6 +59,22 @@
                             //2393
    require(DIR_WS_INCLUDES . 'template_top.php');
 
+           if (NEW_PRODUCT == 1){
+        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras . "' or codigo_barras = '" . $codigobarras . "'");
+      if ($newproducts = tep_db_fetch_array($newproducts_values)){
+
+
+    }else{
+
+         ?>
+
+<script language=javascript>
+window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&action=new_product&ean='.$codigobarras;  ?>', '_blank');
+</script>
+    <?php
+
+
+}}
 
 
 
@@ -710,6 +727,12 @@ $oldday1 = date("Y-m-d", $time1);
 					WHERE products_id = '" . (int)$order['products_id'] . "' ");
 
                         }
+                        
+                        
+
+                        
+                        
+                        
 
 
                               //NUEVO PRODUCTO
@@ -3174,6 +3197,8 @@ if (($action == 'edit') && ($order_exists == true)) {
  $estatus_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
  $estatus = mysql_fetch_array($estatus_values);
 
+ $new_product_configuration_values = mysql_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
+ $new_product_configuration = mysql_fetch_array($new_product_configuration_values);
 
 
  // SOLO STATUS SELECCIONADOS SE EJECUTARÁ ESTA PARTE DEL CODIGO
@@ -3267,7 +3292,55 @@ if (($action == 'edit') && ($order_exists == true)) {
          }
          ?>
        Unid</font></b></p>
+       
+  <?php
+       
+       
+       
+
+                              //NUEVO PRODUCTO
+         if ($new_product == 1){
+
+	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 1 . "'
+					WHERE configuration_key = '" . 'NEW_PRODUCT' . "' ");
+
+                        }else if ($new_product == 2){
+	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 2 . "'
+					WHERE configuration_key = '" . 'NEW_PRODUCT' . "' ");
+
+                    }
+
+ $new_product_configuration_values = mysql_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
+ $new_product_configuration = mysql_fetch_array($new_product_configuration_values);
+
+
+if ($new_product_configuration['configuration_value'] == 1 ){
+
+$checked_1 = 'checked';
+}
+if ($new_product_configuration['configuration_value'] == 2 ){
+
+$checked_0 = 'checked';
+}
+
+
+
+
+                   ?>
+
+<input type="radio" value="1" <?php echo $checked_1; ?> name="new_product">   <input type="radio" value="2" <?php echo $checked_0; ?> name="new_product">
+
+
+       
+       
+       
+       
   <p style="margin-top: 0; margin-bottom: 0">
+
+
+
 
 
     <font size="1" face="Verdana"><b>
@@ -3284,10 +3357,11 @@ if (($action == 'edit') && ($order_exists == true)) {
 
                  $unidades_negativos = 1;
          }
-                   
-                   ?>
 
-    <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3"> </b></font>
+
+           ?>
+
+  <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3"> </b></font>
   </p>
   <p style="margin-top: 0; margin-bottom: 0"><b><font face="Verdana" size="1">
   Búsquedas</font></b></p>
@@ -3304,7 +3378,7 @@ if (($action == 'edit') && ($order_exists == true)) {
      <input type="hidden" name="add_product">
     <input type="submit" name="Submit" value="Buscar" style="color: #FFFFFF; font-family: ve; font-size: 8pt; background-color: #008080">
     </b></font>
-  </p>
+
 </form>
 
 
