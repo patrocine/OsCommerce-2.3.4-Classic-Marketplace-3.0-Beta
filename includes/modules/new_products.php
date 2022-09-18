@@ -183,10 +183,10 @@ if ($customers_porcentage == 0){
         
       //  $products_price = az_change_format($products_price);
 
+       $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" . $new_products['products_id']  . "'  order by pdc_unidades asc");
+      if ( $pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
 
-    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $new_products['products_id'] . "' order by pdc_unidades asc");
-  if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
 
             $pdc_price_final = ' <font color="#000000" size="0"><p style="margin-top: 0; margin-bottom: 0"> <font size="0">+'.$pdc_precio_final['pdc_unidades'].' Pcs ->></s>
               <font color="#ff0000" size="0"><b>' . $pdc_precio_final['pdc_price_final'] . '€ .....</b></font></span></p>';
