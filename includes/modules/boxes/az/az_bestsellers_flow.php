@@ -9,7 +9,7 @@ function imageRestrict_bs($image) {
 			return '<img src="'.$image.'" width="'.$maxwidth.'" height="'.$newheight.'" alt="" />';  
 		}  
 		else  { 
-			$newwidth = round($maxheight/$height * $width);
+		//	$newwidth = round($maxheight/$height * $width);
 			if ($newwidth > $maxwidth) {
 				return '<img src="'.$image.'" width="'.$maxwidth.'"  alt="" />';
 			}

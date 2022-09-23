@@ -1106,48 +1106,28 @@
     return tep_count_modules(MODULE_SHIPPING_INSTALLED);
   }
 
-function tep_create_random_value($length, $type = 'mixed') {
-    if ( ($type != 'mixed') && ($type != 'chars') && ($type != 'digits')) $type = 'mixed';
+  function tep_create_random_value($length, $type = 'mixed') {
+    if ( ($type != 'mixed') && ($type != 'chars') && ($type != 'digits')) return false;
 
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $digits = '0123456789';
-
-    $base = '';
-
-    if ( ($type == 'mixed') || ($type == 'chars') ) {
-      $base .= $chars;
-    }
-
-    if ( ($type == 'mixed') || ($type == 'digits') ) {
-      $base .= $digits;
-    }
-
-    $value = '';
-
-    if (!class_exists('PasswordHash')) {
-      include(DIR_WS_CLASSES . 'passwordhash.php');
-    }
-
-    $hasher = new PasswordHash(10, true);
-
-    do {
-      $random = base64_encode($hasher->get_random_bytes($length));
-
-      for ($i = 0, $n = strlen($random); $i < $n; $i++) {
-        $char = substr($random, $i, 1);
-
-        if ( strpos($base, $char) !== false ) {
-          $value .= $char;
-        }
+    $rand_value = '';
+    while (strlen($rand_value) < $length) {
+      if ($type == 'digits') {
+        $char = tep_rand(0,9);
+      } else {
+        $char = chr(tep_rand(0,255));
       }
-    } while ( strlen($value) < $length );
-
-    if ( strlen($value) > $length ) {
-      $value = substr($value, 0, $length);
+      if ($type == 'mixed') {
+        if (preg_match('/^[a-z0-9]$/i', $char)) $rand_value .= $char;
+      } elseif ($type == 'chars') {
+        if (preg_match('/^[a-z]$/i', $char)) $rand_value .= $char;
+      } elseif ($type == 'digits') {
+        if (preg_match('/^[0-9]$/i', $char)) $rand_value .= $char;
+      }
     }
 
-    return $value;
+    return $rand_value;
   }
+
   function tep_array_to_string($array, $exclude = '', $equals = '=', $separator = '&') {
     if (!is_array($exclude)) $exclude = array();
 
@@ -1254,15 +1234,12 @@ function tep_create_random_value($length, $type = 'mixed') {
 
 ////
 // Return a random value
-function tep_rand($min = null, $max = null) {
+  function tep_rand($min = null, $max = null) {
     static $seeded;
 
     if (!isset($seeded)) {
+      mt_srand((double)microtime()*1000000);
       $seeded = true;
-
-      if ( (PHP_VERSION < '4.2.0') ) {
-        mt_srand((double)microtime()*1000000);
-      }
     }
 
     if (isset($min) && isset($max)) {
@@ -1275,6 +1252,7 @@ function tep_rand($min = null, $max = null) {
       return mt_rand();
     }
   }
+
   function tep_setcookie($name, $value = '', $expire = 0, $path = '/', $domain = '', $secure = 0) {
     setcookie($name, $value, $expire, $path, (tep_not_null($domain) ? $domain : ''), $secure);
   }
