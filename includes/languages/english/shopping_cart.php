@@ -9,7 +9,6 @@
 
   Released under the GNU General Public License
 */
-
 define('NAVBAR_TITLE', 'Contenido de la cesta');
 define('HEADING_TITLE', 'Que hay en mi cesta?');
 define('TABLE_HEADING_PRODUCTS', 'Producto(s)');

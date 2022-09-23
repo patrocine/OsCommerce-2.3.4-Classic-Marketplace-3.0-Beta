@@ -123,22 +123,26 @@ function tep_selected_file($filename) {
 
 ////
 // Redirect to another page or site
-  function tep_redirect($url) {
-    global $logger;
+function tep_redirect($url) {
+  global $logger;
 
-    if ( (strstr($url, "\n") != false) || (strstr($url, "\r") != false) ) {
-      tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
-    }
-
-    header('Location: ' . $url);
-
-    if (STORE_PAGE_PARSE_TIME == 'true') {
-      if (!is_object($logger)) $logger = new logger;
-      $logger->timer_stop();
-    }
-
-    exit;
+  if ( (strstr($url, "\n") != false) || (strstr($url, "\r") != false) ) {
+    tep_redirect(tep_href_link(FILENAME_DEFAULT, '', 'NONSSL', false));
   }
+
+  if ( strpos($url, '&amp;') !== false ) {
+    $url = str_replace('&amp;', '&', $url);
+  }
+
+  header('Location: ' . $url);
+
+  if (STORE_PAGE_PARSE_TIME == 'true') {
+    if (!is_object($logger)) $logger = new logger;
+    $logger->timer_stop();
+  }
+
+  exit;
+}
 
 ////
 // Parse the data used in the html tags to ensure the tags will not break

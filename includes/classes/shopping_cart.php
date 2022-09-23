@@ -143,44 +143,46 @@
       }
     }
 
-    function update_quantity($products_id, $quantity = '', $attributes = '') {
-      global $customer_id;
+function update_quantity($products_id, $quantity = '', $attributes = '') {
+  global $customer_id;
 
-      $products_id_string = tep_get_uprid($products_id, $attributes);
-      $products_id = tep_get_prid($products_id_string);
+  $products_id_string = tep_get_uprid($products_id, $attributes);
+  $products_id = tep_get_prid($products_id_string);
 
-      if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$quantity > MAX_QTY_IN_CART)) {
-        $quantity = MAX_QTY_IN_CART;
+  if (defined('MAX_QTY_IN_CART') && (MAX_QTY_IN_CART > 0) && ((int)$quantity > MAX_QTY_IN_CART)) {
+    $quantity = MAX_QTY_IN_CART;
+  }
+
+  $attributes_pass_check = true;
+
+  if (is_array($attributes)) {
+    reset($attributes);
+    while (list($option, $value) = each($attributes)) {
+      if (!is_numeric($option) || !is_numeric($value)) {
+        $attributes_pass_check = false;
+        break;
       }
+    }
+  }
 
-      $attributes_pass_check = true;
-
-      if (is_array($attributes)) {
-        reset($attributes);
-        while (list($option, $value) = each($attributes)) {
-          if (!is_numeric($option) || !is_numeric($value)) {
-            $attributes_pass_check = false;
-            break;
-          }
-        }
-      }
-
-      if (is_numeric($products_id) && isset($this->contents[$products_id_string]) && is_numeric($quantity) && ($attributes_pass_check == true)) {
-        $this->contents[$products_id_string] = array('qty' => (int)$quantity);
+  if (is_numeric($products_id) && isset($this->contents[$products_id_string]) && is_numeric($quantity) && ($attributes_pass_check == true)) {
+    $this->contents[$products_id_string] = array('qty' => (int)$quantity);
 // update database
-        if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . (int)$quantity . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "'");
+    if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET . " set customers_basket_quantity = '" . (int)$quantity . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "'");
 
-        if (is_array($attributes)) {
-          reset($attributes);
-          while (list($option, $value) = each($attributes)) {
-            $this->contents[$products_id_string]['attributes'][$option] = $value;
+    if (is_array($attributes)) {
+      reset($attributes);
+      while (list($option, $value) = each($attributes)) {
+        $this->contents[$products_id_string]['attributes'][$option] = $value;
 // update database
-            if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " set products_options_value_id = '" . (int)$value . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "' and products_options_id = '" . (int)$option . "'");
-          }
-        }
+        if (tep_session_is_registered('customer_id')) tep_db_query("update " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " set products_options_value_id = '" . (int)$value . "' where customers_id = '" . (int)$customer_id . "' and products_id = '" . tep_db_input($products_id_string) . "' and products_options_id = '" . (int)$option . "'");
       }
     }
 
+// assign a temporary unique ID to the order contents to prevent hack attempts during the checkout procedure
+    $this->cartID = $this->generate_cart_id();
+  }
+}
     function cleanup() {
       global $customer_id;
 

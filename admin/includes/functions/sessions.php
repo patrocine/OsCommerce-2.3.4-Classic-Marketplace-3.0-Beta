@@ -102,19 +102,19 @@
     return session_start();
   }
 
-  function tep_session_register($variable) {
-    if (PHP_VERSION < 4.3) {
-      return session_register($variable);
-    } else {
-      if (isset($GLOBALS[$variable])) {
-        $_SESSION[$variable] =& $GLOBALS[$variable];
-      } else {
-        $_SESSION[$variable] = null;
-      }
+function tep_session_register($variable) {
+  if (PHP_VERSION < 4.3) {
+    return session_register($variable);
+  } else {
+    if (!isset($GLOBALS[$variable])) {
+      $GLOBALS[$variable] = null;
     }
 
-    return false;
+    $_SESSION[$variable] =& $GLOBALS[$variable];
   }
+
+  return false;
+}
 
   function tep_session_is_registered($variable) {
     if (PHP_VERSION < 4.3) {

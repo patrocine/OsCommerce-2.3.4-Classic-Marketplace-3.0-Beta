@@ -10,14 +10,17 @@
   Released under the GNU General Public License
 */
 
-  require('includes/application_top.php');
+require('includes/application_top.php');
 
-        $pro_mo = $_GET['products_id'] ;
-        
-        
+if (!isset($HTTP_GET_VARS['products_id'])) {
+  tep_redirect(tep_href_link(FILENAME_DEFAULT));
+}
+             $pro_mo = $_GET['products_id'] ;
+
+
              require('mobile_version_info.php');
+require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
 
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
   $product_url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
   
 
@@ -453,7 +456,7 @@ $products_price = $currencies->display_price($product_info['products_price'], te
           if (tep_not_null($pi['htmlcontent'])) {
             $pi_entry .= '#piGalimg_' . $pi_counter;
           } else {
-            $pi_entry .= tep_href_link(DIR_WS_IMAGES . $pi['image']);
+       $pi_entry .= tep_href_link(DIR_WS_IMAGES . $pi['image'], '', 'NONSSL', false);
           }
 
           $pi_entry .= '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $pi['image']) . '</a>';
@@ -1982,8 +1985,7 @@ if ($interval->format('%R%a') <= 30){
   
 
 <?php
-    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and reviews_status = 1");
-    $reviews = tep_db_fetch_array($reviews_query);
+    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' and reviews_status = 1");$reviews = tep_db_fetch_array($reviews_query);
 ?>
 
   <div class="buttonSet">

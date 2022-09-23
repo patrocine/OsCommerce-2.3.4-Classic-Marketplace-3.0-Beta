@@ -102,23 +102,23 @@
     return session_start();
   }
 
-  function tep_session_register($variable) {
-    global $session_started;
+function tep_session_register($variable) {
+  global $session_started;
 
-    if ($session_started == true) {
-      if (PHP_VERSION < 4.3) {
-        return session_register($variable);
-      } else {
-        if (isset($GLOBALS[$variable])) {
-          $_SESSION[$variable] =& $GLOBALS[$variable];
-        } else {
-          $_SESSION[$variable] = null;
-        }
+  if ($session_started == true) {
+    if (PHP_VERSION < 4.3) {
+      return session_register($variable);
+    } else {
+      if (!isset($GLOBALS[$variable])) {
+        $GLOBALS[$variable] = null;
       }
-    }
 
-    return false;
+      $_SESSION[$variable] =& $GLOBALS[$variable];
+    }
   }
+
+  return false;
+}
 
   function tep_session_is_registered($variable) {
     if (PHP_VERSION < 4.3) {
@@ -172,22 +172,15 @@
     }
   }
 
-  function tep_session_recreate() {
-    if (PHP_VERSION >= 4.1) {
-      $session_backup = $_SESSION;
+function tep_session_recreate() {
+  global $SID;
 
-      unset($_COOKIE[tep_session_name()]);
+  if (PHP_VERSION >= 5.1) {
+    session_regenerate_id(true);
 
-      tep_session_destroy();
-
-      if (STORE_SESSIONS == 'mysql') {
-        session_set_save_handler('_sess_open', '_sess_close', '_sess_read', '_sess_write', '_sess_destroy', '_sess_gc');
-      }
-
-      tep_session_start();
-
-      $_SESSION = $session_backup;
-      unset($session_backup);
+    if (!empty($SID)) {
+      $SID = tep_session_name() . '=' . tep_session_id();
     }
   }
+}
 ?>

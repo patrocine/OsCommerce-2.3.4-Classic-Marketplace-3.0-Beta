@@ -759,8 +759,7 @@ function updateNet() {
 ?>
           <tr>
             <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_NAME; ?></td>
-            <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? stripslashes($products_name[$languages[$i]['id']]) : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td>
-          </tr>
+          <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . ' ' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (empty($pInfo->products_id) ? '' : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td> </tr>
 <?php
     }
 ?>
@@ -779,12 +778,10 @@ function updateNet() {
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price', $pInfo->products_price, 'onKeyUp="updateGross()"'); ?></td>
-          </tr>
+         <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price', $pInfo->products_price, 'onkeyup="updateGross()"'); ?></td> </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'OnKeyUp="updateNet()"'); ?></td>
-          </tr>
+          <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'onkeyup="updateNet()"'); ?></td> </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>

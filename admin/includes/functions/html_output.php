@@ -68,10 +68,9 @@
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
     $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
-    if (tep_not_null($alt)) {
-      $image .= ' title=" ' . tep_output_string($alt) . ' "';
-    }
-
+if (tep_not_null($alt)) {
+  $image .= ' title="' . tep_output_string($alt) . '"';
+}
     if (tep_not_null($width) && tep_not_null($height)) {
       $image .= ' width="' . tep_output_string($width) . '" height="' . tep_output_string($height) . '"';
     }

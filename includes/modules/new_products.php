@@ -47,9 +47,9 @@ p.products_price, if(s.status, s.specials_new_products_price, null) as specials_
 
   $num_new_products = tep_db_num_rows($new_products_query);
 
-  if ($new_products_query > 0) {
-    $counter = 0;
-    $col = 0;
+if ($num_new_products > 0) {
+  $counter = 0;
+  $col = 0;
 
     $new_prods_content = '<table border="0" width="100%" cellspacing="0" cellpadding="0">';
     while ($new_products = tep_db_fetch_array($new_products_query)) {
