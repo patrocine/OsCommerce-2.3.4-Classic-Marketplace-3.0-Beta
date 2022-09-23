@@ -1,0 +1,84 @@
+/**
+ * Multi Level Drop Down Menu 2.1 - CSS Temp
+ * October 1, 2009
+ * Corey Hart @ http://www.codenothing.com
+ */ 
+
+#az_category_menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#az_category_menu > li {
+	float: left;
+}
+
+#az_category_menu > li > a {
+	font-family:"Century Gothic", Arial, Verdana;
+	font-size:14px;
+	display: block;
+	padding:0 10px 0 10px;
+	text-align:center;
+	text-decoration: none;
+	text-transform:uppercase;
+	color:#4b2c27;
+	font-weight:normal;
+}
+
+#az_category_menu > li > .parent-hover {
+	color:#804a42;
+}
+
+#az_category_menu > li ul {
+	display: none;
+	list-style: none;
+	position: absolute;
+	margin: 7px 0 0 0;
+	z-index: 90;
+	padding: 0;
+	background:url(../images/az_cat_pattern.jpg);
+}
+#az_category_menu > li ul li {
+
+}
+
+#az_category_menu > li ul a {
+	font-family:"Century Gothic", Arial, Verdana;
+	display: block;
+	width: 190px;
+	padding:5px 0 5px 0;
+	text-decoration: none;
+	font-weight:normal;
+	font-size:14px;
+	color: #4b2c27;
+	text-align:left;
+	text-indent:5px;
+}
+
+#az_category_menu > li ul .child-hover {
+	color:#804a42;
+}
+
+#az_category_menu > li ul li ul {
+	margin: -35px 0 0 191px;
+	position: absolute;
+}
+
+#az_category_menu span {
+	float: right;
+	margin-right:5px;
+}
+
+.az_catmenu_top {
+	background:url(../images/az_dropdown_top.png) no-repeat;
+	width:190px;
+	height:6px;
+    margin-top: -6px;
+}
+.az_catmenu_bottom {
+	background:url(../images/az_dropdown_bottom.png) no-repeat;
+	width:190px;
+	height:6px;
+    margin-bottom: -6px;
+}

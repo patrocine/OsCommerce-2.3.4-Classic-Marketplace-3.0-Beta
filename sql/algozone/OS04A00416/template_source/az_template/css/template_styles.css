@@ -1,0 +1,1037 @@
+/*
+  $Id: template_styles.css,v 1.0 17:37:59 06/17/2009  
+
+  Cascading Stylesheets for AlgoZone template
+
+  Copyright (c) 2009 AlgoZone, Inc (www.algozone.com)
+
+*/
+
+BODY {
+	background: url(../images/az_pattern.gif);
+	color: #4B2C27;
+	margin: 0px;
+}
+
+A {
+	color: #4B2C27;
+	text-decoration: none;
+}
+
+A:hover {
+	color: #804a42;
+	text-decoration: none;
+}
+
+H1, H2, H3, .pageHeading, .contentBoxHeadingCenter_azMod, .infoBoxHeading, .contentBoxHeadingCenter{
+    color: #4b2c27;    
+}
+
+INPUT[type="submit"]{
+    cursor: pointer;
+}
+
+#az_page_wrapper {
+	text-align:center;
+	
+}
+
+#az_main_container_border {
+	width:1000px;
+	margin:0 auto 0 auto;
+	position:relative;
+}
+
+#az_main_container {
+	text-align:left;
+	padding:6px 5px 6px 5px;
+}
+
+#az_main_container_top_l {
+	background: url(../images/az_body_top_left.gif) no-repeat;
+}
+#az_main_container_top_r {
+	background: url(../images/az_body_top_right.gif) right top no-repeat;
+	padding:0 5px 0 5px;
+}
+#az_main_container_top_m {
+	background: #fff url(../images/az_body_side_hor.gif) repeat-x;
+	height:5px;
+}
+
+#az_main_container_side_l {
+	background: #fff url(../images/az_body_side_ver.gif) repeat-y;
+}
+#az_main_container_side_r {
+	background: url(../images/az_body_side_ver.gif) top right repeat-y;
+	padding:10px 12px 25px 12px;
+}
+
+#az_main_container_bottom_l {
+	background:url(../images/az_body_bottom_left.gif) left bottom no-repeat;
+}
+#az_main_container_bottom_r {
+	background:url(../images/az_body_bottom_right.gif) right bottom no-repeat;
+	padding:0 5px 0 5px;
+}
+#az_main_container_bottom_m {
+	background: #fff url(../images/az_body_side_hor.gif) left bottom repeat-x;
+	height:5px;
+}
+
+.clear {
+	clear:both;
+}
+
+
+/*------------------------------------------*/
+/*             Header Settings              */
+/*------------------------------------------*/
+#az_info_bar {
+	background:url(../images/az_content_border.gif) repeat-x;
+	margin-top:6px;
+	width:100%;
+}
+#az_info_bar_bottom {
+	background:url(../images/az_content_border.gif) left bottom repeat-x;
+}
+.az_info_bar_1 {
+	float:left;
+	line-height:40px;
+}
+.az_info_bar_2 {
+	float:right;
+	padding-right:30px;
+}
+#az_currencies, #az_languages, #az_shoppingcart {
+	font-family:Tahoma, Arial, Verdana;
+	font-size:11px;
+	color:#6a5a2e;
+}
+#az_currencies, #az_languages {
+}
+#az_shoppingcart {
+	height:40px;
+}
+span.az_cartTitle {
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-size:14px;
+	color:#61433b;
+	text-transform:uppercase;
+}
+span.az_cartItems, span.az_cartPrice {
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-weight:normal;
+	font-size:14px;
+	color:#972f2f;
+}
+span.az_cartItems {
+	margin-left:6px;
+}
+span.az_cartPrice {
+}
+
+#az_main_header {
+	/*position:relative;*/
+}
+
+#az_header_top_l {
+	background:url(../images/az_header_top_left.gif) no-repeat;
+}
+#az_header_top_r {
+	background:url(../images/az_header_top_right.gif) right top no-repeat;
+	padding:0 5px 0 5px;
+}
+#az_header_top_m {
+	background:#bacdce;
+	height:5px;
+}
+
+#az_header_bottom_l {
+	background:url(../images/az_header_bottom_left.gif) left bottom no-repeat;
+}
+#az_header_bottom_r {
+	background:url(../images/az_header_bottom_right.gif) right bottom no-repeat;
+	padding:0 5px 0 5px;
+}
+#az_header_bottom_m {
+	background:#bacdce;
+	height:5px;
+}
+
+#az_header_left {
+	background:url(../images/az_header_left.gif) repeat-y;
+}
+#az_header_right {
+	background:url(../images/az_header_right.gif) top right repeat-y;
+	padding:0 1px 0 1px;
+}
+#az_header {
+	background: url(../images/az_header_bg.jpg) no-repeat;
+	height:108px;
+    width: 962px;
+}
+
+#az_header_logo {
+	background:url(../images/az_header_logo.gif) no-repeat;
+	width:268px;
+	height:33px;
+	float:left;
+	margin:35px 0 0 21px;
+}
+#az_header_logo a {
+	display:block;
+	height:100%;
+}
+#az_header_banner {
+	float:left;
+	width:352px;
+	text-align:center;
+}
+#az_header_banner span {
+	font-family:"Century Gothic", Arial;
+	font-size:12px;
+	text-transform:uppercase;
+	color:#61433b;
+}
+#az_header_banner #az_banner_text1 {
+	display:block;
+	font-size:16px;
+	letter-spacing:-1px;
+	margin-top:32px;
+}
+#az_header_banner #az_banner_text2 {
+}
+#az_header_banner #az_banner_text3 {
+	background:url(../images/az_bullet.gif) left center no-repeat;
+	padding-left:22px;
+	margin-left:20px;
+}
+
+#az_search_box {
+	float:right;
+	font-family:"Century Gothic";
+	font-size:14px;
+	color:#4b2c27;
+	text-transform:uppercase;
+	font-weight:bold;
+	letter-spacing:-1px;
+	margin-top:22px;
+}
+#az_search_box_l {
+	background:url(../images/az_searchbox_left.gif) no-repeat;
+}
+#az_search_box_r {
+	background:url(../images/az_searchbox_right.gif) right top no-repeat;
+	padding:0 5px 0 5px;
+}
+#az_search_box_m {
+	background:#ffffff;
+	height:25px;
+}
+#az_search_box_l input {
+	border:none;
+	background:none;
+	font-family:"Century Gothic", Arial;
+	font-size:12px;
+	color:#4b2c27;
+	margin-top:2px;
+	width:180px;
+}
+#az_search_button {
+	border:none;
+	background:none;
+	font-family:"Century Gothic", Arial;
+	color:#4b2c27;
+	font-size:14px;
+	width:25px;
+}
+#az_search_advance {
+	font-size:12px;
+	color:#61433B;
+	font-weight:bold;
+}
+#az_search_advance:hover {
+	color:#804a42;
+}
+
+#az_topbox_sep {
+	background:url(../images/az_topbox_sep.gif) no-repeat;
+	position:absolute;
+	width:2px;
+	height:87px;
+	top:0;
+	margin:27px 0 0 655px;
+}
+
+#az_category_menu_box {
+	width:100%;
+	text-align:center;
+	clear:both;
+	padding-top:2px;
+}
+#az_category_menu_wrapper {
+	margin:auto;
+}
+/*------------------------------------------*/
+/*          Header Settings (EOF)           */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*           Main Menu Settings             */
+/*------------------------------------------*/
+#az_main_menu {
+}
+#az_main_menu_r {
+	display:none;
+}
+#az_main_menu_l {
+	display:none;
+}
+#az_menubarmain {
+}
+#az_menubarmain ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+#az_menubarmain ul li {
+	float:left;
+	margin:0;
+	padding:0;
+	margin-right:35px;
+}
+#az_menubarmain ul li.az_main_menu_start {
+	margin-left:35px;
+}
+#az_menubarmain ul li.az_main_menu_end {
+	margin-right:0px;
+}
+#az_menubarmain a, #az_menubarmain a:link, .az_menubarmain a:active, .az_menubarmain a:visited {
+	font-family:"Century Gothic", Tahoma, Arial;
+	font-size:14px;
+	color:#4b2c27;
+	text-transform:uppercase;
+}
+#az_menubarmain A:hover {
+	color:#804a42;
+}
+/*------------------------------------------*/
+/*        Main Menu Settings (EOF)          */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*          Main Content Settings           */
+/*------------------------------------------*/
+#az_main_content {
+	width:100%;
+	margin:0;
+	padding:25px 0 0px 0;
+	clear:both;
+}
+
+#az_left_bar {}
+#az_left_bar_top {}
+#az_left_bar_mid {}
+#az_left_bar_bottom {}
+
+#az_site_content {
+	background:url(../images/az_content_border.gif) left bottom repeat-x;
+	padding-bottom:10px;
+}
+#az_site_content_top { display:none; }
+#az_site_content_mid {
+}
+#az_site_content_bottom { display:none; }
+
+#az_right_bar {}
+#az_right_bar_top {}
+#az_right_bar_mid {}
+#az_right_bar_bottom {}
+
+#az_info_bar2 {
+	width:100%;
+	overflow:hidden;
+	padding:15px 0 15px 0;
+}
+#az_info_bar2 ul {
+	list-style:none;
+	white-space:nowrap;
+	margin:5px 0 0 0;
+	padding:0;
+	text-align:center;
+}
+#az_info_bar2 ul li {
+	float:left;
+	margin:0;
+	padding:0;
+	white-space:nowrap;
+	width:20%;
+	overflow:hidden;
+	text-align:center;
+}
+#az_info_bar2 ul.az_brand_list_start {
+	margin:0;
+}
+
+#az_banner {
+	text-align:center;
+}
+/*------------------------------------------*/
+/*       Main Content Settings (EOF)        */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*             Footer Settings              */
+/*------------------------------------------*/
+#az_main_footer {
+	width: 961px;
+    height: 52px;
+    background: url(../images/az_footer_bg.jpg) no-repeat;
+}
+#az_left_bar_footer {
+	background:url(../images/az_footer_left.gif) no-repeat;
+}
+#az_right_bar_footer {
+	background:url(../images/az_footer_right.gif) right top no-repeat;
+	padding:0 6px 0 6px;
+}
+#az_mid_bar_footer {
+	background:url(../images/az_footer_mid.gif) repeat-x;
+	height:52px;
+}
+#az_footer_menu_tb {
+	float:left;
+	width:55%;
+	text-align:center;
+	line-height:52px;
+}
+#az_footer_menu_tb ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	white-space:nowrap;
+}
+#az_footer_menu_tb ul li {
+	display:inline;
+	white-space:nowrap;
+	padding:0;
+	margin:0;
+}
+#az_footer_menu_tb a {
+	font-family:"Century Gothic", Arial, Tahoma;
+	text-decoration:none;
+	font-size:14px;
+	color:#4b2c27;
+	font-weight:normal;
+	text-transform:uppercase;
+	letter-spacing:-1px;
+}
+#az_footer_menu_tb a:hover {
+	color:#972F2F;
+}
+#az_footer_menu_tb ul li.az_footer_menu_sep {
+	padding:0 35px 0 35px;
+	text-align:center;
+}
+#az_cards {
+	display:none;
+}
+#az_footer_note {
+	font-family:Tahoma, Arial, Verdana;
+	font-size:12px;
+	text-align:center;
+	margin-top:25px;
+	color:#77787c;
+}
+#az_footer_note a {
+	font-family:Tahoma, Arial, Verdana;
+	font-size:12px;
+	color:#77787c;
+}
+#az_footer_note a:hover {
+	color:#61433b;
+}
+
+#az_loginbox {
+	float:right;
+}
+.az_inputbox_l {
+	background:url(../images/az_loginbox_left.gif) no-repeat;
+}
+.az_inputbox_r {
+	background:url(../images/az_loginbox_right.gif) right top no-repeat;
+	padding:0 5px 0 5px;
+}
+.az_inputbox_m {
+	background:url(../images/az_loginbox_mid.gif) repeat-x;
+	height:28px;
+	line-height:28px;
+}
+#az_loginbox table {
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-size:16px;
+	height:52px;
+	text-transform:uppercase;
+	letter-spacing:-1px;
+	color:#4b2c27;
+}
+#az_logout_text {
+	font-family:"Century Gothic", Arial;
+	color:#4b2c27;
+	font-size:24px;
+	margin-right:20px;
+}
+.az_inputbox_m, .az_inputbox_m input {
+	font-family:"Century Gothic", Arial;
+	font-size:14px;
+	color:#666666;
+}
+.az_inputbox_m input {
+	border:none;
+	background:none;
+	margin-top:3px;
+	width:150px;
+}
+#az_login_button {
+	border:none;
+	background:none;
+	font-family:"Century Gothic", Arial;
+	color:#4b2c27;
+	font-size:24px;
+	padding:0;
+	margin-bottom:5px;
+	margin-left:4px;
+	width:20px;
+	height:30px;
+}
+/*------------------------------------------*/
+/*          Footer Settings (EOF)           */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*            Sidebox Settings              */
+/*------------------------------------------*/
+#az_left_bar_mid .az_box_new, 
+#az_right_bar_mid .az_box_new {
+	width:229px;
+}
+.az_box2_new {}
+
+.az_box_top_new {}
+.az_box_top_l_new {}
+.az_box_top_r_new {}
+.az_box_top_m_new {}
+
+/* Box2 */
+.az_box2_new .az_box_top_l_new {}
+.az_box2_new .az_box_top_r_new {}
+.az_box2_new .az_box_top_m_new {}
+/* Box2 (end) */
+
+.az_box_top_new .boxTitle {
+	font-family:"Century Gothic", Arial, Tahoma;
+	text-align:left;
+	color:#4b2c27;
+	text-indent:5px;
+	line-height:41px;
+}
+.az_box_top_new .boxTitle a {
+	color:#4b2c27;
+}
+
+.az_box_cont_new {}
+#az_left_bar .az_box_new .az_box_cont_l_new, #az_right_bar .az_box_new .az_box_cont_l_new {}
+#az_left_bar .az_box_new .az_box_cont_r_new, #az_right_bar .az_box_new .az_box_cont_r_new {}
+#az_left_bar .az_box_new .az_box_cont_m_new, #az_right_bar .az_box_new .az_box_cont_m_new {}
+
+/* Box2 */
+#az_left_bar .az_box2_new .az_box_cont_l_new, #az_right_bar .az_box2_new .az_box_cont_l_new {}
+#az_left_bar .az_box2_new .az_box_cont_r_new, #az_right_bar .az_box2_new .az_box_cont_r_new {}
+#az_left_bar .az_box2_new .az_box_cont_m_new, #az_right_bar .az_box2_new .az_box_cont_m_new {}
+/* Box2 (END) */
+
+#az_left_bar .boxContents, #az_right_bar .boxContents {}
+
+.az_box_bottom_new {}
+.az_box_bottom_l_new {}
+.az_box_bottom_r_new {}
+.az_box_bottom_m_new {}
+
+/* Box2 */
+.az_box2_new .az_box_bottom_l_new {}
+.az_box2_new .az_box_bottom_r_new {}
+.az_box2_new .az_box_bottom_m_new {}
+/* Box2 (end) */
+
+.az_box_bottom_new .boxTitle {}
+/*------------------------------------------*/
+/*         Sidebox Settings (EOF)           */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*         Product Box Settings             */
+/*------------------------------------------*/
+.az_pbox_new {}
+
+.az_pbox_top_new {}
+.az_pbox_top_l_new {}
+.az_pbox_top_r_new {}
+.az_pbox_top_m_new {}
+.az_pbox_top_new .boxTitle {}
+
+.az_pbox_cont_new {}
+.az_pbox_cont_l_new {}
+.az_pbox_cont_r_new {}
+.az_pbox_cont_m_new {}
+.az_pbox_cont_new .boxContents {}
+
+.az_box_bottom_new {}
+.az_box_bottom_l_new {}
+.az_box_bottom_r_new {}
+.az_box_bottom_m_new {}
+.az_box_bottom_new .boxTitle {}
+
+.pbox_item {
+	padding:0;
+}
+
+.az_pbox_sep_ver {
+	font-size:0px;
+	padding:3px;
+}
+.az_pbox_sep_hor {
+	height:10px;
+	font-size:1px;
+	padding:0;
+}
+/*------------------------------------------*/
+/*       Product Box Settings (EOF)         */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*          Content Box Settings            */
+/*------------------------------------------*/
+.contentBoxHeading {}
+.contentBoxHeading_l {}
+.contentBoxHeading_m {
+	font-family:Tahoma, Arial, Verdana;
+	font-size:12px;
+	font-weight:bold;
+}
+.contentBoxHeading_r {}
+
+.contentBox {
+	background: #88716b;
+}
+.contentBoxContents {
+	background: #f9f9f9;
+}
+/*------------------------------------------*/
+/*       Content Box Settings (EOF)         */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*       AZ Product Listing Settings        */
+/*------------------------------------------*/
+.az_product_list_box {}
+
+.az_product_list_img {
+	text-align:center;
+	border:1px solid #e0dbda;
+}
+.az_product_list_zoom {
+	display:none;
+}
+.az_product_list_head {
+	text-transform:capitalize;
+	text-align:right;
+}
+.az_product_list_head a {
+	font-family:"Century Gothic", Tahoma, Arial;
+	color:#4B2C27;
+	font-size:14px;
+}
+.az_product_list_head a:hover {
+	color:#804a42;
+}
+.az_product_list_data {}
+.az_product_list_price {
+	text-align:right;
+}
+.az_product_list_button {}
+.az_product_list_info {}
+.az_product_list_buy {}
+
+.az_pagenav_links {
+	font-family:"Century Gothic", Tahoma, Arial;
+	font-size:12px;
+	color:#666666;
+	padding-top:12px;
+}
+/*------------------------------------------*/
+/*    AZ Product Listing Settings (EOF)     */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*           Image Box Settings             */
+/*------------------------------------------*/
+.az_imgbox_new {}
+
+.az_imgbox_top_new {}
+.az_imgbox_top_l_new {}
+.az_imgbox_top_r_new {}
+.az_imgbox_top_m_new {}
+
+.az_imgbox_cont_new {}
+.az_imgbox_cont_l_new {}
+.az_imgbox_cont_r_new {}
+.az_imgbox_cont_m_new {}
+
+.az_imgbox_bottom_new {}
+.az_imgbox_bottom_l_new {}
+.az_imgbox_bottom_r_new {}
+.az_imgbox_bottom_m_new {}
+/*------------------------------------------*/
+/*        Image Box Settings (EOF)          */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*             Random Settings              */
+/*------------------------------------------*/
+.az_cat_nav, .az_cat_nav2, .az_cat_nav_end {}
+.az_cat_nav a, .az_cat_nav_end a, .az_cat_nav2 a {}
+.az_cat_nav2 a {}
+.az_cat_nav a .az_cat_nav_text, .az_cat_nav_end a .az_cat_nav_text, .az_cat_nav2 a .az_cat_nav_text {}
+.az_cat_nav a:hover, .az_cat_nav_end a:hover, .az_cat_nav2 a:hover {}
+.az_cat_nav a.az_cat_nav_sel, .az_cat_nav_end a.az_cat_nav_sel, .az_cat_nav2 a.az_cat_nav_sel {}
+a.az_cat_nav_sel .az_cat_nav_text {}
+.az_cat_nav a:hover .az_cat_nav_text, .az_cat_nav_end a:hover .az_cat_nav_text {}
+
+.az_nav, .az_nav_end {
+	background:url(../images/az_bullet1.gif) 10px 50% no-repeat;
+	margin-bottom:4px;
+	text-indent:18px;
+	text-align:left;
+}
+.az_nav_end {
+	margin-bottom:0px;
+}
+
+.az_product_name {
+	margin:4px 0 4px 0;
+	font-weight:bold;
+}
+.az_product_desc {
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#6a5a2e;
+	width:85%;
+	text-align:left;
+	margin:0 0 8px 0;
+	padding:0;
+}
+.az_review_text {
+	margin:2px auto 6px auto;
+	padding:0;
+	width:80%;
+	text-align:left;
+}
+.az_review_star {}
+
+.az_product_desc_pane {
+	overflow:auto;
+	height:124px;
+	margin-top:8px;
+}
+.az_data_sep {
+	height:20px;
+	margin-top:8px;
+}
+
+.az_borderedPic {
+	border:3px solid #ffffff;
+}
+
+.az_box_heading2 {
+	font-family:"Century Gothic", Tahoma, Arial;
+	font-size:18px;
+	text-align:left;
+	color:#6a5a2e;
+	margin:0 0 5px 0;
+}
+/*------------------------------------------*/
+/*          Random Settings (EOF)           */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*          Product Info Settings           */
+/*------------------------------------------*/
+.az_category_navigation {}
+.az_category_navigation a {
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-size:24px;
+	color:#4B2C27;
+	letter-spacing:-1px;
+	text-transform:uppercase;
+}
+.az_category_navigation a:hover {
+	color:#804a42;
+}
+.headerNavigationEnd {
+	font-size:14px;
+}
+.az_pageHeading {
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-size:18px;
+	letter-spacing:-1px;
+	color:#4b2c27;
+}
+.az_product_info_text_pane {
+	padding-top:16px;
+}
+.az_product_info_text, .az_product_info_text2 {
+	font-family:"Century Gothic", Arial, Verdana;
+	font-size:12px;
+	color:#4b2c27;
+}
+.az_product_info_text2 {
+	font-size:14px;
+	letter-spacing:-1px;
+}
+.az_product_nav {
+	text-align:right;
+	padding-top:4px;
+}
+.az_product_nav-back {}
+.az_product_nav-next {}
+.az_product_info_text_pane2 {
+	margin-top:20px;
+}
+
+.az_option_heading {
+	background:url(../images/az_content_border.gif) left bottom repeat-x;
+	font-family:"Century Gothic", Arial, Tahoma;
+	font-size:14px;
+	color:#4b2c27;
+	padding-bottom:5px;
+}
+
+.az_qty_btn_l {
+	background:url(../images/az_qty_l.gif) no-repeat;
+	width:35px;
+}
+.az_qty_btn_r {
+	background:url(../images/az_qty_r.gif) right top no-repeat;
+	padding:0 4px 0 4px;
+}
+.az_qty_btn_m {
+	background:url(../images/az_qty_m.gif) repeat-x;
+	height:29px;
+}
+.az_qty_btn_m input {
+	font-family:"Century Gothic", Arial, Tahoma;
+	border:none;
+	text-align:center;
+	font-size:14px;
+	color:#404f50;
+	width:25px;
+	margin-top:4px;
+}
+/*------------------------------------------*/
+/*       Product Info Settings (EOF)        */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*             Prices Settings              */
+/*------------------------------------------*/
+.productSpecialPrice, .az_productPrice .productSpecialPrice,
+#productPrices, 
+.az_productPrice2 .productSpecialPrice {
+	font-family:"Century Gothic", Arial, Tahoma, Verdana;
+	font-size:12px;
+	color:#bf2f37;
+	font-weight:normal;
+	letter-spacing:-1px;
+}
+.az_productPrice2 .productSpecialPrice {
+	font-size:14px;
+	color:#404f50;
+}
+.az_smallCur {
+	color:#bf2f37;
+	font-size:12px;
+}
+.az_productPrice2 .az_smallCur {
+	font-size:14px;
+	color:#404f50;
+}
+.az_productPrice, .az_productPrice2 {
+	font-family:"Century Gothic", Arial, Tahoma, Verdana;
+	font-size:12px;
+	color:#61433b;
+	font-weight:normal;
+	letter-spacing:-1px;
+}
+.az_productPrice2 {
+	font-size:14px;
+	color:#404f50;
+}
+.az_productPrice s, .pageHeading s, .az_productPrice2 s {
+	color: #927871;
+	font-size:12px;
+	font-weight:normal;
+}
+.az_productPrice2 s {
+	font-size:14px;
+	color:#75898a;
+}
+.az_productPrice s .az_smallCur, .pageHeading s .az_smallCur {
+	font-size:12px;
+	color:#927871;
+}
+.az_productPrice2 s .az_smallCur {
+	font-size:14px;
+}
+/*------------------------------------------*/
+/*          Prices Settings (EOF)           */
+/*------------------------------------------*/
+
+
+
+
+/*------------------------------------------*/
+/*             Button Settings              */
+/*------------------------------------------*/
+.az-template-submit {
+	border:none;
+	padding:0;
+	background:none;
+	overflow:visible;
+	cursor:pointer;
+	width:auto !important;
+	width:0;
+	white-space:nowrap;
+}
+
+.az-template-button {
+	white-space:nowrap;
+}
+.az-button-left, .az-button-middle, .az-button-right, 
+.az-button-left2, .az-button-middle2, .az-button-right2, 
+.az-button-left3, .az-button-middle3, .az-button-right3, 
+.az-button-left4, .az-button-middle4, .az-button-right4 {
+	font-family:"Century Gothic", Arial, Verdana;
+	font-size:14px;
+	font-weight:normal;
+	color:#fff;
+	text-transform:capitalize;
+	white-space:nowrap;
+	height:32px;
+	line-height:32px;
+	display:inline-block;
+	padding:0;
+	margin:0;
+	cursor:pointer;
+	text-align:center;
+	letter-spacing:-1px;
+}
+
+.az-button-left {
+	background:url(../images/az_button1_left.png) no-repeat;
+	width:5px;
+}
+.az-button-middle {
+	background:url(../images/az_button1_mid.png) repeat-x;
+	padding:0 2px 0 2px;
+}
+.az-button-right {
+	background:url(../images/az_button1_right.png) no-repeat;
+	width:5px;
+}
+.az-button-left2 {
+	background:url(../images/az_button2_left.png) no-repeat;
+	width:5px;
+}
+.az-button-middle2 {
+	background:url(../images/az_button2_mid.png) repeat-x;
+	padding:0 2px 0 2px;
+	color:#404f50;
+}
+.az-button-right2 {
+	background:url(../images/az_button2_right.png) no-repeat;
+	width:5px;
+}
+.az-button-left3, .az-button-middle3, .az-button-right3 {
+	height:21px;
+	line-height:21px;
+	font-size:12px;
+}
+.az-button-left3 {
+	background:url(../images/az_button3_left.gif) no-repeat;
+	width:4px;
+}
+.az-button-middle3 {
+	background:url(../images/az_button3_mid.gif) repeat-x;
+	padding:0 2px 0 2px;
+	color:#7b8686;
+	text-transform:uppercase;
+}
+.az-button-right3 {
+	background:url(../images/az_button3_right.gif) no-repeat;
+	width:4px;
+}
+.az-button-left4, .az-button-middle4, .az-button-right4 {
+	height:29px;
+	line-height:29px;
+}
+.az-button-left4 {
+	background:url(../images/az_button4_left.gif) no-repeat;
+	width:4px;
+}
+.az-button-middle4 {
+	background:url(../images/az_button4_mid.gif) repeat-x;
+	padding:0 2px 0 2px;
+	color:#61433b;
+	text-transform:uppercase;
+}
+.az-button-right4 {
+	background:url(../images/az_button4_right.gif) no-repeat;
+	width:4px;
+}
+/*------------------------------------------*/
+/*          Button Settings (EOF)           */
+/*------------------------------------------*/

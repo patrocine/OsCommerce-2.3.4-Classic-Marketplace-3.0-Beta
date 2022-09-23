@@ -1,0 +1,73 @@
+/* shopping cart dropdown box */
+#btn_animBoxCart {}
+#animBoxCart {
+	position:absolute;
+	border: #88716b solid 1px;
+	background-color: #faf8f7;
+	width:250px;
+	top:auto;
+	right:0;
+	margin:0 17px 0 0;
+	display:none;
+	z-index: 100;
+}
+.animBoxCartLoading {
+	background:url(../images/az_loading.gif) center center no-repeat;
+	height:24px;
+}
+.animBoxCartImage { }
+.animBoxCartImage a img {
+	border:none;
+}
+.animBoxCartContent {
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #6a5a2e;
+}
+.animBoxCartContent A:link, .animBoxCartContent A:active, .animBoxCartContent A:visited {
+	color: #6a5a2e;
+	text-decoration: underline;
+}
+.animBoxCartContent A:hover {
+	text-decoration: none;
+	color: #b19b95;
+}
+.animBoxCartName, .animBoxCartName A:link, .animBoxCartName A:active, .animBoxCartName A:visited  {
+	font-weight: bold;
+	color: #6e5d38;
+	text-decoration: none;
+}
+.animBoxCartName A:hover {
+	font-weight: bold;
+	color: #b19b95;
+	text-decoration: underline;
+}
+.animBoxCartLink, .animBoxCartLink A:link, .animBoxCartLink A:active, .animBoxCartLink A:visited  {
+	font-weight: bold;
+	color: #6a5a2e;
+	text-decoration: none;
+}
+.animBoxCartLink A:hover {
+	font-weight: bold;
+	color: #b19b95;
+	text-decoration: underline;
+}
+.animBoxCartTotal, .animBoxCartLink {
+	text-align: right;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #6a5a2e;
+}
+.animBoxCartLink { border-bottom: #88716b solid 1px; }
+.animBoxCartTotal { border-top: #88716b solid 1px; }
+.animBoxCartNotice {
+	padding: 5px;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #6a5a2e;
+}
