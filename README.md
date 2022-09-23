@@ -9,11 +9,11 @@ El mejor programa de facturación online que jamas hayas visto, se prende en muy
 
 La clave esta en la facturación con esta fuerza siempre tienes toda la mercancia sincronizada en stock.
 
-Vende tus productos conectandote a otros merkaplece y aumenta tu transferencia de datos.
+Vende tus productos conectandote a otros merkaplece y aumenta tus posibilidades de venta.
 
-Comparte tu stock con otras tiendas de tu mismo sector que usen el mismo programa y desde todas las webs que compartan el producto el usuario podrá ver el stock de todas las tiendas.
+Comparte tu stock con otras tiendas de tu mismo sector que usen oscommerce y desde todas las webs que compartan el producto el usuario podrá ver el stock de todas las tiendas.
 
-MERKAPLACE + STOCK CRUZADO todas las tiendas quieren compartir con tiendas que tengan todo su stock sincronizado si no no son merkaplaces.
+MERKAPLACE + STOCK CRUZADO todas las tiendas solo quieren compartir su merkaplace con tiendas que tengan todo su stock sincronizado y esten fisicamente en la zona.
 
 Capitulo 1 ¿Que es una Empresa 3.0?
 
