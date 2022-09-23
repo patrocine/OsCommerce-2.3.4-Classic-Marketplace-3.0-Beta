@@ -29,12 +29,12 @@
   }
 
 ////
+////
 // Stop from parsing any further PHP code
+// v2.3.3.1 now closes the session through a registered shutdown function
   function tep_exit() {
-   tep_session_close();
-   exit();
+    exit();
   }
-
 ////
 // Redirect to another page or site
 function tep_redirect($url) {
@@ -43,8 +43,8 @@ function tep_redirect($url) {
   }
 
   if ( (ENABLE_SSL == true) && (getenv('HTTPS') == 'on') ) { // We are loading an SSL page
-    if (substr($url, 0, strlen(HTTP_SERVER)) == HTTP_SERVER) { // NONSSL url
-      $url = HTTPS_SERVER . substr($url, strlen(HTTP_SERVER)); // Change it to SSL
+    if (substr($url, 0, strlen(HTTP_SERVER . DIR_WS_HTTP_CATALOG)) == HTTP_SERVER . DIR_WS_HTTP_CATALOG) { // NONSSL url
+      $url = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . substr($url, strlen(HTTP_SERVER . DIR_WS_HTTP_CATALOG)); // Change it to SSL
     }
   }
 
