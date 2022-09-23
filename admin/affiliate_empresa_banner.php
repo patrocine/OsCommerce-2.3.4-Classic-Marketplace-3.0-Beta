@@ -17,7 +17,7 @@
 
   require('includes/application_top.php');
   
- $result = mysql_query("show tables like 'affiliate_compartir_empresas'");
+ $result = tep_db_query("show tables like 'affiliate_compartir_empresas'");
 
 /* Si no existe la tabla */
 if(mysql_fetch_row($result) == false) {
@@ -26,7 +26,7 @@ if(mysql_fetch_row($result) == false) {
 <?php  //<script language="javascript" src="actualizar_tabla_banners.php"> </script></td>
  ?>
  <?php
-   mysql_query($sql);
+   tep_db_fetch_array($sql);
 }
 
      if ($HTTP_GET_VARS['up_actualizar']){
@@ -294,8 +294,8 @@ tep_redirect('affiliate_empresa_banner.php');
 
 
 
-    $selec_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . "");
-      while  ($selec = mysql_fetch_array($selec_values)){
+    $selec_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . "");
+      while  ($selec = tep_db_fetch_array($selec_values)){
 
 ?>
 <meta http-equiv="Content-Language" content="es">

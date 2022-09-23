@@ -47,8 +47,8 @@
     <td class="headerBarContent">&nbsp;&nbsp;
                <?php
 
-              $permiso_boxes_values = mysql_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
-             if ($permiso_boxes = mysql_fetch_array($permiso_boxes_values)){
+              $permiso_boxes_values = tep_db_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
+             if ($permiso_boxes = tep_db_fetch_array($permiso_boxes_values)){
           ?>
 
  <a href="orders_tienda.php?permiso_boxes=0&aut_permiso_boxes=ok">Menú OFF</a>

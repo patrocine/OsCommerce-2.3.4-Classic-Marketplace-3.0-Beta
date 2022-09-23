@@ -101,18 +101,18 @@ if (isset($HTTP_POST_VARS['submit'])){
     if ($check_status['orders_status'] != $status) {
 
 
-     $id_factura_ultimo_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
-    $id_factura_ultimo = mysql_fetch_array($id_factura_ultimo_values);
+     $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_ultimo = tep_db_fetch_array($id_factura_ultimo_values);
 
 
                             if ($pagado == tep_db_input($status) or $status_liquidacion == tep_db_input($status)){
 
-    $pro_last_modified_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID . "'");
-    $pro_last_modified = mysql_fetch_array($pro_last_modified_values);
+    $pro_last_modified_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID . "'");
+    $pro_last_modified = tep_db_fetch_array($pro_last_modified_values);
     
 
-    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID .  "' and orders_status = '" .  $pagado. "' order by factura_id desc");
-    $id_factura = mysql_fetch_array($id_factura_values);
+    $id_factura_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  (int)$this_orderID .  "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura = tep_db_fetch_array($id_factura_values);
 
 
          if ($pagado == tep_db_input($status)){
@@ -150,8 +150,8 @@ if (isset($HTTP_POST_VARS['submit'])){
       if (tep_db_input($status) == $pagado or tep_db_input($status) == $pagado_internacional or tep_db_input($status) == $pagado_paypal or tep_db_input($status) == $pagado_transferencia){
 
 
-           $orders_4_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
-    while ($orders_4 = mysql_fetch_array($orders_4_values)){
+           $orders_4_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
+    while ($orders_4 = tep_db_fetch_array($orders_4_values)){
 
 
                    
@@ -162,8 +162,8 @@ if (isset($HTTP_POST_VARS['submit'])){
 
            
                   // descuenta el producto del almacen
-      $orders_3_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
-     if ($orders_3 = mysql_fetch_array($orders_3_values)){
+      $orders_3_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
+     if ($orders_3 = tep_db_fetch_array($orders_3_values)){
 
                                            ECHO '<p style="margin-top: 0; margin-bottom: 0">'.'Descontado del Almacen - '.$orders_4['products_name'].'</p>';
 
@@ -188,13 +188,13 @@ if (isset($HTTP_POST_VARS['submit'])){
         
         
         
-      $proveedor_2_values = mysql_query("select * from " . TABLE_PRODUCTS . " op where products_id = '" . $orders_4['products_id'] . "'");
-      $proveedor_2 = mysql_fetch_array($proveedor_2_values);
+      $proveedor_2_values = tep_db_query("select * from " . TABLE_PRODUCTS . " op where products_id = '" . $orders_4['products_id'] . "'");
+      $proveedor_2 = tep_db_fetch_array($proveedor_2_values);
 
                  //  echo 'antes'.$abono.$proveedor_2['codigo_proveedor'].'fin';
 
-      $proveedor_3_values = mysql_query("select * from " . TABLE_ORDERS . " o where proveedor_id = '" . $proveedor_2['codigo_proveedor'] . "' and orders_status = '" . $abono . "'");
-   if ($proveedor_3 = mysql_fetch_array($proveedor_3_values)){
+      $proveedor_3_values = tep_db_query("select * from " . TABLE_ORDERS . " o where proveedor_id = '" . $proveedor_2['codigo_proveedor'] . "' and orders_status = '" . $abono . "'");
+   if ($proveedor_3 = tep_db_fetch_array($proveedor_3_values)){
 
 
 
@@ -253,8 +253,8 @@ if (isset($HTTP_POST_VARS['submit'])){
      if (tep_db_input($status) == $entregas_stock and tep_db_input($status) <> 75 ){
 
 
-           $orders_4_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
-    while ($orders_4 = mysql_fetch_array($orders_4_values)){
+           $orders_4_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
+    while ($orders_4 = tep_db_fetch_array($orders_4_values)){
 
 
 
@@ -265,8 +265,8 @@ if (isset($HTTP_POST_VARS['submit'])){
 
 
 
-      $orders_3_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
-     if ($orders_3 = mysql_fetch_array($orders_3_values)){
+      $orders_3_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
+     if ($orders_3 = tep_db_fetch_array($orders_3_values)){
 
 
 
@@ -310,13 +310,13 @@ if (isset($HTTP_POST_VARS['submit'])){
 
 
                             
-      $proveedor_2_values = mysql_query("select * from " . TABLE_PRODUCTS . " op where products_id = '" . $orders_4['products_id'] . "'");
-      $proveedor_2 = mysql_fetch_array($proveedor_2_values);
+      $proveedor_2_values = tep_db_query("select * from " . TABLE_PRODUCTS . " op where products_id = '" . $orders_4['products_id'] . "'");
+      $proveedor_2 = tep_db_fetch_array($proveedor_2_values);
       
                   ECHO '<p style="margin-top: 0; margin-bottom: 0">'.'Mercancía Entregada - '.$orders_4['products_name'].'</p>';
 
-      $proveedor_3_values = mysql_query("select * from " . TABLE_ORDERS . " o where proveedor_id = '" . $proveedor_2['codigo_proveedor'] . "' and orders_status = '" . $abono . "'");
-   if ($proveedor_3 = mysql_fetch_array($proveedor_3_values)){
+      $proveedor_3_values = tep_db_query("select * from " . TABLE_ORDERS . " o where proveedor_id = '" . $proveedor_2['codigo_proveedor'] . "' and orders_status = '" . $abono . "'");
+   if ($proveedor_3 = tep_db_fetch_array($proveedor_3_values)){
 
 
 
@@ -390,12 +390,12 @@ if (isset($HTTP_POST_VARS['submit'])){
 
               //si es admin o tienda
      if ($login_id_remoto <> 0){
-      $admin_a_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id_remoto . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id_remoto . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
            }else{
-      $admin_a_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
 
      }             //fin
@@ -403,10 +403,10 @@ if (isset($HTTP_POST_VARS['submit'])){
 
 
             //direcciones
-     $address_books_values = mysql_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $address_books = mysql_fetch_array($address_books_values);
-     $customerss_values = mysql_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $customerss = mysql_fetch_array($customerss_values);
+     $address_books_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $address_books = tep_db_fetch_array($address_books_values);
+     $customerss_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $customerss = tep_db_fetch_array($customerss_values);
               //fin
 
 
@@ -612,8 +612,8 @@ $oldday1 = date("Y-m-d", $time1);
      if (tep_db_input($status) == $retirarado){
 
 
-           $orders_4_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
-    while ($orders_4 = mysql_fetch_array($orders_4_values)){
+           $orders_4_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . "  where orders_id = '" . $this_orderID . "' and pagado = '" . 1 . "'");
+    while ($orders_4 = tep_db_fetch_array($orders_4_values)){
 
 
 
@@ -624,8 +624,8 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-      $orders_3_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
-     if ($orders_3 = mysql_fetch_array($orders_3_values)){
+      $orders_3_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $orders_4['products_id'] . "'");
+     if ($orders_3 = tep_db_fetch_array($orders_3_values)){
 
 
 
@@ -1077,8 +1077,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
               </tr>
                <tr>
                  <?php
-               $purchased_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-              $purchased= mysql_fetch_array($purchased_values);
+               $purchased_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+              $purchased= tep_db_fetch_array($purchased_values);
 
                    ?>
                
@@ -1182,8 +1182,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
 
 
-              <?php   $factura_orders_cambio_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-              $factura_orders_cambio = mysql_fetch_array($factura_orders_cambio_values); ?>
+              <?php   $factura_orders_cambio_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+              $factura_orders_cambio = tep_db_fetch_array($factura_orders_cambio_values); ?>
 
 
 
@@ -1191,24 +1191,24 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
                        <?php
 
-     $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "'");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {
+     $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "'");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
 
 
 
- $factura_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = mysql_fetch_array($factura_shipping_values);
+ $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_shipping' . "'");
+              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
 
- $factura_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = mysql_fetch_array($factura_total_values);
-
-
- $factura_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = mysql_fetch_array($factura_subtotal_values);
+ $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_total' . "'");
+              $factura_total = tep_db_fetch_array($factura_total_values);
 
 
-                $factura_orders_cambio_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-              $factura_orders_cambio = mysql_fetch_array($factura_orders_cambio_values);
+ $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . tep_db_input($oID) . "' and class =  '" . 'ot_subtotal' . "'");
+              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
+
+
+                $factura_orders_cambio_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+              $factura_orders_cambio = tep_db_fetch_array($factura_orders_cambio_values);
               
 
 
@@ -1256,8 +1256,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
              <td width="31%"><?php
 
-              $factura_productos_values = mysql_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $factura_products['products_id'] . "'");
-            if  ($factura_productos = mysql_fetch_array($factura_productos_values)){
+              $factura_productos_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $factura_products['products_id'] . "'");
+            if  ($factura_productos = tep_db_fetch_array($factura_productos_values)){
               echo    $factura_productos['products_name'];
         }else{
           ?>
@@ -1354,8 +1354,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
 
 
-    <?php $factura_productss_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "' and orders_cambios =  '" . 4 . "'");
-         while      ($factura_productss = mysql_fetch_array($factura_productss_values)) {
+    <?php $factura_productss_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "' and orders_cambios =  '" . 4 . "'");
+         while      ($factura_productss = tep_db_fetch_array($factura_productss_values)) {
 
 
  ?>
@@ -1435,8 +1435,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
 
 
-      $factura_insert_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "'");
-               while   ( $factura_insert = mysql_fetch_array($factura_insert_values)) {
+      $factura_insert_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . tep_db_input($oID) . "'");
+               while   ( $factura_insert = tep_db_fetch_array($factura_insert_values)) {
 
                     $factura_insert_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
                       $factura_insert_orders = tep_db_fetch_array($factura_insert_orders_values);
@@ -1465,22 +1465,22 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
 
 
 
-              $certificado_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-              $certificado = mysql_fetch_array($certificado_values);
+              $certificado_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+              $certificado = tep_db_fetch_array($certificado_values);
 
      // $log_id .'-'. $order->info['orders_status'] . '-';
 
-              $consulta1_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-              $consulta1 = mysql_fetch_array($consulta1_values);
+              $consulta1_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+              $consulta1 = tep_db_fetch_array($consulta1_values);
           //  $consulta1['code_admin'] . '-';
 
 
-              $consulta2_values = mysql_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
-              $consulta2 = mysql_fetch_array($consulta2_values);
+              $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+              $consulta2 = tep_db_fetch_array($consulta2_values);
         //  $consulta2['orders_status'] . '-';
 
-              $consulta3_values = mysql_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
-              $consulta3 = mysql_fetch_array($consulta3_values);
+              $consulta3_values = tep_db_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
+              $consulta3 = tep_db_fetch_array($consulta3_values);
         //  $consulta3['tienda'] . '-';
 
 
@@ -1510,8 +1510,8 @@ $remote_remove = tep_db_fetch_array($remote_remove_values);
     $log_id = $login_id;
 
 }          //segurdidad
-       $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $estatuspmw = mysql_fetch_array($estatuspmw_values);
+       $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
   if ($estatuspmw['orders_status'] == $abono and ACTIVACION_AEPR == 'false' or $estatuspmw['orders_status'] == $pagado and ACTIVACION_AEPR == 'false' or $estatuspmw['orders_status'] == $entregas_stock and ACTIVACION_AEPR == 'false' or $estatuspmw['orders_status'] == $retirarado and ACTIVACION_AEPR == 'false'){
 
@@ -2138,15 +2138,15 @@ function uncheckAll(){
 
 
 
- $proveedor_k_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $orders['proveedor_id'] . "'");
- $proveedor_k = mysql_fetch_array($proveedor_k_values);
+ $proveedor_k_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $orders['proveedor_id'] . "'");
+ $proveedor_k = tep_db_fetch_array($proveedor_k_values);
   if ($proveedor_k['proveedor_name']){
   $separador = ' / ';
 }
 
                      // seguridad
-  $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $orders['orders_id'] . "'");
-  $estatuspmw = mysql_fetch_array($estatuspmw_values);
+  $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $orders['orders_id'] . "'");
+  $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
 
 // Start Batch Update Status v0.2
@@ -2161,11 +2161,11 @@ function uncheckAll(){
 
             
 
-            $precio_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $orders['orders_id'] . "' and class = '" . 'ot_total' . "'");
-      $precio = mysql_fetch_array($precio_values);
+            $precio_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $orders['orders_id'] . "' and class = '" . 'ot_total' . "'");
+      $precio = tep_db_fetch_array($precio_values);
 
-  $yergfcvs_values = mysql_query("select * from " . 'admin_supervisores' . " where admin_id = '" . $login_id . "'");
- $yergfcvs = mysql_fetch_array($yergfcvs_values);
+  $yergfcvs_values = tep_db_query("select * from " . 'admin_supervisores' . " where admin_id = '" . $login_id . "'");
+ $yergfcvs = tep_db_fetch_array($yergfcvs_values);
 
 ?>
 
@@ -2187,17 +2187,17 @@ function uncheckAll(){
 
      // $log_id .'-'. $order->info['orders_status'] . '-';
 
-              $consulta1_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-              $consulta1 = mysql_fetch_array($consulta1_values);
+              $consulta1_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+              $consulta1 = tep_db_fetch_array($consulta1_values);
        //   echo  $consulta1['code_admin'] . '-';
 
 
-              $consulta2_values = mysql_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
-              $consulta2 = mysql_fetch_array($consulta2_values);
+              $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+              $consulta2 = tep_db_fetch_array($consulta2_values);
       //  echo  $consulta2['orders_status'] . '-';
 
-              $consulta3_values = mysql_query("select * from " . 'orders_status' . " where orders_status_id = '" . $estatuspmw['orders_status'] . "'");
-              $consulta3 = mysql_fetch_array($consulta3_values);
+              $consulta3_values = tep_db_query("select * from " . 'orders_status' . " where orders_status_id = '" . $estatuspmw['orders_status'] . "'");
+              $consulta3 = tep_db_fetch_array($consulta3_values);
        // echo  $consulta3['tienda'] . '-';
 
 
@@ -2287,8 +2287,8 @@ function uncheckAll(){
 
 
  if  ($_GET['products_keywoards']){
-  $consulta_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id =  '"  . $orders['orders_id'] . "' and products_model like '%" . tep_db_input($_GET['products_keywoards']) . "%' or orders_id =  '"  . $orders['orders_id'] . "' and products_name like '%" . tep_db_input($_GET['products_keywoards']) . "%'");
- while ($consulta = mysql_fetch_array($consulta_values)){
+  $consulta_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id =  '"  . $orders['orders_id'] . "' and products_model like '%" . tep_db_input($_GET['products_keywoards']) . "%' or orders_id =  '"  . $orders['orders_id'] . "' and products_name like '%" . tep_db_input($_GET['products_keywoards']) . "%'");
+ while ($consulta = tep_db_fetch_array($consulta_values)){
 
               ?>
 

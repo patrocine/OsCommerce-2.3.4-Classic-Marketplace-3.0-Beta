@@ -79,21 +79,23 @@
 <script type="text/javascript">
 $('#adminAppMenu').accordion({
   autoHeight: false,
-  collapsible: true,
+  icons: {
+    'header': 'ui-icon-plus',
+    'headerSelected': 'ui-icon-minus'
+  }
 
 <?php
     $counter = 0;
     foreach ($cl_box_groups as $groups) {
       foreach ($groups['apps'] as $app) {
         if ($app['code'] == $PHP_SELF) {
-          break 2;
+          echo ',active: ' . $counter;
+          break;
         }
       }
 
       $counter++;
     }
-
-    echo 'active: ' . (isset($app) && ($app['code'] == $PHP_SELF) ? $counter : 'false');
 ?>
 
 });

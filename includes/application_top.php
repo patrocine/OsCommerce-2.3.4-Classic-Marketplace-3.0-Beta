@@ -383,6 +383,21 @@ if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib'
         $parameters = array('action', 'pid');
       }
     }
+///////////////////////////////////////// Products Multi //////////////////////
+if ($HTTP_GET_VARS['action'] == 'add_multi') {
+        $parameters = array('action', 'pid', 'products_id');
+      }#
+    switch ($HTTP_GET_VARS['action']) {
+      	// multi_product_add
+     case 'add_multi':
+       for ($i=0; $i<=sizeof($HTTP_POST_VARS['products_id']);$i++) {
+         if($_POST['add_id'][$i] >= 1)
+           $cart->add_cart($HTTP_POST_VARS['products_id'][$i], $cart->get_quantity(tep_get_uprid($HTTP_POST_VARS['products_id'][$i], $HTTP_POST_VARS['id'][$i]))+($HTTP_POST_VARS['add_id'][$i]), $HTTP_POST_VARS['id'][$i]);
+       }
+         tep_redirect(tep_href_link('shopping_cart.php', tep_get_all_get_params($parameters), 'NONSSL'));
+     break;
+      }
+     
     switch ($HTTP_GET_VARS['action']) {
       // customer wants to update the product quantity in their shopping cart
       case 'update_product' : for ($i=0, $n=sizeof($HTTP_POST_VARS['products_id']); $i<$n; $i++) {

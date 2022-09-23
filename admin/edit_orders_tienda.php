@@ -12,10 +12,10 @@
      $enviarpedido_notif = $_GET['enviarpedido_notif'];
      $donde_esta = $_GET['donde_esta'];
      $actualizar_cantidades = $_GET['actualizar_cantidades'];
-    
-    $codigobarras = ereg_replace("-M", "-", $codigobarras);
-  $codigobarras_inv  =  ereg_replace("-M", "-", $codigobarras_inv);
-   $palabraclave  =  ereg_replace("-M", "-", $palabraclave);
+
+   // $codigobarras = ereg_replace("-M", "-", $codigobarras);
+ //  $codigobarras_inv  =  ereg_replace("-M", "-", $codigobarras_inv);
+  //  $palabraclave  =  ereg_replace("-M", "-", $palabraclave);
 
    $codigobarrasID = $codigobarras;
 
@@ -102,8 +102,8 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
 
 
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_id = '" . $productoid . "'");
-   if ($codigobarras_c = mysql_fetch_array($codigobarras_values)){
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_id = '" . $productoid . "'");
+   if ($codigobarras_c = tep_db_fetch_array($codigobarras_values)){
 
 
 
@@ -151,8 +151,8 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
      
    if ($prueba_notif){
 
-     $de_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $de = mysql_fetch_array($de_values);
+     $de_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $de = tep_db_fetch_array($de_values);
 
 
 
@@ -162,8 +162,8 @@ $mail_notif .= "Su pedido necesita de su atención. ". "\n" ;
 $mail_notif .= "Algunos productos de su pedido no están disponibles pero podemos ofrecerle otra alternativa.". "\n" . "\n" ;
 $mail_notif .= "Podemos cambiarle este producto". "\n" ;
 
-   $top1_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "' and cambio_de_productos = 1 ");
-    while ($top1 = mysql_fetch_array($top1_values)){
+   $top1_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "' and cambio_de_productos = 1 ");
+    while ($top1 = tep_db_fetch_array($top1_values)){
 
    $mail_notif .= $top1['products_quantity']  . " x " . $top1['products_name'] . " - " . number_format($top1['products_price'], 2, '.', '') . "€ \n" ;
 
@@ -173,8 +173,8 @@ $mail_notif .= "\n";
 $mail_notif .= "Por este otro". "\n" ;
 
 
-   $top1_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "' and cambio_de_productos = 2 ");
-    while ($top1 = mysql_fetch_array($top1_values)){
+   $top1_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "' and cambio_de_productos = 2 ");
+    while ($top1 = tep_db_fetch_array($top1_values)){
 
    $mail_notif .= $top1['products_quantity']  . " x " . $top1['products_name'] . " - " . number_format($top1['products_price'], 2, '.', '') . "€ \n" ;
 
@@ -210,8 +210,8 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 
    if ($enviarpedido_notif){
 
-     $de_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $de = mysql_fetch_array($de_values);
+     $de_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $de = tep_db_fetch_array($de_values);
 
 
 
@@ -224,8 +224,8 @@ $mail_notif .= "Podemos enviarselo de inmediato". "\n" ;
 $mail_notif .= "SU PEDIDO". "\n" ;
 
 
-   $top1_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "'");
-    while ($top1 = mysql_fetch_array($top1_values)){
+   $top1_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "'");
+    while ($top1 = tep_db_fetch_array($top1_values)){
 
    $mail_notif .= $top1['products_quantity']  . " x " . $top1['products_name'] . " - " . number_format($top1['products_price'], 2, '.', '') . "€ \n" ;
 
@@ -291,10 +291,10 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 }
 
 
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras_inv . "'
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras_inv . "'
                                                                                                                                                                                                               or  p.products_id = pd.products_id and p.products_model_2 = '" . $codigobarras_inv . "'
                                                                                                                                                                                                               or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras_inv . "'");
-   if ($codigobarras_cd = mysql_fetch_array($codigobarras_values)){
+   if ($codigobarras_cd = tep_db_fetch_array($codigobarras_values)){
 
 
 
@@ -501,14 +501,14 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 		$order_updated = true;
 
 
-    $pro_last_modified_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "'");
-    $pro_last_modified = mysql_fetch_array($pro_last_modified_values);
+    $pro_last_modified_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "'");
+    $pro_last_modified = tep_db_fetch_array($pro_last_modified_values);
 
-    $id_factura_ultimo_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
-    $id_factura_ultimo = mysql_fetch_array($id_factura_ultimo_values);
+    $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_ultimo = tep_db_fetch_array($id_factura_ultimo_values);
     
-    $id_factura_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
-    $id_factura = mysql_fetch_array($id_factura_values);
+    $id_factura_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura = tep_db_fetch_array($id_factura_values);
 
                              
 
@@ -975,8 +975,8 @@ $oldday1 = date("Y-m-d", $time1);
 
 		   if (isset($products_details['products_special_status'])){
 
-    $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .  (int)$order['products_id'] . "'");
-    if ($pro_special = mysql_fetch_array($pro_special_values)){
+    $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .  (int)$order['products_id'] . "'");
+    if ($pro_special = tep_db_fetch_array($pro_special_values)){
 
 	tep_db_query ("UPDATE " . 'specials' . " SET
 					status = '" . $products_details['products_special_status'] . "',
@@ -1120,12 +1120,12 @@ require('includes/proveedores_precios.php');
 
             //si es admin o tienda
      if ($login_id_remoto <> 0){
-      $admin_a_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id_remoto . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id_remoto . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
            }else{
-      $admin_a_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $login_id . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
 
      }             //fin
@@ -1133,16 +1133,16 @@ require('includes/proveedores_precios.php');
 
 
             //direcciones
-     $address_books_values = mysql_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $address_books = mysql_fetch_array($address_books_values);
-     $customerss_values = mysql_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $customerss = mysql_fetch_array($customerss_values);
+     $address_books_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $address_books = tep_db_fetch_array($address_books_values);
+     $customerss_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $customerss = tep_db_fetch_array($customerss_values);
               //fin
 
 
        //si el la peticion de entrada no existe se crea una nueva en la tienda correspondiente.
-    $salidas_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status_entregas . "'");
-   if ($salidas_c = mysql_fetch_array($salidas_values)){
+    $salidas_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status_entregas . "'");
+   if ($salidas_c = tep_db_fetch_array($salidas_values)){
 
 
 
@@ -1153,8 +1153,8 @@ require('includes/proveedores_precios.php');
 
                    //
                   //selecciona los productos y los datos de estos
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
-   if ($codigobarras_c = mysql_fetch_array($codigobarras_values)){
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
+   if ($codigobarras_c = tep_db_fetch_array($codigobarras_values)){
 
 
 
@@ -1168,8 +1168,8 @@ require('includes/proveedores_precios.php');
 
 
  //Pone el precio de oferta antes que el precio normal
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
       $codigobarras_c['products_price'] = $ofertas['specials_new_products_price'];
 }  //fin
 
@@ -1211,8 +1211,8 @@ require('includes/proveedores_precios.php');
 
 
 
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
         if ($ofertas['status'] == 1){
@@ -1380,13 +1380,13 @@ $oldday1 = date("Y-m-d", $time1);
 
  // Header("Location: ".$PHP_SELF."?serie_bb=ok&action_entradas=ok&action_salidas=ok&admin_id_c=".$admin_id_c."&products_id=".$products_id."&status_entradas_c=".$status_entradas_c."&status_salidas_c=".$status_salidas_c."&unidades=".$unidades."");
 
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
-    $codigobarras_c = mysql_fetch_array($codigobarras_values);
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
+    $codigobarras_c = tep_db_fetch_array($codigobarras_values);
 
 
   //Insertar el producto
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
 
 
@@ -1482,12 +1482,12 @@ $oldday1 = date("Y-m-d", $time1);
 
             //si es admin o tienda
      if ($login_id_remoto <> 0){
-      $admin_a_values = mysql_query("select * from " . 'admin' . " where admin_id = '" . $login_id_remoto . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . 'admin' . " where admin_id = '" . $login_id_remoto . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
            }else{
-      $admin_a_values = mysql_query("select * from " . 'admin' . " where admin_id = '" . $login_id . "'");
-     $admin_a = mysql_fetch_array($admin_a_values);
+      $admin_a_values = tep_db_query("select * from " . 'admin' . " where admin_id = '" . $login_id . "'");
+     $admin_a = tep_db_fetch_array($admin_a_values);
 
 
      }             //fin
@@ -1495,16 +1495,16 @@ $oldday1 = date("Y-m-d", $time1);
 
 
             //direcciones
-     $address_books_values = mysql_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $address_books = mysql_fetch_array($address_books_values);
-     $customerss_values = mysql_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
-     $customerss = mysql_fetch_array($customerss_values);
+     $address_books_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $address_books = tep_db_fetch_array($address_books_values);
+     $customerss_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $admin_a['tienda_cuenta_cliente'] . "'");
+     $customerss = tep_db_fetch_array($customerss_values);
               //fin
 
 
        //si el la peticion de entrada no existe se crea una nueva en la tienda correspondiente.
-    $salidas_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $login_pendiente_entrada_entienda . "'");
-   if ($salidas_c = mysql_fetch_array($salidas_values)){
+    $salidas_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $login_pendiente_entrada_entienda . "'");
+   if ($salidas_c = tep_db_fetch_array($salidas_values)){
 
 
 
@@ -1515,8 +1515,8 @@ $oldday1 = date("Y-m-d", $time1);
 
                    //
                   //selecciona los productos y los datos de estos
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
-   if ($codigobarras_c = mysql_fetch_array($codigobarras_values)){
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
+   if ($codigobarras_c = tep_db_fetch_array($codigobarras_values)){
 
 
 
@@ -1530,8 +1530,8 @@ $oldday1 = date("Y-m-d", $time1);
 
 
  //Pone el precio de oferta antes que el precio normal
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
@@ -1581,8 +1581,8 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
         if ($ofertas['status'] == 1){
@@ -1750,13 +1750,13 @@ $oldday1 = date("Y-m-d", $time1);
 
  // Header("Location: ".$PHP_SELF."?serie_bb=ok&action_entradas=ok&action_salidas=ok&admin_id_c=".$admin_id_c."&products_id=".$products_id."&status_entradas_c=".$status_entradas_c."&status_salidas_c=".$status_salidas_c."&unidades=".$unidades."");
 
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
-    $codigobarras_c = mysql_fetch_array($codigobarras_values);
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
+    $codigobarras_c = tep_db_fetch_array($codigobarras_values);
 
 
   //Insertar el producto
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
         if ($ofertas['status'] == 1){
@@ -1860,8 +1860,8 @@ $oldday1 = date("Y-m-d", $time1);
 
          // Situacion donde esta el producto en el almacen
          // cada tienda tiene su propio sistame de codi         /(
-    $donde_esta_c_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . (int)$order['products_id'] . "' and login_id = '" . $log_id . "'");
-   if  ($donde_esta_c= mysql_fetch_array($donde_esta_c_values)){
+    $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . (int)$order['products_id'] . "' and login_id = '" . $log_id . "'");
+   if  ($donde_esta_c= tep_db_fetch_array($donde_esta_c_values)){
 
 
 
@@ -1922,8 +1922,8 @@ $oldday1 = date("Y-m-d", $time1);
                                       //descuento
 
 
-    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
-    if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
 
           $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
@@ -1989,11 +1989,11 @@ $oldday1 = date("Y-m-d", $time1);
 }
 
 
-  $addstock_values = mysql_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $entregas_stock . "' order by date_purchased DESC");
-   $addstock = mysql_fetch_array($addstock_values);
+  $addstock_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $entregas_stock . "' order by date_purchased DESC");
+   $addstock = tep_db_fetch_array($addstock_values);
 
-  $addpend_values = mysql_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $status_entregas . "' order by date_purchased DESC");
-   $addpend = mysql_fetch_array($addpend_values);
+  $addpend_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $status_entregas . "' order by date_purchased DESC");
+   $addpend = tep_db_fetch_array($addpend_values);
 
               if ($addpend['orders_id'] == $oID) {
              }else{
@@ -2014,8 +2014,8 @@ $oldday1 = date("Y-m-d", $time1);
 
     if ($unidades){
 
-  $selec_nuevopedido_values = mysql_query("select * from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op where o.orders_id = op.orders_id and o.orders_id = '" . $numero_pedido . "' and op.products_id = '" . (int)$order['products_id'] . "'");
-   if ($selec_nuevopedido = mysql_fetch_array($selec_nuevopedido_values)){
+  $selec_nuevopedido_values = tep_db_query("select * from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op where o.orders_id = op.orders_id and o.orders_id = '" . $numero_pedido . "' and op.products_id = '" . (int)$order['products_id'] . "'");
+   if ($selec_nuevopedido = tep_db_fetch_array($selec_nuevopedido_values)){
 
    // si existe actualiza la nueva cantidad.
 
@@ -2030,16 +2030,16 @@ $oldday1 = date("Y-m-d", $time1);
         // Suma order total
 
 // precio total del pedido actual
-   $precioactual_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
-   $precioactual_total = mysql_fetch_array($precioactual_total_values);
+   $precioactual_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
+   $precioactual_total = tep_db_fetch_array($precioactual_total_values);
 
 // precio total del pedido actual
-   $precioactual_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
-   $precioactual_subtotal = mysql_fetch_array($precioactual_subtotal_values);
+   $precioactual_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+   $precioactual_subtotal = tep_db_fetch_array($precioactual_subtotal_values);
 
 // datos del producto
-   $producto_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
-   $producto = mysql_fetch_array($producto_values);
+   $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
+   $producto = tep_db_fetch_array($producto_values);
 
     $importe = $producto['products_price']*$unidades;
 
@@ -2068,8 +2068,8 @@ $oldday1 = date("Y-m-d", $time1);
     // si no existe lo inserta por primera vez
 }else{
 
-    $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
-    $codigobarras_c = mysql_fetch_array($codigobarras_values);
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$order['products_id'] . "'");
+    $codigobarras_c = tep_db_fetch_array($codigobarras_values);
 
                              $serie_b = 'ok';
    require('includes/proveedores_precios.php');
@@ -2102,16 +2102,16 @@ $oldday1 = date("Y-m-d", $time1);
         // Suma order total
 
 // precio total del pedido actual
-   $precioactual_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
-   $precioactual_total = mysql_fetch_array($precioactual_total_values);
+   $precioactual_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
+   $precioactual_total = tep_db_fetch_array($precioactual_total_values);
 
 // precio total del pedido actual
-   $precioactual_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
-   $precioactual_subtotal = mysql_fetch_array($precioactual_subtotal_values);
+   $precioactual_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+   $precioactual_subtotal = tep_db_fetch_array($precioactual_subtotal_values);
 
 // datos del producto
-   $producto_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
-   $producto = mysql_fetch_array($producto_values);
+   $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
+   $producto = tep_db_fetch_array($producto_values);
 
     $importe = $producto['products_price']*$unidades;
 
@@ -2706,7 +2706,7 @@ $oldday1 = date("Y-m-d", $time1);
   if ($productoid <> 'noaynada'){
 
 
-   $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . $productoid . "'");
+   $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and p.products_id = '" . $productoid . "'");
 
 
 
@@ -2714,7 +2714,7 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-   $codigobarras_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . $codigobarrasID . "' or p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras . "'
+   $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . $codigobarrasID . "' or p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras . "'
                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras . "'
                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model_2 = '" . $codigobarras . "'
                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras . "'");
@@ -2729,7 +2729,7 @@ $oldday1 = date("Y-m-d", $time1);
   
   
  //POSIBLE LOCALIZACION HASTA AQUI
-   if ($codigobarras_c = mysql_fetch_array($codigobarras_values)){
+   if ($codigobarras_c = tep_db_fetch_array($codigobarras_values)){
 
 
 
@@ -2742,8 +2742,8 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
@@ -2802,14 +2802,14 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
- $PVP_PVM_values = mysql_query("select * from " . 'customers' . " where customers_id = '" . $codigobarras_a['customers_id'] . "'");
- $PVP_PVM = mysql_fetch_array($PVP_PVM_values);
+ $PVP_PVM_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $codigobarras_a['customers_id'] . "'");
+ $PVP_PVM = tep_db_fetch_array($PVP_PVM_values);
 
 
     if ($PVP_PVM['customers_group_id'] >= 1){
 
-    $pr_grupos_values = mysql_query("select * from " . 'products_groups' . " where products_id = '" . $codigobarras_c['products_id'] . "' and customers_group_id = '" . $PVP_PVM['customers_group_id'] . "'");
-$pr_grupos = mysql_fetch_array($pr_grupos_values);
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $codigobarras_c['products_id'] . "' and customers_group_id = '" . $PVP_PVM['customers_group_id'] . "'");
+$pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
      $codigobarras_c['products_price'] = $pr_grupos['customers_group_price'];
 
@@ -2848,8 +2848,8 @@ $pr_grupos = mysql_fetch_array($pr_grupos_values);
 
 
 
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $codigobarras_c['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
  // si el status de la oferta es uno el PVP se convierte en la oferta.
         if ($ofertas['status'] == 1){
@@ -2861,8 +2861,8 @@ $pr_grupos = mysql_fetch_array($pr_grupos_values);
 
 
 
-    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $codigobarras_c['products_id'] . "' and pdc_unidades <= '" .  $unidades. "' order by pdc_unidades desc");
-    if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $codigobarras_c['products_id'] . "' and pdc_unidades <= '" .  $unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
 
               $producto_precio_final = $pdc_precio_final['pdc_price_final'];
@@ -3093,11 +3093,11 @@ if (($action == 'edit') && ($order_exists == true)) {
             
  <?php
  
-    $proveedorid_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
-   if ($proveedorid = mysql_fetch_array($proveedorid_values)){
+    $proveedorid_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
+   if ($proveedorid = tep_db_fetch_array($proveedorid_values)){
 
-   $proveedor_nombre_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $proveedorid['proveedor_id'] . "'");
-   $proveedor_nombre = mysql_fetch_array($proveedor_nombre_values);
+   $proveedor_nombre_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $proveedorid['proveedor_id'] . "'");
+   $proveedor_nombre = tep_db_fetch_array($proveedor_nombre_values);
 
  
  if  ($login_groups_id <> 1){
@@ -3190,15 +3190,15 @@ if (($action == 'edit') && ($order_exists == true)) {
         <?php  // comienzo 1
         
         
-  $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-  $estatuspmw = mysql_fetch_array($estatuspmw_values);
+  $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+  $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
 
- $estatus_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
- $estatus = mysql_fetch_array($estatus_values);
+ $estatus_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
+ $estatus = tep_db_fetch_array($estatus_values);
 
- $new_product_configuration_values = mysql_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
- $new_product_configuration = mysql_fetch_array($new_product_configuration_values);
+ $new_product_configuration_values = tep_db_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
+ $new_product_configuration = tep_db_fetch_array($new_product_configuration_values);
 
 
  // SOLO STATUS SELECCIONADOS SE EJECUTARÁ ESTA PARTE DEL CODIGO
@@ -3242,7 +3242,7 @@ if (($action == 'edit') && ($order_exists == true)) {
        $codigobarras_negativos = $_GET['codigobarras_negativos'];
        $unidades_negativos = $_GET['unidades_negativos'];
        
-          $codigobarras_negativos_pro = ereg_replace ("^" . CODIGODEBARRAS , "", $codigobarras_negativos); // $cadena = hispano-america
+         // $codigobarras_negativos_pro = ereg_replace("^" . CODIGODEBARRAS , "", $codigobarras_negativos); // $cadena = hispano-america
        
      if ($conf_actualizar){
 
@@ -3312,8 +3312,8 @@ if (($action == 'edit') && ($order_exists == true)) {
 
                     }
 
- $new_product_configuration_values = mysql_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
- $new_product_configuration = mysql_fetch_array($new_product_configuration_values);
+ $new_product_configuration_values = tep_db_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
+ $new_product_configuration = tep_db_fetch_array($new_product_configuration_values);
 
 
 if ($new_product_configuration['configuration_value'] == 1 ){
@@ -3458,24 +3458,24 @@ $checked_0 = 'checked';
 
 
 
-    $proveedor_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $orders['codigo_proveedor'] . "'");
-    $proveedor = mysql_fetch_array($proveedor_values);
+    $proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $orders['codigo_proveedor'] . "'");
+    $proveedor = tep_db_fetch_array($proveedor_values);
 
-    $donde_esta_a_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $orders['products_id'] . "' and login_id = '" . $log_id . "'");
-    $donde_esta_a = mysql_fetch_array($donde_esta_a_values);
+    $donde_esta_a_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $orders['products_id'] . "' and login_id = '" . $log_id . "'");
+    $donde_esta_a = tep_db_fetch_array($donde_esta_a_values);
 
 
-  $ofertas_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $orders['products_id'] . "'");
- if  ($ofertas = mysql_fetch_array($ofertas_values)){
+  $ofertas_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $orders['products_id'] . "'");
+ if  ($ofertas = tep_db_fetch_array($ofertas_values)){
 
 
       $orders['products_price'] = $ofertas['specials_new_products_price'];
 }
- $preciomayor_values = mysql_query("select * from " . 'products_groups' . " where products_id = '" . $orders['products_id'] . "' and customers_group_id = '" . 1 . "'");
- $preciomayor = mysql_fetch_array($preciomayor_values);
+ $preciomayor_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $orders['products_id'] . "' and customers_group_id = '" . 1 . "'");
+ $preciomayor = tep_db_fetch_array($preciomayor_values);
 
- $products_stock_values = mysql_query("select * from " . 'products_stock' . " where products_id = '" . $orders['products_id'] . "'");
- $products_stock = mysql_fetch_array($products_stock_values);
+ $products_stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $orders['products_id'] . "'");
+ $products_stock = tep_db_fetch_array($products_stock_values);
 
   ?>
   
@@ -3564,11 +3564,11 @@ $checked_0 = 'checked';
 
                        // $precioactual_total['value']
   
-         $precioactual_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_total' . "'");
-   $precioactual_total = mysql_fetch_array($precioactual_total_values);
+         $precioactual_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_total' . "'");
+   $precioactual_total = tep_db_fetch_array($precioactual_total_values);
    
-      $orders_cambio_db_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
- $orders_cambio_db = mysql_fetch_array($orders_cambio_db_values);
+      $orders_cambio_db_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+ $orders_cambio_db = tep_db_fetch_array($orders_cambio_db_values);
 
 
 //}
@@ -3716,10 +3716,10 @@ $checked_0 = 'checked';
 
 
 
-     $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $estatuspmw = mysql_fetch_array($estatuspmw_values);
-   $contar_values = mysql_query("select count(*) as value from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "'");
-     $contar = mysql_fetch_array($contar_values);
+     $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $estatuspmw = tep_db_fetch_array($estatuspmw_values);
+   $contar_values = tep_db_query("select count(*) as value from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "'");
+     $contar = tep_db_fetch_array($contar_values);
 
 
 
@@ -3744,17 +3744,17 @@ $checked_0 = 'checked';
 
   }
 
-    $ot_total_values = mysql_query("select * from " . 'orders_total' . " where orders_id = '" . $oID . "' and class = '" . 'ot_total' . "'");
-     $ot_total_pt = mysql_fetch_array($ot_total_values);
+    $ot_total_values = tep_db_query("select * from " . 'orders_total' . " where orders_id = '" . $oID . "' and class = '" . 'ot_total' . "'");
+     $ot_total_pt = tep_db_fetch_array($ot_total_values);
 
 
 
-   $monedabusd_values = mysql_query("select * from " . 'currencies' . " where currencies_id = '" . 1 . "'");
-     $monedabusd = mysql_fetch_array($monedabusd_values);
+   $monedabusd_values = tep_db_query("select * from " . 'currencies' . " where currencies_id = '" . 1 . "'");
+     $monedabusd = tep_db_fetch_array($monedabusd_values);
 
 
-   $monedabusd_values = mysql_query("select * from " . 'currencies' . " where currencies_id = '" . 1 . "'");
-     $monedabusd = mysql_fetch_array($monedabusd_values);
+   $monedabusd_values = tep_db_query("select * from " . 'currencies' . " where currencies_id = '" . 1 . "'");
+     $monedabusd = tep_db_fetch_array($monedabusd_values);
 
 
 
@@ -3791,17 +3791,17 @@ $checked_0 = 'checked';
 
 
 //if (ACTIVACION_AEPR == 'false'){
-              $consulta1_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-              $consulta1 = mysql_fetch_array($consulta1_values);
+              $consulta1_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+              $consulta1 = tep_db_fetch_array($consulta1_values);
       //    echo  $consulta1['code_admin'] . '-';
 
 
-              $consulta2_values = mysql_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
-              $consulta2 = mysql_fetch_array($consulta2_values);
+              $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+              $consulta2 = tep_db_fetch_array($consulta2_values);
      //   echo $consulta2['orders_status'] . '-';
 
-              $consulta3_values = mysql_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
-              $consulta3 = mysql_fetch_array($consulta3_values);
+              $consulta3_values = tep_db_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
+              $consulta3 = tep_db_fetch_array($consulta3_values);
       //   echo $consulta3['tienda'] . '-';
 
 
@@ -4276,14 +4276,14 @@ $checked_0 = 'checked';
 
 echo '	  <tr class="dataTableRow">' . "\n";
 
-  $estatus_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
-  $estatus = mysql_fetch_array($estatus_values);
-  $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-  $estatuspmw = mysql_fetch_array($estatuspmw_values);
+  $estatus_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "' and orders_status = '" . $abono . "'");
+  $estatus = tep_db_fetch_array($estatus_values);
+  $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+  $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
 
-    $proveedor_admin_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" .  $order->products[$i]['codigo_proveedor'] . "'");
-    $proveedor_admin = mysql_fetch_array($proveedor_admin_values);
+    $proveedor_admin_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" .  $order->products[$i]['codigo_proveedor'] . "'");
+    $proveedor_admin = tep_db_fetch_array($proveedor_admin_values);
 
 
 
@@ -4346,8 +4346,8 @@ echo '	  <tr class="dataTableRow">' . "\n";
      	 echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $order->products[$i]['proveedor_price'].'</td>' . "\n";
 
 
-      $saber_stock_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $order->products[$i]['products_id'] . "' and op.products_quantity >= 1");
-     if ($saber_stock = mysql_fetch_array($saber_stock_values)){
+      $saber_stock_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $order->products[$i]['products_id'] . "' and op.products_quantity >= 1");
+     if ($saber_stock = tep_db_fetch_array($saber_stock_values)){
 
 
         echo    '   <td class="' . $RowStyle . '" align="right" valign="top">' . '<a href="javascript:popupWindow(\'' . tep_href_link('consultar_stock_tiendas.php?products_id=' . $order->products[$i]['products_id']) . '&value_2=' . 'A' . $affiliate_id . '\')">'    ."          ".'<p><font color="#FF0000">Stock</font></p>'."</td>\n";
@@ -4368,8 +4368,8 @@ echo '	  <tr class="dataTableRow">' . "\n";
 	echo '	    </td>' . "\n" .
        '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $order->products[$i]['codigo_barras'].'</td>' . "\n";
 
-    $pr_grupos_values = mysql_query("select * from " . 'products_groups' . " where products_id = '" . $codigobarras_c['products_id'] . "' and customers_group_id = '" . $PVP_PVM['customers_group_id'] . "'");
-$pr_grupos = mysql_fetch_array($pr_grupos_values);
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $codigobarras_c['products_id'] . "' and customers_group_id = '" . $PVP_PVM['customers_group_id'] . "'");
+$pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
      $codigobarras_c['products_price'] = $pr_grupos['customers_group_price'];
 	echo '	    </td>' . "\n" .
@@ -4417,13 +4417,13 @@ $pr_grupos = mysql_fetch_array($pr_grupos_values);
     // IMAGENES
   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=/product_info.php?products_id=' . $order->products[$i]['products_id'] . '><img border="0" src="'. DIR_WS_CATALOG_IMAGES . $order->products[$i]['products_image'] .'" width="40">' . "\n";
 
-    $products_stock_values = mysql_query("select * from " . 'products_stock' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
-    $products_stock = mysql_fetch_array($products_stock_values);
+    $products_stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
+    $products_stock = tep_db_fetch_array($products_stock_values);
 
-    $products_values = mysql_query("select * from " . 'products' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
-    $products = mysql_fetch_array($products_values);
-    $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
-    $pro_special = mysql_fetch_array($pro_special_values);
+    $products_values = tep_db_query("select * from " . 'products' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
+    $products = tep_db_fetch_array($products_values);
+    $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
+    $pro_special = tep_db_fetch_array($pro_special_values);
 
   $stock_exterior = '<script language="javascript" src="products_info_stock.php?stock_nivel=6&products_id_stock='. $order->products[$i]['products_id'] . ' "> </script>';
 
@@ -4453,8 +4453,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' .  $order->products[$i]['
 
 
 
-    $pr_grupos_values = mysql_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 2 . "'");
-$pr_grupos = mysql_fetch_array($pr_grupos_values);
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 2 . "'");
+$pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
      $pvmver = $_GET['pvmver'];
 
@@ -4537,11 +4537,11 @@ echo '	    </td>' . "\n" .
 		   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
 		      '	    <td class="' . $RowStyle . '" align="right" valign="top"><b>' . $currencies->format(($order->products[$i]['final_price'] + ($order->products[$i]['final_price'] * $order->products[$i]['tax']/100)) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . '</b></td>' . "\n";
 
-  $addstock_values = mysql_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $entregas_stock . "' order by date_purchased DESC");
-   $addstock = mysql_fetch_array($addstock_values);
+  $addstock_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $entregas_stock . "' order by date_purchased DESC");
+   $addstock = mysqli_fetch_array($addstock_values);
 
-  $addpend_values = mysql_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $status_entregas . "' order by date_purchased DESC");
-   $addpend = mysql_fetch_array($addpend_values);
+  $addpend_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $status_entregas . "' order by date_purchased DESC");
+   $addpend = tep_db_fetch_array($addpend_values);
 
 
 
@@ -4605,8 +4605,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 
 
-    $pdc_precio_final_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $order->products[$i]['products_id'] . "' order by pdc_unidades desc");
-  if ($pdc_precio_final = mysql_fetch_array($pdc_precio_final_values)){
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $order->products[$i]['products_id'] . "' order by pdc_unidades desc");
+  if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
             $pdc_price_final = '<p style="margin-top: -5px; margin-bottom: -5px"><font size="0">+'.$pdc_precio_final['pdc_unidades'].'->></s>
              <b>' . $pdc_precio_final['pdc_price_final'] . '€</b></p>';
@@ -4641,8 +4641,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
            if (PERMISO_DONDE_ESTA == 'True'){
           echo  '	    <td class="' . $RowStyle . '" align="left" valign="top">';
-   $donde_esta_a_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $order->products[$i]['products_id'] . "'");
-   while  ($donde_esta_a = mysql_fetch_array($donde_esta_a_values)){
+   $donde_esta_a_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $order->products[$i]['products_id'] . "'");
+   while  ($donde_esta_a = tep_db_fetch_array($donde_esta_a_values)){
 
 
 
@@ -4651,8 +4651,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 }
 
-   $donde_esta_b_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $order->products[$i]['products_id'] . "' and login_id = '" . $log_id . "' ");
-     $donde_esta_b = mysql_fetch_array($donde_esta_b_values);
+   $donde_esta_b_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $order->products[$i]['products_id'] . "' and login_id = '" . $log_id . "' ");
+     $donde_esta_b = tep_db_fetch_array($donde_esta_b_values);
 
 
      '</td>' . "\n";
@@ -4682,8 +4682,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
         }   // DONDE ESTA
      	//echo    '	<td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][proveedor_price]' size='6' value='" . $order->products[$i]['proveedor_price_general'] . "'>";
 
-      $saber_stock_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $order->products[$i]['products_id'] . "' and op.products_quantity >= 1");
-     if ($saber_stock = mysql_fetch_array($saber_stock_values)){
+      $saber_stock_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $order->products[$i]['products_id'] . "' and op.products_quantity >= 1");
+     if ($saber_stock = tep_db_fetch_array($saber_stock_values)){
 
 
         echo    '   <td class="' . $RowStyle . '" align="right" valign="top">' . '<a href="javascript:popupWindow(\'' . tep_href_link('consultar_stock_tiendas.php?products_id=' . $order->products[$i]['products_id']) . '&value_2=' . 'A' . $affiliate_id . '\')">'    ."          ".'<p><font color="#FF0000">Stock</font></p>'."</td>\n";
@@ -4899,8 +4899,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 
 
-     $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $estatuspmw = mysql_fetch_array($estatuspmw_values);
+     $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
                                        //  and  $login_groups_id <> 1
  // SOLO STATUS SELECCIONADOS SE EJECUTARÁ ESTA PARTE DEL CODIG
@@ -4910,17 +4910,17 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 //if (ACTIVACION_AEPR == 'false'){
 
-              $consulta1_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-              $consulta1 = mysql_fetch_array($consulta1_values);
+              $consulta1_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+              $consulta1 = tep_db_fetch_array($consulta1_values);
       //    echo  $consulta1['code_admin'] . '-';
 
 
-              $consulta2_values = mysql_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
-              $consulta2 = mysql_fetch_array($consulta2_values);
+              $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+              $consulta2 = tep_db_fetch_array($consulta2_values);
      //   echo $consulta2['orders_status'] . '-';
 
-              $consulta3_values = mysql_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
-              $consulta3 = mysql_fetch_array($consulta3_values);
+              $consulta3_values = tep_db_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
+              $consulta3 = tep_db_fetch_array($consulta3_values);
       //   echo $consulta3['tienda'] . '-';
 
 
@@ -5425,8 +5425,8 @@ if (tep_db_num_rows($orders_history_query)) {
 
 
 
-     $estatuspmw_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
-     $estatuspmw = mysql_fetch_array($estatuspmw_values);
+     $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
+     $estatuspmw = tep_db_fetch_array($estatuspmw_values);
 
                                        //  and  $login_groups_id <> 1
  // SOLO STATUS SELECCIONADOS SE EJECUTARÁ ESTA PARTE DEL CODIG
@@ -5436,17 +5436,17 @@ if (tep_db_num_rows($orders_history_query)) {
 
 //if (ACTIVACION_AEPR == 'false'){
 
-              $consulta1_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-              $consulta1 = mysql_fetch_array($consulta1_values);
+              $consulta1_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+              $consulta1 = tep_db_fetch_array($consulta1_values);
       //    echo  $consulta1['code_admin'] . '-';
 
 
-              $consulta2_values = mysql_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
-              $consulta2 = mysql_fetch_array($consulta2_values);
+              $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+              $consulta2 = tep_db_fetch_array($consulta2_values);
      //   echo $consulta2['orders_status'] . '-';
 
-              $consulta3_values = mysql_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
-              $consulta3 = mysql_fetch_array($consulta3_values);
+              $consulta3_values = tep_db_query("select * from " . 'orders_status' . " where orders_status_id = '" . $order->info['orders_status'] . "'");
+              $consulta3 = tep_db_fetch_array($consulta3_values);
       //   echo $consulta3['tienda'] . '-';
 
 

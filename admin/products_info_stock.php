@@ -23,8 +23,8 @@ $almacen = $_GET['almacen'];
 
 
                                                                                                               //p.stock_nivel = 6 and
-                $ayuda_producto_values = mysql_query("select * from products p, products_description pd where p.products_id = pd.products_id and p.products_id = '" . $products_id_stock . "' order by time_entradasysalidas ASC");
-    if ($ayuda_producto = mysql_fetch_array($ayuda_producto_values)){
+                $ayuda_producto_values = tep_db_query("select * from products p, products_description pd where p.products_id = pd.products_id and p.products_id = '" . $products_id_stock . "' order by time_entradasysalidas ASC");
+    if ($ayuda_producto = tep_db_fetch_array($ayuda_producto_values)){
 
       $tr = $ayuda_producto['time_entradasysalidas']-$ayuda_producto['time_entradasysalidas']-$ayuda_producto['time_entradasysalidas'];
 
@@ -124,8 +124,8 @@ $almacen = $_GET['almacen'];
    //  tep_db_perform('products', $sql_data_array, 'update', "products_id = '" . $products_id_stock . "'");
 
 
-        $products_stock_values = mysql_query("select * from products_stock pd where products_id = '" . $products_id_stock . "'");
-    if ($products_stock = mysql_fetch_array($products_stock_values)){
+        $products_stock_values = tep_db_query("select * from products_stock pd where products_id = '" . $products_id_stock . "'");
+    if ($products_stock = tep_db_fetch_array($products_stock_values)){
 
 
              $sql_data_array = array('products_stock_pendiente' => $sumar_mercancia_entregado_procesando['value'],
@@ -174,14 +174,14 @@ $almacen = $_GET['almacen'];
 
 
 
-   $query = mysql_query("SELECT * FROM `products` WHERE  products_id='" . $products_id_stock . "'");
- $products = mysql_fetch_array($query);
-   $query = mysql_query("SELECT * FROM `products_stock` WHERE  products_id='" . $products_id_stock . "'");
- $products_stock = mysql_fetch_array($query);
+   $query = tep_db_query("SELECT * FROM `products` WHERE  products_id='" . $products_id_stock . "'");
+ $products = tep_db_fetch_array($query);
+   $query = tep_db_query("SELECT * FROM `products_stock` WHERE  products_id='" . $products_id_stock . "'");
+ $products_stock = tep_db_fetch_array($query);
 
 
-                 $ayuda_quanty_values = mysql_query("select * from orders where orders_status = '" . 75 . "' order by orders_id DESC");
-    $ayuda_quanty = mysql_fetch_array($ayuda_quanty_values);
+                 $ayuda_quanty_values = tep_db_query("select * from orders where orders_status = '" . 75 . "' order by orders_id DESC");
+    $ayuda_quanty = tep_db_fetch_array($ayuda_quanty_values);
 
 
 

@@ -107,7 +107,7 @@ body {
 }
 
 .productListTable tr.alt td {
-  background-color: #ecf6fc;
+  background-color: #F5F5F5;
 }
 
 .fieldKey {
@@ -406,7 +406,7 @@ SPAN.errorText {
 .moduleRowSelected { background-color: #fff; }
 
 .checkoutBarFrom, .checkoutBarTo { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #8c8c8c; }
-.checkoutBarCurrent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
+.checkoutBarCurrent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
 
 /* message box */
 

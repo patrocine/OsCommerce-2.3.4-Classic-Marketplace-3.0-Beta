@@ -108,7 +108,7 @@ $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
 
 
     if (ACCOUNT_DOB == 'true') {
-      if ((is_numeric(tep_date_raw($dob)) == false) || (@checkdate(substr(tep_date_raw($dob), 4, 2), substr(tep_date_raw($dob), 6, 2), substr(tep_date_raw($dob), 0, 4)) == false)) {
+      if ((strlen($dob) < ENTRY_DOB_MIN_LENGTH) || (!empty($dob) && (!is_numeric(tep_date_raw($dob)) || !@checkdate(substr(tep_date_raw($dob), 4, 2), substr(tep_date_raw($dob), 6, 2), substr(tep_date_raw($dob), 0, 4))))) {
         $error = true;
 
         $messageStack->add('create_account', ENTRY_DATE_OF_BIRTH_ERROR);
