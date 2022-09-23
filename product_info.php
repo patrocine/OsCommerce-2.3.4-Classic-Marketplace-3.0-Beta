@@ -411,7 +411,12 @@ $products_price = $currencies->display_price($product_info['products_price'], te
   <div class="contentText">
 
 <?php
-    if (tep_not_null($product_info['products_image'])) {
+
+
+
+
+
+    if (tep_not_null($product_info['products_name'])) {
       $pi_query = tep_db_query("select image, htmlcontent from " . TABLE_PRODUCTS_IMAGES . " where products_id = '" . (int)$product_info['products_id'] . "' order by sort_order");
 
       if (tep_db_num_rows($pi_query) > 0) {
@@ -421,7 +426,6 @@ $products_price = $currencies->display_price($product_info['products_price'], te
       <ul>
 
 <?php
-
 
 
 
@@ -678,8 +682,23 @@ echo '<a href="'. $ref_fabricante['proveedor_ruta_images'] . $product_info['prod
    if (ereg("^https://", $product_info['products_image']) ) {
   echo '<a href="' . $product_info['products_image'] . '" target="_blank" rel="fancybox">' . tep_image('' . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, null, 'hspace="5" vspace="5"') . '</a>';
 }else{
-   echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $product_info['products_image']) . '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, null, 'hspace="5" vspace="5"') . '</a>';
+
+if ($product_info['products_image']){
+echo '<a href="'. DIR_WS_IMAGES . $product_info['products_image'] .'"><img src="'. DIR_WS_IMAGES . $product_info['products_image']  .'"  height="'. HEADING_IMAGE_HEIGHT .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                                 }else{
+echo '<a href="'. DIR_WS_IMAGES . 'imnd.svg' .'"><img src="'. DIR_WS_IMAGES . 'imnd.svg'  .'"  height="'. HEADING_IMAGE_HEIGHT .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                             }
+
+
+
+//  echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $product_info['products_image']) . '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, null, 'hspace="5" vspace="5"') . '</a>';
   }
+
+
+
+
+
+
 
 // SE UTILIZA EL SUMADOR DE PRODUCTOS PARA GENERAR LA CONSULTA Y DESPUES GUARDARLA EN UNA TABLA PARA QUE ESTE PROCESO SE LO MENOS TARDIO POSIBLE.
 

@@ -11,7 +11,7 @@
 
 //$product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 
- $product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+ $product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
 
 
 
@@ -160,7 +160,18 @@ $product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . 'no-f
              }else{
 
                if (ACTIVO_NOFOTO == 'True'){
- $product['image']			= tep_image(DIR_WS_IMAGES . 'no-foto.jpg', $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+
+
+               if ($new_products['products_image']){
+
+$product['image']			='<img src="images/'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                              }else{
+$product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+
+                          }
+
+
+ //$product['image']			= tep_info_image($new_products['products_image'], $new_products['products_name'], HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT);
       require(TMPL_DIR. 'templ_product_box.php');
                $new_prods_content .= '<td align="center" valign="top">'.$az_product_html.$texto_stock.$stock_exterior.'</td>';
                $col ++;

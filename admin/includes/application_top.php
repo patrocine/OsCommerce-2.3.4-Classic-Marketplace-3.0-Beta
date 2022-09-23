@@ -278,11 +278,11 @@
    
 if ($value_edit){
 
- $yergfcv_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $value_edit . "'");
- $yergfcv = mysql_fetch_array($yergfcv_values);
+ $yergfcv_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $value_edit . "'");
+ $yergfcv = tep_db_fetch_array($yergfcv_values);
 
- $yergfcvs_values = mysql_query("select * from " . 'admin_supervisores' . " where admin_id = '" . $login_id . "'");
- $yergfcvs = mysql_fetch_array($yergfcvs_values);
+ $yergfcvs_values = tep_db_query("select * from " . 'admin_supervisores' . " where admin_id = '" . $login_id . "'");
+ $yergfcvs = tep_db_fetch_array($yergfcvs_values);
 
 
 

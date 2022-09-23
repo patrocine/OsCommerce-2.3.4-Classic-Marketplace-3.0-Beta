@@ -217,7 +217,7 @@ $product['image']			=       '<a href="'. $ref_fabricante['proveedor_ruta_images'
 
 
                  if (ACTIVO_NOFOTO == 'True'){
-  $product['image']			= tep_image(DIR_WS_IMAGES . 'no-foto.jpg', $products_images_name['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+  $product['image']			= '<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>'; //tep_image(DIR_WS_IMAGES . 'imnd.svg', $products_images_name['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 
 
     require(TMPL_DIR. 'templ_product_box.php');

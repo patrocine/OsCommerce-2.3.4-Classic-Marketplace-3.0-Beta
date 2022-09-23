@@ -215,8 +215,8 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
      require(DIR_WS_INCLUDES . 'header.php');
 
 
-              $permiso_boxes_values = mysql_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
-             if ($permiso_boxes = mysql_fetch_array($permiso_boxes_values)){
+              $permiso_boxes_values = tep_db_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
+             if ($permiso_boxes = tep_db_fetch_array($permiso_boxes_values)){
      
     include(DIR_WS_INCLUDES . 'column_left.php');
       }else{}
@@ -242,8 +242,8 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
    
    <?php
 
-              $permiso_boxes_values = mysql_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
-             if ($permiso_boxes = mysql_fetch_array($permiso_boxes_values)){
+              $permiso_boxes_values = tep_db_query("select * from " . 'administrators' . " where admin_id = '" . $login_id . "' and admin_boxes = '" . 1 . "'");
+             if ($permiso_boxes = tep_db_fetch_array($permiso_boxes_values)){
 
           ?>
 

@@ -182,7 +182,7 @@
               
               
 	  $infobox = new azInfoBox();
-      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' . '');
+      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' . '<p><b><font size="2">MERKAPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
       $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);
