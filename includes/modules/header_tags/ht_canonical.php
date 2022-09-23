@@ -28,19 +28,19 @@
       }
     }
 
-    function execute() {
-      global $PHP_SELF, $HTTP_GET_VARS, $cPath, $oscTemplate;
+function execute() {
+  global $PHP_SELF, $HTTP_GET_VARS, $cPath, $oscTemplate;
 
-      if (basename($PHP_SELF) == FILENAME_PRODUCT_INFO) {
-        $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $HTTP_GET_VARS['products_id'], 'NONSSL', false) . '" />' . "\n", $this->group);
-      } elseif (basename($PHP_SELF) == FILENAME_DEFAULT) {
-        if (isset($cPath) && tep_not_null($cPath)) {
-          $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $cPath, 'NONSSL', false) . '" />' . "\n", $this->group);
-        } elseif (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
-          $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'], 'NONSSL', false) . '" />' . "\n", $this->group);
-        }
-      }
+  if (basename($PHP_SELF) == FILENAME_PRODUCT_INFO) {
+    $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$HTTP_GET_VARS['products_id'], 'NONSSL', false) . '" />' . "\n", $this->group);
+  } elseif (basename($PHP_SELF) == FILENAME_DEFAULT) {
+    if (isset($cPath) && tep_not_null($cPath)) {
+      $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_DEFAULT, 'cPath=' . $cPath, 'NONSSL', false) . '" />' . "\n", $this->group);
+    } elseif (isset($HTTP_GET_VARS['manufacturers_id']) && tep_not_null($HTTP_GET_VARS['manufacturers_id'])) {
+      $oscTemplate->addBlock('<link rel="canonical" href="' . tep_href_link(FILENAME_DEFAULT, 'manufacturers_id=' . $HTTP_GET_VARS['manufacturers_id'], 'NONSSL', false) . '" />' . "\n", $this->group);
     }
+  }
+}
 
     function isEnabled() {
       return $this->enabled;

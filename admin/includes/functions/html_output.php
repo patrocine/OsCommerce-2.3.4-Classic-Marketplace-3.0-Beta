@@ -40,29 +40,28 @@
     return $link;
   }
 
-  function tep_catalog_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
-    if ($connection == 'NONSSL') {
+function tep_catalog_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
+  if ($connection == 'NONSSL') {
+    $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
+  } elseif ($connection == 'SSL') {
+    if (ENABLE_SSL_CATALOG == 'true') {
+      $link = HTTPS_CATALOG_SERVER . (defined('DIR_WS_HTTPS_CATALOG') ? DIR_WS_HTTPS_CATALOG : DIR_WS_CATALOG);
+    } else {
       $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
-    } elseif ($connection == 'SSL') {
-      if (ENABLE_SSL_CATALOG == 'true') {
-        $link = HTTPS_CATALOG_SERVER . DIR_WS_CATALOG;
-      } else {
-        $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
-      }
-    } else {
-      die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><strong>Error!</strong></font><br /><br /><strong>Unable to determine connection method on a link!<br /><br />Known methods: NONSSL SSL<br /><br />Function used:<br /><br />tep_href_link(\'' . $page . '\', \'' . $parameters . '\', \'' . $connection . '\')</strong>');
     }
-    if ($parameters == '') {
-      $link .= $page;
-    } else {
-      $link .= $page . '?' . $parameters;
-    }
-
-    while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) $link = substr($link, 0, -1);
-
-    return $link;
+  } else {
+    die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><strong>Error!</strong></font><br /><br /><strong>Unable to determine connection method on a link!<br /><br />Known methods: NONSSL SSL<br /><br />Function used:<br /><br />tep_href_link(\'' . $page . '\', \'' . $parameters . '\', \'' . $connection . '\')</strong>');
+  }
+  if ($parameters == '') {
+    $link .= $page;
+  } else {
+    $link .= $page . '?' . $parameters;
   }
 
+  while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) $link = substr($link, 0, -1);
+
+  return $link;
+}
 ////
 // The HTML image wrapper function
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {

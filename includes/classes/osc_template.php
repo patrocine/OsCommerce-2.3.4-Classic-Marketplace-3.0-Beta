@@ -67,35 +67,41 @@
       }
     }
 
-    function buildBlocks() {
-      global $language;
+function buildBlocks() {
+  global $language;
 
-      if ( defined('TEMPLATE_BLOCK_GROUPS') && tep_not_null(TEMPLATE_BLOCK_GROUPS) ) {
-        $tbgroups_array = explode(';', TEMPLATE_BLOCK_GROUPS);
+  if ( defined('TEMPLATE_BLOCK_GROUPS') && tep_not_null(TEMPLATE_BLOCK_GROUPS) ) {
+    $tbgroups_array = explode(';', TEMPLATE_BLOCK_GROUPS);
 
-        foreach ($tbgroups_array as $group) {
-          $module_key = 'MODULE_' . strtoupper($group) . '_INSTALLED';
+    foreach ($tbgroups_array as $group) {
+      $module_key = 'MODULE_' . strtoupper($group) . '_INSTALLED';
 
-          if ( defined($module_key) && tep_not_null(constant($module_key)) ) {
-            $modules_array = explode(';', constant($module_key));
+      if ( defined($module_key) && tep_not_null(constant($module_key)) ) {
+        $modules_array = explode(';', constant($module_key));
 
-            foreach ( $modules_array as $module ) {
-              $class = substr($module, 0, strrpos($module, '.'));
+        foreach ( $modules_array as $module ) {
+          $class = substr($module, 0, strrpos($module, '.'));
 
-              if ( !class_exists($class) ) {
-                include(DIR_WS_LANGUAGES . $language . '/modules/' . $group . '/' . $module);
-                include(DIR_WS_MODULES . $group . '/' . $class . '.php');
-              }
+          if ( !class_exists($class) ) {
+            if ( file_exists(DIR_WS_LANGUAGES . $language . '/modules/' . $group . '/' . $module) ) {
+              include(DIR_WS_LANGUAGES . $language . '/modules/' . $group . '/' . $module);
+            }
 
-              $mb = new $class();
+            if ( file_exists(DIR_WS_MODULES . $group . '/' . $class . '.php') ) {
+              include(DIR_WS_MODULES . $group . '/' . $class . '.php');
+            }
+          }
 
-              if ( $mb->isEnabled() ) {
-                $mb->execute();
-              }
+          if ( class_exists($class) ) {
+            $mb = new $class();
+
+            if ( $mb->isEnabled() ) {
+              $mb->execute();
             }
           }
         }
       }
     }
   }
+} }
 ?>

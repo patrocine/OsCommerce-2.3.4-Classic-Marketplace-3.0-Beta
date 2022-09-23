@@ -970,54 +970,55 @@ function tep_redirect($url) {
 
 ////
 // Retreive server information
-  function tep_get_system_information() {
-    global $HTTP_SERVER_VARS;
+function tep_get_system_information() {
+  global $HTTP_SERVER_VARS;
 
-    $db_query = tep_db_query("select now() as datetime");
-    $db = tep_db_fetch_array($db_query);
+  $db_query = tep_db_query("select now() as datetime");
+  $db = tep_db_fetch_array($db_query);
 
-    @list($system, $host, $kernel) = preg_split('/[\s,]+/', @exec('uname -a'), 5);
+  @list($system, $host, $kernel) = preg_split('/[\s,]+/', @exec('uname -a'), 5);
 
-    $data = array();
+  $data = array();
 
-    $data['oscommerce']  = array('version' => tep_get_version());
+  $data['oscommerce']  = array('version' => tep_get_version());
 
-    $data['system'] = array('date' => date('Y-m-d H:i:s O T'),
-                            'os' => PHP_OS,
-                            'kernel' => $kernel,
-                            'uptime' => @exec('uptime'),
-                            'http_server' => $HTTP_SERVER_VARS['SERVER_SOFTWARE']);
+  $data['system'] = array('date' => date('Y-m-d H:i:s O T'),
+                          'os' => PHP_OS,
+                          'kernel' => $kernel,
+                          'uptime' => @exec('uptime'),
+                          'http_server' => $HTTP_SERVER_VARS['SERVER_SOFTWARE']);
 
-    $data['mysql']  = array('version' => (function_exists('mysql_get_server_info') ? mysql_get_server_info() : ''),
-                            'date' => $db['datetime']);
+  $data['mysql']  = array('version' => tep_db_get_server_info(),
+                          'date' => $db['datetime']);
 
-    $data['php']    = array('version' => PHP_VERSION,
-                            'zend' => zend_version(),
-                            'sapi' => PHP_SAPI,
-                            'int_size'	=> defined('PHP_INT_SIZE') ? PHP_INT_SIZE : '',
-                            'safe_mode'	=> (int) @ini_get('safe_mode'),
-                            'open_basedir' => (int) @ini_get('open_basedir'),
-                            'memory_limit' => @ini_get('memory_limit'),
-                            'error_reporting' => error_reporting(),
-                            'display_errors' => (int)@ini_get('display_errors'),
-                            'allow_url_fopen' => (int) @ini_get('allow_url_fopen'),
-                            'allow_url_include' => (int) @ini_get('allow_url_include'),
-                            'file_uploads' => (int) @ini_get('file_uploads'),
-                            'upload_max_filesize' => @ini_get('upload_max_filesize'),
-                            'post_max_size' => @ini_get('post_max_size'),
-                            'disable_functions' => @ini_get('disable_functions'),
-                            'disable_classes' => @ini_get('disable_classes'),
-                            'enable_dl'	=> (int) @ini_get('enable_dl'),
-                            'magic_quotes_gpc' => (int) @ini_get('magic_quotes_gpc'),
-                            'register_globals' => (int) @ini_get('register_globals'),
-                            'filter.default'   => @ini_get('filter.default'),
-                            'zend.ze1_compatibility_mode' => (int) @ini_get('zend.ze1_compatibility_mode'),
-                            'unicode.semantics' => (int) @ini_get('unicode.semantics'),
-                            'zend_thread_safty'	=> (int) function_exists('zend_thread_id'),
-                            'extensions' => get_loaded_extensions());
+  $data['php']    = array('version' => PHP_VERSION,
+                          'zend' => zend_version(),
+                          'sapi' => PHP_SAPI,
+                          'int_size'  => defined('PHP_INT_SIZE') ? PHP_INT_SIZE : '',
+                          'safe_mode' => (int) @ini_get('safe_mode'),
+                          'open_basedir' => (int) @ini_get('open_basedir'),
+                          'memory_limit' => @ini_get('memory_limit'),
+                          'error_reporting' => error_reporting(),
+                          'display_errors' => (int)@ini_get('display_errors'),
+                          'allow_url_fopen' => (int) @ini_get('allow_url_fopen'),
+                          'allow_url_include' => (int) @ini_get('allow_url_include'),
+                          'file_uploads' => (int) @ini_get('file_uploads'),
+                          'upload_max_filesize' => @ini_get('upload_max_filesize'),
+                          'post_max_size' => @ini_get('post_max_size'),
+                          'disable_functions' => @ini_get('disable_functions'),
+                          'disable_classes' => @ini_get('disable_classes'),
+                          'enable_dl' => (int) @ini_get('enable_dl'),
+                          'magic_quotes_gpc' => (int) @ini_get('magic_quotes_gpc'),
+                          'register_globals' => (int) @ini_get('register_globals'),
+                          'filter.default'   => @ini_get('filter.default'),
+                          'zend.ze1_compatibility_mode' => (int) @ini_get('zend.ze1_compatibility_mode'),
+                          'unicode.semantics' => (int) @ini_get('unicode.semantics'),
+                          'zend_thread_safty' => (int) function_exists('zend_thread_id'),
+                          'extensions' => get_loaded_extensions());
 
-    return $data;
-  }
+  return $data;
+}
+
 
   function tep_generate_category_path($id, $from = 'category', $categories_array = '', $index = 0) {
     global $languages_id;

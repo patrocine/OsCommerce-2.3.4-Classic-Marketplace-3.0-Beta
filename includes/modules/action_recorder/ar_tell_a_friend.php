@@ -40,13 +40,14 @@
       }
     }
 
-    function expireEntries() {
-      global $db_link;
+function expireEntries() {
+  global $db_link;
 
-      tep_db_query("delete from " . TABLE_ACTION_RECORDER . " where module = '" . $this->code . "' and date_added < date_sub(now(), interval " . (int)$this->minutes  . " minute)");
+  tep_db_query("delete from " . TABLE_ACTION_RECORDER . " where module = '" . $this->code . "' and date_added < date_sub(now(), interval " . (int)$this->minutes  . " minute)");
 
-      return mysql_affected_rows($db_link);
-    }
+  return tep_db_affected_rows($db_link);
+}
+
 
     function check() {
       return defined('MODULE_ACTION_RECORDER_TELL_A_FRIEND_EMAIL_MINUTES');
