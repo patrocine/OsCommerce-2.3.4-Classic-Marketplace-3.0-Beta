@@ -30,7 +30,7 @@
   
   define('DB_SERVER', 'localhost');
    define('DB_SERVER_USERNAME', 'cz4seo7z_maskot');
-  define('DB_SERVER_PASSWORD', '@(hq#oV*NIDO');
+  define('DB_SERVER_PASSWORD', '');
   define('DB_DATABASE', 'cz4seo7z_maskot');
   define('USE_PCONNECT', 'false');
   define('STORE_SESSIONS', 'mysql');
