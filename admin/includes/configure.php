@@ -4,9 +4,9 @@
   define('HTTP_CATALOG_SERVER', 'https://tienda.es');
   define('HTTPS_CATALOG_SERVER', 'https://tienda.es');
   define('ENABLE_SSL_CATALOG', 'true');
-  define('DIR_FS_DOCUMENT_ROOT', '/home/userplesk/tienda/');  // /shop/
+  define('DIR_FS_DOCUMENT_ROOT', '/home/userplesk/catalog/');  // /shop/
   define('DIR_WS_ADMIN', '/admin/');   // /shop/
-  define('DIR_FS_ADMIN', '/home/userplesk/tienda/admin/'); // /shop/
+  define('DIR_FS_ADMIN', '/home/userplesk/catalog/admin/'); // /shop/
   define('DIR_WS_CATALOG', '/');
   define('DIR_FS_CATALOG', '/home/userplesk/tienda/');   // /shop/
   define('DIR_WS_IMAGES', 'images/');
@@ -25,6 +25,9 @@
   define('DIR_FS_BACKUP', DIR_FS_ADMIN . 'backups/');
   define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG . 'download/');
   define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG . 'pub/');
+
+define('DIR_WS_HTTPS_ADMIN', '/catalog/admin/');
+  define('DIR_WS_HTTPS_CATALOG', '/catalog/');
 
   define('DB_SERVER', 'localhost');
    define('DB_SERVER_USERNAME', 'NAME_USER');
