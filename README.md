@@ -54,7 +54,7 @@ FACTURACIÓN
     Cambia o añade descuento de cliente 
     Cambia o añade descuento en el pedido actual.
     Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.
-   1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
+    1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
     Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
     Configura el stock minimo recomendado.
     Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
