@@ -48,17 +48,29 @@ FACTURACIÓN
 Con solo unas horas de aprendizage se aprende muy facilmente a gestionarlo, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
 
 Crea Pedidos a nombre de clientes o de contado por administración.
+
     Crea nuevos productos desde facturación.
+    
     Desactiva Productos del Merkaplace desde factuarición.
+    
     Edita la ficha del producto desde facturación.
+    
     Chekea el historial del stock del cliente desde facturación.
+    
     Cambia o añade descuento de cliente 
+    
     Cambia o añade descuento en el pedido actual.
+    
     Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.
+    
     1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
+    
     Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
+    
     Configura el stock minimo recomendado.
+    
     Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
+    
     Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
     
     
