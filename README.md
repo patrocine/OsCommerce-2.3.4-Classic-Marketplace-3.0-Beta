@@ -3,8 +3,11 @@
 REQUISITOS
 HOSTING LINUX 
 PHP 5.6
+
 Recomendación de hosting
+
 https://www.nominalia.com/hosting/linux/
+
 Son muy fiables y economicos, calidad precio es de lo mejor que hay en internet, este software viene preparado ya para instalar en este hosting, edita el archivo configure.php y pon tu usuario cpanel y la carpeta de dominio.
 
 Capitulo 1 ¿Que es MERKAPLACE 3.0?
