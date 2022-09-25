@@ -4,7 +4,7 @@ Capitulo 1 ¿Que es MERKAPLACE 3.0?
 
 Son varios comercios que dispone de una o varias tiendas físicas dispersas por una geografía que pueden ofrecer todo su producto tanto en línea por internet como en tienda física de forma simultánea y sincronizada en stock a sus clientes habituales y a los clientes de su red de merkaplace.
 
-Software de facturación en linea orientado a pequeños comercios a mantener una tienda online con una amplia gama de funcionalidades.
+Software de facturación en linea orientado a pequeños comercios a mantener una tienda online con una amplia gama de funcionalidades, este software es gratuito y se puede descargar completamente gratís sin restricciones.
 
 Tutoriales
 https://www.youtube.com/playlist?list=PLv6_VqQZKB8ZSEhfF9nlTvjpjyDiQKqaE
@@ -17,8 +17,13 @@ Vende tus productos conectandote a otros merkaplece y aumenta tus posibilidades 
 
 Comparte tu stock con otras tiendas de tu mismo sector que usen oscommerce y desde todas las webs que compartan el producto el usuario podrá ver el stock de todas las tiendas.red
 
+
+
 MERKAPLACE
 Ahora el pequeño comercio es MERKAPLACE una nueva forma de vender haciendo muy eficiente la venta online de cercanía, se abren 1 millón de posibilidades con otros merkaplaces, has publicidad gratis, registrese como afiliado y gane una commisión por cada venta que redirecciones, acepta stock cruzados con la competencia y rediriganse clientes unos a otros.
+
+
+
 
 PROGRAMA DE AFILIADOS
 Con el programa de afiliados puedes controlar y monitorizar campañas en facebook, google y sitios donde pagues por publicidad facilitandote datos reales de conversión.
@@ -37,6 +42,25 @@ CUENTAS DE AFILIADOS
       TIPO DE COMISIONES
     Comisión Fija: Configura una comisión fija para todos los afiliados en general.
     Comisión Individual: Configura una comisión individual en la ficha del aficiliado que tendrá prioridad sobre la comisión fija.
+    
+
+FACTURACIÓN
+  Con solo unas horas de aprendizage se aprende muy facilmente a gestionarlo, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
+    Crea Pedidos a nombre de clientes o de contado por administración.
+    Crea nuevos productos desde facturación.
+    Desactiva Productos del Merkaplace desde factuarición.
+    Edita la ficha del producto desde facturación.
+    Chekea el historial del stock del cliente desde facturación.
+    Cambia o añade descuento de cliente 
+    Cambia o añade descuento en el pedido actual.
+    Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.
+   1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
+    Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
+    Configura el stock minimo recomendado.
+    Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
+    Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
+    
+    
 
 
 
