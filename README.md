@@ -46,7 +46,8 @@ CUENTAS DE AFILIADOS
 
 FACTURACIÓN
 Con solo unas horas de aprendizage se aprende muy facilmente a gestionarlo, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
-    Crea Pedidos a nombre de clientes o de contado por administración.
+
+Crea Pedidos a nombre de clientes o de contado por administración.
     Crea nuevos productos desde facturación.
     Desactiva Productos del Merkaplace desde factuarición.
     Edita la ficha del producto desde facturación.
