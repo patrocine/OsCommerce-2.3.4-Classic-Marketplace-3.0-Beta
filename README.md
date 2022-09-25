@@ -32,9 +32,11 @@ Con el programa de afiliados puedes controlar y monitorizar campañas en faceboo
 Como Por Ejemplo:
 
 CUENTAS DE MONITORIZACIÓN DE CAMPAÑAS DE PUBLICIDAD
+
   Crear una cuenta de afiliado "Facebook" y en la url publicitaria insertas el 
   de afiliado "affiliate_id=2", entonnces cada click y cada venta que provengan de ese link quedará registrada como una venta proveniente de facebook. Facil no¡
   Los usuarios y otros merkaplace pueden abrir cuentas de afiliados y recibir una comisión:
+  
 CUENTAS DE AFILIADOS
   Los merkaplace y afiliados se dan de alta y por cada venta que refieran ganarán una comisión.
   
