@@ -1,4 +1,4 @@
-# OsCommerce-Classic-Empresa-3.0
+# OsCommerce-2.3.4-Classic-Empresa-3.0
 
 Capitulo 1 ¿Que es MERKAPLACE 3.0?
 
