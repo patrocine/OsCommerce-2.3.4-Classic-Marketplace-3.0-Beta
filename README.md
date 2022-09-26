@@ -69,21 +69,13 @@ Dispones de 2 canales de administración
 Con solo unas horas de aprendizage se aprende muy facilmente a facturar con oscommerce, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
 
     Crea Pedidos a nombre de clientes o de contado por administración.
-
-    Crea nuevos productos desde facturación.
-    
-    Desactiva Productos del Merkaplace desde factuarición.
-    
-    Edita la ficha del producto desde facturación.
-    
-    Chekea el historial del stock desde facturación.
-    
-    Cambia o añade descuento de cliente 
-    
-    Cambia o añade descuento en el pedido actual.
-    
-    Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.
-    
+    Crea nuevos productos desde facturación.  
+    Desactiva Productos del Merkaplace desde factuarición.   
+    Edita la ficha del producto desde facturación.    
+    Chekea el historial del stock desde facturación    
+    Cambia o añade descuento de cliente    
+    Cambia o añade descuento en el pedido actual.    
+    Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.   
     1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
     
     Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
