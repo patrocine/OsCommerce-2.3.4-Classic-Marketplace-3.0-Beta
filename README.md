@@ -33,6 +33,17 @@ MERKAPLACE
 
 Ahora el pequeño comercio es MERKAPLACE una nueva forma de vender haciendo muy eficiente la venta online de cercanía, se abren 1 millón de posibilidades con otros merkaplaces, has publicidad gratis, registrese como afiliado y gane una commisión por cada venta que redirecciones, acepta stock cruzados con la competencia y rediriganse clientes unos a otros.
 
+Mi OsCommerce es mi amigo, mi compañero y se encarga de muchas funciones, como la de buscarme nuevos clientes para yo centrame en mi trabajo, gestionar y dar un buen servicio a mis clientes.
+
+Mis clientes pueden registrarse solo con su correo electronico y los datos que solo quiera facilitar salvaguardando su privacidad y brindando el maximo de mis servicios.
+     Pueden hacer su pedido con los mismos descuentos que tienen en la tienda fisica.
+     Pueden hacer su pedido y se lo enviamos por mensajería.
+     Puede pagar con criptomonedas BUSD Binance.com
+     Puede recogerlo en tienda fisica.
+     Puede ver el producto por la web, reservarlo por wasap y recogerlo por la tienda
+     ....... el cliente pone las reglas nosotros las gestionamos.
+     
+
 
 
 
@@ -57,6 +68,9 @@ CUENTAS DE AFILIADOS
     Comisión Fija: Configura una comisión fija para todos los afiliados en general.
     Comisión Individual: Configura una comisión individual en la ficha del aficiliado que tendrá prioridad sobre la comisión fija.
     
+
+
+
 
   FACTURACIÓN
 
@@ -92,7 +106,8 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
       Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
     
    
-
+CATALOGOS
+Crear productos super rapidos en modo facturación esta estrechamente vinculado con la facturación, aquí ordenamos y creamos las categorias, productos, imagenes, extraimagenes, descripciones, caracteristicas, descuentos etc... algunos cambios también puede hacerse desde la facturación.
 
 
 ........ EN CONSTRUCCION
