@@ -31,7 +31,7 @@ Software de facturación en linea orientado a pequeños comercios a mantener una
 
 MERKAPLACE
 
-Ahora el pequeño comercio es MERKAPLACE una nueva forma de vender haciendo muy eficiente la venta online de cercanía, se abren 1 millón de posibilidades con otros merkaplaces, has publicidad gratis, registrese como afiliado y gane una commisión por cada venta que redirecciones, acepta stock cruzados con la competencia y rediriganse clientes unos a otros.
+Ahora el pequeño comercio es MERKAPLACE una nueva forma de vender haciendo muy eficiente la venta online de cercanía, se abren 1 millón de posibilidades con otros merkaplaces, has publicidad gratis, registrete como afiliado y gane una commisión por cada venta que redirecciones, acepta stock cruzados con la competencia y rediriganse clientes unos a otros.
 
 Mi OsCommerce es mi amigo, mi compañero y se encarga de muchas funciones, como la de buscarme nuevos clientes para yo centrame en mi trabajo, gestionar y dar un buen servicio a mis clientes.
 
