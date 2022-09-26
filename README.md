@@ -61,6 +61,7 @@ CUENTAS DE AFILIADOS
 FACTURACIÓN
 
 Dispones de 2 canales de administración 
+
    Almacen: Todos los pedidos que realicen los clientes por la web de compras se gestiónan en este canal de administración
    
    Tienda: Todos los pedidos de venta al contado y los que realicen los clientes por la web de compras que sean para recoger por tienda fisica.
