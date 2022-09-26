@@ -58,9 +58,9 @@ CUENTAS DE AFILIADOS
     Comisión Individual: Configura una comisión individual en la ficha del aficiliado que tendrá prioridad sobre la comisión fija.
     
 
-FACTURACIÓN
+  FACTURACIÓN
 
-Dispones de 2 canales de administración 
+  Dispones de 2 canales de administración 
 
    Almacen: Todos los pedidos que realicen los clientes por la web de compras se gestiónan en este canal de administración
    
@@ -92,7 +92,7 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
       Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
       Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
     
-    
+   
 
 
 
