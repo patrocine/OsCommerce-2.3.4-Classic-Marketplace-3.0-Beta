@@ -1,0 +1,7 @@
+div.section {margin-bottom:4px}
+div.section_row {clear:both; margin-left:auto; margin-right:auto; width:90%; padding-top:0px; }
+div.section_column a:link { float:left; width:80px; padding-left:10px; color:#cc0000; text-align:center;}
+div.shadow { width:100px; height:12px; background-color:#ccc; box-shadow: 6px 6px 5px #888888; padding:0px 0px 4px; border-radius:6px;}
+div.heading {font-weight:bold }
+div.row_spacing { padding-bottom:10px }
+span.subHeading {font-weight:bold;}
