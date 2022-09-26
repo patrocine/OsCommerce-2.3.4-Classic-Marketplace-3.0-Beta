@@ -484,3 +484,9 @@ TD.pageHeading, DIV.pageHeading {
   font-weight: bold;
   color: #0d3463;
 }
+  /* UL Class osCaffiliate */
+.ul
+{
+    list-style-type: none;
+}
+/* UL Class osCaffiliate */

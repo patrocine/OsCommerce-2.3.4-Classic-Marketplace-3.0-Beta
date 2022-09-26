@@ -21,7 +21,7 @@
   if (tep_admin_check_boxes('compbuild.php') == true) {
     require(DIR_WS_BOXES . 'compbuild.php');
   }
-
+  include(DIR_WS_BOXES . 'affiliate.php');
 
   if (tep_admin_check_boxes('administrator.php') == true) {
     require(DIR_WS_BOXES . 'administrator.php');

@@ -342,8 +342,11 @@ if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib'
   }
 
 // include the language translations
+  $_system_locale_numeric = setlocale(LC_NUMERIC, 0);
   require(DIR_WS_LANGUAGES . $language . '.php');
-
+  setlocale(LC_NUMERIC, $_system_locale_numeric); // Prevent LC_ALL from setting LC_NUMERIC to a locale with 1,0 float/decimal values instead of 1.0 (see bug #634)
+  
+  
 // currency
   if (!tep_session_is_registered('currency') || isset($HTTP_GET_VARS['currency']) || ( (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $currency) ) ) {
     if (!tep_session_is_registered('currency')) tep_session_register('currency');
@@ -606,5 +609,10 @@ $ie = true;
       require_once('socialshare.php');
                               } // FIN SOCIAL LOGIN
          } /* DETERMINA PRIMERO SI SE USA IE */
+
+
+ // Include OSC-AFFILIATE
+  include(DIR_WS_INCLUDES . 'affiliate_application_top.php');
+
 
 ?>

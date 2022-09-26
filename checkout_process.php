@@ -6,6 +6,7 @@
   http://www.oscommerce.com
 
   Copyright (c) 2007 osCommerce
+  
 
   Released under the GNU General Public License
 */
@@ -401,7 +402,13 @@ $attributes_query = "select popt.products_options_name, poval.products_options_v
 
 // load the after_process function from the payment modules
   $payment_modules->after_process();
-
+   // Include OSC-AFFILIATE
+   
+   
+   $affiliate_ref = $affiliate_id;
+  include(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');
+  
+  
   $cart->reset(true);
 
 // unregister session variables used during checkout

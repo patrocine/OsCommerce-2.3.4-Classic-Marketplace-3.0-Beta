@@ -22,7 +22,10 @@
       $languages_selected = $languages[$i]['code'];
     }
   }
-
+  include(DIR_WS_CLASSES . 'currencies.php');
+  $currencies = new currencies();
+  
+  
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 

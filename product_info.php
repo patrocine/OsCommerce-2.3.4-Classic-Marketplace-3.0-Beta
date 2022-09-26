@@ -326,6 +326,11 @@ $products_price = $currencies->display_price($product_info['products_price'], te
                                                            }
 ?>
 
+<div>
+
+  <?php if (tep_session_is_registered('affiliate_id')) { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, 'individual_banner_id=' . $product_info['products_id']) .'" target="_self">' . tep_draw_button(MAKE_A_LINK,'folder-collapsed',null,'primary') . ' </a>'; } ?>
+  </form>
+</div>
 <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
 
 <div>

@@ -67,6 +67,8 @@ $template->az_tmpl_js();
 //#AZ
 ?>
 </head>
+ <script type="text/javascript" src="ext/tooltip/tooltipsy.min.js"></script>
+
 <body>
 
 <div id="bodyWrapper" class="container_<?php echo $oscTemplate->getGridContainerWidth(); ?>">

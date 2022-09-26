@@ -17,7 +17,9 @@ define('FILENAME_PHOTO_GALLERY', 'photo_gallery.php');
   define('FILENAME_MY_POINTS', 'my_points.php'); //Points/Rewards Module V2.1beta
   define('FILENAME_MY_POINTS_HELP', 'my_points_help.php'); //Points/Rewards Module V2.1beta
 
-
+// osCAffiliate
+define('MAKE_A_LINK', 'Create a Product Link');
+// osCAffiliate
 
 // ################# Contribution Newsletter by brouillard s'embrouille ##############
   define('FILENAME_NEWSLETTER_ABONNEMENT', 'newsletter_abonnement.php');

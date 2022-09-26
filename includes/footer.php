@@ -128,5 +128,19 @@ cc.initialise({
 // ]]>
 </script>
 <!-- End Cookie Consent plugin -->
-
+ <script type="text/javascript">
+$('.hastip').tooltipsy({
+    css: {
+        'padding': '5px',
+        'max-width': '300px',
+        'color': '#303030',
+        'background-color': '#F0F7FE',
+        'border': '1px solid #6DB8E7',
+        '-moz-box-shadow': '0 0 10px rgba(0, 0, 0, .5)',
+        '-webkit-box-shadow': '0 0 10px rgba(0, 0, 0, .5)',
+        'box-shadow': '0 0 10px rgba(0, 0, 0, .5)',
+        'text-shadow': 'none'
+    }
+});
+</script>
 
