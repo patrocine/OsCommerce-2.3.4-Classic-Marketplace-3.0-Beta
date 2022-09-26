@@ -26,13 +26,14 @@ var s=""+
               $linkbanner = $_GET['linkbanner'];
               $linkenlace = $_GET['linkenlace'];
               $url_web = $_GET['url_web'];
+              $url_affiliate = $_GET['url_affiliate'];
               $nombre = $_GET['nombre'];
               $nombre_sector = $_GET['nombre_sector'];
               $nombre_ciudad = $_GET['nombre_ciudad'];
               $email = $_GET['email'];
 
-                $link_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where 	url_enlace = '" . $linkenlace . "'");
-              if ($link= mysql_fetch_array($link_values)){
+                $link_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where 	url_enlace = '" . $linkenlace . "'");
+              if ($link= tep_db_fetch_array($link_values)){
 
 
 
@@ -43,6 +44,7 @@ var s=""+
                                                       'email' => $email,
                                                       'url_empresa_catalog' => $linkbanner,
                                                       'url_web' => $url_web,
+                                                      'url_affiliate' => $url_affiliate,
                                                       'nombre_sector' => $nombre_sector,
                                                       'nombre_ciudad' => $nombre_ciudad,
                                                       'url_enlace' => $linkenlace,

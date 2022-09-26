@@ -101,4 +101,52 @@ define('MENUE_TITLE_ORDER', '3. Productos del pedido');
 define('MENUE_TITLE_TOTAL', '4. Descuento, envío y total');
 define('MENUE_TITLE_STATUS', '5. Estado y notificaciones');
 define('MENUE_TITLE_UPDATE', '6. Actualizar datos');
+
+define('ADDPRODUCT_TEXT_STEP3', ' &laquo; Seleccionar una opción. ');
+
+define('AYUDA_TEXT_X', 'Si seleccionas este campo la referencia o ean se actualizará también en la ficha del producto');
+define('AYUDA_TEXT_PVM', ' 1º importe es el precio de venta al por mayor G2 2º importe corresponde al beneficio de 1 producto. 3º corresponde al beneficio del total de productos.');
+define('AYUDA_TEXT_EAN', ' Referencia o ean del producto, puedes cambarla y solo se actualiza en este pedido.');
+define('AYUDA_TEXT_EANA', ' referencia alternativa o ean del producto, puedes cambarla y solo se guardará en este pedido.');
+define('AYUDA_TEXT_ID', ' Identificador numérico único del producto, escribe en una etiqueta y pégala al producto, factura con el id.');
+define('AYUDA_TEXT_IMAG', ' Imagen del producto, pulsa encima de la imagen para ir a la ficha del producto en la tienda online');
+define('AYUDA_TEXT_DEL', ' Selecciona y actualiza para borrar el producto de este pedido. ');
+define('AYUDA_TEXT_NOMBRE', ' Nombre del producto');
+define('AYUDA_TEXT_PCS', ' Número de unidades en este pedido, cambie la cantidad y pulse en en actualizar o enter en su teclado.');
+define('AYUDA_TEXT_PVP', ' Precio de venta publico, si cambias este precio afectará a los descuentos de este producto en este pedido, si seleccionas la casilla PVP cambiarás el precio en la ficha del producto, si solo cambias el precio y no seleccionas la casilla PVP solo se actualizará el precio en este pedido. ');
+define('AYUDA_TEXT_PVF', ' Precio de venta final, todos los descuentos se aplican en función del PVP y este es el precio final que se aplica en este pedido.');
+ define('AYUDA_TEXT_DESCUENTO', ' Añade un descuento directo al producto, tiene preferencia sobre el descuento cliente y descuento producto, para devolver a su precio inicial, actualize 0 y marque la casilla PVF.');
+define('AYUDA_TEXT_TOTAL', ' Total de unidades x PVF, este es el valor que se suma al total del pedido.');
+define('AYUDA_TEXT_ADD', ' 1 pon el número de pedido y la cantidad para añadir el producto a otra factura. 2 Añade la Cantidad y agregarás al ulitma Factura a Proveedor que hayas creado. 3 Añade la cantidad y agrega al ultimo albaran a proveedor que hayas creado.');
+define('AYUDA_TEXT_STATUS', ' 0 Inactive y 1 Active en el merkaplace.');
+define('AYUDA_TEXT_CATEGORIA', ' Accede directamente a la categoria donde se encuentra el producto.');
+define('AYUDA_TEXT_EDITAR', ' Accede directamente a la edición del producto donde podrás cambiar toda la información del producto.');
+define('AYUDA_TEXT_STOCK', ' Stock disponible en tiempo real');
+define('AYUDA_TEXT_PENDIENTE', ' Productos pendiente de entrada en almacén');
+define('AYUDA_TEXT_STOCKMIN', ' Configura las unidades maximas que quieres tener stock cuando el stock sea inferior al valor del stock minimo del producto aparecerá en la sección de stock recomendados al que puedes acceder a través del menú superior -Stock Recomendado-, cuando el valor del stock sea superior al Stock Minimo el producto se elimina de la lista stock recomendado.');
+define('AYUDA_TEXT_OBS', ' Observaciones sobre el stock mínimo que se quiera anotar.');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+define('AYUDA_TEXT_ID', ' ');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

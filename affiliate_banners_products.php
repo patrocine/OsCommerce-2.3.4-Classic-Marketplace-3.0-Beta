@@ -24,11 +24,11 @@ var s=""+
 
 
             if (SHOPTOSHOP_MODO == 1){
-$query = mysql_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd where p.products_id = pd.products_id and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT $pro_ale");
+$query = tep_db_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd where p.products_id = pd.products_id and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT 10");
                                   }else if (SHOPTOSHOP_MODO == 2){
-$query = mysql_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd, " . 'specials' . " s where p.products_id = pd.products_id and p.products_id = s.products_id and s.status = 1 and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT $pro_ale");
+$query = tep_db_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd, " . 'specials' . " s where p.products_id = pd.products_id and p.products_id = s.products_id and s.status = 1 and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT 10");
                                   }else if (SHOPTOSHOP_MODO == 3){
-$query = mysql_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd where p.products_id = pd.products_id and p.products_shoptoshop = 1 and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT $pro_ale");
+$query = tep_db_query("select p.products_image, p.codigo_proveedor, p.products_id, p.products_price, pd.products_name from " . 'products' . " p, " . 'products_description' . " pd where p.products_id = pd.products_id and p.products_shoptoshop = 1 and p.products_status = '1' and p.products_price <> 0 ORDER BY RAND() LIMIT 10");
                                    }
 ?>"+
 "<table align=center border=0 cellpadding=0 cellspacing=0 style=border-collapse: collapse bordercolor=#111111 width=100%>"+
@@ -39,14 +39,14 @@ $query = mysql_query("select p.products_image, p.codigo_proveedor, p.products_id
 "</table>  "+
 
 "<?php
-while ($products_image = mysql_fetch_array($query)){
+while ($products_image = tep_db_fetch_array($query)){
    // Busca comillas (") en el texto del nombre y las elimina, el scrip es incompatible con las comillas.
                        $nombre_producto = ereg_replace("[\"]", '', $products_image['products_name']);
                        
                        
                        
-                $ref_fabricante_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $products_image['codigo_proveedor'] . "'");
-               $ref_fabricante= mysql_fetch_array($ref_fabricante_values);
+                $ref_fabricante_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $products_image['codigo_proveedor'] . "'");
+               $ref_fabricante= tep_db_fetch_array($ref_fabricante_values);
 
       if ($ref_fabricante['proveedor_ruta_images']){
 
@@ -112,8 +112,8 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
          } // Total CON EL DESCUENTO DEL PRODUCTO
 
 
-    $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .  $products_image['products_id'] . "'");
-    $pro_special = mysql_fetch_array($pro_special_values);
+    $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .  $products_image['products_id'] . "'");
+    $pro_special = tep_db_fetch_array($pro_special_values);
 
 
         if ($pro_special['specials_new_products_price']) {

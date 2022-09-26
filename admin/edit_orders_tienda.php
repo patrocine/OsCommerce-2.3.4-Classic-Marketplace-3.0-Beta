@@ -4188,14 +4188,20 @@ $checked_0 = 'checked';
 <table border="0" width="10%" cellspacing="0" cellpadding="2" align="center">
 
 	<tr class="dataTableHeadingRow">
-	<td class="dataTableHeadingContent"><?php  echo 'DEL'; ?></td>
+		  <td class="dataTableHeadingContent"><?php echo 'DEL'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DEL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
           <?php if (PERMISO_INSERTAR_PRODUCTO_EN_NUEVO_PEDIDO == 'True'){ ?>
-	  <td class="dataTableHeadingContent"><?php  echo 'IMG' // 'Traspasar NºPedido'; ?></td>
-	 <td class="dataTableHeadingContent"><?php  echo 'ID' //'Producto Unidades'; ?></td>
+	  <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'ID'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_ID;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
             <?php } ?>
 
-	 <td class="dataTableHeadingContent"><?php  echo 'CODE'; ?></td>
-	 <td class="dataTableHeadingContent"><?php  echo 'PVM'; ?></td>
+ 	  <td class="dataTableHeadingContent"><?php echo 'EANA'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EANA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+ 	  <td class="dataTableHeadingContent"><?php echo 'PVM'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVM;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+
   
   
   
@@ -4213,30 +4219,40 @@ $checked_0 = 'checked';
       
       
       
-      
-	  <td class="dataTableHeadingContent"><?php  echo 'X'; ?></td>
-	  <td class="dataTableHeadingContent"><?php  echo 'EAN'; ?></td>
+
+	  <td class="dataTableHeadingContent"><?php echo 'X'; ?>
+   <a class="hastip"  title="<?php echo AYUDA_TEXT_X;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+ 	  <td class="dataTableHeadingContent"><?php echo 'EAN'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EAN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
        <?php if (PERMISO_DONDE_ESTA == 'True'){ ?>
-	  <td class="dataTableHeadingContent"><?php  echo 'Nombre'; ?></td>
-  <td class="dataTableHeadingContent"><?php  echo 'PCS'; ?></td>
+ 	  <td class="dataTableHeadingContent"><?php echo 'NOMBRE'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_NOMBRE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+ 	  <td class="dataTableHeadingContent"><?php echo 'PCS'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PCS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
                <?php } ?>
 
 
-	   <td class="dataTableHeadingContent"><?php  echo 'PVP'; ?></td>
+  	  <td class="dataTableHeadingContent"><?php echo 'PVP'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVP;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
-	 <td class="dataTableHeadingContent"><?php  echo 'PV'; ?></td>
-	 <td class="dataTableHeadingContent"><?php  echo 'Descuento'; ?></td>
-	 <td class="dataTableHeadingContent"><?php  echo 'Total'; ?></td>
+  	  <td class="dataTableHeadingContent"><?php echo 'PVF'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVF;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  	  <td class="dataTableHeadingContent"><?php echo 'DESCUENTO'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DESCUENTO;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+  	  <td class="dataTableHeadingContent"><?php echo 'TOTAL'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_TOTAL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
 
                                                
 
-	     <td class="dataTableHeadingContent"><?php  echo 'TOTAL'; ?></td>
+  	  <td class="dataTableHeadingContent"><?php echo 'ADD>>'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_ADD;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 	   <td class="dataTableHeadingContent"><?php  echo 'ID Order'; ?></td>
 
-	     <td class="dataTableHeadingContent"><?php  echo 'Status'; ?></td>
+  	  <td class="dataTableHeadingContent"><?php echo 'STATUS'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STATUS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
                             
                             
@@ -4245,14 +4261,24 @@ $checked_0 = 'checked';
                             
                             
                             
-   <td class="dataTableHeadingContent"><?php  echo 'Categorias'; ?></td>
-   <td class="dataTableHeadingContent"><?php  echo 'Editar'; ?></td>
- <td class="dataTableHeadingContent"><?php  echo 'Imag'; ?></td>
-  <td class="dataTableHeadingContent"><?php  echo 'Stock'; ?></td>
- <td class="dataTableHeadingContent"><?php  echo 'Stock Min'; ?></td>
-  <td class="dataTableHeadingContent"><?php  echo 'Obser Min'; ?></td>
-  <td class="dataTableHeadingContent"><?php  echo 'Descuento Producto'; ?></td>
- <td class="dataTableHeadingContent"><?php  echo 'Crear Oferta'; ?></td>
+  	  <td class="dataTableHeadingContent"><?php echo 'CATEGORIA'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_CATEGORIA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+  	  <td class="dataTableHeadingContent"><?php echo 'EDITAR'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'STOCK'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCK;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'PENDIENTE'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PENDIENTE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'Stock Min'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCKMIN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+	  <td class="dataTableHeadingContent"><?php echo 'Observa StockMin'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_OBS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+
+
+	  <td class="dataTableHeadingContent"><?php echo 'OFERTA'; ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_OFERTA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
 
    <td class="dataTableHeadingContent" align="right"><?php  echo 'Stock Nivel'; ?></td>
    <td class="dataTableHeadingContent" align="right"><?php  echo 'STS'; ?></td>

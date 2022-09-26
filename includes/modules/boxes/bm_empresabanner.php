@@ -40,8 +40,8 @@
   if ($pro_ale <= 11){
 
 
-   $banner_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" . 1 . "'   ORDER BY RAND() LIMIT 1");
-   if ($banner = mysql_fetch_array($banner_values)){
+   $banner_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" . 1 . "'   ORDER BY RAND() LIMIT 1");
+   if ($banner = tep_db_fetch_array($banner_values)){
 
 
 
@@ -60,8 +60,8 @@
 
 
 
-    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
-   while ($tiendas = mysql_fetch_array($tiendas_values)){
+    $tiendas_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
+   while ($tiendas = tep_db_fetch_array($tiendas_values)){
 
 
        ?>
@@ -118,8 +118,8 @@
      
      
      
-    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
-   if ($tiendas = mysql_fetch_array($tiendas_values)){
+    $tiendas_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
+   if ($tiendas = tep_db_fetch_array($tiendas_values)){
 
 
        ?>
@@ -178,11 +178,11 @@
      
      
      
-              
-              
+
+
               
 	  $infobox = new azInfoBox();
-      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' . '<p><b><font size="2">MERKAPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
+      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>'.'<p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Software licencia GNU</a></font></b> <img border="0" src="'.'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'.'" width="30" height="">'  . '<p><b><font size="2">MERKAPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
       $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);

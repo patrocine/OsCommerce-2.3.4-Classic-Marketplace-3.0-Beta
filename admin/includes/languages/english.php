@@ -73,9 +73,9 @@ define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Numero de Paginas:');
 // this may not work under win32 environments..
 
 
-setlocale(LC_TIME, 'en_ES.ISO_8859-1');
 
 
+                        setlocale(LC_TIME, 'es_ES.ISO_8859-1, es_ES.UTF8, esp_esp');
 
 
 
