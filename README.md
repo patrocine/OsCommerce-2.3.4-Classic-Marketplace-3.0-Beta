@@ -62,6 +62,7 @@ FACTURACIÓN
 
 Dispones de 2 canales de administración 
    Almacen: Todos los pedidos que realicen los clientes por la web de compras se gestiónan en este canal de administración
+   
    Tienda: Todos los pedidos de venta al contado y los que realicen los clientes por la web de compras que sean para recoger por tienda fisica.
 
 Con solo unas horas de aprendizage se aprende muy facilmente a facturar con oscommerce, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
