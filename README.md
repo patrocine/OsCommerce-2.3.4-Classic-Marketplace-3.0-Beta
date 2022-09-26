@@ -59,7 +59,8 @@ CUENTAS DE AFILIADOS
     
 
 FACTURACIÓN
-Con solo unas horas de aprendizage se aprende muy facilmente a gestionarlo, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
+
+Con solo unas horas de aprendizage se aprende muy facilmente a facturar con oscommerce, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
 
     Crea Pedidos a nombre de clientes o de contado por administración.
 
@@ -80,6 +81,13 @@ Con solo unas horas de aprendizage se aprende muy facilmente a gestionarlo, ya q
     1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
     
     Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
+    
+    Añade el stock nivel al producto, 1-Stock permanente
+                                      2 Bajo Pedido
+                                      3 Cita Previa
+                                      4 de 1 a 3 semmanas
+                                      4 de 3 a 6 semanas
+                                      6 Stock real y pendientes de entrada
     
     Configura el stock minimo recomendado.
     
