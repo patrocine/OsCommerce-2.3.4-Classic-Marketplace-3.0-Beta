@@ -3,12 +3,17 @@
 REQUISITOS
 HOSTING LINUX 
 PHP 5.6
+
 Demostración: https://empresa30.es
+
 Admin: https://empresa30.es/admin/login.php
+
 user1: tienda | user2: almacen
+
 pass: admin
 
-Recomendación de hosting
+
+HOSTING RECOMENDADO
 
 https://www.nominalia.com/hosting/linux/
 
