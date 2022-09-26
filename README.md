@@ -60,6 +60,10 @@ CUENTAS DE AFILIADOS
 
 FACTURACIÓN
 
+Dispones de 2 canales de administración 
+   Almacen: Todos los pedidos que realicen los clientes por la web de compras se gestiónan en este canal de administración
+   Tienda: Todos los pedidos de venta al contado y los que realicen los clientes por la web de compras que sean para recoger por tienda fisica.
+
 Con solo unas horas de aprendizage se aprende muy facilmente a facturar con oscommerce, ya que casi todos sus procesos de gestión estan automatizados y diseñados para trabajar muy comodos.
 
     Crea Pedidos a nombre de clientes o de contado por administración.
@@ -88,6 +92,7 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
                                       4 de 1 a 3 semmanas
                                       4 de 3 a 6 semanas
                                       6 Stock real y pendientes de entrada
+                                      
     
     Configura el stock minimo recomendado.
     
