@@ -73,9 +73,9 @@ define('IMAGE_BUTTON_SEARCH', 'Buscar');
 
 //BEGIN : IOSC Advanced Search Button
 define('IMAGE_BUTTON_ADVANCED_SEARCH', 'B&uacute;squeda avanzada');
-//END : IOSC Advanced Search Button
+//END : IOSC Advanced Search Button es_ES.UTF-8, es_ES.UTF8, esp_esp
 
-
+setlocale(LC_TIME, 'en_ES.ISO_8859-1, esp_esp');
 
 define('IMAGE_BUTTON_CHANGE_ADDRESS', 'Cambiar Direcci&oacute;n');
 

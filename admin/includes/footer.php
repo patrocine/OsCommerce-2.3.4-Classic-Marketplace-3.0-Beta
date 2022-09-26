@@ -66,8 +66,8 @@ osCommerce provides no warranty and is redistributable under the <a href="http:/
 
           echo  $sumar_orders['value'];
           
-               $bo_or_pro_quanty_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 0 . "' order by orders_id DESC");
-   while ($bo_or_pro = mysql_fetch_array($bo_or_pro_quanty_values)){
+               $bo_or_pro_quanty_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 0 . "' order by orders_id DESC");
+   while ($bo_or_pro = tep_db_fetch_array($bo_or_pro_quanty_values)){
 
 
         tep_db_query("delete from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" .  $bo_or_pro['orders_id'] . "'");
@@ -93,12 +93,12 @@ osCommerce provides no warranty and is redistributable under the <a href="http:/
                                     $limit = LIMIT_ACTUALIZAR_CANTIDADES;
                                     $limit_stock = LIMIT_STOCK_ACTCAN;
                                     
-               $ayuda_quanty_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 75 . "' or orders_status = '" . 38 . "' order by orders_id DESC");
-    $ayuda_quanty = mysql_fetch_array($ayuda_quanty_values);
+               $ayuda_quanty_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 75 . "' or orders_status = '" . 38 . "' order by orders_id DESC");
+    $ayuda_quanty = tep_db_fetch_array($ayuda_quanty_values);
 
 
-                $ayuda_producto_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . 'products_stock' . " ps where p.stock_nivel = 6 and p.products_id = ps.products_id and p.products_id = pd.products_id and ps.products_stock_real <= '" . $limit_stock . "' $sql_products_status order by time_entradasysalidas ASC LIMIT $limit");
-    while ($ayuda_producto = mysql_fetch_array($ayuda_producto_values)){
+                $ayuda_producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . 'products_stock' . " ps where p.stock_nivel = 6 and p.products_id = ps.products_id and p.products_id = pd.products_id and ps.products_stock_real <= '" . $limit_stock . "' $sql_products_status order by time_entradasysalidas ASC LIMIT $limit");
+    while ($ayuda_producto = tep_db_fetch_array($ayuda_producto_values)){
       $tr = $ayuda_producto['products_stock_real']-$ayuda_producto['products_stock_real']-$ayuda_producto['products_stock_real'];
 
 
@@ -218,8 +218,8 @@ osCommerce provides no warranty and is redistributable under the <a href="http:/
                                     $limit_stock = LIMIT_STOCK_ACTCAN_VISUAL;
 
                                                                                                                                                                    //p.stock_nivel = 6 and
-         $ayuda_producto_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . 'products_stock' . " ps where p.products_id = ps.products_id and p.products_id = pd.products_id and ps.products_stock_real <= '" . $limit_stock . "' $sql_products_status order by ps.products_stock_real ASC LIMIT $limit");
-    while ($ayuda_producto = mysql_fetch_array($ayuda_producto_values)){
+         $ayuda_producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . 'products_stock' . " ps where p.products_id = ps.products_id and p.products_id = pd.products_id and ps.products_stock_real <= '" . $limit_stock . "' $sql_products_status order by ps.products_stock_real ASC LIMIT $limit");
+    while ($ayuda_producto = tep_db_fetch_array($ayuda_producto_values)){
           $tr = $ayuda_producto['products_stock_real']-$ayuda_producto['products_stock_real']-$ayuda_producto['products_stock_real'];
 
 
@@ -240,8 +240,8 @@ osCommerce provides no warranty and is redistributable under the <a href="http:/
 tienes que &quot;Inactive&quot; en el catalogo exel.</p>
       <?php
 
-            $comprobar_images_print_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and comprobar_images = 1 order by p.products_model  DESC LIMIT 100");
-    while ($comprobar_images_print = mysql_fetch_array($comprobar_images_print_values)){
+            $comprobar_images_print_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and comprobar_images = 1 order by p.products_model  DESC LIMIT 100");
+    while ($comprobar_images_print = tep_db_fetch_array($comprobar_images_print_values)){
 
 
 
@@ -271,8 +271,8 @@ tienes que &quot;Inactive&quot; en el catalogo exel.</p>
 
        if ($comprobar_images){
                                                                                                                                                                                                //or p.products_id = pd.products_id and p.comprobar_images = 1 and products_status = 0
-          $comprobar_images_db_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and products_status = 1 or p.products_id = pd.products_id and p.comprobar_images = 1 and products_status = 0");
-    while ($comprobar_images_db = mysql_fetch_array($comprobar_images_db_values)){
+          $comprobar_images_db_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and products_status = 1 or p.products_id = pd.products_id and p.comprobar_images = 1 and products_status = 0");
+    while ($comprobar_images_db = tep_db_fetch_array($comprobar_images_db_values)){
 
 
 
@@ -340,8 +340,8 @@ tienes que &quot;Inactive&quot; en el catalogo exel.</p>
 if ($eliminar_toda_lista_images){
 
 
-                         $comprobar_images_db_values = mysql_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id");
-    while ($comprobar_images_db = mysql_fetch_array($comprobar_images_db_values)){
+                         $comprobar_images_db_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id");
+    while ($comprobar_images_db = tep_db_fetch_array($comprobar_images_db_values)){
 
                    $sql_status_update_array = array('comprobar_images' => 0,);
              tep_db_perform(TABLE_PRODUCTS, $sql_status_update_array, 'update', " products_id= '" . $comprobar_images_db['products_id'] . "' and comprobar_images = 1");
