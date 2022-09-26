@@ -94,11 +94,9 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
                                       6 Stock real y pendientes de entrada
                                       
     
-    Configura el stock minimo recomendado.
-    
-    Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
-    
-    Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
+    Configura el stock minimo recomendado
+      Imagen del producto, si pulsas en cima redirige a la ficha del producto en el merkaplace.
+      Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
     
     
 
