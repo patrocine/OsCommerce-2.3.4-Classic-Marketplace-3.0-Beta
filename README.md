@@ -12,7 +12,7 @@ Son muy fiables y economicos, calidad precio es de lo mejor que hay en internet,
 
 Capitulo 1 ¿Que es MERKAPLACE 3.0?
 
-Son varios comercios que dispone de una o varias tiendas físicas dispersas por una geografía que pueden ofrecer todo su producto tanto en línea por internet como en tienda física de forma simultánea y sincronizada en stock a sus clientes habituales y a los clientes de su red de merkaplace.
+Son varios comercios que dispone de una o varias tiendas físicas dispersas por una geografía que pueden ofrecer todo su producto tanto en línea por internet como en tienda física de forma simultánea y sincronizada en stock a sus clientes habituales y a su red de merkaplace.
 
 Software de facturación en linea orientado a pequeños comercios a mantener una tienda online con una amplia gama de funcionalidades, este software es gratuito y se puede descargar completamente gratís sin restricciones.
 
@@ -44,6 +44,8 @@ Mis clientes pueden registrarse solo con su correo electronico y los datos que s
      Puede recogerlo en tienda fisica.
      Puede ver el producto por la web, reservarlo por wasap y recogerlo por la tienda
      ....... el cliente pone las reglas nosotros las gestionamos.
+     
+Aque no habías caido que tu comercio es un punto potencial de markenting para otros comerciantes? y puedes sacarle rendimiento economico afiliandote a los programas de afliados de la competencia y los demas merkaplace, envieles usuarios y gana por las ventas referidas. 
      
 
 
