@@ -16,16 +16,16 @@ Son varios comercios que dispone de una o varias tiendas físicas dispersas por 
 
 Software de facturación en linea orientado a pequeños comercios a mantener una tienda online con una amplia gama de funcionalidades, este software es gratuito y se puede descargar completamente gratís sin restricciones.
 
-Tutoriales
-https://www.youtube.com/playlist?list=PLv6_VqQZKB8ZSEhfF9nlTvjpjyDiQKqaE
+  Tutoriales
+  https://www.youtube.com/playlist?list=PLv6_VqQZKB8ZSEhfF9nlTvjpjyDiQKqaE
 
-El mejor programa de facturación online que jamas hayas visto, se aprende en muy poco tiempo a dominarlo y puedes controlar los pedidos de una tienda fisica y online al mismo tiempo.
+  El mejor programa de facturación online que jamas hayas visto, se aprende en muy poco tiempo a dominarlo y puedes controlar los pedidos de una tienda fisica y   online al mismo tiempo.
 
-La clave esta en la facturación con esta fuerza siempre tienes toda la mercancia sincronizada en stock, las imagenes y la información de los productos es un proceso muy rapido gracias a que recortamos el tiempo y click en todos los procesos de gestión.
+  La clave esta en la facturación con esta fuerza siempre tienes toda la mercancia sincronizada en stock, las imagenes y la información de los productos es un   proceso muy rapido gracias a que recortamos el tiempo y click en todos los procesos de gestión.
 
-Vende tus productos conectandote a otros merkaplece y aumenta tus posibilidades de venta, por la naturaleza de los merkaplace todos estan siempre sincronizados en stock y los clientes y los comerciantes que navegan por ellos lo sabén el stock sincronizado es lo que mas valor le da a los merkaplace y es de lo que mas atento se esta por parte de usuarios y comerciantes.
+  Vende tus productos conectandote a otros merkaplece y aumenta tus posibilidades de venta, por la naturaleza de los merkaplace todos estan siempre sincronizados en   stock y los clientes y los comerciantes que navegan por ellos lo sabén el stock sincronizado es lo que mas valor le da a los merkaplace y es de lo que mas atento   se esta por parte de usuarios y comerciantes.
 
-Comparte tu stock con otras tiendas de tu mismo sector que usen oscommerce y desde todas las webs que compartan el producto el usuario podrá ver el stock de todas las tiendas.red
+  Comparte tu stock con otras tiendas de tu mismo sector que usen oscommerce y desde todas las webs que compartan el producto el usuario podrá ver el stock de todas   las tiendas.red
 
 
 
