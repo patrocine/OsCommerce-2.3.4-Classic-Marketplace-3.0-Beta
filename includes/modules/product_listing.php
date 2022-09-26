@@ -295,7 +295,9 @@ if ($customers_porcentage){
 
 
                 if (BOTON_COMPRA == 'True' and $listing['products_price'] <> 0){
+                  // $product['buy_now_url'] = tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id']))
         $product['buy_now_url']		= tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id']);
+        
          $product['buy_now_btn']	    = tep_image_button('button_in_cart.gif', AZ_BUTTON_CART, '', '2', false);
 
                             }

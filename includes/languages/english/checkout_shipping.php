@@ -9,7 +9,7 @@
 
   Released under the GNU General Public License
 */
-
+define('ERROR_NO_SHIPPING_AVAILABLE_TO_SHIPPING_ADDRESS', 'Shipping is currently not available for the selected shipping address. Please select or create a new shipping address to use with your purchase.');
 define('NAVBAR_TITLE_1', 'Realizar pedido');
 define('NAVBAR_TITLE_2', 'Forma de env&iacute;o');
 
