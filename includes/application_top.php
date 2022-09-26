@@ -617,4 +617,11 @@ $ie = true;
   include(DIR_WS_INCLUDES . 'affiliate_application_top.php');
 
 
+  /***** Begin View Counter *****/
+  require(DIR_WS_INCLUDES . 'view_counter_defines.php');
+
+  if (VIEW_COUNTER_ENABLED == 'true' && strpos(basename($_SERVER['PHP_SELF']), 'googlefeeder.php') === FALSE) {
+      include(DIR_WS_MODULES . FILENAME_VIEW_COUNTER);
+  }
+  /***** End View Counter *****/
 ?>

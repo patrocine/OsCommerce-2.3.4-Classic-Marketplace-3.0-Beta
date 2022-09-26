@@ -11,7 +11,7 @@
   Released under the GNU General Public License
 */
 
-                           
+/*** End View Counter ***/
 if (strpos(PROJECT_VERSION, 'v2.3') !== FALSE) {
 
   $vc_menu = array(

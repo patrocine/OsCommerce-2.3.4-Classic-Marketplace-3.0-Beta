@@ -12,6 +12,9 @@
 
 
 
+  /***** Begin View Counter *****/
+  require(DIR_WS_INCLUDES . 'view_counter_defines.php');
+  /***** End View Counter *****/
 //BOF Gallery Photos
 define('FILENAME_GALLERY_PHOTOS', 'gallery_photos.php');
 //EOF Gallery Photos

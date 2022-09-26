@@ -18,6 +18,16 @@
 // on Windows try 'sp', or 'Spanish'
 setlocale(LC_TIME, 'en_ES.ISO_8859-1');
 
+/**** Begin View Counter ****/ //NOTE: text must be on one line
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_MSG', 'The IP %s attempted access to the directory named admin and is most likely a hacker.' . "\r\n\r\n" . '******* This IP should be banned *******.' . "\r\n\r\n" . 'Click this url, %s, to find out more information about the IP.');
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_MSG_HACKER', 'The IP %s attempted to alter the url in a way that is consistent with hacking attempts.' . "\r\n\r\n" . '******* This IP should be banned *******.' . "\r\n\r\n" . 'Click this url, %s, to find out more information about this IP.');
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_SUBJECT', 'View counter IP Trap warning for IP %s');
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_MSG_PREV', 'The IP %s attempted access to the directory named admin. This IP has already been banned.');
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_MSG_SPOOF', 'The IP %s accessed the bad bot directory. Click this url, %s, to find out more information about the IP.');
+define('TEXT_VIEW_COUNTER_EMAIL_TRAP_SUBJECT_PREV', 'View counter PREVIOUS IP Trap warning');
+define('TEXT_VIEW_COUNTER_KILL_MESSAGE', 'We carefully monitor our shops traffic and you have been identified as trying to cause problems. We have notified the authorities of your attempts to defraud us.');
+/**** End View Counter ****/
+
 define('DATE_FORMAT_SHORT', '%d/%m/%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd/m/Y'); // this is used for date()
@@ -25,7 +35,13 @@ define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
 define('JQUERY_DATEPICKER_I18N_CODE', ''); // leave empty for en_US; see http://jqueryui.com/demos/datepicker/#localization
 define('JQUERY_DATEPICKER_FORMAT', 'dd/mm/yy'); // see http://docs.jquery.com/UI/Datepicker/formatDate
 
-
+/*** Begin View Counter ***/
+define('BOX_HEADING_VIEW_COUNTER', 'View Counter');
+define('BOX_VIEW_COUNTER_MONITOR', 'Monitor');
+define('BOX_VIEW_COUNTER_COLOR', 'Color');
+define('BOX_VIEW_COUNTER_REPORTS', 'Reports');
+define('BOX_VIEW_COUNTER_TOOLS', 'Tools');
+/*** End View Counter ***/
 
 define('BOX_INFORMATION_MY_POINTS_HELP', 'Programa de Puntos FAQ');//Points/Rewards Module V2.1beta
 #### Points/Rewards Module V2.1beta BOF ####

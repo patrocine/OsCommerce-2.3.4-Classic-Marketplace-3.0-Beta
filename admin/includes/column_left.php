@@ -35,6 +35,10 @@
   if (tep_admin_check_boxes('patrocine.php') == true) {
     require(DIR_WS_BOXES . 'patrocine.php');
   }
+  
+  require(DIR_WS_BOXES . 'view_counter.php');
+  
+  
   if (tep_admin_check_boxes('modules.php') == true) {
     require(DIR_WS_BOXES . 'modules.php');
   }

@@ -14,6 +14,14 @@ define('TEXT_DISPLAY_NUMBER_OF_GALLERY_PHOTOS', 'Displaying <strong>%d</strong> 
 define('BOX_TOOLS_GALARY_PHOTOS', 'Gallery Photos');
 
 //EOF Gallery Photos
+ /*** Begin View Counter ***/
+define('BOX_HEADING_VIEW_COUNTER', 'View Counter');
+define('BOX_VIEW_COUNTER_MONITOR', 'Monitor');
+define('BOX_VIEW_COUNTER_COLOR', 'Color');
+define('BOX_VIEW_COUNTER_REPORTS', 'Reports');
+define('BOX_VIEW_COUNTER_TOOLS', 'Tools');
+/*** End View Counter ***/
+
 
 ######## Points/Rewards Module V2.1beta BOF ##################
 define('BOX_CUSTOMERS_POINTS', 'Customers Points');
@@ -71,6 +79,17 @@ define('TEXT_DISPLAY_NUMBER_OF_SALES', 'Numero de Paginas:');
 // on RedHat6.0 I used 'en_US'
 // on FreeBSD 4.0 I use 'en_US.ISO_8859-1'
 // this may not work under win32 environments..
+
+/*** Begin View Counter ***/
+define('MODULES_ADMIN_MENU_VIEW_COUNTER_HEADING', 'Whos Online');
+define('MODULES_ADMIN_MENU_VIEW_COUNTER_MONITOR', 'Monitor');
+define('MODULES_ADMIN_MENU_VIEW_COUNTER_COLOR', 'Color');
+define('MODULES_ADMIN_MENU_VIEW_COUNTER_REPORTS', 'Reports');
+define('MODULES_ADMIN_MENU_VIEW_COUNTER_TOOLS', 'Tools');
+/*** End View Counter ***/
+
+
+
 
 
 
