@@ -36,7 +36,9 @@ Ahora el pequeño comercio es MERKAPLACE una nueva forma de vender haciendo muy 
 Mi OsCommerce es mi amigo, mi compañero y se encarga de muchas funciones, como la de buscarme nuevos clientes para yo centrame en mi trabajo, gestionar y dar un buen servicio a mis clientes.
 
 Mis clientes pueden registrarse solo con su correo electronico y los datos que solo quiera facilitar salvaguardando su privacidad y brindando el maximo de mis servicios.
+
      Pueden hacer su pedido con los mismos descuentos que tienen en la tienda fisica.
+     
      Pueden hacer su pedido y se lo enviamos por mensajería.
      Puede pagar con criptomonedas BUSD Binance.com
      Puede recogerlo en tienda fisica.
