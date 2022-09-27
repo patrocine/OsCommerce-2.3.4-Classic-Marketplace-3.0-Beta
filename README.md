@@ -60,7 +60,7 @@ Aque no habías caido que tu comercio es un punto potencial de markenting para o
 
 
 
-PROGRAMA DE AFILIADOS
+PROGRAMA DE AFILIADOS->>
 
 Con el programa de afiliados puedes controlar y monitorizar campañas en facebook, google y sitios donde pagues por publicidad facilitandote datos reales de conversión.
 Como Por Ejemplo:
@@ -80,12 +80,11 @@ CUENTAS DE AFILIADOS
       TIPO DE COMISIONES
     Comisión Fija: Configura una comisión fija para todos los afiliados en general.
     Comisión Individual: Configura una comisión individual en la ficha del aficiliado que tendrá prioridad sobre la comisión fija.
+        EN CONSTRUCCIÓN
+        La comisión del afiliado se pueda proratear en función del margen de beneficio con que el cliente haya echo la compra, no es lo mismo un cliente que le haces un 20% de descento que uno al que le haces un 5% o nada, entonces si marcas al afiliado un 10% y el margen se reduce pues el porcentage del afiliado se proratea y baja, esto es necesario porque no a todos los productos se le saca el mismo beneficio y no todas las ventas se realizan con el mismo margen.
     
 
-
-
-
-  FACTURACIÓN
+  FACTURACIÓN->>
 
   Dispones de 2 canales de administración 
 
@@ -104,8 +103,7 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
     Cambia o añade descuento en el producto desvincualndo el descuento cliente o del pedido.   
     1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
     
-    Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.
-    
+    Crea descuento por cantidades, para borrarlos debes ir a la ficha del producto.    
     Añade el stock nivel al producto, 1-Stock permanente
                                       2 Bajo Pedido
                                       3 Cita Previa
@@ -119,7 +117,8 @@ Con solo unas horas de aprendizage se aprende muy facilmente a facturar con osco
       Añade, cambia y elimena referencias y ean, también cambialo en la ficha del producto desde facturación 
     
    
-CATALOGOS
+CATALOGOS->>
+
 Crear productos super rapidos en modo facturación esta estrechamente vinculado con la facturación, aquí ordenamos y creamos las categorias, productos, imagenes, extraimagenes, descripciones, caracteristicas, descuentos etc... algunos cambios también puede hacerse desde la facturación.
 
 
