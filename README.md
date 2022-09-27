@@ -106,23 +106,23 @@ Tienda: Administra todos los pedidos de venta al contado y los que realicen los 
 Con solo unas horas de práctica se aprende muy fácilmente a facturar con oscommerce, ya que casi todos sus procesos de gestión están automatizados y diseñados para trabajar muy cómodos.
 
 Los comerciante puede hacer desde facturación:
-Crea Pedidos a nombre de clientes.
-Crea nuevos productos. 
-Desactiva Productos del Merkaplace. 
-Edita la ficha del producto. 
-Chekea el historial del stock
-Cambia o añade descuento de cliente 
-Cambia o añade descuento en el pedido actual. 
-Cambia o añade descuento en el producto anulando el descuento cliente o del pedido. 
-1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
-Crea descuento por cantidades, para borrarlos y administrarlos debes ir a la ficha del producto. 
+     Crea Pedidos a nombre de clientes.
+     Crea nuevos productos. 
+     Desactiva Productos del Merkaplace. 
+     Edita la ficha del producto. 
+     Chekea el historial del stock
+     Cambia o añade descuento de cliente 
+     Cambia o añade descuento en el pedido actual. 
+     Cambia o añade descuento en el producto anulando el descuento cliente o del pedido. 
+     1 Activa, 0 Desactiva y 2 borras las ofertas ofertas
+     Crea descuento por cantidades, para borrarlos y administrarlos debes ir a la ficha del producto. 
 Añade el stock nivel al producto, 
-1-Stock permanente
-2 Bajo Pedido
-3 Cita Previa
-4 de 1 a 3 semanas
-4 de 3 a 6 semanas
-6 Stock real y pendientes de entrada
+     1-Stock permanente
+     2 Bajo Pedido
+     3 Cita Previa
+     4 de 1 a 3 semanas
+     4 de 3 a 6 semanas
+     6 Stock real y pendientes de entrada
 
 
 Configura el stock mínimo recomendado
