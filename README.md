@@ -1,4 +1,4 @@
-# OsCommerce-2.3.4-Classic-Merkaplace-3.0
+# OsCommerce-2.3.4-Classic-MarketPlace-3.0
 
 REQUISITOS
 HOSTING LINUX 
@@ -19,7 +19,7 @@ https://www.nominalia.com/hosting/linux/
 
 Son muy fiables y economicos, calidad precio es de lo mejor que hay en internet, este software viene preparado ya para instalar en este hosting, edita el archivo configure.php y configura tu usuario cpanel, carpeta de dominio, usario y contraseña DB.
 
-¿Que es MERKAPLACE 3.0?
+¿Que es MARKETPLACE 3.0?
 
 Son comercios que disponen de una o varias tiendas físicas dispersas por una geografía que pueden ofrecer todo su producto tanto en línea por internet como en tienda física de forma simultánea y sincronizada en stock a sus clientes habituales y a su red de merkaplace.
 
