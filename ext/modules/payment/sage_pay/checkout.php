@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2010 osCommerce
+  Copyright (c) 2014 osCommerce
 
   Released under the GNU General Public License
 */
@@ -36,7 +36,7 @@
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   }
 
-  if (!tep_session_is_registered('payment') || (($payment != 'sage_pay_direct') && ($payment != 'sage_pay_server'))) {
+  if (!tep_session_is_registered('payment') || (($payment != 'sage_pay_direct') && ($payment != 'sage_pay_server')) || (($payment == 'sage_pay_server') && !tep_session_is_registered('sage_pay_server_nexturl'))) {
     tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
   }
 
@@ -90,7 +90,11 @@
     $iframe_url = $sage_pay_server_nexturl;
   }
 
-  require(DIR_WS_INCLUDES . 'template_top.php');
+  if ( !file_exists(DIR_FS_CATALOG . DIR_WS_INCLUDES . 'template_top.php') ) {
+    tep_redirect($iframe_url);
+  }
+
+  include(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 
     <iframe src="<?php echo $iframe_url; ?>" width="100%" height="600" frameborder="0">
@@ -98,6 +102,6 @@
     </iframe>
 
 <?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
+  include(DIR_WS_INCLUDES . 'template_bottom.php');
   require(DIR_WS_INCLUDES . 'application_bottom.php');
 ?>
