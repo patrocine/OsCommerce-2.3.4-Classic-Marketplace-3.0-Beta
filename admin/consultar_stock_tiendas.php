@@ -55,8 +55,8 @@
 
               <?php
 
-        $status_procesando_a_values = mysql_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, admin a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status = a.status_liquidacion and a.admin_groups_id=6");
-       while  ($status_procesando_a = mysql_fetch_array($status_procesando_a_values)){
+        $status_procesando_a_values = tep_db_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, admin a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status = a.status_liquidacion and a.admin_groups_id=6");
+       while  ($status_procesando_a = tep_db_fetch_array($status_procesando_a_values)){
 
          ?>
 
@@ -96,8 +96,8 @@
 
               <?php
 
-        $status_procesando_a_values = mysql_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, admin a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status = a.pendiente_entrada and a.admin_groups_id=6");
-       while  ($status_procesando_a = mysql_fetch_array($status_procesando_a_values)){
+        $status_procesando_a_values = tep_db_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, admin a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status = a.pendiente_entrada and a.admin_groups_id=6");
+       while  ($status_procesando_a = tep_db_fetch_array($status_procesando_a_values)){
 
          ?>
 
@@ -139,8 +139,8 @@
 
               <?php
 
-        $procesando_reembolso_internacional_a_values = mysql_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando_reembolso_internacional . "'");
-       while  ($procesando_reembolso_internacional_a = mysql_fetch_array($procesando_reembolso_internacional_a_values)){
+        $procesando_reembolso_internacional_a_values = tep_db_query("select op.orders_id, o.delivery_name, o.date_purchased, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando_reembolso_internacional . "'");
+       while  ($procesando_reembolso_internacional_a = tep_db_fetch_array($procesando_reembolso_internacional_a_values)){
 
          ?>
 
@@ -178,8 +178,8 @@
 
               <?php
 
-        $status_entregas_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $status_entregas . "'");
-       while  ($status_entregas_a = mysql_fetch_array($status_entregas_a_values)){
+        $status_entregas_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $status_entregas . "'");
+       while  ($status_entregas_a = tep_db_fetch_array($status_entregas_a_values)){
 
          ?>
 
@@ -219,8 +219,8 @@
 
               <?php
 
-        $status_salidas_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $status_salidas . "'");
-       while  ($status_salidas_a = mysql_fetch_array($status_salidas_a_values)){
+        $status_salidas_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $status_salidas . "'");
+       while  ($status_salidas_a = tep_db_fetch_array($status_salidas_a_values)){
 
          ?>
 
@@ -258,8 +258,8 @@
 
               <?php
 
-        $valor_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_no_recogido . "'");
-       while  ($valor_a = mysql_fetch_array($valor_a_values)){
+        $valor_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_no_recogido . "'");
+       while  ($valor_a = tep_db_fetch_array($valor_a_values)){
 
          ?>
 
@@ -296,8 +296,8 @@
 
               <?php
 
-        $valor_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_cancelado . "'");
-       while  ($valor_a = mysql_fetch_array($valor_a_values)){
+        $valor_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_cancelado . "'");
+       while  ($valor_a = tep_db_fetch_array($valor_a_values)){
 
          ?>
 
@@ -339,8 +339,8 @@
 
               <?php
 
-        $login_procesando_paypal_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando_paypal . "'");
-       while  ($login_procesando_paypal_a = mysql_fetch_array($login_procesando_paypal_a_values)){
+        $login_procesando_paypal_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando_paypal . "'");
+       while  ($login_procesando_paypal_a = tep_db_fetch_array($login_procesando_paypal_a_values)){
 
          ?>
 
@@ -388,8 +388,8 @@
 
               <?php
 
-        $login_pendiente_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_pendiente . "'");
-       while  ($login_pendiente_a = mysql_fetch_array($login_pendiente_a_values)){
+        $login_pendiente_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_pendiente . "'");
+       while  ($login_pendiente_a = tep_db_fetch_array($login_pendiente_a_values)){
 
          ?>
 
@@ -426,8 +426,8 @@
 
               <?php
 
-        $login_transferencia_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_transferencia . "'");
-       while  ($login_transferencia_a = mysql_fetch_array($login_transferencia_a_values)){
+        $login_transferencia_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_transferencia . "'");
+       while  ($login_transferencia_a = tep_db_fetch_array($login_transferencia_a_values)){
 
          ?>
 
@@ -464,8 +464,8 @@
 
               <?php
 
-        $login_transferencia_procesando_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_transferencia_procesando . "'");
-       while  ($login_transferencia_procesando_a = mysql_fetch_array($login_transferencia_procesando_a_values)){
+        $login_transferencia_procesando_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_transferencia_procesando . "'");
+       while  ($login_transferencia_procesando_a = tep_db_fetch_array($login_transferencia_procesando_a_values)){
 
          ?>
 
@@ -504,8 +504,8 @@
 
               <?php
 
-        $status_procesando_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando . "'");
-       while  ($status_procesando_a = mysql_fetch_array($status_procesando_a_values)){
+        $status_procesando_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_procesando . "'");
+       while  ($status_procesando_a = tep_db_fetch_array($status_procesando_a_values)){
 
          ?>
 
@@ -558,8 +558,8 @@
 
               <?php
 
-        $pagado_paypal_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $pagado_paypal . "'");
-       while  ($pagado_paypal_a = mysql_fetch_array($pagado_paypal_a_values)){
+        $pagado_paypal_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $pagado_paypal . "'");
+       while  ($pagado_paypal_a = tep_db_fetch_array($pagado_paypal_a_values)){
 
          ?>
 
@@ -600,8 +600,8 @@
   </tr>
                    
               <?php
-         $pagados_a_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status =a.pagado and a.admin_groups_id=6");
- while  ($pagados_a = mysql_fetch_array($pagados_a_values)){
+         $pagados_a_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status =a.pagado and a.admin_groups_id=6");
+ while  ($pagados_a = tep_db_fetch_array($pagados_a_values)){
 
          ?>
 
@@ -637,8 +637,8 @@
 
               <?php
 
-              $entregados_a_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status =a.entregas_stock and a.admin_groups_id=6");
-  while  ($entregados_a = mysql_fetch_array($entregados_a_values)){
+              $entregados_a_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status =a.entregas_stock and a.admin_groups_id=6");
+  while  ($entregados_a = tep_db_fetch_array($entregados_a_values)){
 
          ?>
 
@@ -677,8 +677,8 @@
 
               <?php
 
-        $pagado_internacional_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $pagado_internacional . "'");
-       while  ($pagado_internacional_a = mysql_fetch_array($pagado_internacional_a_values)){
+        $pagado_internacional_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $pagado_internacional . "'");
+       while  ($pagado_internacional_a = tep_db_fetch_array($pagado_internacional_a_values)){
 
          ?>
 
@@ -718,8 +718,8 @@
 
               <?php
 
-        $pagado_transferencia_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $pagado_transferencia . "'");
-       while  ($pagado_transferencia_a = mysql_fetch_array($pagado_transferencia_a_values)){
+        $pagado_transferencia_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $pagado_transferencia . "'");
+       while  ($pagado_transferencia_a = tep_db_fetch_array($pagado_transferencia_a_values)){
 
          ?>
 
@@ -758,8 +758,8 @@
 
               <?php
 
-        $paypal_enviado_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $login_paypal_enviado . "'");
-       while  ($paypal_enviado_a = mysql_fetch_array($paypal_enviado_a_values)){
+        $paypal_enviado_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "' and o.orders_status ='" . $login_paypal_enviado . "'");
+       while  ($paypal_enviado_a = tep_db_fetch_array($paypal_enviado_a_values)){
 
          ?>
 
@@ -806,8 +806,8 @@
 
               <?php
 
-        $retirarados_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $retirarado . "'");
-       while  ($retirarados_a = mysql_fetch_array($retirarados_a_values)){
+        $retirarados_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $retirarado . "'");
+       while  ($retirarados_a = tep_db_fetch_array($retirarados_a_values)){
 
          ?>
 
@@ -853,8 +853,8 @@
 
               <?php
 
-        $cobrado_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $cobrado . "'");
-       while  ($cobrado_a = mysql_fetch_array($cobrado_a_values)){
+        $cobrado_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $cobrado . "'");
+       while  ($cobrado_a = tep_db_fetch_array($cobrado_a_values)){
 
          ?>
 
@@ -891,8 +891,8 @@
 
               <?php
 
-        $presupuestos_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_presupuestos . "'");
-       while  ($presupuestos_a = mysql_fetch_array($presupuestos_a_values)){
+        $presupuestos_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_presupuestos . "'");
+       while  ($presupuestos_a = tep_db_fetch_array($presupuestos_a_values)){
 
          ?>
 
@@ -935,8 +935,8 @@
 
 
 
-        $presupuestos_a_values = mysql_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_credito . "'");
-       while  ($presupuestos_a = mysql_fetch_array($presupuestos_a_values)){
+        $presupuestos_a_values = tep_db_query("select op.orders_id, o.date_purchased, o.delivery_name, op.products_quantity, op.products_inventario from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and op.products_id ='" . $products_id . "'and o.orders_status ='" . $login_credito . "'");
+       while  ($presupuestos_a = tep_db_fetch_array($presupuestos_a_values)){
 
          ?>
 
@@ -995,8 +995,8 @@ BODY { margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 1
 
 
 
-        $admin_log_values = mysql_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
-    $admin_log = mysql_fetch_array($admin_log_values);
+        $admin_log_values = tep_db_query("select * from " . TABLE_ADMIN . " where admin_id = '" . $log_id . "'");
+    $admin_log = tep_db_fetch_array($admin_log_values);
 
 
 

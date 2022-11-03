@@ -1,3 +1,4 @@
+          <?php if (PERMISO_FILENAME_LOGIN_REGISTRO == 'True'){ ?>
 <div class="f_left footer_width_1">
 	<ul class="list_footer">
 		<li><a href="<?php echo $tmpl['url']['contact'] ?>"><?php echo $tmpl['txt']['contact'] ?></a></li>
@@ -44,3 +45,6 @@
 </div>
 
 <div class="clear"></div>
+
+                                      <?php
+                                                     } ?>

@@ -103,7 +103,19 @@ jQuery(".gallery2").jCarouselLite({
 
 	<div class="main_part_right_box">
 		<div class="main_part_right_box_pad">
-			<div class="main_part_title bestseller_title"> <a href="https://oscommerce.com"><img src="/images/logo_oscommerce.png"></a></div> <?php
+			<div class="main_part_title bestseller_title"> <a href="https://oscommerce.com"><img src="/images/logo_oscommerce.png"></a></div>
+            <p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Descargar Tienda</a></font></b> <img border="0" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="30" height="">
+
+
+
+
+
+
+
+
+
+
+   <?php
 
 
 
@@ -111,6 +123,15 @@ jQuery(".gallery2").jCarouselLite({
 
     $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
    if ($tiendas = mysql_fetch_array($tiendas_values)){
+
+
+                if ($tiendas['url_affiliate']){
+
+          }else{
+        $tiendas['url_affiliate'] = $tiendas['url_web'];
+
+      }
+
            ?>
 
 
@@ -124,7 +145,7 @@ jQuery(".gallery2").jCarouselLite({
 <table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
 	<tr>
 		<td colspan="2">
-		<p align="center"><b><font size="4"><?php echo '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></font></b></td>
+		<p align="center"><b><font size="4"><?php echo '<a href="'.$tiendas['url_affiliate'] .'"><img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></a></font></b></td>
 	</tr>
 	<tr>
 		<td width="100%" colspan="2">
@@ -140,7 +161,7 @@ jQuery(".gallery2").jCarouselLite({
 	</tr>
 	<tr>
 		<td colspan="2">
-		<p align="right"><b><a href="<?php echo $tiendas['url_web'] ?>"><font size="3">Visitar Merkaplace
+		<p align="right"><b><a href="<?php echo $tiendas['url_affiliate'] ?>"><font size="3">Visitar Marketplace
 		-&gt;&gt;</font></a></b></td>
 	</tr>
 </table>
@@ -166,6 +187,18 @@ jQuery(".gallery2").jCarouselLite({
 
     $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
    while ($tiendas = mysql_fetch_array($tiendas_values)){
+
+
+              if ($tiendas['url_affiliate']){
+
+          }else{
+        $tiendas['url_affiliate'] = $tiendas['url_web'];
+
+      }
+
+
+
+
            ?>
 
 
@@ -179,7 +212,7 @@ jQuery(".gallery2").jCarouselLite({
 <table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
 	<tr>
 		<td colspan="2">
-		<p align="center"><b><font size="4"><?php echo '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></font></b></td>
+		<p align="center"><b><font size="4"><?php echo '<a href="'.$tiendas['url_affiliate'] .'"><img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></a></font></b></td>
 	</tr>
 	<tr>
 		<td width="100%" colspan="2">
@@ -195,7 +228,7 @@ jQuery(".gallery2").jCarouselLite({
 	</tr>
 	<tr>
 		<td colspan="2">
-		<p align="right"><b><a href="<?php echo $tiendas['url_web'] ?>"><font size="3">Visitar Merkaplace
+		<p align="right"><b><a href="<?php echo $tiendas['url_affiliate'] ?>"><font size="3">Visitar Marketplace
 		-&gt;&gt;</font></a></b></td>
 	</tr>
 </table>

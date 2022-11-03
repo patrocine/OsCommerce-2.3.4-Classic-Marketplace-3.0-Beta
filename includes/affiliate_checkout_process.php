@@ -22,12 +22,24 @@
   if (AFFILATE_INDIVIDUAL_PERCENTAGE == 'true') {
     $affiliate_commission_query = tep_db_query ("select affiliate_commission_percent from " . TABLE_AFFILIATE . " where affiliate_id = '" . $affiliate_ref . "'");
     $affiliate_commission = tep_db_fetch_array($affiliate_commission_query);
+    $affiliate_customers_query = tep_db_query ("select * from " . 'customers' . " where customers_id = '" . $customer_id . "'");
+    $affiliate_customers = tep_db_fetch_array($affiliate_customers_query);
+
+    
     $affiliate_percent = $affiliate_commission['affiliate_commission_percent'];
   }
   if ($affiliate_percent < AFFILIATE_PERCENT) $affiliate_percent = AFFILIATE_PERCENT;
   $affiliate_payment = tep_round(($affiliate_total * $affiliate_percent / 100), 2);
+  
+ if ($affiliate_customers['customers_affiliate_id']) {
+ if (AFFILIATE_OPTION == 'true') {
+
+        $affiliate_ref = $affiliate_customers['customers_affiliate_id'];
+
+}}
+
    
-  if ($_SESSION['affiliate_ref']) {
+  if ($affiliate_ref) {
     $sql_data_array = array('affiliate_id' => $affiliate_ref,
                             'affiliate_date' => $affiliate_clientdate,
                             'affiliate_browser' => $affiliate_clientbrowser,

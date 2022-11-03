@@ -68,7 +68,7 @@ while ($products_image = tep_db_fetch_array($query)){
    } // fin ref_fabricante
 
 
-$products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . number_format($products_image['products_price'], 2, ",", ".") . '€</a></font></p>';
+$products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . number_format($products_image['products_price'], 2, ",", ".") . 'Eur</a></font></p>';
 
 
                          // Total CON EL DESCUENTO DEL PRODUCTO
@@ -98,7 +98,7 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
 
       $customers_porcentage = DESCUENTO_CLIENTE;
               if (DESCUENTO_CLIENTE <> 0){
-            $products_price2 = number_format($products_image['products_price'], 2, ",", ".") . '€'. '</s> &nbsp;<b><font size=5 color=#FF0000>'.number_format($products_image['products_price'] *DESCUENTO_CLIENTE/100+$products_image['products_price'], 2, ",", ".");
+            $products_price2 = number_format($products_image['products_price'], 2, ",", ".") . 'Eur'. '</s> &nbsp;<b><font size=5 color=#FF0000>'.number_format($products_image['products_price'] *DESCUENTO_CLIENTE/100+$products_image['products_price'], 2, ",", ".");
             $products_price =  '<p><p align=center><font face=Verdana > <a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='.$affiliate_id.'&products_id=' . $products_image['products_id'] . '><s>' . $products_price2 .'</a></font></p>';
 
 
@@ -118,7 +118,7 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
 
         if ($pro_special['specials_new_products_price']) {
 
-            $products_price2 = number_format($products_image['products_price'], 2, ",", ".") . '€'. '</s> &nbsp;<b><font size=5 color=#FF0000>'.number_format($pro_special['specials_new_products_price'], 2, ",", ".").'€';
+            $products_price2 = number_format($products_image['products_price'], 2, ",", ".") . 'Eur'. '</s> &nbsp;<b><font size=5 color=#FF0000>'.number_format($pro_special['specials_new_products_price'], 2, ",", ".").'Eur';
             $products_price =  '<p><p align=center><font face=Verdana > <a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='.$affiliate_id.'&products_id=' . $products_image['products_id'] . '><s>' . $products_price2 .'</a></font></p>';
 
             }
@@ -136,7 +136,7 @@ $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . nu
 "<p align=center style=margin-top: -10; margin-bottom: 0> <p align=center><?php echo '<a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php' . '?ref=' . $affiliate_id . '&products_id=' . $products_image['products_id'] . '><img border=0 src='. $image_sc .' width=100 alt=></p>'; ?></td></p> "+
 "  <tr>  "+
 "    <td width=100%> "+
-"    <p align=center style=margin-top: -10; margin-bottom: 0><?php echo '<p><p align=center><font face=Verdana size=1 ><a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='.$affiliate_id.'&products_id=' . $products_image['products_id'] . '>' . $nombre_producto . '</a></font></p>'; ?></td> "+
+"    <p align=center style=margin-top: -10; margin-bottom: 0><?php echo '<p><p align=center><font face=Verdana size=1 ><a href=' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . 'product_info.php?ref='. AFFILIATE_MARKETPLACE .'&products_id=' . $products_image['products_id'] . '>' . $nombre_producto . '</a></font></p>'; ?></td> "+
 "  </tr>"+
 "    <td width=100%> "+
 "    <p align=center style=margin-top: -10; margin-bottom: 0><?php echo $products_price; ?> </td>"+

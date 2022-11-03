@@ -34,9 +34,20 @@ if ($imgper == 'ok') {
 
 
 //$product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . $products_images['products_image'], $products_images_name['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+
+       if (file($ref_fabricante['proveedor_ruta_images'] . $products_images['products_image'])) {
 $product['image']			=       '<a href="'. $ref_fabricante['proveedor_ruta_images'] . $products_images['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $products_images['products_image']  .'" width="'. SMALL_IMAGE_WIDTH .'" height="'. SMALL_IMAGE_HEIGHT  .'" ></a>' . '</a>';
+                                                         }else{
+  $product['image']			= '<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>'; //tep_image(DIR_WS_IMAGES . 'imnd.svg', $products_images_name['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+                                                           }
+                                                           
+                              if (file(DIR_WS_IMAGES . $products_images['products_image'])) {
+$product['image']			=       '<a href="'. DIR_WS_IMAGES . $products_images['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $products_images['products_image']  .'" width="'. SMALL_IMAGE_WIDTH .'" height="'. SMALL_IMAGE_HEIGHT  .'" ></a>' . '</a>';
 
-
+                          }
+                                                           
+                                                           
+                                                           
 
         require(TMPL_DIR. 'templ_product_box.php');
 

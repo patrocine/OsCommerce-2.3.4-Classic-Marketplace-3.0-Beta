@@ -2,8 +2,8 @@
 
 
 
-                 $ref_fabricante_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $new_products['codigo_proveedor'] . "'");
-               $ref_fabricante= mysql_fetch_array($ref_fabricante_values);
+                 $ref_fabricante_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $new_products['codigo_proveedor'] . "'");
+               $ref_fabricante= tep_db_fetch_array($ref_fabricante_values);
 
       if ($ref_fabricante['proveedor_ruta_images']){
              if ($ref_fabricante['proveedor_ruta_images']){
@@ -11,7 +11,42 @@
 
 //$product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'], $new_products['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
 
+
+  if (@getimagesize($ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'])) {
+
+
+
+
+
+
+
+
  $product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                                     }else{
+$product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+
+
+
+                    if (@getimagesize(DIR_WS_IMAGES . $new_products['products_image'])) {
+$product['image']			='<img src="images/'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                          }else{
+
+$product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+
+
+
+
+
+                                                           //url webp
+                                                   if (file($ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'])) {
+$product['image']			='<img src="'.$ref_fabricante['proveedor_ruta_images']. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                                               //   echo    $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'];
+
+                                                  }
+
+                      }
+
+                                 }
 
 
 
@@ -145,7 +180,7 @@ $product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . 'no-f
               $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "' and almacenpro = '" . 0 . "'");
        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
- $stock_exterior = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_info_patrocine.php?stock_nivel=6&products_model_stock='. $products_model_stock .'&almacen=' . $product_compartir['nombre_publico']  .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . '&web=' . $product_compartir['ruta_url'] . '  "> </script>';
+ $stock_exterior .= '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_info_patrocine.php?stock_nivel=6&products_model_stock='. $products_model_stock .'&almacen=' . $product_compartir['nombre_publico']  .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . '&web=' . $product_compartir['ruta_url'] . '  "> </script>';
     }
 
 
@@ -163,9 +198,23 @@ $product['image']			= tep_image($ref_fabricante['proveedor_ruta_images'] . 'no-f
 
 
                if ($new_products['products_image']){
-
+                    if (@getimagesize(DIR_WS_IMAGES . $new_products['products_image'])) {
 $product['image']			='<img src="images/'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
-                              }else{
+
+
+                          }else{
+
+                          if ($ref_fabricante['proveedor_ruta_images']){
+$product['image']			='<img src="'.$ref_fabricante['proveedor_ruta_images']. $new_products['products_image']  .'dddddd" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+                                                                    }else{
+$product['image']			='<img src="images/'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+
+                                                                }
+                      }
+                      
+                      
+                               }else{
+
 $product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
 
                           }

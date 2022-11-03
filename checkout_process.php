@@ -405,7 +405,7 @@ $attributes_query = "select popt.products_options_name, poval.products_options_v
    // Include OSC-AFFILIATE
    
    
-   $affiliate_ref = $affiliate_id;
+
   include(DIR_WS_INCLUDES . 'affiliate_checkout_process.php');
   
   

@@ -5,7 +5,7 @@ if (file_exists('includes/local/configure.php')) include('includes/local/configu
    require(DIR_WS_FUNCTIONS . 'database.php');
   tep_db_connect() or die('Unable to connect to database server!');
   
-  
+
   
    $products_model_stock = $_GET['products_model_stock'];
 $almacen = $_GET['almacen'];
@@ -15,12 +15,12 @@ $status_agotado = $_GET['status_agotado'];
 $status_stock = $_GET['status_stock'];
 $status_pendiente = $_GET['status_pendiente'];
 
- $query = mysql_query("SELECT * FROM `products` WHERE  products_model='" . $products_model_stock . "' and stock_nivel = 6");
-if ($products = mysql_fetch_array($query)){
+ $query = tep_db_query("SELECT * FROM `products` WHERE  products_model='" . $products_model_stock . "' and stock_nivel = 6");
+if ($products = tep_db_fetch_array($query)){
 
 
- $stock_nivel_values = mysql_query("select * from " . 'products_stock' . " where products_id = '" . $products['products_id'] . "'");
-             $stock_nivel= mysql_fetch_array($stock_nivel_values);
+ $stock_nivel_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $products['products_id'] . "'");
+             $stock_nivel= tep_db_fetch_array($stock_nivel_values);
              
     $configurations = tep_db_query("select configuration_value from " . 'configuration' . " where configuration_key='PERMISO_STOCK_UNIDADES' limit 1");
     $pstock = tep_db_fetch_array($configurations);

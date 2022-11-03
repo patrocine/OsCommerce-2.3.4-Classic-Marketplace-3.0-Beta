@@ -81,7 +81,84 @@
  | <a href="coupons.php">Cupones</a>
  | <a href="whos_online.php">Clientes Online</a>
  | <a href="https://www.youtube.com/playlist?list=PLv6_VqQZKB8ZSEhfF9nlTvjpjyDiQKqaE">Tutoriales</a>
- |</p>
+
+ 
+ <?php
+ 
+ 
+ 
+        if (AYUDA_ADMIN == 'true'){
+        ECHO '|<a href="'.$_SERVER['PHP_SELF']. '?ayuda_admin_link=true&oID='.$oID. '&action=edit&ayuda_admin_link=admin_ayuda_off'.'">Ayuda off</a>';
+
+    }
+ 
+        if (AYUDA_ADMIN == 'false'){
+          ECHO '|<a href="'.$_SERVER['PHP_SELF']. '?ayuda_admin_link=true&oID='.$oID. '&action=edit&ayuda_admin_link=admin_ayuda_on'.'">Ayuda on</a>';
+
+    }
+
+    if ($_GET['ayuda_admin_link'] == 'admin_ayuda_off'){
+
+        
+                      $sql_status_update_array = array('configuration_value' => 'false',        );
+             tep_db_perform('configuration', $sql_status_update_array, 'update', " configuration_key= '" . 'AYUDA_ADMIN' . "'");
+
+        
+
+
+                          ?>
+
+                      <script type="text/javascript">
+
+    var pagina = '<?php echo $_SERVER['PHP_SELF'].'?ayuda_admin_link=true&oID='.$oID. '&action=edit' ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+              <?php
+
+                      }
+                      
+     if ($_GET['ayuda_admin_link']== 'admin_ayuda_on'){
+                      
+                      
+                      $sql_status_update_array = array('configuration_value' => 'true',        );
+             tep_db_perform('configuration', $sql_status_update_array, 'update', " configuration_key= '" . 'AYUDA_ADMIN' . "'");
+
+
+                          ?>
+
+                      <script type="text/javascript">
+
+    var pagina = '<?php echo $_SERVER['PHP_SELF'].'?ayuda_admin_link=true&oID='.$oID. '&action=edit' ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+              <?php
+
+                  }
+
+
+       ?>
+
+  |</p>
 
 </a></td>
     <td class="headerBarContent" align="right"><?php echo (tep_session_is_registered('admin') ? 'Logged in as: ' . $admin['username']  . ' (<a href="' . tep_href_link(FILENAME_LOGIN, 'action=logoff') . '" class="headerLink">Logoff</a>)' : ''); ?>&nbsp;&nbsp;</td>

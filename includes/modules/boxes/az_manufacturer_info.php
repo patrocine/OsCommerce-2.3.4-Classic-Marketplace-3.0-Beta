@@ -2,19 +2,19 @@
 
 function imageRestrict1($image) {  
 
-	$maxwidth = 194; 
+	$maxwidth = 180;
 
 	list($width,$height) = getimagesize($image); 
 
 	if ($width > $maxwidth) { 
 
-		return '<img src="'.$image.'" width="'.$maxwidth.'" alt="" />';  
+		return '<img src="'.$image.'" width="'.$maxwidth.'" alt="" />';
 
 	}
 
 	else {
 
-		return '<img src="'.$image.'" alt="" />';
+		return '<img src="'.$image.'" width="'.$maxwidth.'"  alt="" />';
 
 	}
 
@@ -22,7 +22,7 @@ function imageRestrict1($image) {
 
 
 
-/*
+/*          width="4819" height="6873">
 
   $Id$
 

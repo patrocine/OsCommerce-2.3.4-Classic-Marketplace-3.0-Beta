@@ -231,9 +231,9 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
         
         
         
-        
-   $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .   $HTTP_GET_VARS['pID'] . "'");
-    if ($pro_special = mysql_fetch_array($pro_special_values)){
+
+   $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .   $HTTP_GET_VARS['pID'] . "'");
+    if ($pro_special = tep_db_fetch_array($pro_special_values)){
 
 	tep_db_query ("UPDATE " . 'specials' . " SET
 					status = '" . $HTTP_POST_VARS['products_specials_onoff'] . "',
@@ -288,7 +288,6 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
 
 
 
-
         $sql_data_array = array('products_quantity' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_quantity']),
                                 'codigo_proveedor' => (int)tep_db_prepare_input($HTTP_POST_VARS['codigo_proveedor']),
                                 'stock_nivel' => (int)tep_db_prepare_input($HTTP_POST_VARS['stock_nivel']),
@@ -302,6 +301,11 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
                                 'products_rc' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_rc']),
                                 'opcion_1' => tep_db_prepare_input($HTTP_POST_VARS['opcion_1']),
                                 'opcion_1_1' => tep_db_prepare_input($HTTP_POST_VARS['opcion_1_1']),
+                                'products_youtube_1' => tep_db_prepare_input($HTTP_POST_VARS['products_youtube_1']),
+                                'products_youtube_2' => tep_db_prepare_input($HTTP_POST_VARS['products_youtube_2']),
+                                'referencia_padre' => tep_db_prepare_input($HTTP_POST_VARS['referencia_padre']),
+                                'referencia_padre_g2' => tep_db_prepare_input($HTTP_POST_VARS['referencia_padre_g2']),
+                                'referencia_padre_g3' => tep_db_prepare_input($HTTP_POST_VARS['referencia_padre_g3']),
                                 'opcion_2' => tep_db_prepare_input($HTTP_POST_VARS['opcion_2']),
                                 'opcion_2_2' => tep_db_prepare_input($HTTP_POST_VARS['opcion_2_2']),
                                 'opcion_3' => tep_db_prepare_input($HTTP_POST_VARS['opcion_3']),
@@ -395,6 +399,18 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 $customers_group_query = tep_db_query("select distinct customers_group_id, customers_group_name from " . TABLE_CUSTOMERS . " where customers_group_id != '" . 0 . "' order by customers_group_id");
 while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets all of the customers groups
   {
@@ -448,6 +464,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
             $piArray[] = (int)$matches[1];
           } elseif (preg_match('/^products_image_large_new_([0-9]+)$/', $key, $matches)) {
 // Insert new large product images
+
             $sql_data_array = array('products_id' => (int)$products_id,
                                     'htmlcontent' => tep_db_prepare_input($HTTP_POST_VARS['products_image_htmlcontent_new_' . $matches[1]]));
 
@@ -493,11 +510,205 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
 
  }else{
 
+
+
+   }
+   
+   
+     if ($HTTP_POST_VARS['unidades_nuevo_pedido']){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  if ($HTTP_POST_VARS['unidades_nuevo_pedido'] <> 0){
+ $unidades = $HTTP_POST_VARS['unidades_nuevo_pedido'];
+ $numero_pedido = $HTTP_POST_VARS['numero_nuevo_pedido'];
+}
+
+
+
+
+
+
+    if ($unidades){
+
+  $selec_nuevopedido_values = tep_db_query("select * from " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op where o.orders_id = op.orders_id and o.orders_id = '" . $numero_pedido . "' and op.products_id = '" . $products_id. "'");
+   if ($selec_nuevopedido = tep_db_fetch_array($selec_nuevopedido_values)){
+
+   // si existe actualiza la nueva cantidad.
+
+
+           $sql_status_update_array = array('products_quantity' => $selec_nuevopedido["products_quantity"]+$unidades, );
+            tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_status_update_array, 'update', " products_id= '" . $products_id . "' and orders_id = '" . $numero_pedido . "'");
+
+
+
+
+
+        // Suma order total
+
+// precio total del pedido actual
+   $precioactual_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
+   $precioactual_total = tep_db_fetch_array($precioactual_total_values);
+
+// precio total del pedido actual
+   $precioactual_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+   $precioactual_subtotal = tep_db_fetch_array($precioactual_subtotal_values);
+
+// datos del producto
+   $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id . "'");
+   $producto = tep_db_fetch_array($producto_values);
+
+    $importe = $producto['products_price']*$unidades;
+
+                  // ot_total
+           $sql_status_update_array = array('value' => $precioactual_total['value']+$importe,
+                                            'text' => $precioactual_total['value']+$importe.'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido. "' and class = '" . 'ot_total' . "'");
+
+
+                  // ot_subtotal
+           $sql_status_update_array = array('value' => $precioactual_subtotal['value']+$importe,
+                                            'text' => $precioactual_subtotal['value']+$importe.'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+
+
+
+         // fin
+
+
+
+
+
+
+
+
+    // si no existe lo inserta por primera vez
+}else{
+
+    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . (int)$products_id . "'");
+    $codigobarras_c = tep_db_fetch_array($codigobarras_values);
+
+                             $serie_b = 'ok';
+   require('includes/proveedores_precios.php');
+
+
+
+
+
+
+           $Query = "INSERT INTO " . TABLE_ORDERS_PRODUCTS . " set
+              orders_id = '" . $numero_pedido . "',
+              products_id = '" . $codigobarras_c['products_id'] . "',
+              products_model = '" . $codigobarras_c['products_model'] . "',
+              products_name = '" . $codigobarras_c['products_name'] . "',
+              products_price = '". $codigobarras_c['products_price'] . "',
+              final_price = '" . $codigobarras_c['products_price'] . "',
+              final_price_euro = '" . $total_pago_euro . "',
+              final_price_tienda = '" . $ganancias_tiendas . "',
+              products_tax = '" . $ProductsTax . "',
+              products_quantity = '" . $unidades . "'";
+              tep_db_query($Query);
+              $new_product_id = tep_db_insert_id();
+
+
+
+
+
+
+
+        // Suma order total
+
+// precio total del pedido actual
+   $precioactual_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
+   $precioactual_total = tep_db_fetch_array($precioactual_total_values);
+
+// precio total del pedido actual
+   $precioactual_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+   $precioactual_subtotal = tep_db_fetch_array($precioactual_subtotal_values);
+
+// datos del producto
+   $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id . "'");
+   $producto = tep_db_fetch_array($producto_values);
+
+    $importe = $producto['products_price']*$unidades;
+
+                  // ot_total
+           $sql_status_update_array = array('value' => $precioactual_total['value']+$importe,
+                                            'text' => $precioactual_total['value']+$importe.'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_total' . "'");
+
+           // ot_subtotal
+           $sql_status_update_array = array('value' => $precioactual_subtotal['value']+$importe,
+                                            'text' => $precioactual_subtotal['value']+$importe.'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
+
+
+         // fin
+
+
+
+
+
+
+
+
+
+
+            }
+               }// fin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id.'&action=new_product'));
+
+ }else{
+
        tep_redirect(tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products_id.''));
 
 
 
    }
+   
         break;
       case 'copy_to_confirm':
         if (isset($HTTP_POST_VARS['products_id']) && isset($HTTP_POST_VARS['categories_id'])) {
@@ -515,10 +726,10 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
             }
           } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
-            $product_query = tep_db_query("select products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model, products_image, products_price, products_date_available, products_weight, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+            $product_query = tep_db_query("select products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, products_youtube_1, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model, products_image, products_price, products_date_available, products_weight, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model,products_image, products_price, products_date_added, products_date_available, products_weight, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model,products_image, products_price, products_date_added, products_date_available, products_weight, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");
             $dup_products_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
@@ -540,6 +751,16 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
             tep_reset_cache_block('also_purchased');
           }
         }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -578,6 +799,11 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
                        'products_rc' => '',
                        'opcion_1' => '',
                        'opcion_1_1' => '',
+                       'products_youtube_1' => '',
+                       'products_youtube_2' => '',
+                       'referencia_padre' => '',
+                       'referencia_padre_g2' => '',
+                       'referencia_padre_g3' => '',
                        'opcion_2' => '',
                        'opcion_2_2' => '',
                        'opcion_3' => '',
@@ -629,12 +855,54 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
                        'manufacturers_id' => '');
 
     $pInfo = new objectInfo($parameters);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
-      $product_query = tep_db_query("select pd.products_name, products_descuento_onoff, products_descuento, products_shoptoshop, pd.products_description, pd.products_url, p.products_id, p.products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $product_query = tep_db_query("select pd.products_name, products_descuento_onoff, products_descuento, products_shoptoshop, pd.products_description, pd.products_url, p.products_id, p.products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status,
+      p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       $product_images_query = tep_db_query("select products_extra_images_id, products_extra_image, htmlcontent, image_number from " . 'products_extra_images' . " where products_id = '" . (int)$product['products_id'] . "' order by image_number");
@@ -717,6 +985,52 @@ function updateNet() {
 
   document.forms["new_product"].products_price.value = doRound(netValue, 4);
 }
+
+
+
+
+
+<?php
+       if (AYUDA_ADMIN == 'true'){
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_fecha_alta = '<a class="hastip"  title="' . AYUDA_TEXT_FECHA_ALTA . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_fabricante = '<a class="hastip"  title="' . AYUDA_TEXT_FABRICANTE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_nombre_producto = '<a class="hastip"  title="' . AYUDA_TEXT_NOMBRE_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_referencia = '<a class="hastip"  title="' . AYUDA_TEXT_REFERENCIA . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_impuesto_nombre = '<a class="hastip"  title="' . AYUDA_TEXT_IMPUESTO_NOMBRE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_pvp = '<a class="hastip"  title="' . AYUDA_TEXT_PVP . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_pvp_impuesto = '<a class="hastip"  title="' . AYUDA_TEXT_PVP_IMPUESTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_precio_grupo = '<a class="hastip"  title="' . AYUDA_TEXT_PRECIO_GRUPO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_shoptoshop = '<a class="hastip"  title="' . AYUDA_TEXT_SHOPTOSHOP . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_shoptoshop_seleccion = '<a class="hastip"  title="' . AYUDA_TEXT_SHOPTOSHOP_SELECCION . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_descuento_cliente_vincular = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_CLIENTE_VINCULAR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_descuento_cliente = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_CLIENTE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_descuento_cantidad_unidades = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_CANTIDAD_UNIDADES . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_descuento_cantidad_precio = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_CANTIDAD_PRECIO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_stocknivel = '<a class="hastip"  title="' . AYUDA_TEXT_STOCKNIVEL . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_regladecategorias_onoff = '<a class="hastip"  title="' . AYUDA_TEXT_REGLADECATEGORIAS_ONOFF . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_carasteristicas = '<a class="hastip"  title="' . AYUDA_TEXT_CARASTERISTICAS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_codigodebarras = '<a class="hastip"  title="' . AYUDA_TEXT_CODIGODEBARRAS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+ $ayuda_status = '<a class="hastip"  title="' . AYUDA_TEXT_STATUS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+
+
+$ayuda_shoptoshop = '<p><a href="configuration.php?gID=6126&cID=112087&action=edit">Configurar</a> '.'<a class="hastip"  title="' . AYUDA_TEXT_SHOPTOSHOP . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</p></span></font></b>';
+$ayuda_ofertas_selec = '<p><a href="configuration.php?gID=6126&cID=112087&action=edit">Ver Ofertas </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_OFERTAS_SELEC . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</p></span></font></b>';
+$ayuda_proveedores = '<p><a href="conceptos_proveedores.php">Ir A Proveedores </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_PROVEEDORES . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_regladeprecios = '<p><a href="regladeprecios.php">Ir A Reglas de Precios </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REGLADEPRECIOS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_reglafabricante = '<p><a href="cpe.php">Ir Crear reglas de caegoria </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REGLAFABRICANTE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_reglacategoria = '<p><a href="cpe.php">Ir Crear reglas de caegoria </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REGLACATEGORIA . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                           }
+
+ ?>
 //--></script>
     <?php echo tep_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : '') . '&action=' . $form_action, 'post', 'enctype="multipart/form-data"'); ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -735,21 +1049,21 @@ function updateNet() {
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_STATUS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
+            <td class="main"><?php echo $ayuda_status . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_status', '1', $in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . tep_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="products_date_available"') . ' <small>(YYYY-MM-DD)</small>'; ?></td>
+            <td class="main"><?php echo $ayuda_fecha_alta . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_date_available', $pInfo->products_date_available, 'id="products_date_available"') . ' <small>(YYYY-MM-DD)</small>'; ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
             <td class="main"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></td>
+            <td class="main"><?php echo $ayuda_fabricante . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -759,29 +1073,111 @@ function updateNet() {
 ?>
           <tr>
             <td class="main"><?php if ($i == 0) echo TEXT_PRODUCTS_NAME; ?></td>
-          <td class="main"><?php echo tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . ' ' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (empty($pInfo->products_id) ? '' : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td> </tr>
+          <td class="main"><?php echo $ayuda_nombre_producto . tep_image(DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . ' ' . tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (empty($pInfo->products_id) ? '' : tep_get_products_name($pInfo->products_id, $languages[$i]['id']))); ?></td> </tr>
 <?php
     }
 ?>
 
             <td class="main"><?php echo 'Referencia o Codigo de Barras'; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model.$HTTP_GET_VARS['ean']); ?></td>
+            <td class="main"><?php echo $ayuda_referencia . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_model', $pInfo->products_model.$HTTP_GET_VARS['ean'].$HTTP_GET_VARS['codigobarras']); ?></td>
           </tr>
           <tr>
 
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+          
+         <tr bgcolor="#ebebff">
+            <td class="main"><?php echo 'Codigo de Barras'; ?></td>
+            <td class="main"><?php echo $ayuda_codigodebarras . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('codigo_barras', $pInfo->codigo_barras); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+            
+            
+                <?php
+
+  $addstock_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $entregas_stock . "' order by date_purchased DESC");
+   $addstock = mysqli_fetch_array($addstock_values);
+
+  $addpend_values = tep_db_query("select * from " . TABLE_ORDERS . "  where orders_status = '" . $status_entregas . "' order by date_purchased DESC");
+   $addpend = tep_db_fetch_array($addpend_values);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $stock_exterior = '<script language="javascript" src="products_info_stock.php?stock_nivel=6&products_id_stock='. $HTTP_GET_VARS['pID'] . ' "> </script>';
+
+     $query = tep_db_query("SELECT * FROM `products_stock` WHERE  products_id='" . $HTTP_GET_VARS['pID'] . "' and products_stock_real >= 1");
+  if ($products_stock = tep_db_fetch_array($query)){
+     $color = '#CCFF99';
+}else{
+ $color = '#FFA8A8';
+}
+
+
+
+                    ?>
+
+          <tr bgcolor="#CCFF99">
+            <td class="main"><?php echo 'Unidades Stock ('.$stock_exterior.')';; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('unidades_nuevo_pedido', '') . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('numero_nuevo_pedido', $addstock['orders_id']); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+            
+            
+            
+            
+            
+            
+            <?php
+
+
+
+
+                  ?>
+
+          
+   <tr>
+            <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
+          </tr>
+
+      <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+          </tr>
+          <tr>
+
+          
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
+            <td class="main"><?php echo $ayuda_impuesto_nombre . tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_pull_down_menu('products_tax_class_id', $tax_class_array, $pInfo->products_tax_class_id, 'onchange="updateGross()"'); ?></td>
           </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_NET; ?></td>
-         <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price', $pInfo->products_price, 'onkeyup="updateGross()"'); ?></td> </tr>
+         <td class="main"><?php echo $ayuda_pvp . tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price', $pInfo->products_price, 'onkeyup="updateGross()"'); ?></td> </tr>
           <tr bgcolor="#ebebff">
             <td class="main"><?php echo TEXT_PRODUCTS_PRICE_GROSS; ?></td>
-          <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'onkeyup="updateNet()"'); ?></td> </tr>
+          <td class="main"><?php echo $ayuda_pvp_impuesto . tep_draw_separator('pixel_trans.gif', '24', '15') . ' ' . tep_draw_input_field('products_price_gross', $pInfo->products_price, 'onkeyup="updateNet()"'); ?></td> </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
@@ -805,7 +1201,7 @@ updateGross();
 ?>
     <td><table border="0" cellpadding="0" cellspacing="0">
       <tr class="dataTableHeadingRow">
-      <td class="dataTableHeadingContent" colspan="3"><?php echo $options['products_options_name']; ?></td>
+      <td class="dataTableHeadingContent" colspan="3"><?php echo $ayuda_precio_grupo . $options['products_options_name']; ?></td>
     </tr>
 <?php
         }
@@ -843,9 +1239,25 @@ updateGross();
       <tr>
         <td class="smallText" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))) . tep_draw_button(IMAGE_SAVE, 'disk', null, 'primary') . tep_draw_button(IMAGE_CANCEL, 'close', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . (isset($HTTP_GET_VARS['pID']) ? '&pID=' . $HTTP_GET_VARS['pID'] : ''))); ?></td>
       </tr>
+  <?php
+  $codigo_proveedor = $_GET['codigo_proveedor'];
+  $codigobarras_des = $_GET['codigobarras_des'];
+
+ 
+        if ($codigo_proveedor){
+
+ $query = tep_db_query("SELECT * FROM `products_compartir` WHERE  proveedor_id='" . $codigo_proveedor . "'");
+$url = tep_db_fetch_array($query);
 
 
-
+       ?>
+<p>
+<iframe name="I1" width="1404" height="332" src="<?php echo   $url['ruta_url'] ?>products_stock_exterior_quick_description_up.php?&action=new_product&codigobarras_des=
+<?php echo $codigobarras_des ?>">
+El explorador no admite los marcos flotantes o no está configurado actualmente para mostrarlos.
+</iframe></p>
+          <?php
+          } ?>
 
 <?php
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
@@ -919,11 +1331,38 @@ $languages[$i]['id'] . '] class="ckeditor"'); ?> </td>
               <ul id="piList">
 <?php
     $pi_counter = 0;
+    
+        if ($HTTP_GET_VARS['products_extra_images_id']){
+ tep_db_query("delete from " . 'products_extra_images' . " where products_extra_images_id = '" . $HTTP_GET_VARS['products_extra_images_id'] . "' ");
 
-    foreach ($pInfo->products_larger_images as $pi) {
+         ?>
+         
+         
+              <script type="text/javascript">
+
+    var pagina = '<?php echo FILENAME_CATEGORIES, '?cPath=' . $HTTP_GET_VARS['cPath'] . '&pID=' . $HTTP_GET_VARS['pID']. '&action=new_product'; ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+         
+         
+         
+ <?php
+    }
+
+    foreach($pInfo->products_larger_images as $pi) {
       $pi_counter++;
 
-      echo '                <li id="piId' . $pi_counter . '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="float: right;"></span><a href="#" onclick="showPiDelConfirm(' . $pi_counter . ');return false;" class="ui-icon ui-icon-trash" style="float: right;"></a><strong>' . TEXT_PRODUCTS_LARGE_IMAGE . '</strong><br />' . tep_draw_file_field('products_image_large_' . $pi['id']) . '<br /><a href="' . DIR_WS_CATALOG_IMAGES . $pi['image'] . '" target="_blank">' . $pi['image'] . '</a><br /><br />' . TEXT_PRODUCTS_LARGE_IMAGE_HTML_CONTENT . '<br />' . tep_draw_textarea_field('products_image_htmlcontent_' . $pi['id'], 'soft', '70', '3', $pi['htmlcontent']) . '</li>';
+      echo '             <li id="piId' . $pi_counter . '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="float: right;"></span><a href="#" onclick="showPiDelConfirm(' . $pi_counter . ');return false;" class="ui-icon ui-icon-trash" style="float: right;"></a><strong>' . TEXT_PRODUCTS_LARGE_IMAGE . '</strong><br />' . tep_draw_file_field('products_image_large_' . $pi['products_extra_images_id']) . '<br /><a href="' . DIR_WS_CATALOG_IMAGES . $pi['products_extra_image'] . '" target="_blank">' . $pi['products_extra_image'] . '</a><br /><br />' . TEXT_PRODUCTS_LARGE_IMAGE_HTML_CONTENT . '<br />' . tep_draw_textarea_field('products_image_htmlcontent_' . $pi['products_extra_images_id'], 'soft', '70', '3', $pi['htmlcontent']) . ''.'<a href="'. 'categories.php?del_pdc=' . 'action' . '&pID=' .  $HTTP_GET_VARS['pID'].'&action=new_product' . '&products_extra_images_id=' .  $pi['products_extra_images_id'].'"> Eliminar Todo ('.$pi['products_extra_images_id'].')</li>';
     }
 ?>
               </ul>
@@ -1005,8 +1444,28 @@ function showPiDelConfirm(piId) {
 <?php
     }
 
-   $pro_special_values = mysql_query("select * from " . 'specials' . " where products_id = '" .   $HTTP_GET_VARS['pID'] . "'");
-    $pro_special = mysql_fetch_array($pro_special_values);
+   $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .   $HTTP_GET_VARS['pID'] . "'");
+    $pro_special = tep_db_fetch_array($pro_special_values);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1014,9 +1473,58 @@ function showPiDelConfirm(piId) {
 
 ?>
 
+
+
+
+                   </tr>
+          <tr>
+            <td class="main"><?php echo 'Video Youtube 1';; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_youtube_1', $pInfo->products_youtube_1); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+                   </tr>
+          <tr>
+            <td class="main"><?php echo 'Video Youtube 2'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_youtube_2', $pInfo->products_youtube_2); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+
+
+                   </tr>
+          <tr>
+            <td class="main"><?php echo 'Referencia Padre grupo 1';; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('referencia_padre', $pInfo->referencia_padre); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+                   </tr>
+          <tr>
+            <td class="main"><?php echo 'Referencia Padre grupo 2'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('preferencia_padre_g2', $pInfo->referencia_padre_g2); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+                   </tr>
+          <tr>
+            <td class="main"><?php echo 'Referencia Padre grupo 3'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('referencia_padre_g3', $pInfo->referencia_padre_g3); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+
+
+
+
+
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
-              <td class="main"><?php echo 'SHOP TO SHOP Inactive (0) Active (1)'; ?></td>
+              <td class="main"><?php echo $ayuda_shoptoshop.'SHOP TO SHOP Inactive (0) Active (1) ' . $ayuda_shoptoshop_seleccion; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_shoptoshop', $pInfo->products_shoptoshop); ?></td>
           </tr>
           <tr>
@@ -1024,12 +1532,12 @@ function showPiDelConfirm(piId) {
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
 
-            <td class="main"><?php echo 'Vincular el Decuento Cliente (1) Producto (0)'; ?></td>
+            <td class="main"><?php echo 'Vincular el Decuento Cliente (1) Producto (0)'. $ayuda_descuento_cliente_vincular; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_descuento_onoff', $pInfo->products_descuento_onoff); ?></td>
           </tr>
           <tr>
            <tr>
-            <td class="main"><?php echo 'Descuento Aplicar al Producto'; ?></td>
+            <td class="main"><?php echo 'Descuento Aplicar al Producto' . $ayuda_descuento_cliente; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_descuento', $pInfo->products_descuento); ?></td>
           </tr>
           <tr>
@@ -1041,11 +1549,11 @@ function showPiDelConfirm(piId) {
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
 
-            <td class="main"><?php echo 'Descuento por Cantidades '; ?></td>
+            <td class="main"><?php echo 'Descuento por Cantidades '. $ayuda_descuento_cantidad_unidades; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('pdc_unidades', $pInfo->pdc_unidades); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo 'Precios' . '<a href="'. 'categories.php?del_pdc=' . 'action' . '&pID=' .  $HTTP_GET_VARS['pID'].'&action=new_product' . '"> ->> Eliminar Todo' ; ?></td>
+            <td class="main"><?php echo 'Precios ' . $ayuda_descuento_cantidad_precio . '<a href="'. 'categories.php?del_pdc=' . 'action' . '&pID=' .  $HTTP_GET_VARS['pID'].'&action=new_product' . '"> ->> Eliminar Todo' ; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('pdc_price_final', $pInfo->pdc_price_final); ?></td>
           </tr>
 
@@ -1068,8 +1576,8 @@ function showPiDelConfirm(piId) {
 
     }
 
-   $pdc_consulta_values = mysql_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .   $HTTP_GET_VARS['pID'] . "' order by pdc_unidades ASC");
-  while  ($pdc_consulta = mysql_fetch_array($pdc_consulta_values)){
+   $pdc_consulta_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .   $HTTP_GET_VARS['pID'] . "' order by pdc_unidades ASC");
+  while  ($pdc_consulta = tep_db_fetch_array($pdc_consulta_values)){
 
 
  ?>
@@ -1093,40 +1601,42 @@ function showPiDelConfirm(piId) {
           </tr>
 
 
-            <td class="main"><?php echo 'Activar Oferta (1) Desactivar Oferta (0) Borrar Oferta (2) '; ?></td>
+            <td class="main"><?php echo $ayuda_ofertas_selec . ' Activar Oferta (1) Desactivar Oferta (0) Borrar Oferta (2) '; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_specials_onoff', $pro_special['status']); ?></td>
           </tr>
           <tr>
            <tr>
-            <td class="main"><?php echo 'Precio de Oferta'; ?></td>
+            <td class="main"><?php echo 'Precio de Oferta ' . $ayuda_ofertas; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_specials',  $pro_special['specials_new_products_price']); ?></td>
           </tr>
           <tr>
            <tr>            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo 'Codigo Proveedor'; ?></td>
+          
+
+            <td class="main"><?php echo $ayuda_proveedores . ' Codigo Proveedor'; ?>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('codigo_proveedor', $pInfo->codigo_proveedor); ?></td>
           </tr>
           <tr>
            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo 'Stock Nivel'; ?></td>
+            <td class="main"><?php echo 'Stock Nivel '. $ayuda_stocknivel; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('stock_nivel', $pInfo->stock_nivel); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo 'Regla de Precios'; ?></td>
+            <td class="main"><?php echo 'Regla de Precios'. $ayuda_regladeprecios; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_regladeprecios', $pInfo->products_regladeprecios); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                    </tr>
           <tr>
-            <td class="main"><?php echo 'Regla de Fabricante'; ?></td>
+            <td class="main"><?php echo 'Regla de Fabricante'. $ayuda_reglacategoria; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_cpf', $pInfo->products_cpf); ?></td>
           </tr>
           <tr>
@@ -1138,24 +1648,18 @@ function showPiDelConfirm(piId) {
 
                     </tr>
           <tr>
-            <td class="main"><?php echo 'Regla de Categoria'; ?></td>
+            <td class="main"><?php echo 'Regla de Categoria'. $ayuda_reglafabricante; ; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_cpe', $pInfo->products_cpe); ?></td>
           </tr>
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                     </tr>
-          <tr>
-            <td class="main"><?php echo 'Codigo de Barras'; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('codigo_barras', $pInfo->codigo_barras); ?></td>
-          </tr>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
 
 
 
                    </tr>
           <tr>
-            <td class="main"><?php echo 'Reglas de Categorias Usar(1) NO(2)'; ?></td>
+            <td class="main"><?php echo 'Reglas de Categorias Usar(1) NO(2)' . $ayuda_regladecategorias_onoff; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_rc', $pInfo->products_rc); ?></td>
           </tr>
           <tr>
@@ -1166,7 +1670,7 @@ function showPiDelConfirm(piId) {
 
                    </tr>
           <tr>
-            <td class="main"><?php echo 'Opcion 1'; ?></td>
+            <td class="main"><?php echo 'Opcion 1' . $ayuda_carasteristicas;; ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('opcion_1', $pInfo->opcion_1); ?></td>
           </tr>
           <tr>
@@ -1547,14 +2051,7 @@ function showPiDelConfirm(piId) {
           </tr>
          <tr>
 
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?></td>
-            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_weight', $pInfo->products_weight); ?></td>
-          </tr>
-        </table></td>
+       </table></td>
       </tr>
       <tr>
       
@@ -1670,20 +2167,50 @@ $('#products_date_available').datepicker({
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
 
-            
-            
+<SCRIPT>
+<!--
+function sffh(){document.s.search.focus();}
+function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURIComponent ? encodeURIComponent : escape;var u="";var oi_param="";var cad_param="";if (url) u="&url="+e(url.replace(/#.*/,"")).replace(/\+/g,"%2B");if (oi) oi_param="&oi="+e(oi);if (cad) cad_param="&cad="+e(cad);new Image().src="/url?sa=T"+oi_param+cad_param+"&ct="+e(ct)+"&cd="+e(cd)+u+"&ei=yzHqRPLoGpy2QP6B_X0"+sg;}return true;}
+// -->
+</SCRIPT>
+  <BODY topMargin=3 onload=sffh()>
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
             
-            
---></script>
-            
+
+
             <td align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="smallText" align="left">
+                
+  <BODY topMargin=3 onload=sffh()>
+<form name="s"  method="get" action="<?php echo $PHP_SELF . '?cPath=' . $HTTP_GET_VARS['cPath'];?>">
+                   <?php
+                       if (NEW_PRODUCT == 1){
+                     ?>
+<p><input type="radio" value="1" checked name="<?php ECHO 'new_products_cat' ?>">
+<input type="radio" name="<?php ECHO 'new_products_cat' ?>" value="2"><font color="#008000"><b>Activado</b></font>
+ 
+ 
+                           <?php
+                          }else if (NEW_PRODUCT == 2){
+                             ?>
+<p><input type="radio" value="1"  name="<?php ECHO 'new_products_cat' ?>">
+<input type="radio" checked name="<?php ECHO 'new_products_cat' ?>" value="2"><font color="#ff0000"><b>Desactivado</b></font>
+                                  <?php
+                          }
+                             ?>
+ 
+ 
+	<p><input type="text" name="search" size="20">
+ <input type="checkbox" name="<?php ECHO 'cPath' ?>" value="<?php ECHO $HTTP_GET_VARS['cPath']; ?> " checked>
+
+ <input type="submit" value="Buscar" name="B1"></p>
+</form>
+                
 <?php
-   echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
-    echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
-    echo tep_hide_session_id() . '</form>';
+ //  echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
+   //    echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search');
+  //     echo tep_hide_session_id() . '</form>';
 ?>
                 </td>
               </tr>
@@ -1709,18 +2236,128 @@ $('#products_date_available').datepicker({
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
+
+
+
 <?php
-              if (NEW_PRODUCT == 1){
-       $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $HTTP_GET_VARS['search'] . "' or codigo_barras = '" . $HTTP_GET_VARS['search'] . "'");
+
+
+
+     echo '<p><b><a href="' . 'categories.php?cPath=' . (int)$current_category_id . 'pID='.$pInfo->products_id.'">VOLVER A LA CATEGORIA</a></b> '.(int)$current_category_id;
+
+                    if ( $HTTP_GET_VARS['new_products_cat'] == 1){
+  	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 1 . "'
+					WHERE configuration_key = '" . 'NEW_PRODUCT' . "'");
+                              echo 'a';
+     
+                           if ( NEW_PRODUCT == 2){
+                                echo 'b';
+                                       ?>
+        <script type="text/javascript">
+
+       var pagina = 'categories.php<? echo '?cPath=' . $HTTP_GET_VARS['cPath'] . 'pID=' . $HTTP_GET_VARS['pID'];  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+    <?php
+                             }
+     
+     
+                                                   }
+
+                    if ( $HTTP_GET_VARS['new_products_cat'] == 2){
+  	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 2 . "'
+					WHERE configuration_key = '" . 'NEW_PRODUCT' . "'");
+     
+     
+                           if ( NEW_PRODUCT == 1){
+                                       ?>
+        <script type="text/javascript">
+
+       var pagina = 'categories.php<? echo '?cPath=' . $HTTP_GET_VARS['cPath'] . 'pID=' . $HTTP_GET_VARS['pID'];  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+    <?php
+                             }
+     
+     
+     
+     
+                                                   }
+
+
+
+           if (NEW_PRODUCT == 1){
+        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $HTTP_GET_VARS['search'] . "' or codigo_barras = '" . $HTTP_GET_VARS['search'] . "'");
       if ($newproducts = tep_db_fetch_array($newproducts_values)){
 
 
     }else{
 
+
+                 if (NEW_PRODUCT_PRE == 1){
+
+ 	//tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+				//	configuration_value = '" . 2 . "'
+			//		WHERE configuration_key = '" . 'NEW_PRODUCT_PRE' . "'");
+
+
+
+
+                                                       //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?cPath=' . (int)$current_category_id . '&codigobarras='.$HTTP_GET_VARS['search'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+
+
+
+
+
+
+                              }
+                           }
+                        }
+                   }
+
+
+
+
+
+              if (NEW_PRODUCT == 1){
+       $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $HTTP_GET_VARS['search'] . "'");
+      if ($newproducts = tep_db_fetch_array($newproducts_values)){
+
+
+    }else{
+             if ($HTTP_GET_VARS['search'] <> ''){
          ?>
         <script type="text/javascript">
 
-       var pagina = 'categories.php<? echo '?cPath=' . $categories['parent_id'] .'&pID=' . $products_id.'&action=new_product'.'&ean='.$HTTP_GET_VARS['search'];  ?>';
+       var pagina = 'categories.php<? echo '?cPath=' . $HTTP_GET_VARS['cPath'] . '&action=new_product'.'&ean='.$HTTP_GET_VARS['search'];  ?>';
     var segundos = 0;
 
     function redireccion() {
@@ -1736,7 +2373,7 @@ $('#products_date_available').datepicker({
     <?php
 
 
-}}
+}}}
 
     $categories_count = 0;
     $rows = 0;
@@ -1832,6 +2469,9 @@ $('#products_date_available').datepicker({
 
     $cPath_back = (tep_not_null($cPath_back)) ? 'cPath=' . $cPath_back . '&' : '';
 ?>
+
+
+
               <tr>
                 <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
@@ -1967,11 +2607,38 @@ $('#products_date_available').datepicker({
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<strong>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</strong>');
 
-            $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=new_product')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=delete_product')) . tep_draw_button(IMAGE_MOVE, 'arrow-4', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=move_product')) . tep_draw_button(IMAGE_COPY_TO, 'copy', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=copy_to')));
+
+
+  $product_values = tep_db_query("select * from " . 'products' . "  where products_id = '" . $pInfo->products_id . "'");
+   $product = tep_db_fetch_array($product_values);
+
+
+
+
+            $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=new_product')) .
+            tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=delete_product')) .
+            tep_draw_button(IMAGE_MOVE, 'arrow-4', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=move_product')) .
+            tep_draw_button(IMAGE_COPY_TO, 'copy', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $pInfo->products_id . '&action=copy_to')));
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($pInfo->products_date_added));
             if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . tep_date_short($pInfo->products_date_available));
-            
+
+
+           $contents[] = array('text' => '<a target="_blank" href="' . 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=100&codigo_proveedor=' . $product['codigo_proveedor'] . '&palabraclave=' . $product['products_model'] . '">MODIFICAR X EAN ->></a>');
+
+              if ($product['referencia_padre']){
+            $contents[] = array('text' => '<a target="_blank" href="' . 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=100&codigo_proveedor=' . $product['codigo_proveedor'] . '&palabraclave=' . $product['referencia_padre'] . '">MODIFICAR X REFERENCIA PADRE ->></a>');
+                  }
+
+              if ($product['referencia_padre_g2']){
+            $contents[] = array('text' => '<a target="_blank" href="' . 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=100&codigo_proveedor=' . $product['codigo_proveedor'] . '&palabraclave=' . $product['referencia_padre_g2'] . '">MODIFICAR X REFERENCIA PADRE G2 ->></a>');
+                  }
+
+              if ($product['referencia_padre_g3']){
+            $contents[] = array('text' => '<a target="_blank" href="' . 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=100&codigo_proveedor=' . $product['codigo_proveedor'] . '&palabraclave=' . $product['referencia_padre_g2'] . '">MODIFICAR X REFERENCIA PADRE G3 ->></a>');
+                  }
+
+
           //  $contents[] = array('text' => '<br />' . tep_info_image($pInfo->products_image, $pInfo->products_name, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br />' . $pInfo->products_image);
             $contents[] = array('text' => '<br />' . '<img border="0" src="'.HTTPS_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $pInfo->products_image.'" width="'.SMALL_IMAGE_WIDTH.'" height="'.SMALL_IMAGE_HEIGHT.'"></p>' . '<br />' . $pInfo->products_image);
 

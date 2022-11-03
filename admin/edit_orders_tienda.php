@@ -12,7 +12,7 @@
      $enviarpedido_notif = $_GET['enviarpedido_notif'];
      $donde_esta = $_GET['donde_esta'];
      $actualizar_cantidades = $_GET['actualizar_cantidades'];
-
+               $codigobarras_negativos = $_GET['codigobarras_negativos'];
    // $codigobarras = ereg_replace("-M", "-", $codigobarras);
  //  $codigobarras_inv  =  ereg_replace("-M", "-", $codigobarras_inv);
   //  $palabraclave  =  ereg_replace("-M", "-", $palabraclave);
@@ -59,6 +59,47 @@
                             //2393
    require(DIR_WS_INCLUDES . 'template_top.php');
 
+
+
+
+
+
+
+ $query = tep_db_query("SELECT * FROM `configuration` WHERE  configuration_key='" . 'NEW_PRODUCT_PRE' . "'");
+$new_product_pre = tep_db_fetch_array($query);
+
+
+
+
+$action_in = $_GET['action_in'];
+$codigobarras_in = $_GET['codigobarras_in'];
+  if ($action_in == 'true'){
+
+       $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras_in . "' or codigo_barras = '" . $codigobarras_in . "'");
+      if ($newproducts = tep_db_fetch_array($newproducts_values)){
+             echo '<font color="#008000" size="1" face="Arial Black">Producto con ean '.$codigobarras_in.' se importo correctamente</font>';
+     }else{
+             echo '<font color="#ff0000" size="1" face="Arial Black">Producto con ean '.$codigobarras_in.' No Disponible</font>';
+       ?>
+
+
+ <script language=javascript>
+window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&action=new_product&codigobarras='.$codigobarras_in.'&action_in=true';  ?>', '_blank');
+</script>
+
+
+
+
+    <?php
+
+}}
+
+
+
+
+
+
+
            if (NEW_PRODUCT == 1){
         $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras . "' or codigo_barras = '" . $codigobarras . "'");
       if ($newproducts = tep_db_fetch_array($newproducts_values)){
@@ -66,15 +107,102 @@
 
     }else{
 
+
+                 if (NEW_PRODUCT_PRE == 1){
+
+ 	//tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+				//	configuration_value = '" . 2 . "'
+			//		WHERE configuration_key = '" . 'NEW_PRODUCT_PRE' . "'");
+
+
+
+
+                                                       //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+                              }
+
+
+
+
+    //   echo  header("Location: '" . $PHP_SELF.'?codigobarras=' . $codigobarras . '&oID='.$oID.'&action=edit' . "'");
+
          ?>
 
-<script language=javascript>
-window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&action=new_product&ean='.$codigobarras;  ?>', '_blank');
-</script>
+           <script type="text/javascript">
+    var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
+    var segundos = 9999999999999999999999999;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+
+
+
+
+
     <?php
 
 
-}}
+
+               }
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+                 if (NEW_PRODUCT == 2){
+                         $codigobarras_in = $codigobarras;
+                 $query = tep_db_query("SELECT * FROM `products` WHERE  products_model='" . $codigobarras . "'");
+                 if ($products = tep_db_fetch_array($query)){
+
+                             }else{
+                                                       //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+                              }
+
+
+
+
+
+    }
+
+  }
 
 
 
@@ -122,24 +250,34 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
      // Resetear Inventario
      
      
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
 
      
      
      
+     
+                                          /*
+     
+                                                        //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+
+
+
+    }
      
      
+                    */
+     
+     
+
+
+
+
      
      
      
@@ -468,6 +606,7 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 			customers_postcode = '" . tep_db_input($_POST['update_customer_postcode']) . "',
 			customers_country = '" . tep_db_input(stripslashes($_POST['update_customer_country'])) . "',
 			customers_telephone = '" . tep_db_input($_POST['update_customer_telephone']) . "',
+			last_modified = '" . tep_db_input($_POST['update_last_modified']) . "',
 			customers_email_address = '" . tep_db_input($_POST['update_customer_email_address']) . "',";
 
 		$UpdateOrders .= "billing_name = '" . tep_db_input(stripslashes($_POST['update_billing_name'])) . "',
@@ -2767,11 +2906,34 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+
+
+                           $entregas_unidades  =  $unidades + $codigobarras_a['products_quantity'];
+                           
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $codigobarras_a['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
+
+
+          $products_precio = $pdc_precio_final['pdc_price_final'];
+          
+          
+                      $sql_status_update_array = array('products_quantity' => $unidades + $codigobarras_a['products_quantity'],
+                                                       'final_price_euro' => $total_pago_euro,
+                                                       'final_price' => $products_precio,
+                                                       'final_price_tienda' => $ganancias_tiendas,
+                                                      );
+
+
+                                                           }else{
+
+                                                            //descuento
                       $sql_status_update_array = array('products_quantity' => $unidades + $codigobarras_a['products_quantity'],
                                                        'final_price_euro' => $total_pago_euro,
                                                        'final_price_tienda' => $ganancias_tiendas,
                                                       );
-
+                                                         }
+                                                         
+                                                         
              tep_db_perform(TABLE_ORDERS_PRODUCTS, $sql_status_update_array, 'update', " orders_products_id= '" . $codigobarras_a['orders_products_id'] . "'");
 
                       $sql_status_update_array = array('contencion' =>1,);
@@ -2867,10 +3029,16 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
               $producto_precio_final = $pdc_precio_final['pdc_price_final'];
 
+                                    // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
 
-                                                           }
 
 
+
+
+
+                                                                  }
+                                     // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
+                             // inserta desde el formulario principal.
 
            $Query = "INSERT INTO " . TABLE_ORDERS_PRODUCTS . " set
               orders_id = '" . $oID . "',
@@ -3023,7 +3191,7 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
     ?>
 
-            <script type="text/javascript">
+              <script type="text/javascript">
 
     var pagina = '<?php echo FILENAME_EDIT_ORDERS_TIENDA . '?'.$pclaw.'action=edit&oID=' . $oID . '&conf_actualizar=' . $conf_actualizar . '&conf_insertar=' . $conf_insertar; ?>';
     var segundos = 0;
@@ -3281,6 +3449,17 @@ if (($action == 'edit') && ($order_exists == true)) {
                                                        <?php } ?>
 
 
+
+
+
+
+
+            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+
+
+
+
+
  <form name="f"  method="post" action="<?php echo $PHP_SELF.'?oID='.$oID.'&action=edit&action_cod=o&escbot=ok'; ?>">
   <p style="margin-top: 0; margin-bottom: 0"><b><font face="Verdana" size="1">Codigo Barras / Referencia /
 
@@ -3304,6 +3483,11 @@ if (($action == 'edit') && ($order_exists == true)) {
 	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
 					configuration_value = '" . 1 . "'
 					WHERE configuration_key = '" . 'NEW_PRODUCT' . "' ");
+     
+
+
+
+     
 
                         }else if ($new_product == 2){
 	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
@@ -3323,14 +3507,30 @@ $checked_1 = 'checked';
 if ($new_product_configuration['configuration_value'] == 2 ){
 
 $checked_0 = 'checked';
-}
+}                    if (AYUDA_ADMIN == 'true'){
+                 $ayuda_buscar_facturacion_regular= '<a class="hastip"  title="' . AYUDA_TEXT_FACTURACION_REGULAR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                 $ayuda_buscar_facturacion_nuevo_producto = '<a class="hastip"  title="' . AYUDA_TEXT_FACTURACION_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                 $ayuda_codigo_barras = '<a class="hastip"  title="' . AYUDA_TEXT_CODIGO_BARRAS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                 $ayuda_buscar_inactive = '<a class="hastip"  title="' . AYUDA_TEXT_BUSCAR_INACTIVE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                 $ayuda_buscar_producto = '<a class="hastip"  title="' . AYUDA_TEXT_BUSCAR_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                 $ayuda_udidades = '<a class="hastip"  title="' . AYUDA_TEXT_UNIDADES . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+
+
+                   }
+
+
+
+
+
+             echo     $ayuda_buscar_facturacion_nuevo_producto;
+
 
 
 
 
                    ?>
 
-<input type="radio" value="1" <?php echo $checked_1; ?> name="new_product">   <input type="radio" value="2" <?php echo $checked_0; ?> name="new_product">
+<input type="radio" value="1" <?php echo $checked_1; ?> name="new_product">   <?php  echo     $ayuda_buscar_facturacion_regular; ?><input type="radio" value="2" <?php echo $checked_0; ?> name="new_product">
 
 
        
@@ -3340,11 +3540,11 @@ $checked_0 = 'checked';
   <p style="margin-top: 0; margin-bottom: 0">
 
 
-
+            <?php     echo     $ayuda_codigo_barras; ?>
 
 
     <font size="1" face="Verdana"><b>
-    <input  name="codigobarras" value ="<?php echo $codigobarras_negativos_pro; ?>" type="text" size="20">
+    <input  name="codigobarras" value ="<?php echo $codigobarras_negativos.$codigobarras_in; ?>" type="text" size="20">
 
    <?php   if ($login_groups_id == 1){
     //<input name="proveedorprice" type="text" value="" size="6">
@@ -3359,6 +3559,9 @@ $checked_0 = 'checked';
          }
 
 
+      // seleccionado busca todos los productos que esten activados o desactivados.
+            echo     $ayuda_udidades;
+
            ?>
 
   <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3"> </b></font>
@@ -3370,13 +3573,20 @@ $checked_0 = 'checked';
     
     <?php
       // seleccionado busca todos los productos que esten activados o desactivados.
-
+            echo     $ayuda_buscar_inactive;
        ?>
 <input type="checkbox" name="stock_disponible" value="ON">
     
     <input name="palabraclave" type="text" value="" size="20" style="font-family: Verdana; font-size: 8pt; color: #000080; border-style: outset; border-width: 3; background-color: #FFFF00">
      <input type="hidden" name="add_product">
-    <input type="submit" name="Submit" value="Buscar" style="color: #FFFFFF; font-family: ve; font-size: 8pt; background-color: #008080">
+
+
+    <?php
+      // seleccionado busca todos los productos que esten activados o desactivados.
+            echo     $ayuda_buscar_producto;
+       ?>
+
+                <input type="submit" name="Submit" value="Buscar" style="color: #FFFFFF; font-family: ve; font-size: 8pt; background-color: #008080">
     </b></font>
 
 </form>
@@ -3477,13 +3687,36 @@ $checked_0 = 'checked';
  $products_stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $orders['products_id'] . "'");
  $products_stock = tep_db_fetch_array($products_stock_values);
 
+
+
+
+                            // IMAGENES DE PRODUCTO
+                         $products_imagen = $orders['products_image'];
+                         $codigo_proveedor = $orders['codigo_proveedor'];
+if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_imagen)) {
+                                          }else{
+        $image_product = DIR_WS_CATALOG_IMAGES . 'imnd.svg';
+}
+
+                               //IMAGENES PRODUCTOS
+  $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $codigo_proveedor . "'");
+  $codigo_proveedor= tep_db_fetch_array($codigo_proveedor_values);
+
+
+ if (file($codigo_proveedor['proveedor_ruta_images'] . $products_imagen)) {
+ $image_product = $codigo_proveedor['proveedor_ruta_images'] . $products_imagen;
+}
+                                          //  echo  $order->products[$i]['codigo_proveedor'];
+if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_imagen)) {
+        $image_product = DIR_WS_CATALOG_IMAGES . $products_imagen;
+}
   ?>
   
 
   
   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
   <tr>
-   <td width="5%"><font size="1" face="Verdana"><p></a><img src="<?php echo HTTP_CATALOG_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . $orders['products_image'] ?>" width="35" ></p></font></td>
+   <td width="5%"><font size="1" face="Verdana"><p></a><img src="<?php echo $image_product ?>" width="35" ></p></font></td>
 
    <td width="20%"><font size="1" face="Verdana"><p> <form method="POST" action="<?php echo $PHP_SELF . '?pcla=ok&action=edit&action_cod=ok&oID='.$oID.'&productoid='.$orders['products_id']; ?>">
 	<input type="text" name="unidades" size="3" value="1" style="font-family: Verdana; font-size: 8pt; background-color: #FFCC00"><input type="submit" value="Añadir" name="B1" style="font-size: 8pt; font-family: Verdana; color: #FFFFFF; font-weight: bold; background-color: #000080"></p>
@@ -3978,28 +4211,45 @@ $checked_0 = 'checked';
              <td class="main" bgcolor="#C9C9C9" width="10">
 
               <td class="main" bgcolor="#C9C9C9" width="10">
-              
-   <?php echo tep_draw_form('orders', 'edit_orders_tienda.php', '', 'get'); ?>
-                <?php echo 'Actualizar'. ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?>
+               <?php
+                   if (AYUDA_ADMIN == 'true'){
+               $ayuda_editar = '<a class="hastip"  title="' . AYUDA_TEXT_EDITAR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+               $ayuda_actualizar = '<a class="hastip"  title="' . AYUDA_TEXT_ACTUALIZAR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+               $ayuda_descuento_pedido = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_PEDIDO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+               $ayuda_descuento_cliente = '<a class="hastip"  title="' . AYUDA_TEXT_DESCUENTO_CLIENTE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+               $ayuda_keywoards_cliente = '<a class="hastip"  title="' . AYUDA_TEXT_KEYWOARDS_CLIENTE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+               $ayuda_keywoards_producto = '<a class="hastip"  title="' . AYUDA_TEXT_KEYWOARDS_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+                                                   }
+
+
+                   ?>
 
                                        </form>
 
               <td class="main" bgcolor="#C9C9C9" width="10">
 
-              <?php echo tep_draw_form('orders', FILENAME_ORDERS_TIENDA, '', 'get'); ?>
-        <?php echo 'Editar' . ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?>
+              <?php echo tep_draw_form('orders', 'edit_orders_tienda.php', '', 'get'); ?>
+        <?php echo 'Actualizar'  .$ayuda_actualizar.  ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?>
 
                                           </form>
 
 
            <td class="main" bgcolor="#C9C9C9" width="10">
            
+               <?php echo tep_draw_form('orders', FILENAME_ORDERS_TIENDA, '', 'get'); ?>
+        <?php echo 'Editar' .$ayuda_editar. ' ' . tep_draw_input_field('oID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?>
+
+                                          </form>
+
+
+           <td class="main" bgcolor="#C9C9C9" width="10">
+
 
 
               <td class="main" bgcolor="#C9C9C9" width="10">
               
                   <?php echo tep_draw_form('descuento_pedido', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
-           <?php echo 'Descuento en pedido' . ' ' . $porcentage_tienda['porcentage_tienda']. tep_draw_input_field('descuento_pedido', '', 'size="12"'); ?>
+           <?php echo 'Descuento en pedido' .$ayuda_descuento_pedido. ' ' . $porcentage_tienda['porcentage_tienda']. tep_draw_input_field('descuento_pedido', '', 'size="12"'); ?>
                                                  </form>
 
               <td class="main" bgcolor="#C9C9C9" width="10">
@@ -4007,7 +4257,7 @@ $checked_0 = 'checked';
               <td class="main" bgcolor="#C9C9C9" width="10">
               
                   <?php echo tep_draw_form('descuento_cliente', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
-           <?php echo 'Descuento de Cliente' . ' ' . $customers_porcentage['customers_porcentage']. tep_draw_input_field('descuento_cliente', '', 'size="12"'); ?>
+           <?php echo 'Descuento de Cliente' .$ayuda_descuento_cliente.  ' ' . $customers_porcentage['customers_porcentage']. tep_draw_input_field('descuento_cliente', '', 'size="12"'); ?>
                                                  </form>
                                                                                                         <?php
 
@@ -4017,8 +4267,8 @@ $checked_0 = 'checked';
               <td class="main" bgcolor="#C9C9C9" width="10">
               
               
-                  <?php echo tep_draw_form('keywoard<<<s', FILENAME_ORDERS_TIENDA, '', 'get'); ?>
-           <?php echo 'Datos de Cliente' . ' ' . tep_draw_input_field('keywoards', '', 'size="12"'); ?>
+                  <?php echo tep_draw_form('keywoards', FILENAME_ORDERS_TIENDA, '', 'get'); ?>
+           <?php echo 'Datos de Cliente' .$ayuda_keywoards_cliente. ' ' . tep_draw_input_field('keywoards', '', 'size="12"'); ?>
 
 
                                          </form>
@@ -4032,7 +4282,7 @@ $checked_0 = 'checked';
 
 
                     <?php echo tep_draw_form('products_keywoards', FILENAME_ORDERS_TIENDA, '', 'get'); ?>
-          <?php echo 'Buscar por Producto: ' . ' ' . tep_draw_input_field('products_keywoards', '', 'size="12"'); ?>
+          <?php echo 'Buscar por Producto: ' .$ayuda_keywoards_producto. ' ' . tep_draw_input_field('products_keywoards', '', 'size="12"'); ?>
 
                                               </form>
 
@@ -4098,7 +4348,8 @@ $checked_0 = 'checked';
                                                       p.products_stock_obs,
                                                       p.stock_nivel,
                                                       p.products_image,
-                                                      p.products_shoptoshop,
+                                                      p.codigo_proveedor,
+                                                       p.products_shoptoshop,
                                                       p.products_status,
                                                       p.time_mercancia_entregado_procesando,
                                                       p.products_price,
@@ -4128,6 +4379,7 @@ $checked_0 = 'checked';
                                      'name' => tep_html_quotes($orders_products['products_name']),
                                      'products_id' => $orders_products['products_id'],
                                      'codigo_barras' => $orders_products['codigo_barras'],
+                                     'codigo_proveedor' => $orders_products['codigo_proveedor'],
                                      'cambio_de_productos' => $orders_products['cambio_de_productos'],
                                      'products_image' => $orders_products['products_image'],
                                      'products_status' => $orders_products['products_status'],
@@ -4189,19 +4441,45 @@ $checked_0 = 'checked';
 
 	<tr class="dataTableHeadingRow">
 		  <td class="dataTableHeadingContent"><?php echo 'DEL'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_DEL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-          <?php if (PERMISO_INSERTAR_PRODUCTO_EN_NUEVO_PEDIDO == 'True'){ ?>
+      <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DEL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+     <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'ID'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_ID;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-            <?php } ?>
-
+     <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_ID;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
  	  <td class="dataTableHeadingContent"><?php echo 'EANA'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_EANA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+      <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EANA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
  	  <td class="dataTableHeadingContent"><?php echo 'PVM'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVM;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
+      <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVM;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   
   
   
@@ -4209,89 +4487,246 @@ $checked_0 = 'checked';
   
   
   <?php
-
-
-
-
-
-
+  if (AYUDA_ADMIN == 'true'){
       ?>
       
-      
+  <?php
+    }
+      ?>
       
 
 	  <td class="dataTableHeadingContent"><?php echo 'X'; ?>
-   <a class="hastip"  title="<?php echo AYUDA_TEXT_X;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+         <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+   <a class="hastip"  title="<?php echo AYUDA_TEXT_X;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
  	  <td class="dataTableHeadingContent"><?php echo 'EAN'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_EAN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-       <?php if (PERMISO_DONDE_ESTA == 'True'){ ?>
+          <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EAN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
  	  <td class="dataTableHeadingContent"><?php echo 'NOMBRE'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_NOMBRE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+          <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_NOMBRE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
  	  <td class="dataTableHeadingContent"><?php echo 'PCS'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_PCS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-               <?php } ?>
-
-
+          <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PCS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   	  <td class="dataTableHeadingContent"><?php echo 'PVP'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVP;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-  	  <td class="dataTableHeadingContent"><?php echo 'PVF'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVF;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+           <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVP;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+ 	  <td class="dataTableHeadingContent"><?php echo 'PVF'; ?>
+           <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PVF;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  	  <td class="dataTableHeadingContent"><?php echo 'DESCUENTO'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_DESCUENTO;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+            <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DESCUENTO;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   	  <td class="dataTableHeadingContent"><?php echo 'TOTAL'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_TOTAL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-
-                                               
-
+           <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_TOTAL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   	  <td class="dataTableHeadingContent"><?php echo 'ADD>>'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_ADD;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+           <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_ADD;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	   <td class="dataTableHeadingContent"><?php  echo 'ID Order'; ?></td>
-
   	  <td class="dataTableHeadingContent"><?php echo 'STATUS'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_STATUS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-                            
-                            
-
-
-                            
-                            
-                            
+           <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STATUS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+      
   	  <td class="dataTableHeadingContent"><?php echo 'CATEGORIA'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_CATEGORIA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+                <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_CATEGORIA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   	  <td class="dataTableHeadingContent"><?php echo 'EDITAR'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-	  <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+                <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+     <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_IMAG;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'STOCK'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCK;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCK;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'PENDIENTE'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_PENDIENTE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_PENDIENTE;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'Stock Min'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCKMIN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCKMIN;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 	  <td class="dataTableHeadingContent"><?php echo 'Observa StockMin'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_OBS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-
-	  <td class="dataTableHeadingContent"><?php echo 'OFERTA'; ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_OFERTA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">?</span></font></b>
-
-   <td class="dataTableHeadingContent" align="right"><?php  echo 'Stock Nivel'; ?></td>
-   <td class="dataTableHeadingContent" align="right"><?php  echo 'STS'; ?></td>
-   <td class="dataTableHeadingContent" align="right"><?php  echo 'Ubicación'; ?></td>
-   <td class="dataTableHeadingContent" align="right"><?php  echo 'Editar Ubicación'; ?></td>
-   <td class="dataTableHeadingContent" align="left"><?php  echo 'Stock'; ?></td>
-  <td class="dataTableHeadingContent" align="right"><?php  echo 'Nombre Producto'; ?></td>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_OBS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+	  <td class="dataTableHeadingContent"><?php echo 'Descuento Producto'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DESCUENTO_PRODUCTO;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+	  <td class="dataTableHeadingContent"><?php echo 'Descuento Cantidad'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_DESCUENTO_CANTIDAD;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+	  <td class="dataTableHeadingContent"><?php echo 'Crear Oferta'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_CREAR_OFERTA;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+	  <td class="dataTableHeadingContent"><?php echo 'Stock Nivel'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCK_NIVEL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+	  <td class="dataTableHeadingContent"><?php echo 'STS'; ?>
+              <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STS;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+ 	  <td class="dataTableHeadingContent"><?php echo 'Ubicacion'; ?>
+               <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_UBICACION;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+ 	  <td class="dataTableHeadingContent"><?php echo 'Editar Ubicacion'; ?>
+               <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR_UBICACION;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+ 	  <td class="dataTableHeadingContent"><?php echo 'Stock'; ?>
+               <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_STOCK;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
+ 	  <td class="dataTableHeadingContent"><?php echo 'Nombre Producto'; ?>
+               <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR_NOMBRE_PRODUCTO;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
   <td class="dataTableHeadingContent" align="right"><?php  echo 'Web'; ?></td>
-  <td class="dataTableHeadingContent" align="right"><?php  echo 'or'; ?></td>
+
+ 	  <td class="dataTableHeadingContent"><?php echo 'or'; ?>
+                <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_EXEL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
   <td class="dataTableHeadingContent" align="right"><?php  echo 'Exel'; ?></td>
-  <td class="dataTableHeadingContent" align="right"><?php  echo 'Total'; ?></td>
+  <?php
+    }
+      ?>
+  	  <td class="dataTableHeadingContent"><?php echo 'TOTAL'; ?>
+                <?php
+  if (AYUDA_ADMIN == 'true'){
+      ?>
+  <a class="hastip"  title="<?php echo AYUDA_TEXT_TOTAL;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
+  <?php
+    }
+      ?>
 		</tr>
 	<?php
+
 
 	for ($i=0; $i<sizeof($order->products); $i++) {
 	$orders_products_id = $order->products[$i]['orders_products_id'];
@@ -4438,10 +4873,46 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 }else{
 
 
+
+
+
+
     // BORRAR
    echo	'	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][delete]' type='checkbox' /></div></td>\n";
-    // IMAGENES
-  echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=/product_info.php?products_id=' . $order->products[$i]['products_id'] . '><img border="0" src="'. DIR_WS_CATALOG_IMAGES . $order->products[$i]['products_image'] .'" width="40">' . "\n";
+ // IMAGENES
+
+
+                         $products_imagen = $order->products[$i]['products_image'];
+                         $codigo_proveedor = $order->products[$i]['codigo_proveedor'];
+
+
+;
+                         
+if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_imagen)) {
+                                          }else{
+        $image_product = DIR_WS_CATALOG_IMAGES . 'imnd.svg';
+}
+
+                               //IMAGENES PRODUCTOS
+  $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $codigo_proveedor . "'");
+  $codigo_proveedor= tep_db_fetch_array($codigo_proveedor_values);
+
+
+ if (file($codigo_proveedor['proveedor_ruta_images'] . $products_imagen)) {
+ $image_product = $codigo_proveedor['proveedor_ruta_images'] . $products_imagen;
+}
+                                          //  echo  $order->products[$i]['codigo_proveedor'];
+if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_imagen)) {
+        $image_product = DIR_WS_CATALOG_IMAGES . $products_imagen;
+}
+                         
+                         
+                         
+                         
+
+
+
+  echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=/product_info.php?products_id=' . $order->products[$i]['products_id'] . '><img border="0" src="'. $image_product .'" width="40">' . "\n";
 
     $products_stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" .  $order->products[$i]['products_id'] . "'");
     $products_stock = tep_db_fetch_array($products_stock_values);
@@ -4603,16 +5074,14 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 
 
-   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=categories.php?search=' . $order->products[$i]['model'] . '>' . 'Categoria' .'</td>' . "\n";
-
-
-   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=categories.php?pID=' . $order->products[$i]['products_id'] . '&action=new_product>' . 'Editar' .'</td>' . "\n";
-
+   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=categories.php?search=' . $order->products[$i]['model'] . '>' . 'Categoria' .
+   '	  <a target="_blank" href=categories.php?pID=' . $order->products[$i]['products_id'] . '&action=new_product>' . 'Editar' .
+    '	  <a target="_blank" href=quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1&codigo_proveedor=' . $order->products[$i]['codigo_proveedor'] . '&palabraclave=' . $order->products[$i]['model'] . '&>' . 'Repositorio' .'</td>' . "\n";
 
 
 
                                                  
-   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=/product_info.php?products_id=' . $order->products[$i]['products_id'] . '><img border="0" src="'. DIR_WS_CATALOG_IMAGES . $order->products[$i]['products_image'] .'" width="40">' . "\n";
+   echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=/product_info.php?products_id=' . $order->products[$i]['products_id'] . '><img border="0" src="'. $image_product .'" width="40">' . "\n";
   // echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exterior . '/' . $order->products[$i]['time_mercancia_entregado_procesando'] . '</td>     ' . "\n";
    echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exterior . '/' . $products_stock['products_stock_pendiente'] . '</td>     ' . "\n";
 
@@ -4739,7 +5208,7 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
                      // nombre del producto y cantidad
         echo '	    </td>' . "\n" .
-             '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='38' value='" . $order->products[$i]['name'] . "'><input name='update_products[$orders_products_id][products_news]' type='checkbox' />"  . $products_parametros ;
+             '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='38' value='" . $order->products[$i]['name'] . "'><input name='update_products[$orders_products_id][products_news]' type='checkbox' />" . '<a class="hastip"  title="' . AYUDA_TEXT_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>'  . $products_parametros ;
  		//'	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][peso]' size='7' value='" . $order->products[$i]['peso'] . "
                           // NUEVO PRODUCTO
 
@@ -5193,7 +5662,7 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 ?>
   <tr>
     <td class="main"><b><?php echo ENTRY_CUSTOMER_NAME; ?>: </b></td>
-    <td><span class="main"><input name="update_customer_name" size="25" value="<?php echo tep_html_quotes($order->customer['name']); ?>" /></span></td>
+     <td><span class="main"><input name="update_customer_name" size="25" value="<?php echo tep_html_quotes($order->customer['name']); ?>" /></span></td>
     <td>&nbsp;</td>
     <td><span class="main"><input name="update_delivery_name" size="25" value="<?php echo tep_html_quotes($order->delivery['name']); ?>" /></span></td>
 	<td>&nbsp;</td>
@@ -5290,14 +5759,24 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
                              //  echo 's'.$customers_id.$c_observ['customers_id'].$estatuspmw['customers_id'].$c_customers['customers_observaciones'];
 
 
+   $codigo_proveedor_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+  $lastm= tep_db_fetch_array($codigo_proveedor_values);
 
 
               ?>
  <td class="main"><b><?php echo 'Observaciones'; ?>: </b></td>
     <td><span class="main"><input name="customers_observaciones" size="100" value="<?php echo $c_customers['customers_observaciones']; ?>" />  </span></td>
+      <p>&nbsp;</p>
+    	</td>
+			</tr>
+
+  <td class="main"><b><?php echo 'Fecha Ultima modificación'; ?>: </b></td>
+    <td><span class="main"><input name="update_last_modified" size="20" value="<?php echo $lastm['last_modified']; ?>" /> </span></td>
           <td>&nbsp;</td>   <p>&nbsp;</p>
     	</td>
 			</tr>
+   
+   
 <!-- End Addresses Block -->
 
       <tr>

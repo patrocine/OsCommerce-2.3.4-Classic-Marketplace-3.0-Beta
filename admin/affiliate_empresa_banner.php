@@ -29,20 +29,21 @@ if(mysql_fetch_row($result) == false) {
    tep_db_fetch_array($sql);
 }
 
-     if ($HTTP_GET_VARS['up_actualizar']){
+     if ($_GET['up_actualizar']){
 
 
-                      $sql_status_update_array = array('numero_productos' => $HTTP_POST_VARS['numero_productos'],
-                                                      'nombre' => $HTTP_POST_VARS['nombre'],
-                                                      'email' => $HTTP_POST_VARS['email'],
-                                                      'aut' => $HTTP_POST_VARS['aut'],
-                                                      'url_web' => $HTTP_POST_VARS['url_web'],
-                                                      'nombre_sector' => $HTTP_POST_VARS['nombre_sector'],
-                                                      'nombre_ciudad' => $HTTP_POST_VARS['nombre_ciudad'],
-                                                      'url_enlace' => $HTTP_POST_VARS['url_enlace'],
+                      $sql_status_update_array = array('numero_productos' => $_POST['numero_productos'],
+                                                      'nombre' => $_POST['nombre'],
+                                                      'email' => $_POST['email'],
+                                                      'aut' => $_POST['aut'],
+                                                       'url_empresa_catalog' => $_POST['url'],
+                                                      'url_web' => $_POST['url_web'],
+                                                      'nombre_sector' => $_POST['nombre_sector'],
+                                                      'nombre_ciudad' => $_POST['nombre_ciudad'],
+                                                      'url_enlace' => $_POST['url_enlace'],
                                                      );
 
-             tep_db_perform('affiliate_compartir_empresas', $sql_status_update_array, 'update', " id_banners= '" . $HTTP_GET_VARS['id_banners'] . "'");
+             tep_db_perform('affiliate_compartir_empresas', $sql_status_update_array, 'update', " id_banners= '" . $_GET['id_banners'] . "'");
 
 
 tep_redirect('affiliate_empresa_banner.php');
@@ -53,25 +54,25 @@ tep_redirect('affiliate_empresa_banner.php');
 
                  
                  
-     if ($HTTP_GET_VARS['insertar']){
+     if ($_GET['insertar']){
 
 
 
     $text_email_si .= '<p>Su banner ya esta operativo en la tienda ' . HTTP_SERVER . '</p>';
     $text_email_si .= '<p> Esta confirmación es automática y es enviada en el mismo momento que se ha insertado el registro en la tienda online correspondiente.</p>';
 
-       tep_mail('', $HTTP_POST_VARS['email'], 'Banner Insertado', $text_email_si, '', 'PatroCine.es <patrocinees@gmail.com>');
+       tep_mail('', $_POST['email'], 'Banner Insertado', $text_email_si, '', 'PatroCine.es <patrocinees@gmail.com>');
 
 
-                        $sql_data_array = array('numero_productos' => $HTTP_POST_VARS['numero_productos'],
-                                                      'nombre' => $HTTP_POST_VARS['nombre'],
-                                                      'email' => $HTTP_POST_VARS['email'],
-                                                      'aut' => $HTTP_POST_VARS['aut'],
-                                                      'url_web' => $HTTP_POST_VARS['url_web'],
-                                                      'nombre_sector' => $HTTP_POST_VARS['nombre_sector'],
-                                                      'nombre_ciudad' => $HTTP_POST_VARS['nombre_ciudad'],
-                                                      'url_enlace' => $HTTP_POST_VARS['url_enlace'],
-                                                      'url_empresa_catalog' => $HTTP_POST_VARS['url'],);
+                        $sql_data_array = array('numero_productos' => $_POST['numero_productos'],
+                                                      'nombre' => $_POST['nombre'],
+                                                      'email' => $_POST['email'],
+                                                      'aut' => $_POST['aut'],
+                                                      'url_web' => $_POST['url_web'],
+                                                      'nombre_sector' => $_POST['nombre_sector'],
+                                                      'nombre_ciudad' => $_POST['nombre_ciudad'],
+                                                      'url_enlace' => $_POST['url_enlace'],
+                                                      'url_empresa_catalog' => $_POST['url'],);
                tep_db_perform('affiliate_compartir_empresas', $sql_data_array);
 
 
@@ -130,10 +131,10 @@ tep_redirect('affiliate_empresa_banner.php');
 
 <?php
 
-          $update_reg_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners= '" . $HTTP_GET_VARS['id_banners'] . "'");
+          $update_reg_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners= '" . $_GET['id_banners'] . "'");
       if  ($update_reg = tep_db_fetch_array($update_reg_values)){
 
- if ($HTTP_GET_VARS['actualizar']){
+ if ($_GET['actualizar']){
 
      ?>
 
@@ -146,13 +147,16 @@ tep_redirect('affiliate_empresa_banner.php');
 }
 -->
 </style>
-<body class="Estilo1"><form name="form1" method="post" action="<?php echo 'affiliate_empresa_banner.php' . '?' . 'up_actualizar=' . 'Array'.'&id_banners='.$HTTP_GET_VARS['id_banners']?>">
+<body class="Estilo1"><form name="form1" method="post" action="<?php echo 'affiliate_empresa_banner.php' . '?' . 'up_actualizar=' . 'Array'.'&id_banners='.$_GET['id_banners']?>">
    <p>URL BANNER
      <input name="url" type="text" size="80" value="<?php echo $update_reg['url_empresa_catalog'] ?>" maxlength="255">
 </p>
 
    <p>URL ENLACE
      <input name="url_enlace" type="text" size="80" value="<?php echo $update_reg['url_enlace']  ?>" maxlength="255">
+</p>
+   <p>URL AFFILIATE
+     <input name="url_affiliate" type="text" size="80" value="<?php echo $update_reg['url_affiliate']  ?>" maxlength="255">
 </p>
 
    <p>Sector
@@ -287,7 +291,7 @@ tep_redirect('affiliate_empresa_banner.php');
       $image_sc = HTTP_SERVER . DIR_WS_CATALOG . 'affiliate_banners_products.php?pro_ale=';;
       $image_en = HTTP_SERVER . DIR_WS_CATALOG . 'enlace.php';;
       $url_web = HTTP_SERVER . DIR_WS_CATALOG;
-      $url_affiliate = HTTP_SERVER . DIR_WS_CATALOG . 'index.php?product_info.php?ref=1';
+      $url_affiliate = HTTP_SERVER . DIR_WS_CATALOG . 'index.php?ref=1';
       $nombre = STORE_NAME;
       $nombre_sector = NOMBRE_SECTOR;
       $nombre_ciudad = NOMBRE_CIUDAD_TIENDA;

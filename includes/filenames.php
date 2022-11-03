@@ -72,7 +72,7 @@ define('FILENAME_SITE_SEARCH', 'site_search.php');
   define('FILENAME_PRIVACY', 'privacy.php');
   define('FILENAME_PRODUCT_INFO', 'product_info.php');
 
-  define('FILENAME_PRODUCT_LISTING', 'product_listing_multi.php');
+  define('FILENAME_PRODUCT_LISTING', 'product_listing.php');
   
   
   define('FILENAME_PRODUCT_REVIEWS', 'product_reviews.php');

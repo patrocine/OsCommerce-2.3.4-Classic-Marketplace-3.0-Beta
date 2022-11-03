@@ -28,7 +28,7 @@ p.products_price, if(s.status, s.specials_new_products_price, null) as specials_
   } else {
     $new_products_query = tep_db_query(
         "select
-            distinct p.codigo_proveedor, products_porcentage, p.products_id, p.products_image, p.products_tax_class_id, pd.products_name, p.products_model, pd.products_description,
+            distinct p.codigo_proveedor, products_porcentage, p.products_id, p.products_image,  p.products_tax_class_id, pd.products_name, p.products_model, pd.products_description,
   p.products_price, if(s.status, s.specials_new_products_price, null) as specials_new_products_price
         from
             " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id,

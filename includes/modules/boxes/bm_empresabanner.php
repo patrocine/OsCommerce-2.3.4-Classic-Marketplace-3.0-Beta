@@ -62,7 +62,12 @@
 
     $tiendas_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
    while ($tiendas = tep_db_fetch_array($tiendas_values)){
+                     if ($tiendas['url_affiliate']){
 
+          }else{
+        $tiendas['url_affiliate'] = $tiendas['url_web'];
+
+      }
 
        ?>
        
@@ -72,7 +77,7 @@
 
 <?php  $a .='<tr>' ;?>
 <?php  $a .='<td colspan="2">'; ?>
-<?php  $a .='  <p align="center"><b><font size="4">'. '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</font></b></td>'; ?>
+<?php  $a .='  <p align="center"><b><font size="4">'. '<a href="'.$tiendas['url_affiliate'] .'"><img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</a></font></b></td>'; ?>
 <?php  $a .='</tr>'; ?>
 <?php  $a .='<tr>'; ?>
 <?php  $a .='<td width="100%" colspan="2">'; ?>
@@ -88,7 +93,7 @@
 <?php  $a .='</tr>' ?>
 <?php  $a .='<tr>' ?>
 <?php  $a .='<td colspan="2">' ?>
-<?php  $a .='	<p align="right"><b><a href="'.$tiendas['url_web'] .'"><font size="3">Visitar Merkaplace-&gt;&gt;</font></a></b></td>' ?>
+<?php  $a .='	<p align="right"><b><a href="'.$tiendas['url_affiliate'] .'"><font size="3">Visitar Marketplace-&gt;&gt;</font></a></b></td>' ?>
 <?php  $a .='</tr>' ?>
 <?php  $a .='</tr>' ?>
 
@@ -121,7 +126,12 @@
     $tiendas_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where id_banners = '" .  $banner['id_banners'] . "'");
    if ($tiendas = tep_db_fetch_array($tiendas_values)){
 
+               if ($tiendas['url_affiliate']){
 
+          }else{
+        $tiendas['url_affiliate'] = $tiendas['url_web'];
+
+      }
        ?>
 
 
@@ -130,7 +140,7 @@
 
 <?php  $b .='<tr>' ;?>
 <?php  $b .='<td colspan="2">'; ?>
-<?php  $b .='  <p align="center"><b><font size="4">'. '<img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</font></b></td>'; ?>
+<?php  $b .='  <p align="center"><b><font size="4">'. '<a href="'.$tiendas['url_affiliate'] .'"><img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' .'</a></font></b></td>'; ?>
 <?php  $b .='</tr>'; ?>
 <?php  $b .='<tr>'; ?>
 <?php  $b .='<td width="100%" colspan="2">'; ?>
@@ -146,7 +156,7 @@
 <?php  $b .='</tr>' ?>
 <?php  $b .='<tr>' ?>
 <?php  $b .='<td colspan="2">' ?>
-<?php  $b .='	<p align="right"><b><a href="'.$tiendas['url_web'] .'"><font size="3">Visitar Merkaplace-&gt;&gt;</font></a></b></td>' ?>
+<?php  $b .='	<p align="right"><b><a href="'.$tiendas['url_affiliate'] .'"><font size="3">Visitar Marketplace-&gt;&gt;</font></a></b></td>' ?>
 <?php  $b .='</tr>' ?>
 <?php  $b .='</tr>' ?>
 
@@ -182,7 +192,9 @@
 
               
 	  $infobox = new azInfoBox();
-      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>'.'<p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Software licencia GNU</a></font></b> <img border="0" src="'.'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'.'" width="30" height="">'  . '<p><b><font size="2">MERKAPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
+      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' .
+      '<p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Descargar Tienda</a></font></b> <img border="0" src="'.'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'.'" width="30" height="">'   .
+      '<p><b><font size="2">MARKETPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
       $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);

@@ -28,25 +28,25 @@
 
 
 
-               $factura_orders_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-                while   ( $factura_orders = mysql_fetch_array($factura_orders_values)) {
+               $factura_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+                while   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
 
 
           $factura_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $factura_orders['orders_id'] . "'";
-  $factura_price_query = mysql_query($factura_price_raw);
-  $factura_price= mysql_fetch_array($factura_price_query);
+  $factura_price_query = tep_db_query($factura_price_raw);
+  $factura_price= tep_db_fetch_array($factura_price_query);
 
 
 
- $factura_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = mysql_fetch_array($factura_shipping_values);
+ $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
+              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
 
- $factura_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = mysql_fetch_array($factura_total_values);
+ $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
+              $factura_total = tep_db_fetch_array($factura_total_values);
 
 
- $factura_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = mysql_fetch_array($factura_subtotal_values);
+ $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
+              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
 
 
 
@@ -59,7 +59,7 @@
 
 }
 
- $admin_lof_values = mysql_query("select * from " . TABLE_ADMIN . " where id = '" . $admin['id'] . "'");
+ $admin_lof_values = tep_db_query("select * from " . TABLE_ADMIN . " where id = '" . $admin['id'] . "'");
  $admin_lof = mysql_fetch_array($admin_lof_values);
 
 
@@ -119,8 +119,8 @@ DETALLES DE FACTURA</font></b></u></p>
  
  
                                    <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 <tr>
 			<td width="7%" height="21">  <b>  <?php echo $factura_products['products_id'] ?>&nbsp;&nbsp;  </td>

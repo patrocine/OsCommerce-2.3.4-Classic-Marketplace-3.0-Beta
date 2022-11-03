@@ -10,7 +10,8 @@
   This version was contributed by Blue Dog (simon@bluedogweb.co.uk)
 
   Copyright (c) 2002 osCommerce
-
+                      $status_procesando_paypal_query = tep_db_query("select * from " . 'proveedor' . " ORDER BY proveedor_name");
+        while ($status_procesando_paypal = tep_db_fetch_array($status_procesando_paypal_query)) {
   Released under the GNU General Public License
 */
 
@@ -30,7 +31,7 @@
     $action  = $_GET['action'];
 
   IF ($MAX_DISPLAY_SEARCH_RESULTS == 0){
- $MAX_DISPLAY_SEARCH_RESULTS  = 10;
+ $MAX_DISPLAY_SEARCH_RESULTS  = 100;
 }
 
 
@@ -64,7 +65,7 @@ $pendiente_er  = $_POST['pendiente_er'];
  $codigo_proveedor  = 1;
 }
 
-
+   $referencia_padre = $_GET['referencia_padre'];
 
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
@@ -126,8 +127,17 @@ $pendiente_er  = $_POST['pendiente_er'];
 
       $filtro = $_GET['filtro'];
 }
+ if ($_POST['manufacturers_id']){
+   $manufacturers_id = $_POST['manufacturers_id'];
+}else if ($_GET['manufacturers_id']){
+
+      $manufacturers_id = $_GET['manufacturers_id'];
+}
 
 
+$codigo_proveedor_up_replace = $_GET['codigo_proveedor_up_replace'];
+$codigo_proveedor_up = $_GET['codigo_proveedor_up'];
+$codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
 
   tep_db_query("delete from " . 'specials' . " where specials_new_products_price  = '" . 0 . "'");
 
@@ -144,7 +154,7 @@ $pendiente_er  = $_POST['pendiente_er'];
 
           $_POST['product_new_weight'];
 
-        mysql_query("UPDATE products SET products_price=$new_price WHERE products_id=$id");
+        tep_db_query("UPDATE products SET products_price=$new_price WHERE products_id=$id");
     }
 
 
@@ -153,7 +163,7 @@ $pendiente_er  = $_POST['pendiente_er'];
 
          $_POST['product_new_status'];
 
-        mysql_query("UPDATE products SET products_weight=$new_weight WHERE products_id=$id");
+        tep_db_query("UPDATE products SET products_weight=$new_weight WHERE products_id=$id");
     }
     
     
@@ -164,7 +174,7 @@ $pendiente_er  = $_POST['pendiente_er'];
 
 
 
-        mysql_query("UPDATE products SET products_status=$new_status WHERE products_id=$id");
+        tep_db_query("UPDATE products SET products_status=$new_status WHERE products_id=$id");
     }
 
 
@@ -172,7 +182,7 @@ $pendiente_er  = $_POST['pendiente_er'];
 
 
 
-        mysql_query("UPDATE products SET products_status_exel=$new_status_exel WHERE products_id=$id");
+        tep_db_query("UPDATE products SET products_status_exel=$new_status_exel WHERE products_id=$id");
     }
     
     
@@ -181,32 +191,130 @@ $pendiente_er  = $_POST['pendiente_er'];
 
 
 
-        mysql_query("UPDATE products SET products_regladeprecios=$new_regladeprecios WHERE products_id=$id");
+        tep_db_query("UPDATE products SET products_regladeprecios=$new_regladeprecios WHERE products_id=$id");
     }
 
 
 
      foreach($_POST['products_new_filtro'] as $id => $new_filtro) {
 
+          $sql_status_update_array = array('filtro' => $new_filtro);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
-        mysql_query("UPDATE products SET filtro=$new_filtro WHERE products_id=$id");
+     }
+     
+     foreach($_POST['products_new_products_cpe'] as $id => $products_cpe) {
+
+          $sql_status_update_array = array('products_cpe' => $products_cpe);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+     }
+     
+     
+     
+     foreach($_POST['products_new_products_cpf'] as $id => $products_cpf) {
+
+          $sql_status_update_array = array('products_cpf' => $products_cpf);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+     }
+     
+     
+     foreach($_POST['products_new_products_rc'] as $id => $products_rc) {
+
+          $sql_status_update_array = array('products_rc' => $products_rc);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+     }
+
+
+
+     foreach($_POST['products_new_referencia_padre_g2'] as $id => $referencia_padre_g2) {
+
+          $sql_status_update_array = array('referencia_padre_g2' => $referencia_padre_g2);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+     }
+     
+     foreach($_POST['products_new_referencia_padre_g3'] as $id => $referencia_padre_g3) {
+
+          $sql_status_update_array = array('referencia_padre_g3' => $referencia_padre_g3);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+     }
+     
+     
+     foreach($_POST['products_new_referencia_padre'] as $id => $new_model) {
+
+          $sql_status_update_array = array('referencia_padre' => $new_model);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
     }
+     
+     
     
      foreach($_POST['products_new_model'] as $id => $new_model) {
+
+          $sql_status_update_array = array('products_model' => $new_model);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
+    }
+     foreach($_POST['products_new_model_2'] as $id => $new_model) {
 
           $sql_status_update_array = array('products_model_2' => $new_model);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
-      //  mysql_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
     }
 
+
+
+       foreach($_POST['products_new_model_3'] as $id => $new_model) {
+
+          $sql_status_update_array = array('products_model_3' => $new_model);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
+    }
+    
+    
+       foreach($_POST['products_new_products_youtube_1'] as $id => $new_model) {
+
+          $sql_status_update_array = array('products_youtube_1' => $new_model);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
+    }
+
+       foreach($_POST['products_new_products_youtube_2'] as $id => $new_products_youtube_2) {
+
+          $sql_status_update_array = array('products_youtube_2' => $new_products_youtube_2);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+      //  tep_db_query("UPDATE products SET p.products_model_2=$new_model WHERE products_id=$id");
+    }
+
+
+    
      foreach($_POST['products_new_stock_min'] as $id => $products_stock_min) {
 
 
-
-        mysql_query("UPDATE products SET products_stock_min=$products_stock_min WHERE products_id=$id");
+          $sql_status_update_array = array('products_stock_min' => $products_stock_min);
+            tep_db_perform('products_stock', $sql_status_update_array, 'update', " products_id='" . $id . "'");
     }
 
 
@@ -217,8 +325,15 @@ $pendiente_er  = $_POST['pendiente_er'];
 
 
 
-        mysql_query("UPDATE products SET stock_nivel=$new_stocknivel WHERE products_id=$id");
+        tep_db_query("UPDATE products SET stock_nivel=$new_stocknivel WHERE products_id=$id");
     }
+     foreach($_POST['products_new_manufacturers_id'] as $id => $new_manufacturers_id) {
+
+
+          $sql_status_update_array = array('manufacturers_id' => $new_manufacturers_id);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+   }
 
 
 
@@ -227,11 +342,11 @@ $pendiente_er  = $_POST['pendiente_er'];
      foreach($_POST['products_new_dondeesta'] as $id => $new_dondeesta) {
 
 
-            $dondeesta_values = mysql_query("select * from " . 'products_donde_esta' . " where products_id = '" . $id . "' and login_id = '" . $log_id . "'");
-           if ($dondeesta= mysql_fetch_array($dondeesta_values)){
+            $dondeesta_values = tep_db_query("select * from " . 'products_donde_esta' . " where products_id = '" . $id . "' and login_id = '" . $log_id . "'");
+           if ($dondeesta= tep_db_fetch_array($dondeesta_values)){
 
-      $dondeesta_model_values = mysql_query("select * from " . 'products' . " where products_id = '" . $id . "'");
-           $dondeesta_model= mysql_fetch_array($dondeesta_model_values);
+      $dondeesta_model_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $id . "'");
+           $dondeesta_model= tep_db_fetch_array($dondeesta_model_values);
 
 
 
@@ -242,8 +357,8 @@ $pendiente_er  = $_POST['pendiente_er'];
 
                                                              }else{
 
-      $dondeesta_model_values = mysql_query("select * from " . 'products' . " where products_id = '" . $id . "'");
-           $dondeesta_model= mysql_fetch_array($dondeesta_model_values);
+      $dondeesta_model_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $id . "'");
+           $dondeesta_model= tep_db_fetch_array($dondeesta_model_values);
 
 
                   $sql_data_array = array('products_id' => $id,
@@ -266,8 +381,8 @@ $time1 = mktime(1, 1, 1, date("m"), date("d"), date("Y"));
 $oldday1 = date("Y-m-d", $time1);
 
 
-            $special_exist_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $id . "'");
-           if ($special_exist= mysql_fetch_array($special_exist_values)){
+            $special_exist_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $id . "'");
+           if ($special_exist= tep_db_fetch_array($special_exist_values)){
 
 
 
@@ -312,16 +427,20 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-             mysql_query("UPDATE specials SET specials_new_products_price=$new_status_special_price WHERE products_id=$id");
+
+          $sql_status_update_array = array('specials_new_products_price' => $new_status_special_price);
+            tep_db_perform('specials', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
 
 
 
      }
 
+ $referencia_padre = $_GET['referencia_padre'];
 
 
 
-      tep_redirect($PHP_SELF . '?codigo_proveedor='.$codigo_proveedor . '&palabraclave=' . $palabraclave . '&buscar=' . $buscar . '&status_active='. $status_active . '&status_exel_web=' . $status_exel_web . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS);
+     tep_redirect($PHP_SELF . '?codigo_proveedor='.$codigo_proveedor . '&palabraclave=' . $palabraclave . '&buscar=' . $buscar . '&status_active='. $status_active . '&status_exel_web=' . $status_exel_web . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro . '&referencia_padre=' . $referencia_padre . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS);
 
 
    echo "<td width=\"100%\" valign=\"top\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\">
@@ -429,10 +548,21 @@ function popupWindow(url) {
 .Estilo3 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; }
 -->
 </style>
+
+
+<SCRIPT>
+<!--
+function qu(){document.s.palabraclave.focus();}
+function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURIComponent ? encodeURIComponent : escape;var u="";var oi_param="";var cad_param="";if (url) u="&url="+e(url.replace(/#.*/,"")).replace(/\+/g,"%2B");if (oi) oi_param="&oi="+e(oi);if (cad) cad_param="&cad="+e(cad);new Image().src="/url?sa=T"+oi_param+cad_param+"&ct="+e(ct)+"&cd="+e(cd)+u+"&ei=yzHqRPLoGpy2QP6B_X0"+sg;}return true;}
+// -->
+</SCRIPT>
+
+  <BODY topMargin=3 onload=qu()>
+
 <body class="Estilo1">
 <table width="100%" border="0">
 <tr>
-    <td><form name="form1" method="post" action="<?php echo $PHP_SELF . '?buscar=ok&page='.$page . '&MAX_DISPLAY_SEARCH_RESULTS='.$MAX_DISPLAY_SEARCH_RESULTS.'&codigo_proveedor='.$codigo_proveedor; ?>">
+    <td><form name="s" method="post" action="<?php echo $PHP_SELF . '?buscar=ok&page='.$page . '&MAX_DISPLAY_SEARCH_RESULTS='.$MAX_DISPLAY_SEARCH_RESULTS.'&codigo_proveedor='.$codigo_proveedor; ?>">
       <table width="100%" border="0">
         <tr>
           <td width="227"><span class="Estilo3 Estilo1 Estilo2">Busquedas</span></td>
@@ -470,6 +600,21 @@ function popupWindow(url) {
 
 
      ?>
+     
+     
+ <?php
+       $status_procesando_paypal_array = array(array('id' => '0', 'text' => TEXT_NONE));
+        $status_procesando_paypal_query = tep_db_query("select * from " . 'proveedor' . " ORDER BY proveedor_name");
+        while ($status_procesando_paypal = tep_db_fetch_array($status_procesando_paypal_query)) {
+          $status_procesando_paypal_array[] = array('id' => $status_procesando_paypal['proveedor_id'],
+                                  'text' => $status_procesando_paypal['proveedor_name']);
+        }
+        echo 'Proveedores: ' . tep_draw_pull_down_menu('codigo_proveedor', $status_procesando_paypal_array, $codigo_proveedor);
+
+  ?>
+     
+     
+     
 
        <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
 
@@ -552,16 +697,7 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
 
 
 
-<?php
-       $status_procesando_paypal_array = array(array('id' => '0', 'text' => TEXT_NONE));
-        $status_procesando_paypal_query = tep_db_query("select * from " . 'proveedor' . " ORDER BY proveedor_name");
-        while ($status_procesando_paypal = tep_db_fetch_array($status_procesando_paypal_query)) {
-          $status_procesando_paypal_array[] = array('id' => $status_procesando_paypal['proveedor_id'],
-                                  'text' => $status_procesando_paypal['proveedor_name']);
-        }
-        echo 'Proveedores: ' . tep_draw_pull_down_menu('codigo_proveedor', $status_procesando_paypal_array, $codigo_proveedor);
 
-  ?>
 
 
 
@@ -580,7 +716,41 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
 
 
 
+           <?php
 
+          if (AYUDA_ADMIN == 'true'){
+
+$ayuda_fabricantes = '<p><a href="manufacturers.php">Ir A Fabricantes </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_FABRICANTES . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_stockminimo = '<p><a href="conceptos_stock_min.php">Ir A lista stock mininimo </a> '.'<a class="hastip"  title="' . AYUDA_TEXT_STOCKMINIMO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+
+
+
+
+
+$ayuda_filtro = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_FILTRO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_dondeesta = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_DONDEESTA . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_nombre_producto = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_NOMBRE_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_model = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_MODEL . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_imagen = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_IMAGEN . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_preciooferta = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_PRECIOOFERTA . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_ofertaon = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_OFERTAON . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_ofertaoff = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_OFERTAOFF . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_referencia_padre = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REFERENCIA_PADRE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_active = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_ACTIVE . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_preciooferta_onoff = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_PRECIOOFERTA_10 . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_peso = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_PESO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_youtube1 = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_YOUTUBE1 . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_youtube2 = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_YOUTUBE2 . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+$ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REFER_EXTERIOR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
+
+
+}
+
+ $refp = '?codigo_proveedor=' . $codigo_proveedor . '&palabraclave=' . $palabraclave . '&buscar=ok&status_active=' . $status_active . '&status_exel_web=' . $status_exel_web . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro . '&referencia_padre=' . 'order' . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS . '';
+ $refpdes = '?codigo_proveedor=' . $codigo_proveedor . '&palabraclave=' . $palabraclave . '&buscar=ok&status_active=' . $status_active . '&status_exel_web=' . $status_exel_web . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro . '&referencia_padre=' . 'order' . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS . '';
+
+
+                   ?>
 
 <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
@@ -596,20 +766,31 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo 'Id'; ?></td>
-                 <td class="dataTableHeadingContent"><?php echo 'Exel'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Web'; ?></td>
-               <td class="dataTableHeadingContent"><?php echo 'Nombre'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Stock Min/max'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Filtro'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Donde Esta'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Imagen'; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo 'Oferta Precio'; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo 'Oferta SI'; ?></td>
-                <td class="dataTableHeadingContent" align="center"><?php echo 'Oferta NO'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Modelo'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Activo'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Inactivo'; ?></td>
-                <td class="dataTableHeadingContent"><?php echo 'Peso'; ?></td>
+                 <td class="dataTableHeadingContent"><?php echo 'On'.$ayuda_active; ?></td>
+                 <td class="dataTableHeadingContent"><?php echo 'Off'; ?></td>
+                 <td class="dataTableHeadingContent"><?php echo 'Idc'; ?></td>
+               <td class="dataTableHeadingContent"><?php echo 'Refer Padre extra' ; ?></td>
+              <td class="dataTableHeadingContent"><?php echo '<a href="' . $PHP_SELF . '' . $refp . '">Refer Padre</a>'.$ayuda_referencia_padre ; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Refer Padre ' .$codigo_proveedor. ' '.$ayuda_refer_exterior; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Repositorio' .$ayuda_repositorio; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Model' .$ayuda_model; ?></td>
+               <td class="dataTableHeadingContent"><?php echo 'Nombre' .$ayuda_nombre_producto; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Regla Categoria' .$ayuda_regla_categoria; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Regla Fabricante' .$ayuda_regla_fabricante; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Reglas 1-2'; ?></td>
+              <td class="dataTableHeadingContent"><?php echo 'Filtro' .$ayuda_filtro; ?></td>
+                 <td class="dataTableHeadingContent"><?php echo 'Stock Recomen' . $ayuda_stockminimo; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Donde Esta'. $ayuda_dondeesta; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Fabricante '.$ayuda_fabricantes; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo 'Imagen'.$ayuda_imagen; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo 'Precio'; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo 'Oferta Precio 1-0'.$ayuda_preciooferta.$ayuda_preciooferta_onoff; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo 'Regla de Precio '; ?></td>
+                <td class="dataTableHeadingContent" align="center"><?php echo '1'.$ayuda_ofertaon; ?></td>
+                <td class="dataTableHeadingContent"><?php echo '0'.$ayuda_ofertaoff; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Peso'.$ayuda_peso; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Yutube1'.$ayuda_youtube1; ?></td>
+                <td class="dataTableHeadingContent"><?php echo 'Yutube2'.$ayuda_youtube1; ?></td>
                <td class="dataTableHeadingContent" align="center"><?php echo 'Precio'; ?>
               <td class="dataTableHeadingContent" align="center"><?php echo 'Reglas de Precios'; ?>&nbsp;</td>
               <td class="dataTableHeadingContent" align="center"><?php echo 'Stock Nivel'; ?>&nbsp;</td>
@@ -663,11 +844,44 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                    
                                                    
                  ?>
-<form name="update" method="post" action="<?php echo "$PHP_SELF?action=updateprices" . $codigo_proveedor_b . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS . '&palabraclave=' . $palabraclave . '&buscar=' . $buscar . '&status_exel_web=' . $status_exel_web . '&status_active=' . $status_active . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel  . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro; ?>">
+<form name="update" method="post" action="<?php echo "$PHP_SELF?action=updateprices" . $codigo_proveedor_b . '&MAX_DISPLAY_SEARCH_RESULTS=' . $MAX_DISPLAY_SEARCH_RESULTS . '&palabraclave=' . $palabraclave . '&buscar=' . $buscar . '&status_exel_web=' . $status_exel_web . '&status_active=' . $status_active . '&regladeprecios=' . $regladeprecios . '&stocknivel=' . $stocknivel  . '&status_oferta=' . $status_oferta . '&filtro=' . $filtro . '&referencia_padre=' . $referencia_padre; ?>">
           <tr class="datatableRow">            
 <?    
 
+  $referencia_padre = $_GET['referencia_padre'];
+
+
+
+               if ($referencia_padre == 'order'){
+    $order_byy='referencia_padre';
+}else{
+  $order_byy='products_name';
+}
+
+    ECHO '<p><a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update'.'"><b>Importar Parametros de ...</b></a></p>';
+    ECHO '<p><a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'"><font color="#FF0000"><b>Importar REEMPLAZAR Parametros de ...</b></font></a></p>';
+
+    ECHO '<p><a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'">
+    <font color="#FF0000"><b>Refer Padre - </b></font></a>
     
+    <a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'">
+    <font color="#FF0000"><b>Imagenes - </b></font></a>
+    
+    <a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'">
+    <font color="#FF0000"><b>Nombre Producto - </b></font></a>
+    
+    <a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'">
+    <font color="#FF0000"><b>Youtube1 - </b></font></a>
+    
+    <a href="'.$PHP_SELF.$refp.'&codigo_proveedor_up=update&codigo_proveedor_up_replace=update'.'">
+    <font color="#FF0000"><b>Youtube2 - </b></font></a>
+
+    </p>';
+
+  //  ECHO '<p><a href="'.$PHP_SELF.$refp.'&codigo_proveedor_description_up=update'.'"><b>Importar Descripciones de ...</b></a></p>';
+
+
+
 
   //$affiliate_sales_raw = "select op.products_name, op.orders_id from " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'admin' . " a left join " . TABLE_ORDERS_PRODUCTS . " op on op.orders_id = o.orders_id where op.products_id = p.products_id and o.orders_status = '" . $entregas_stock . "'";
       if ($buscar){
@@ -677,7 +891,15 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.products_youtube_1,
+                                                      p.products_youtube_2,
                                                       p.filtro,
+                                                      p.products_rc,
+                                                      p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
+                                                      p.referencia_padre,
                                                       p.stock_nivel,
                                                       p.products_image,
                                                       p.products_price,
@@ -700,9 +922,56 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_status_exel,
                                                       pde.donde_esta,
                                                       p.codigo_proveedor,
-                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p left join  " . TABLE_SPECIALS . " ps on ps.products_id = p.products_id,  " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id  and pde.login_id = '" . $log_id . "' where p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta  $p_filtro and p.codigo_proveedor = '" . $codigo_proveedor . "' and p.products_model like '%" . $palabraclave . "%' or
-                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.codigo_proveedor = '" . $codigo_proveedor . "' and pde.donde_esta like '%" . $palabraclave . "%'  or
-                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.codigo_proveedor = '" . $codigo_proveedor . "' and pd.products_name like '%" . $palabraclave . "%'    ORDER BY '" . 'products_model' . "' desc limit $MAX_DISPLAY_SEARCH_RESULTS ";
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p left join  " . TABLE_SPECIALS . " ps on ps.products_id = p.products_id,  " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id  and pde.login_id = '" . $log_id . "' where p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta  $p_filtro  and p.products_model like '%" . $palabraclave . "%' or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and pde.donde_esta like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.products_cpe like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.products_cpf like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.referencia_padre like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.referencia_padre_g2 like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and p.referencia_padre_g3 like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and pd.products_name like '%" . $palabraclave . "%'    ORDER BY $order_byy desc limit $MAX_DISPLAY_SEARCH_RESULTS ";
+}else if ($referencia_padre){
+
+  		$result = "select p.products_id,
+                                                      p.proveedor_price_general,
+                                                      p.products_regladeprecios,
+                                                      pd.products_name,
+                                                      p.codigo_barras,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
+                                                      p.products_youtube_1,
+                                                      p.products_youtube_2,
+                                                      p.filtro,
+                                                      p.products_rc,
+                                                      p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre,
+                                                      p.stock_nivel,
+                                                      p.products_image,
+                                                      p.products_price,
+                                                      p.products_weight,
+                                                      p.products_stock_min,
+                                                      p.time_ultimaactualizacion,
+                                                      p.time_entradasysalidas,
+                                                      p.time_pendiente_entrada_total,
+                                                      p.time_entregado,
+                                                      p.time_paypal_enviado,
+                                                      p.time_pagado_transferencia,
+                                                      p.time_no_recogido,
+                                                      p.time_cobrados,
+                                                      p.time_credito,
+                                                      p.time_pagado,
+                                                      p.products_model,
+                                                      p.products_model_2,
+                                                      p.products_model_3,
+                                                      p.products_status,
+                                                      p.products_status_exel,
+                                                      pde.donde_esta,
+                                                      p.codigo_proveedor,
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p left join  " . TABLE_SPECIALS . " ps on ps.products_id = p.products_id,  " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id  and pde.login_id = '" . $log_id . "' where p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta  $p_filtro  and p.products_model like '%" . $palabraclave . "%' or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and pde.donde_esta like '%" . $palabraclave . "%'  or
+                                                                                                                                                                                                                                                                                                                                                   p.products_id = pd.products_id $productos_status_active $productos_status_exel $productos_status_web $p_regladeprecios $p_stocknivel $p_status_oferta $p_filtro and pd.products_name like '%" . $palabraclave . "%'    ORDER BY '" . 'referencia_padre' . "' desc limit $MAX_DISPLAY_SEARCH_RESULTS ";
+
 }else if ($buscar_dondeesta){
 
   		$result = "select p.products_id,
@@ -710,6 +979,14 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       pd.products_name,
                                                       p.products_image,
                                                       p.filtro,
+                                                      p.products_rc,
+                                                      p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
+                                                      p.products_youtube_1,
+                                                      p.products_youtube_2,
+                                                      p.referencia_padre,
                                                       p.products_stock_min,
                                                       p.codigo_barras,
                                                       p.time_entradasysalidas,
@@ -728,7 +1005,7 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_status,
                                                       pde.donde_esta,
                                                       p.codigo_proveedor,
-                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where p.products_id = pd.products_id and p.codigo_proveedor = '" . $codigo_proveedor . "' and pde.donde_esta like '%" . $palabraclave . "%'    ORDER BY '" . 'products_model' . "' desc limit 100";
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where p.products_id = pd.products_id and pde.donde_esta like '%" . $palabraclave . "%'    ORDER BY '" . 'products_name' . "' desc limit 100";
 
 
 
@@ -742,6 +1019,14 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       pd.products_name,
                                                       p.codigo_barras,
                                                       p.filtro,
+                                                      p.products_rc,
+                                                      p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
+                                                      p.products_youtube_1,
+                                                      p.products_youtube_2,
+                                                      p.referencia_padre,
                                                       p.products_stock_min,
                                                       p.products_image,
                                                       p.time_ultimaactualizacion,
@@ -759,7 +1044,7 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_model_3,
                                                       p.products_status,
                                                       p.codigo_proveedor,
-                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where p.products_id = pd.products_id and p.codigo_proveedor = '" . $codigo_proveedor . "' ORDER BY '" . $ordenar_concep . "' DESC";
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where p.products_id = pd.products_id ORDER BY products_name DESC";
 
 
 
@@ -773,8 +1058,16 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.filtro,
+                                                      p.products_rc,
+                                                      p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
+                                                      p.referencia_padre,
                                                       p.products_stock_min,
-                                                      o.billing_name,
+                                                    p.products_youtube_2,
+                                                       p.products_youtube_1,
+                                                       o.billing_name,
                                                       o.orders_id,
                                                       o.orders_status,
                                                       o.date_purchased,
@@ -799,9 +1092,9 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_status,
                                                       pde.donde_esta,
                                                       p.codigo_proveedor,
-                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, orders_products op, orders o, administrators a,  " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.pendiente_entrada and a.admin_groups_id=6 and op.orders_id=o.orders_id and p.codigo_proveedor = '" . $codigo_proveedor . "' or
-                                                                                                                                                                                                                                                                                                                   op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.status_pendiente and a.admin_groups_id=6 and op.orders_id=o.orders_id and p.codigo_proveedor = '" . $codigo_proveedor . "' or
-                                                                                                                                                                                                                                                                                                                   op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.status_procesando and a.admin_groups_id=6 and op.orders_id=o.orders_id and p.codigo_proveedor = '" . $codigo_proveedor . "' ORDER BY '" . 'orders_id' . "' DESC";
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, orders_products op, orders o, administrators a,  " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pd.products_id = pde.products_id and pde.login_id = '" . $login_id . "' where op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.pendiente_entrada and a.admin_groups_id=6 and op.orders_id=o.orders_id  or
+                                                                                                                                                                                                                                                                                                                   op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.status_pendiente and a.admin_groups_id=6 and op.orders_id=o.orders_id  or
+                                                                                                                                                                                                                                                                                                                   op.products_id =p.products_id and op.lista_prov = 0 and p.products_id = pd.products_id and o.orders_status = a.status_procesando and a.admin_groups_id=6 and op.orders_id=o.orders_id ORDER BY '" . 'products_name' . "' DESC";
 
 
 
@@ -813,8 +1106,16 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       pd.products_name,
                                                       p.codigo_barras,
                                                       p.filtro,
+                                                      p.products_rc,
+                                                       p.products_cpe,
+                                                      p.products_cpf,
+                                                      p.referencia_padre_g3,
+                                                      p.referencia_padre_g2,
                                                       p.products_stock_min,
+                                                      p.products_youtube_1,
+                                                      p.products_youtube_2,
                                                       p.products_image,
+                                                      p.referencia_padre,
                                                       p.products_price,
                                                       p.time_ultimaactualizacion,
                                                       p.time_entradasysalidas,
@@ -836,32 +1137,42 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
                                                       p.products_weight,
                                                      pde.donde_esta,
                                                       p.codigo_proveedor,
-                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pde.login_id = '" . $login_id . "' and pd.products_id = pde.products_id where p.products_status = 1 and p.products_id = pd.products_id and p.codigo_proveedor = '" . $codigo_proveedor . "' ORDER BY '" . 'time_entradasysalidas' . "' desc limit $MAX_DISPLAY_SEARCH_RESULTS";
+                                                      p.proveedor_price from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pde.login_id = '" . $login_id . "' and pd.products_id = pde.products_id where p.products_status = 1 and p.products_id = pd.products_id  ORDER BY '" . 'p.products_name' . "' desc limit $MAX_DISPLAY_SEARCH_RESULTS";
 
 
          }
 
- $result = mysql_query($result);
+ $result = tep_db_query($result);
 
     
     
-    if ($row = mysql_fetch_array($result)) {
+    if ($row = tep_db_fetch_array($result)) {
         do {
         
                   $products_id_stock = $row["products_id"];
 
 
+            $im=1;
+ $products_images_values = tep_db_query("select * from " . 'products_extra_images' . " where products_id = '" . $row["products_id"] . "'");
+          while   ($count_image= tep_db_fetch_array($products_images_values)){
+
+       $iim =   $im++;
+
+      }
 
 
+              $products_images_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id_stock . "'");
+             $products_images= tep_db_fetch_array($products_images_values);
+               $products_images_name_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $products_id_stock . "'");
+             $products_images_name = tep_db_fetch_array($products_images_name_values);
+              $products_stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $row["products_id"] . "'");
+             $products_stock= tep_db_fetch_array($products_stock_values);
 
-              $products_images_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id_stock . "'");
-             $products_images= mysql_fetch_array($products_images_values);
-               $products_images_name_values = mysql_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $products_id_stock . "'");
-             $products_images_name = mysql_fetch_array($products_images_name_values);
+              $products_dat_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $row["products_id"] . "'");
+             $products_dat= tep_db_fetch_array($products_dat_values);
 
-
-                    $ref_fabricante_values = mysql_query("select * from " . 'proveedor' . " where proveedor_id = '" . $products_images['codigo_proveedor'] . "'");
-               $ref_fabricante= mysql_fetch_array($ref_fabricante_values);
+                    $ref_fabricante_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $products_images['codigo_proveedor'] . "'");
+               $ref_fabricante= tep_db_fetch_array($ref_fabricante_values);
 // ruta imagen
 if ($ref_fabricante['proveedor_ruta_images']){
 
@@ -898,12 +1209,14 @@ if (getimagesize($ref_fabricante['proveedor_ruta_images']. $products_images['pro
 
 
 
-              $dondeesta_values = mysql_query("select * from " . 'products_donde_esta' . " where products_id = '" . $row['products_id'] . "' and login_id = '" . $log_id . "'");
-             $dondeesta= mysql_fetch_array($dondeesta_values);
+              $dondeesta_values = tep_db_query("select * from " . 'products_donde_esta' . " where products_id = '" . $row['products_id'] . "' and login_id = '" . $log_id . "'");
+             $dondeesta= tep_db_fetch_array($dondeesta_values);
 
-              $specials_exist_values = mysql_query("select * from " . 'specials' . " where products_id = '" . $row['products_id'] . "'");
-             $specials_exist= mysql_fetch_array($specials_exist_values);
+              $specials_exist_values = tep_db_query("select * from " . 'specials' . " where products_id = '" . $row['products_id'] . "'");
+             $specials_exist= tep_db_fetch_array($specials_exist_values);
 
+             $ptc_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . $row["products_id"]. "'");
+             $ptc= tep_db_fetch_array($ptc_values);
 
 
 // ruta imagen
@@ -911,60 +1224,6 @@ if (getimagesize($ref_fabricante['proveedor_ruta_images']. $products_images['pro
 						echo "<td class=\"smallText\" valign=\"top\">".$row["products_id"]."</td>\n";
       
       
-      
-      
-      
-             if ($row['products_status_exel'] == 1){
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_exel[".$row['products_id']."]\" value=1></td>\n";
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" name=\"product_new_status_exel[".$row['products_id']."]\" value=2></td>\n";
-                           }
-           if ($row['products_status_exel'] == 2){
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\"  name=\"product_new_status_exel[".$row['products_id']."]\" value=1></td>\n";
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_exel[".$row['products_id']."]\" value=2></td>\n";
-                           }
-
-
-      
-      
-      
-      
-      
-            echo "<td class=\"smallText\" valign=\"top\">".$row["products_name"]."</td>\n";
-            
-            
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"3\" type=\"text\" name=\"products_new_filtro[".$row['products_id']."]\" value={$row['filtro']}></td>\n";
-
-            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"3\" type=\"text\" name=\"products_new_stock_min[".$row['products_id']."]\" value={$row['products_stock_min']}></td>\n";
-
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_dondeesta[".$row['products_id']."]\" value={$dondeesta['donde_esta']}></td>\n";
-          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_model[".$row['products_id']."]\" value={$row['products_model_2']}></td>\n";
-
-
-                echo"<td class=\"smallText\" valign=\"top\"><img border=\"0\" src=\"" . $images ."\" width=\"46\" height=\"46\">"."</td>\n";
-
-
-
-
-       echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_specialprice[".$row['products_id']."]\" value={$specials_exist['specials_new_products_price']}></td>\n";
-
-
-             if ($specials_exist['status'] == 1){
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_special[".$row['products_id']."]\" value=1></td>\n";
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" name=\"product_new_status_special[".$row['products_id']."]\" value=0></td>\n";
-                           }
-
-
-
-           if ($specials_exist['status'] == 0){
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\"  name=\"product_new_status_special[".$row['products_id']."]\" value=1></td>\n";
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_special[".$row['products_id']."]\" value=0></td>\n";
-                           }
-
-
-
-
-           echo "<td class=\"smallText\" valign=\"top\">".$row["products_model"]."</td>\n";
-           
             if ($row['products_status'] == 1){
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status[".$row['products_id']."]\" value=1></td>\n";
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" name=\"product_new_status[".$row['products_id']."]\" value=0></td>\n";
@@ -975,21 +1234,239 @@ if (getimagesize($ref_fabricante['proveedor_ruta_images']. $products_images['pro
                            }
                            
 
+					echo "<td class=\"smallText\" valign=\"top\"><a target=\"_blank\" href=\"" . HTTP_SERVER . DIR_WS_CATALOG . 'admin/categories.php?pID=' . $row['products_id'] . '&cPath=' . $ptc["categories_id"] . "\">".$ptc["categories_id"]."</a></td>\n";
+
+                           
+
+                   $referencia_padre_filtrar = 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1000&codigo_proveedor=' . $codigo_proveedor  . '&palabraclave=' . $row['referencia_padre'];
+                   $referencia_padre2_filtrar = 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1000&codigo_proveedor=' . $codigo_proveedor  . '&palabraclave=' . $row['referencia_padre_g2'];
+                   $referencia_reglacategoria_filtrar = 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1000&codigo_proveedor=' . $codigo_proveedor  . '&palabraclave=' . $row['products_cpe'];
+                   $referencia_reglafabricante_filtrar = 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1000&codigo_proveedor=' . $codigo_proveedor  . '&palabraclave=' . $row['products_cpf'];
+                   $referencia_model_filtrar = 'quick_cliente.php?buscar=ok&page=&MAX_DISPLAY_SEARCH_RESULTS=1000&codigo_proveedor=' . $codigo_proveedor  . '&palabraclave=' . $row['products_model'];
+
+                   
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_padre2_filtrar .">Filtrar</a><input size=\"15\" type=\"text\" name=\"products_new_referencia_padre_g2[".$row['products_id']."]\" value={$row['referencia_padre_g2']}>
+           <p align=".left."><a href=". aaa . "> Filtrar</a><input size=\"15\" type=\"text\" name=\"products_new_referencia_padre_g3[".$row['products_id']."]\" value={$row['referencia_padre_g3']}></td>\n";
+            
+            //echo "<td class=\"smallText\" valign=\"top\" align=\"right\"></td>\n";
+
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_padre_filtrar .">Filtrar</a><input size=\"10\" type=\"text\" name=\"products_new_referencia_padre[".$row['products_id']."]\" value={$row['referencia_padre']}></td>\n";
+
+                                            if ($codigo_proveedor_up == 'update'){
+
+                                                       //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id = '" . $codigo_proveedor . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+                                                     if ($codigo_proveedor_up_replace == 'update'){
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        $text_ext = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior_quick_up.php?codigobarras='.$row['products_model'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta_quick_up.php' . '&proveedor_id=' . $row['products_id'] . '&codigo_proveedor=' . $codigo_proveedor . '&codigo_proveedor_up_replace=update"> </script>';
+                                                                                          }else{
+
+        $text_ext = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior_quick_up.php?codigobarras='.$row['products_model'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta_quick_up.php' . '&proveedor_id=' . $row['products_id'] . '&codigo_proveedor=' . $codigo_proveedor . '"> </script>';
+                                                                                               }
+                                                                                              }
+                                                                                              
+                                                                                              
+                                               }else{
+
+                                                       //zona envío
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id = '" . $codigo_proveedor . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        $text_ext = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior_quick.php?codigobarras='.$row['products_model'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta_quick.php' . '&proveedor_id=' . $row['products_id'] . '&codigo_proveedor=' . $codigo_proveedor . '"> </script>';
+                              }
+                                             }
+
+
+
+
+                                  if  ($codigo_proveedor_description_up == 'update'){
+
+                 $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id = '" . $codigo_proveedor . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+                                     ?>
+
+
+ <script language=javascript>
+window.open('<? echo 'categories.php?cPath=&pID='.$row['products_id'].'&action=new_product&codigobarras_des='.$products_dat['products_model'].'&codigo_proveedor='.$codigo_proveedor;  ?>', '_blank');
+</script>
+
+
+                                   <?php
+
+                              }}
+                              
+        $text_int_sep  =    '<p style="margin-top: 0; margin-bottom: 0"><b><span style="background-color: #000000">Updates</span></p>';
+  // echo ' Entrada en Almcen '.$store_name['configuration_value'] . ' ' , $codigobarras . ' ';
+  
+   if ($row['referencia_padre']){
+  $text_int_rp = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>'.$row['referencia_padre'].'</font></b></p>';
+}else{
+   $text_int_rp =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>RPadre</font></b></p>';
+
+}
+
+   if ($row['referencia_padre_g2']){
+  $text_int_rp2 = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>RPadre2</font></b></p>';
+}else{
+   $text_int_rp2 =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>RPadre2</font></b></p>';
+
+}
+
+   if ($row['referencia_padre_g3']){
+  $text_int_rp3 = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>RPadre3</font></b></p>';
+}else{
+   $text_int_rp3 =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>RPadre3</font></b></p>';
+
+}
+
+    if ($row['products_cpe']){
+  $text_int_cpe = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>RCateg</font></b></p>';
+}else{
+   $text_int_cpe =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>RCateg</font></b></p>';
+
+}
+    if ($row['products_cpf']){
+  $text_int_cpf = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>Rfabri</font></b></p>';
+}else{
+   $text_int_cpf =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>Rfabri</font></b></p>';
+
+}
+
+   if ($products_images['products_image']){
+  $text_int_im = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>'.'Images'.'</font></b></p>';
+}else{
+   $text_int_im =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>Images</font></b></p>';
+
+}
+
+
+
+   if ($products_images['products_image']){
+  $text_int_iim = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>im'.$iim.'</font></b></p>';
+}else{
+   $text_int_iim =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>im'.$iim.'</font></b></p>';
+
+}
+
+
+
+
+   if ($row['products_youtube_1']){
+  $text_int_y1 = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>'.'Ytube1'.'</font></b></p>';
+}else{
+   $text_int_y1 =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>Ytube1</font></b></p>';
+
+}
+
+    if ($row['products_youtube_2']){
+  $text_int_y2 = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>'.'Ytube2'.'</font></b></p>';
+}else{
+   $text_int_y2 =  '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#FF0000>Ytube2</font></b></p>';
+
+}
+    if ($products_images_name['products_description']){
+  $text_int_de = '<p style="margin-top: 0; margin-bottom: 0"><b><font color=#008000>'.'<a target="_blank" href="categories.php?cPath=&pID='.$row['products_id'].'&action=new_product&codigobarras_des='.$products_dat['products_model'].'&codigo_proveedor='.$products_images['codigo_proveedor'].'"><b><font color=#008000>Descrip'.'</font></b></p></a>';
+}else{
+   $text_int_de =  '<p style="margin-top: 0; margin-bottom: 0"><a target="_blank" href="'.'categories.php?cPath=&pID='.$row['products_id'].'&action=new_product&codigobarras_des='.$products_dat['products_model'].'&codigo_proveedor='.$products_images['codigo_proveedor'].'"><b><font color=#FF0000>Descrip</b></p></a></font>';
+
+}
+
+
+
+       $text_int = $text_int_sep.$text_int_rp.$text_int_rp2.$text_int_rp3.$text_int_cpe.$text_int_cpf.$text_int_im.$text_int_iim.$text_int_y1.$text_int_y2.$text_int_de;
+
+
+echo "<td class=\"smallText\" valign=\"top\">".$text_int."</td>\n";
+echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
+
+              echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_model_filtrar .">Filtrar</a><input size=\"12\" type=\"text\" name=\"products_new_model[".$row['products_id']."]\" value={$row['products_model']}><input size=\"8\" type=\"text\" name=\"products_new_model_2[".$row['products_id']."]\" value={$row['products_model_2']}><input size=\"8\" type=\"text\" name=\"products_new_model_3[".$row['products_id']."]\" value={$row['products_model_3']}></td>\n";
+
+
+
+
+
+            echo "<td class=\"smallText\" valign=\"top\"><p><a target=_blank href=categories.php?cPath=&pID=" . $row['products_id'] . "&action=new_product>Editar ".$row["products_name"]."</a></td>\n";
+            
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_reglacategoria_filtrar .">Filtrar</a><input size=\"6\" type=\"text\" name=\"products_new_products_cpe[".$row['products_id']."]\" value={$row['products_cpe']}></td>\n";
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_reglafabricante_filtrar .">Filtrar</a><input size=\"6\" type=\"text\" name=\"products_new_products_cpf[".$row['products_id']."]\" value={$row['products_cpf']}></td>\n";
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"1\" type=\"text\" name=\"products_new_products_rc[".$row['products_id']."]\" value={$row['products_rc']}></td>\n";
+
+
+
+            
+       //    echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"20\" type=\"textarea\" name=\"products_new_name[".$row['products_id']."]\" value={$row['products_name']}></td>\n";
+
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"3\" type=\"text\" name=\"products_new_filtro[".$row['products_id']."]\" value={$row['filtro']}></td>\n";
+
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"3\" type=\"text\" name=\"products_new_stock_min[".$row['products_id']."]\" value={$products_stock['products_stock_min']}></td>\n";
+
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_dondeesta[".$row['products_id']."]\" value={$dondeesta['donde_esta']}></td>\n";
+
+
+
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_manufacturers_id[".$row['products_id']."]\" value={$products_images['manufacturers_id']}></td>\n";
+
+
+  $codigo_proveedors_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $row['codigo_proveedor'] . "'");
+  $codigo_proveedors= tep_db_fetch_array($codigo_proveedors_values);
+
+
+ if (file($codigo_proveedors['proveedor_ruta_images'] . $products_images['products_image'])) {
+ $image_product = $codigo_proveedors['proveedor_ruta_images'] . $products_images['products_image'];
+
+}
+                                           //  echo  $order->products[$i]['codigo_proveedor'];
+ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_images['products_image'])) {
+
+        $image_product = DIR_WS_CATALOG_IMAGES . $products_images['products_image'];
+}
+
+                echo"<td class=\"smallText\" valign=\"top\"><a target=\"_blank\" href=\"" . HTTP_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $row['products_id'] ."\"><img border=\"0\" src=\"" . $image_product ."\" width=\"46\" height=\"46\">"."</a></td>\n";
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"product_new_price[".$row['products_id']."]\" value={$row['products_price']}></td>\n";
+
+
+
+       echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_specialprice[".$row['products_id']."]\" value={$specials_exist['specials_new_products_price']}>
+       <input size=\"2\" type=\"text\" name=\"product_new_status_special[".$row['products_id']."]\" value={$specials_exist['status']}></td>\n";
+
+
+
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"2\" type=\"text\" name=\"products_new_regladeprecios[".$row['products_id']."]\" value={$row['products_regladeprecios']}></td>\n";
+
+
+             if ($row['products_status_exel'] == 1){
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_exel[".$row['products_id']."]\" value=1></td>\n";
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" name=\"product_new_status_exel[".$row['products_id']."]\" value=2></td>\n";
+                           }
+           if ($row['products_status_exel'] == 2){
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\"  name=\"product_new_status_exel[".$row['products_id']."]\" value=1></td>\n";
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"radio\" checked name=\"product_new_status_exel[".$row['products_id']."]\" value=2></td>\n";
+                           }
+
+
 
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"5\" type=\"text\" name=\"product_new_weight[".$row['products_id']."]\" value={$row['products_weight']}></td>\n";
 
 
 
-          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" name=\"product_new_price[".$row['products_id']."]\" value={$row['products_price']}></td>\n";
-           
-           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"2\" type=\"text\" name=\"products_new_regladeprecios[".$row['products_id']."]\" value={$row['products_regladeprecios']}></td>\n";
+
+
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"20\" type=\"text\" name=\"products_new_products_youtube_1[".$row['products_id']."]\" value={$row['products_youtube_1']}></td>\n";
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"20\" type=\"text\" name=\"products_new_products_youtube_2[".$row['products_id']."]\" value={$row['products_youtube_2']}></td>\n";
 
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"2\" type=\"text\" name=\"products_new_stocknivel[".$row['products_id']."]\" value={$row['stock_nivel']}></td>\n";
 
-
            
         }
-        while($row = mysql_fetch_array($result));
+        while($row = tep_db_fetch_array($result));
     }
     echo "</table>\n";
 ?></td>

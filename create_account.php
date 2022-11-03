@@ -1,4 +1,4 @@
-<?php
+ <?php
 /*
   $Id$
 
@@ -239,13 +239,18 @@ $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
     }
 // EOF Anti Robot Registration v4.5
 
+ if (AFFILIATE_OPTION == 'true') {
 
+        $affioption = $affiliate_ref;
+
+}
 
 
     if ($error == false) {
       $sql_data_array = array('customers_firstname' => $firstname,
                               'customers_lastname' => $lastname,
                               'customers_billetera' => $billetera,
+                              'customers_affiliate_id' => $affioption,
                               'customers_porcentage' => DESCUENTO_CLIENTE,
                               'customers_dni' => $account_dninie,
                               'customers_email_address' => $email_address,

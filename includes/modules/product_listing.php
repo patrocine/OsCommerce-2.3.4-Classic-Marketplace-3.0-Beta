@@ -337,6 +337,443 @@ if ($customers_porcentage){
 
 
 
+                               if (PERMISO_REGLADEPRECIOS_PRODUCTSLISTING == 'True'){
+
+
+
+
+
+
+
+
+
+                         // SELECCION 1
+
+
+     $wersdfs_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id= '" . $product['id'] . "'");
+     $products = tep_db_fetch_array($wersdfs_values);
+
+
+                                                  //REGLAS DE CATEGORIAS
+
+
+
+                                                 if (PERMISO_REGLADEPRECIOS_PRODUCTSLISTING == 'True' and $products['products_rc'] == 1){
+
+
+
+
+
+
+
+
+                                              $product['id'] =   $listing['products_id'];
+
+
+
+
+                                                               //seguridad
+     $wersdfs_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id= '" . $product['id'] . "'");
+     $wersdfs = tep_db_fetch_array($wersdfs_values);
+
+
+
+     $wersdfs_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id= '" . $wersdfs['codigo_proveedor'] . "'");
+     $id_categoria_defecto = tep_db_fetch_array($wersdfs_values);
+
+
+                                                if ($id_categoria_defecto['id_categoria_defecto']){
+                                                     $v_categories_id_original = $id_categoria_defecto['id_categoria_defecto'];
+                                            }else{
+                                            $v_categories_id_original = CATEGORIA_DEFECTO_RDC;
+                                              }
+
+
+
+
+                                                        $quitar_tiempo =  $_GET['quitar_tiempo'];
+
+                                                         if ($quitar_tiempo == 'ok'){
+                                                   $wersdfs['easypopulate_time'] = time();
+
+                                                     }else{
+
+                                                       }
+
+
+
+            $sql_status_update_array = array('easypopulate_time' => time()+rand(1,5000000));
+            tep_db_perform(TABLE_PRODUCTS, $sql_status_update_array, 'update', " products_id= '" . $product['id'] . "' and easypopulate_time = 0");
+
+
+                                  if (time() >= $wersdfs['easypopulate_time']){
+                                 // activar nuevo tiempo falta un update.            time()+rand(1,130000)
+
+
+            $sql_status_update_array = array('easypopulate_time' => time()+rand(1,5000000));
+            tep_db_perform(TABLE_PRODUCTS, $sql_status_update_array, 'update', " products_id= '" . $product['id'] . "'");
+
+                                                                ECHO '.';
+
+
+                                                             $tiempo_permiso = 1;
+
+                                 } //
+
+
+
+                                                         //seguridad
+                                    if ($tiempo_permiso == 1){
+
+ tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" .  $product['id'] . "'");
+
+
+
+                     // si el producto no encuentra categoria se inserta en la categoría novedades definida en el listado exel.
+
+    $cpe_values = tep_db_query("select * from " . 'categories_pareja' . " where cp_ce= '" . $wersdfs['products_cpe'] . "' and cp_ce >= '" . 1 . "'");
+    if ($cpe = tep_db_fetch_array($cpe_values)){
+
+
+}else{
+
+    $cpcat_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id= '" . $product['id'] . "' and categories_id= '" . $v_categories_id_original . "'");
+    if  ($cpcat = tep_db_fetch_array($cpcat_values)){
+   }else{
+                            $res1 = tep_db_query('INSERT INTO '.TABLE_PRODUCTS_TO_CATEGORIES.' (products_id, categories_id)
+                			VALUES ("' . $product['id'] . '", "' . $v_categories_id_original . '")');
+   } // CPCAT
+
+
+}
+
+
+
+
+
+
+      if ($wersdfs['products_cpf'] == 1){
+          $wersdfs['products_cpf'] = 0;
+      }
+      if ($wersdfs['products_cpe'] == 1){
+          $wersdfs['products_cpe'] = 0;
+                        }
+
+                  // por número de categoria externa.
+    $cpe_values = tep_db_query("select * from " . 'categories_pareja' . " where cp_ce= '" . $wersdfs['products_cpe'] . "' and cp_ce >= '" . 1 . "' or cp_cf= '" . $wersdfs['products_cpf'] . "' and cp_cf >= '" . 1 . "'");
+    while ($cpe = tep_db_fetch_array($cpe_values)){
+
+
+
+
+
+                                       if ($cpe['cp_ci']){
+                                    $v_categories_id = $cpe['cp_ci'];
+                                  }  // CPE
+
+    $cpcat_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id= '" . $product['id'] . "' and categories_id= '" . $v_categories_id . "'");
+    if  ($cpcat = tep_db_fetch_array($cpcat_values)){
+   }else{
+                            $res1 = tep_db_query('INSERT INTO '.TABLE_PRODUCTS_TO_CATEGORIES.' (products_id, categories_id)
+                			VALUES ("' . $product['id'] . '", "' . $v_categories_id . '")');
+   } // CPCAT
+
+
+
+
+
+
+
+                                                         //seguridad
+
+
+
+
+                                       if ($cpe['cp_ci']){
+                                    $v_categories_id = $cpe['cp_ci'];
+                                  }  // CPE
+
+    $cpcat_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id= '" . $product['id'] . "' and categories_id= '" . $v_categories_id . "'");
+    if  ($cpcat = tep_db_fetch_array($cpcat_values)){
+   }else{
+                            $res1 = tep_db_query('INSERT INTO '.TABLE_PRODUCTS_TO_CATEGORIES.' (products_id, categories_id)
+                			VALUES ("' . $product['id'] . '", "' . $v_categories_id . '")');
+   } // CPCAT
+
+
+
+
+
+
+
+
+
+
+
+} // fin while cpe
+
+
+
+
+
+
+
+
+
+
+
+                       //seleccion 1
+
+
+              // por medio de coincidencia por referencia products_model
+    $cpe_busca_values = tep_db_query("select * from " . 'categories_pareja' . " order by cp_id ASC");
+     while ($cpe_busca = tep_db_fetch_array($cpe_busca_values)){
+
+
+       if ($cpe_busca['cp_ce_model'] <> 'defaultmodel'){
+
+
+    $cpe_model_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_model like '%" . $cpe_busca['cp_ce_model'] . "%' and products_id= '" . $product['id'] . "'");
+     IF  ($cpe_model = tep_db_fetch_array($cpe_model_values)){
+      $cpe_busca_a_values = tep_db_query("select * from " . 'categories_pareja' . " where cp_ce_model = '" . $cpe_busca['cp_ce_model'] . "'");
+        while  ($cpe_busca_a = tep_db_fetch_array($cpe_busca_a_values)){
+                                   $v_categories_id =  $cpe_busca_a['cp_ci'];
+
+
+
+
+
+
+
+     $cpeo_categori_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " ptc, " . TABLE_CATEGORIES_DESCRIPTION . " cd where ptc.categories_id = cd.categories_id and ptc.categories_id = '" . $v_categories_id_original . "'  and ptc.products_id= '" . $product['id'] . "'");
+     IF  ($cpeo_categori = tep_db_fetch_array($cpeo_categori_values)){
+        tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" .  $product['id'] . "' and categories_id = '" .  $v_categories_id_original . "'");
+
+}
+
+
+
+                                         if ($v_categories_id){
+				// nope, this is a new category for this product
+    $cpcat_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id= '" . $product['id'] . "' and categories_id= '" . $v_categories_id . "'");
+    if  ($cpcat = tep_db_fetch_array($cpcat_values)){
+   }else{
+                            $res1 = tep_db_query('INSERT INTO '.TABLE_PRODUCTS_TO_CATEGORIES.' (products_id, categories_id)
+                			VALUES ("' . $product['id'] . '", "' . $v_categories_id . '")');
+   } // CPCAT
+
+                                       // } // SEGURIDAD
+
+
+                                      } // $v_categories_id
+
+
+                                      } // fin while
+
+
+
+       }}
+        IF  ($cpe_busca['cp_ce_nombre'] <> 'defaultnombre'){
+
+                                 if ($cpe_busca['cp_ce_nombre_2'] <> 'defaultnombre2'){
+                  $bce_nombre2_1 = "and products_name like '%" . $cpe_busca['cp_ce_nombre_2'] . "%'";
+                                }else{
+                      $bce_nombre2_1 = '';
+
+                  }
+
+
+                                 if ($cpe_busca['cp_ce_nombre_3'] <> 'defaultnombre3'){
+                  $bce_nombre3_1 = "and products_name like '%" . $cpe_busca['cp_ce_nombre_3'] . "%'";
+                                }else{
+                      $bce_nombre3_1 = '';
+
+                  }
+
+
+
+
+
+   $cpe_menos_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_name like '%" . $cpe_busca['cp_ce_menosnombre_1'] . "%' and products_id= '" . $product['id'] . "' or products_name like '%" . $cpe_busca['cp_ce_menosnombre_2'] . "%' and products_id= '" . $product['id'] . "' or products_name like '%" . $cpe_busca['cp_ce_menosnombre_3'] . "%' and products_id= '" . $product['id'] . "'");
+     IF  ($cpe_menos = tep_db_fetch_array($cpe_menos_values)){
+                                         /*
+                                 $menos1 = $cpe_busca['cp_ce_menosnombre_1']
+
+                    if ($cpe_busca['cp_ce_menosnombre_1'] == 'defaultmenosnombre1'){
+                         $cpe_busca['cp_ce_menosnombre_1'] = '';
+                }
+                    if ($cpe_busca['cp_ce_menosnombre_2'] == 'defaultmenosnombre2'){
+                         $cpe_busca['cp_ce_menosnombre_2'] = '';
+                }
+                    if ($cpe_busca['cp_ce_menosnombre_3'] == 'defaultmenosnombre1'){
+                         $cpe_busca['cp_ce_menosnombre_3'] = '';
+                }
+
+                                              */
+            $sql_status_update_array = array('products_cp_ce_menosnombre_1' => $cpe_busca['cp_ce_menosnombre_1'],
+                                             'products_cp_ce_menosnombre_2' => $cpe_busca['cp_ce_menosnombre_2'],
+                                             'products_cp_ce_menosnombre_3' => $cpe_busca['cp_ce_menosnombre_3']);
+            tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $sql_status_update_array, 'update', " products_id= '" . $product['id'] . "'");
+
+
+
+ }else{
+
+ }
+
+
+
+                               // por medio de coincidencia por el nombre del producto products_name
+   $cpe_model_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_name like '%" . $cpe_busca['cp_ce_nombre'] . "%' $bce_nombre2_1 $bce_nombre3_1 and products_id= '" . $product['id'] . "'");
+     IF  ($cpe_model = tep_db_fetch_array($cpe_model_values)){
+
+                   if ($cpe_busca['cp_ce_nombre_2'] <> 'defaultnombre2'){
+                  $bce_nombre2_2 = "and cp_ce_nombre_2 = '" . $cpe_busca['cp_ce_nombre_2'] . "'";
+                      }else{
+                      $bce_nombre2_2 = '';
+
+                  }
+
+
+                   if ($cpe_busca['cp_ce_nombre_3'] <> 'defaultnombre3'){
+                  $bce_nombre3_2 = "and cp_ce_nombre_3 = '" . $cpe_busca['cp_ce_nombre_3'] . "'";
+                      }else{
+                      $bce_nombre3_2 = '';
+
+                  }
+
+
+
+                                 if ($cpe_busca['cp_ce_menosnombre_1'] <> 'defaultmenosnombre1'){
+                  $bce_defaultmenosnombre1_2 = "and cp_ce_menosnombre_1 <> '" . $cpe_model['products_cp_ce_menosnombre_1'] . "'";
+                                }else{
+                  $bce_defaultmenosnombre1_2 = '';
+
+                  }
+
+
+                                 if ($cpe_busca['cp_ce_menosnombre_2'] <> 'defaultmenosnombre2'){
+                  $bce_defaultmenosnombre2_2 = "and cp_ce_menosnombre_2 <> '" . $cpe_model['products_cp_ce_menosnombre_2'] . "'";
+                                }else{
+                  $bce_defaultmenosnombre2_2 = '';
+
+                  }
+
+
+                                 if ($cpe_busca['cp_ce_menosnombre_3'] <> 'defaultmenosnombre3'){
+                  $bce_defaultmenosnombre3_2 = "and cp_ce_menosnombre_3 <> '" . $cpe_model['products_cp_ce_menosnombre_3'] . "'";
+                                }else{
+                  $bce_defaultmenosnombre3_2 = '';
+
+                  }
+
+
+
+
+
+
+
+      $cpe_busca_b_values = tep_db_query("select * from " . 'categories_pareja' . " where cp_ce_nombre = '" . $cpe_busca['cp_ce_nombre'] . "' $bce_nombre2_2 $bce_nombre3_2 $bce_defaultmenosnombre1_2 $bce_defaultmenosnombre2_2 $bce_defaultmenosnombre3_2");
+    while  ($cpe_busca_b = tep_db_fetch_array($cpe_busca_b_values)){
+
+
+
+
+     $cpeo_categori_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " ptc, " . TABLE_CATEGORIES_DESCRIPTION . " cd where ptc.categories_id = cd.categories_id and ptc.categories_id = '" . $v_categories_id_original . "'  and ptc.products_id= '" . $product['id'] . "'");
+     IF  ($cpeo_categori = tep_db_fetch_array($cpeo_categori_values)){
+        tep_db_query("delete from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" .  $product['id'] . "' and categories_id = '" .  $v_categories_id_original . "'");
+
+}
+
+
+
+
+
+
+
+
+                                    if ($cpe_busca_b['cp_ci']){
+                                  $v_categories_id =  $cpe_busca_b['cp_ci'];
+                                       }else{
+
+                                  $v_categories_id =  $v_categories_id_original;
+
+                                   }
+
+
+
+
+
+
+
+                                 //     ECHO 'SELECCION1rd'. $v_categories_id;
+
+                                                        //seguridad
+
+
+                                       if ($cpe['cp_ci']){
+                                    $v_categories_id = $cpe['cp_ci'];
+                                         }
+
+                                         if ($v_categories_id){
+				// nope, this is a new category for this product
+    $cpcat_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id= '" . $product['id'] . "' and categories_id= '" . $v_categories_id . "'");
+    if  ($cpcat = tep_db_fetch_array($cpcat_values)){
+   }else{
+                            $res1 = tep_db_query('INSERT INTO '.TABLE_PRODUCTS_TO_CATEGORIES.' (products_id, categories_id)
+                			VALUES ("' . $product['id'] . '", "' . $v_categories_id . '")');
+   } // CPCAT
+
+                                       } // SEGURIDAD
+
+
+                                      } // $v_categories_id
+
+
+
+                                   } // fin while.
+
+
+
+
+
+                                               // $v_categories_id =  $cpe_busca_b['cp_ci'];
+
+       }
+         }
+          }// comprobar cpe model y nombre
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                }  // FIN REGLAS DE CATEGORIAS
+
+
+
+
+
+
+                                   }
+
+
+
+
+
+
+
+
 
 
 
