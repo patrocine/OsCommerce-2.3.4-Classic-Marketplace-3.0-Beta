@@ -2331,7 +2331,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
 
              //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
-        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?cPath=' . (int)$current_category_id . '&codigobarras='.$HTTP_GET_VARS['search'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?cPath=' . (int)$current_category_id . '&codigobarras='.$HTTP_GET_VARS['search'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
 
 
 
