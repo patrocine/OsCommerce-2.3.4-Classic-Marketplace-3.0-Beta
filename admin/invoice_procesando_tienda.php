@@ -24,66 +24,36 @@
   include(DIR_WS_CLASSES . 'order.php');
   $order = new order($oID);
 
-              $facturas_1_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 12 . "'");
-              $facturas_1 = mysql_fetch_array($facturas_1_values);
 
-              $facturas_2_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 13 . "'");
-              $facturas_2 = mysql_fetch_array($facturas_2_values);
-
-              $facturas_3_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 14 . "'");
-              $facturas_3 = mysql_fetch_array($facturas_3_values);
-
-              $facturas_4_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 15 . "'");
-              $facturas_4 = mysql_fetch_array($facturas_4_values);
-
-              $facturas_5_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 16 . "'");
-              $facturas_5 = mysql_fetch_array($facturas_5_values);
-
-              $facturas_6_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 17 . "'");
-              $facturas_6 = mysql_fetch_array($facturas_6_values);
-
-              $facturas_7_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 18 . "'");
-              $facturas_7 = mysql_fetch_array($facturas_7_values);
-
-              $facturas_8_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 19 . "'");
-              $facturas_8 = mysql_fetch_array($facturas_8_values);
-
-              $facturas_9_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 20 . "'");
-              $facturas_9 = mysql_fetch_array($facturas_9_values);
-
-              $facturas_10_values = mysql_query("select * from " . TABLE_CONF_STATUS . " where id = '" . 21 . "'");
-              $facturas_10 = mysql_fetch_array($facturas_10_values);
-
-
-               $factura_orders_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $invoice_status  . "'");
-                if   ( $factura_orders = mysql_fetch_array($factura_orders_values)) {
+               $factura_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $invoice_status  . "'");
+                if   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
 
 
           $factura_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $factura_orders['orders_id'] . "'";
-  $factura_price_query = mysql_query($factura_price_raw);
-  $factura_price= mysql_fetch_array($factura_price_query);
+  $factura_price_query = tep_db_query($factura_price_raw);
+  $factura_price= tep_db_fetch_array($factura_price_query);
   
   
   
 
- $liquidacion_values = mysql_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $invoice_status . "'");
-              $liquidacion = mysql_fetch_array($liquidacion_values);
+ $liquidacion_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $invoice_status . "'");
+              $liquidacion = tep_db_fetch_array($liquidacion_values);
               
 
- $liquidacion_h_values = mysql_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $invoice_status . "'");
-              $liquidacion_h = mysql_fetch_array($liquidacion_h_values);
+ $liquidacion_h_values = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $invoice_status . "'");
+              $liquidacion_h = tep_db_fetch_array($liquidacion_h_values);
 
 
 
- $factura_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = mysql_fetch_array($factura_shipping_values);
+ $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
+              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
 
- $factura_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = mysql_fetch_array($factura_total_values);
+ $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
+              $factura_total = tep_db_fetch_array($factura_total_values);
 
 
- $factura_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = mysql_fetch_array($factura_subtotal_values);
+ $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
+              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
 
 
   ?>
@@ -260,8 +230,8 @@
               <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
                              <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "'order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' order by o.orders_id, op.orders_products_id");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
@@ -285,8 +255,8 @@
               <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
                  <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'proveedor' . " pv where op.products_id = p.products_id and o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' group by op.orders_products_id order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'proveedor' . " pv where op.products_id = p.products_id and o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' group by op.orders_products_id  order by o.orders_id, op.orders_products_id");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 6pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
@@ -311,8 +281,8 @@
       echo "$bah[$desc] ";
       }
 
-      $dondeesta_values = mysql_query("select * from " . 'products_donde_esta' . " where products_id = '" . $factura_products['products_id'] . "'");
-     while ( $dondeesta = mysql_fetch_array($dondeesta_values)){
+      $dondeesta_values = tep_db_query("select * from " . 'products_donde_esta' . " where products_id = '" . $factura_products['products_id'] . "'");
+     while ( $dondeesta = tep_db_fetch_array($dondeesta_values)){
 
        echo '. '. $dondeesta['donde_esta'];
         }
@@ -347,8 +317,8 @@
 
 
                                 <?php
-          $factura_products_values = mysql_query("select op.products_price from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select op.products_price from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' order by o.orders_id, op.orders_products_id");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
@@ -379,8 +349,8 @@
 
 
                             <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "'order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' order by o.orders_id, op.orders_products_id");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
                 <tr>
@@ -411,11 +381,11 @@
               </td>
               <td width="11%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
                       <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "'order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and  o.orders_status = '" . $invoice_status  . "' order by o.orders_id, op.orders_products_id");
+         while      ($factura_productss = tep_db_fetch_array($factura_products_values)) {  ?>
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
                 <tr>
-                  <td width="100%"><?php ECHO  $currencies->format($factura_products['final_price']);
+                  <td width="100%"><?php ECHO  $currencies->format($factura_productss['final_price']);
 
 
 
@@ -428,8 +398,8 @@
               </td>
               <td width="21%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
                                          <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $invoice_status  . "'order by o.orders_id");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $invoice_status  . "'order by o.orders_id, op.orders_products_id");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
 
 
 
@@ -486,12 +456,12 @@
 
 
           $sd_raw = "select sum(final_price_total)  as value, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $invoice_status  . "'";
-  $sd_query = mysql_query($sd_raw);
-  $sd= mysql_fetch_array($sd_query);
+  $sd_query = tep_db_query($sd_raw);
+  $sd= tep_db_fetch_array($sd_query);
 
           $sds_raw = "select sum(final_price) as value, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o  where o.orders_id = op.orders_id and o.orders_status = '" . $invoice_status  . "'";
-  $sds_query = mysql_query($sds_raw);
-  $sds= mysql_fetch_array($sds_query);
+  $sds_query = tep_db_query($sds_raw);
+  $sds= tep_db_fetch_array($sds_query);
 
                       ?>
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">

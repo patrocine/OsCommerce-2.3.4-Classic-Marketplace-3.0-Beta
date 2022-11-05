@@ -31,7 +31,7 @@
     $action  = $_GET['action'];
 
   IF ($MAX_DISPLAY_SEARCH_RESULTS == 0){
- $MAX_DISPLAY_SEARCH_RESULTS  = 100;
+ $MAX_DISPLAY_SEARCH_RESULTS  = 40;
 }
 
 
@@ -150,50 +150,54 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
    if ($action == 'updateprices') {
 
 
+
+
+
     foreach($_POST['product_new_price'] as $id => $new_price) {
 
-          $_POST['product_new_weight'];
-
-        tep_db_query("UPDATE products SET products_price=$new_price WHERE products_id=$id");
-    }
+          $sql_status_update_array = array('products_price' => $new_price);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
+     }
 
+    
      foreach($_POST['product_new_weight'] as $id => $new_weight) {
 
-         $_POST['product_new_status'];
+          $sql_status_update_array = array('products_weight' => $new_weight);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
-        tep_db_query("UPDATE products SET products_weight=$new_weight WHERE products_id=$id");
-    }
-    
-    
+
+     }
+
 
 
 
      foreach($_POST['product_new_status'] as $id => $new_status) {
 
+          $sql_status_update_array = array('products_status' => $new_status);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
-        tep_db_query("UPDATE products SET products_status=$new_status WHERE products_id=$id");
-    }
+     }
 
 
-     foreach($_POST['product_new_status_exel'] as $id => $new_status_exel) {
+   foreach($_POST['product_new_status_exel'] as $id => $new_status_exel) {
+
+          $sql_status_update_array = array('products_status_exel' => $new_status_exel);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
-
-        tep_db_query("UPDATE products SET products_status_exel=$new_status_exel WHERE products_id=$id");
-    }
+     }
     
-    
-    
-     foreach($_POST['products_new_regladeprecios'] as $id => $new_regladeprecios) {
+
+foreach($_POST['products_new_regladeprecios'] as $id => $new_regladeprecios) {
+
+          $sql_status_update_array = array('products_regladeprecios' => $new_regladeprecios);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
-
-        tep_db_query("UPDATE products SET products_regladeprecios=$new_regladeprecios WHERE products_id=$id");
-    }
-
+     }
 
 
      foreach($_POST['products_new_filtro'] as $id => $new_filtro) {
@@ -319,14 +323,14 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
 
 
 
-
-
      foreach($_POST['products_new_stocknivel'] as $id => $new_stocknivel) {
 
 
+          $sql_status_update_array = array('stock_nivel' => $new_stocknivel);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
-        tep_db_query("UPDATE products SET stock_nivel=$new_stocknivel WHERE products_id=$id");
-    }
+   }
+
      foreach($_POST['products_new_manufacturers_id'] as $id => $new_manufacturers_id) {
 
 
