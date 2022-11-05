@@ -17,7 +17,21 @@
         'code' => 'affiliate_empresa_banner.php',
         'title' => 'Banners',
         'link' => tep_href_link('affiliate_empresa_banner.php')
+      ),
+     array(
+        'code' => 'conceptos_proveedores.php',
+        'title' => 'Proveedor Imagenes',
+        'link' => tep_href_link('conceptos_proveedores.php')
+       ),
+      array(
+        'code' => 'conceptos_compartir_products.php',
+        'title' => 'Compartir Productos',
+        'link' => tep_href_link('conceptos_compartir_products.php')
       )
+
+      
+      
+      
             )
   );
 ?>

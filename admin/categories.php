@@ -2166,6 +2166,7 @@ $('#products_date_available').datepicker({
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            
 
 <SCRIPT>
 <!--
@@ -2206,6 +2207,10 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
  <input type="submit" value="Buscar" name="B1"></p>
 </form>
+
+
+
+
                 
 <?php
  //  echo tep_draw_form('search', FILENAME_CATEGORIES, '', 'get');
@@ -2326,7 +2331,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
 
                                                        //zona envío
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 

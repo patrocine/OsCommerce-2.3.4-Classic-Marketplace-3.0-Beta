@@ -118,7 +118,7 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
 
                                                        //zona envío
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -188,7 +188,7 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
                              }else{
                                                        //zona envío
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -995,7 +995,7 @@ $oldday1 = date("Y-m-d", $time1);
                      if (isset($products_details['products_aut_codigo'])){
 
 
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -1015,7 +1015,7 @@ $oldday1 = date("Y-m-d", $time1);
                      if (isset($products_details['products_aut_referencia2'])){
 
 
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -3728,7 +3728,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 <?php
 
                   // stock exterior
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -4924,7 +4924,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
   $stock_exterior = '<script language="javascript" src="products_info_stock.php?stock_nivel=6&products_id_stock='. $order->products[$i]['products_id'] . ' "> </script>';
 
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -5086,7 +5086,7 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
    echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exterior . '/' . $products_stock['products_stock_pendiente'] . '</td>     ' . "\n";
 
                   // stock exterior
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 

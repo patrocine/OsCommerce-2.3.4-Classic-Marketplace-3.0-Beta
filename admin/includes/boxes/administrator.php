@@ -58,12 +58,7 @@
         'title' => 'Envios y Devoluciones',
         'link' => tep_href_link('define_devoluciones.php')
       ),
-     array(
-        'code' => 'conceptos_proveedores.php',
-        'title' => 'Proveedores',
-        'link' => tep_href_link('conceptos_proveedores.php')
-       ),
-      array(
+        array(
         'code' => 'conceptos_balances_ventas.php',
         'title' => 'Balances de Ventas',
         'link' => tep_href_link('conceptos_balances_ventas.php')
@@ -73,11 +68,6 @@
         'title' => 'Mantenimiento Catalogos',
         'link' => tep_href_link('configuracion_productos.php')
        ),
-      array(
-        'code' => 'conceptos_compartir_products.php',
-        'title' => 'Compartir Productos',
-        'link' => tep_href_link('conceptos_compartir_products.php')
-      )
-    )
+   )
   );
 ?>

@@ -37,6 +37,37 @@
       global $oscTemplate;
 
 
+
+
+
+   $registros_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 3 . "'");
+                    while  ($registros = tep_db_fetch_array($registros_values)){
+
+
+
+            ?>
+<?php  $f .='<table border="0" width="100%">' ;?>
+<?php  $f .='<tr>' ;?>
+<?php  $f .='<td width="194"><a href=' .  $registros['ruta_url'] . '>';?>
+<?php  $f .='<img src="' .  $registros['ruta_url'] . 'images/store_logo.png"' . 'width="160" height=""></a></td>';?>
+<?php  $f .='<tr><td>&nbsp;</td></tr></tr></tr></table>' ;?>
+
+
+
+
+
+   <?php
+
+      }
+
+
+$f .='</p>';
+
+
+
+
+
+
   if ($pro_ale <= 11){
 
 
@@ -192,7 +223,7 @@
 
               
 	  $infobox = new azInfoBox();
-      $infobox->azSetBoxHeading('<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' .
+      $infobox->azSetBoxHeading($f.'<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' .
       '<p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Descargar Tienda</a></font></b> <img border="0" src="'.'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'.'" width="30" height="">'   .
       '<p><b><font size="2">MARKETPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
       $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');

@@ -30,10 +30,33 @@ jQuery(".gallery2").jCarouselLite({
 	<div class="main_part_left_box">
 		<div class="main_part_left_box_pad">
    <?php require(TMPL_BOXES . 'az_categ_intro.php'); ?>
+      <p>&nbsp;</p>
+  <?php
+
+   $registros_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 3 . "'");
+                    while  ($registros = tep_db_fetch_array($registros_values)){
+
+
+
+            ?>
+<table border="0" width="100%">
+	<tr>
+		<td width="194"><a href="<?php echo $registros['ruta_url'] ?>">
+		<img src="<?php echo $registros['ruta_url'] . 'images/store_logo.png' ?>" alt="<?php echo $registros['nombre_oculto'] ?>" width="160" height=""></a></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+	</tr>
+</table>
 
 			<div class="main_part_title review_price_blocks"><?php // echo BOX_TAGS; ?></div>
 
-   <?php // require(TMPL_BOXES . 'az_flash.php'); ?>
+   <?php
+
+      }
+
+
+      ?>
    
    
    

@@ -388,6 +388,7 @@ $eliminar_cont = $_GET['eliminar_cont'];
             <td class="dataTableHeadingContent"><?php echo 'Editar'; ?></td>
             <td class="dataTableHeadingContent"><?php echo 'Eliminar'; ?></td>
             <td class="dataTableHeadingContent" align="center"><?php echo 'ID'; ?></td>
+            <td class="dataTableHeadingContent" align="center"><?php echo 'ID Proveedor'; ?></td>
             <td class="dataTableHeadingContent" align="center"><?php echo 'N. Oculto'; ?></td>
             <td class="dataTableHeadingContent" align="center"><?php echo 'N. Publico'; ?></td>
             <td class="dataTableHeadingContent" align="center"><?php echo 'Ruta URL'; ?></td>
@@ -411,6 +412,7 @@ $eliminar_cont = $_GET['eliminar_cont'];
             <td class="dataTableContent"><?php echo '<p><a href="'. $PHP_SELF .'?seleccionar_formulario=ok&id_compartir='. $affiliate_sales['id_compartir'] . '">Editar</a></p>'; ?></td>
             <td class="dataTableContent"><?php echo '<p><a href="'. $PHP_SELF .'?eliminar_cont=ok&id_compartir='. $affiliate_sales['id_compartir'] . '">Eliminar</a></p>'; ?></td>
             <td class="dataTableContent"><?php echo $affiliate_sales['activo']; ?></td>
+            <td class="dataTableContent"><?php echo $affiliate_sales['proveedor_id']; ?></td>
             <td class="dataTableContent"><?php echo $affiliate_sales['nombre_oculto']; ?></td>
             <td class="dataTableContent"><?php echo $affiliate_sales['nombre_publico']; ?></td>
             <td class="dataTableContent" align="center"><?php echo $affiliate_sales['ruta_url']; ?></td>
