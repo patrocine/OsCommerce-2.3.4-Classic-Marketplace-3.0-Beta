@@ -245,7 +245,7 @@ $default_these = array(
 	'v_categories_id',
 	'v_products_price',
 	'v_products_quantity',
-	'v_products_weight',
+	'products_weight',
 	'v_date_avail',
 	'v_instock',
 	'v_tax_class_title',
@@ -312,7 +312,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		$endofrow = "\n";
 	} else {
 		// default to normal end of row
-		$endofrow = $separator . 'EOREOR' . "\n";
+		$endofrow = $separator . '' . "\n";
 	}
 	$filestring .= $endofrow;
 
@@ -370,7 +370,9 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 			}
 
 			$row['v_products_name_' . $lid] 	= $row2['products_name'];
+			$row['título'] 	= $row2['products_name'];
 			$row['v_products_description_' . $lid] 	= $row2['products_description'];
+			$row['descripción'] 	= $row2['products_description'];
 			$row['v_products_url_' . $lid] 		= $row2['products_url'];
 
 			// froogle advanced format needs the quotes around the name and desc
@@ -406,7 +408,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 				$result2 = tep_db_query($sql2);
 				$row2 =  tep_db_fetch_array($result2);
 				// only set it if we found something
-				$temprow['v_categories_name_' . $categorylevel] = $row2['categories_name'];
+				//$temprow['v_categories_name_' . $categorylevel] = $row2['categories_name'];
 				// now get the parent ID if there was one
 				$sql3 = "SELECT parent_id
 					FROM ".TABLE_CATEGORIES."
@@ -423,9 +425,9 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 					$thecategory_id = false;
 				}
 				//$fullcategory .= " > " . $row2['categories_name'];
-				$fullcategory = $row2['categories_name'] . " > " . $fullcategory;
+			//	$fullcategory = $row2['categories_name'] . " > " . $fullcategory;
 			} else {
-				$temprow['v_categories_name_' . $categorylevel] = '';
+			//	$temprow['v_categories_name_' . $categorylevel] = '';
 			}
 		}
 		// now trim off the last ">" from the category stack
@@ -436,7 +438,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		// let's turn them into high to low level categories
 		for( $categorylevel=6; $categorylevel>0; $categorylevel--){
 			if ($temprow['v_categories_name_' . $categorylevel] != ''){
-				$row['v_categories_name_' . $newlevel++] = $temprow['v_categories_name_' . $categorylevel];
+				//$row['v_categories_name_' . $newlevel++] = $temprow['v_categories_name_' . $categorylevel];
 			}
 		}
 		// if the filelayout says we need a manufacturers name, get it
@@ -609,6 +611,35 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		} else {
 			$row['v_status'] = $inactive;
 		}
+
+  $products_images_name_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_name = tep_db_fetch_array($products_images_name_values);
+  $products_images_name_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_para = tep_db_fetch_array($products_images_name_values);
+  $products_images_name_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_stock = tep_db_fetch_array($products_images_name_values);
+
+       $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id = '" . $pro_para['codigo_proveedor'] . "'");
+       $product_compartir = tep_db_fetch_array($product_compartir_values);
+
+           if ($pro_stock['products_stock_real'] >= 1){
+
+               $stock = 'in_stock';
+               }else{
+            $stock = 'out_of_stock';
+
+           }
+
+       	$row['id'] = $row['v_products_id'];
+       	$row['gtin'] = $row['v_products_model'];
+       	$row['image_link'] =$product_compartir['ruta_url'] .'images/'. $row['v_products_image'];
+        $row['precio'] 	= $pro_para['products_price'].'EUR';
+       	$row['disponibilidad'] 	= $stock;
+       	$row['estado'] = 'new';
+       	$row['enlace'] = HTTPS_SERVER.DIR_WS_CATALOG. 'product_info.php?products_id='.$row['v_products_id'];
+       	$row['product_weight'] = '0.30';
+
+
 
 		// remove any bad things in the texts that could confuse EasyPopulate
 		$therow = '';
@@ -974,12 +1005,19 @@ function ep_create_filelayout($dltype){
 	$fieldmap = array(); // default to no mapping to change internal field names to external.
 	switch( $dltype ){
 	case 'full':
+
 		// The file layout is dynamically made depending on the number of languages
 		$iii = 0;
 		$filelayout = array(
-			'v_products_model'		=> $iii++,
-			'v_customer_price_2'		=> $iii++,
-			'v_products_image'		=> $iii++,
+			'id'		=> $iii++,
+			'título'		=> $iii++,
+			'descripción'	=> $iii++,
+			'enlace'		=> $iii++,
+			'estado'		=> $iii++,
+			'precio'		=> $iii++,
+			'disponibilidad'		=> $iii++,
+			'image_link'		=> $iii++,
+			'gtin'		=> $iii++,
 			);
 
 		foreach ($langcode as $key => $lang){
@@ -988,25 +1026,20 @@ function ep_create_filelayout($dltype){
 			// Linda's Header Tag Controller 2.0
 			//echo $langcode['id'] . $langcode['code'];
 			$filelayout  = array_merge($filelayout , array(
-					'v_products_name_' . $l_id		=> $iii++,
-					'v_products_description_' . $l_id	=> $iii++,
-					'v_products_url_' . $l_id	=> $iii++,
-			//		'v_products_head_title_tag_'.$l_id	=> $iii++,
-			//		'v_products_head_desc_tag_'.$l_id	=> $iii++,
+					'v_products_head_desc_tag_'.$l_id	=> $iii++,
 			//		'v_products_head_keywords_tag_'.$l_id	=> $iii++,
 					));
 		}
 
 
 		// uncomment the customer_price and customer_group to support multi-price per product contrib
+  
 
     // VJ product attribs begin
      $header_array = array(
-			'v_products_price'		=> $iii++,
-			'v_products_weight'		=> $iii++,
-			'v_date_avail'			=> $iii++,
-			'v_date_added'			=> $iii++,
-			'v_products_quantity'		=> $iii++,
+
+            'products_weight'		=> $iii++,
+			'google_product_category'		=> $iii++,
 			);
 
 			$languages = tep_get_languages();
@@ -1050,26 +1083,25 @@ function ep_create_filelayout($dltype){
 					$header_array[$key6] = $iii++;
 	}				
 //// attributes stock add end 		
-					
+
 					$attribute_values_count++;
 				}
 
 				$attribute_options_count++;
      }
 
-    $header_array['v_manufacturers_name'] = $iii++;
+                 $header_array['v_manufacturers_name'] = $iii++;
+
 
     $filelayout = array_merge($filelayout, $header_array);
     // VJ product attribs end
 
 		// build the categories name section of the array based on the number of categores the user wants to have
 		for($i=1;$i<$max_categories+1;$i++){
-			$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
+		//	$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
 		}
 
 		$filelayout = array_merge($filelayout, array(
-			'v_tax_class_title'		=> $iii++,
-			'v_status'			=> $iii++,
 			));
 
 		$filelayout_sql = "SELECT
@@ -1077,7 +1109,7 @@ function ep_create_filelayout($dltype){
 			p.products_model as v_products_model,
 			p.products_image as v_products_image,
 			p.products_price as v_products_price,
-			p.products_weight as v_products_weight,
+			p.products_weight as products_weight,
 			p.products_date_available as v_date_avail,
 			p.products_date_added as v_date_added,
 			p.products_tax_class_id as v_tax_class_id,
@@ -1132,7 +1164,7 @@ function ep_create_filelayout($dltype){
 
 		// build the categories name section of the array based on the number of categores the user wants to have
 		for($i=1;$i<$max_categories+1;$i++){
-			$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
+		//	$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
 		}
 
 
@@ -1166,8 +1198,6 @@ function ep_create_filelayout($dltype){
 //		foreach ($langcode as $key => $lang){
 //			$l_id = $lang['id'];
 			$filelayout  = array_merge($filelayout , array(
-					'v_froogle_products_name_' . $l_id		=> $iii++,
-					'v_froogle_products_description_' . $l_id	=> $iii++,
 					));
 //		}
 		$filelayout  = array_merge($filelayout , array(
@@ -1178,7 +1208,7 @@ function ep_create_filelayout($dltype){
 			'v_froogle_instock'		=> $iii++,
 			'v_froogle_ shipping'		=> $iii++,
 			'v_manufacturers_name'		=> $iii++,
-			'v_froogle_ upc'		=> $iii++,
+   'v_froogle_ upc'		=> $iii++,
 			'v_froogle_color'		=> $iii++,
 			'v_froogle_size'		=> $iii++,
 			'v_froogle_quantitylevel'	=> $iii++,
@@ -1217,7 +1247,7 @@ function ep_create_filelayout($dltype){
 			p.products_model as v_products_model,
 			p.products_image as v_products_image,
 			p.products_price as v_products_price,
-			p.products_weight as v_products_weight,
+			p.products_weight as products_weight,
 			p.products_date_added as v_date_avail,
 			p.products_tax_class_id as v_tax_class_id,
 			p.products_quantity as v_products_quantity,
@@ -1441,7 +1471,6 @@ function walk( $item1 ) {
 		// Get the category description
 		// set the appropriate variable name
 		// if parent_id is not null, then follow it up.
-		$thecategory_id = $row['v_categories_id'];
 
 		for( $categorylevel=1; $categorylevel<$max_categories+1; $categorylevel++){
 			if ($thecategory_id){
