@@ -57,15 +57,27 @@ while ($products_image = tep_db_fetch_array($query)){
 // si en la imagan el nombre empieza por http:// pues elimina la ruta actual para que la imagen del producto siempre se vea.
    if (ereg("^http://", $products_image['products_image']) ) {
 
-      $image_sc = '' . $products_image['products_image'];
+      $image_sc = $products_image['products_image'];
 }else{
 
-      $image_sc = HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_WS_IMAGES . $products_image['products_image'];
+     $image_sc = $products_image['products_image'];
 
   }
 
 
    } // fin ref_fabricante
+
+
+
+   if (ereg("^http://", $products_image['products_image']) ) {
+
+      $image_sc = $products_image['products_image'];
+}else{
+
+       $image_sc = $ref_fabricante['proveedor_ruta_images'] . $products_image['products_image'];
+
+  }
+
 
 
 $products_price = '<p><p align=center><font face=Verdana ><font size=5><b>' . number_format($products_image['products_price'], 2, ",", ".") . 'Eur</a></font></p>';

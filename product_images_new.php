@@ -31,8 +31,14 @@ $product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMA
 $product['image']			='<img src="images/'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
                           }else{
 
-$product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
 
+      if (ereg("^https://", $new_products['products_image']) ) {
+$product['image']			='<img src="'. $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+
+
+}else{
+$product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+ }
 
 
 

@@ -50,6 +50,31 @@ $products_name = str_replace('_', ' ', $products_name);
  $query = tep_db_query("SELECT * FROM `products` WHERE  products_model='" . $codigobarras . "'");
 if ($products = tep_db_fetch_array($query)){
 
+ $query = tep_db_query("SELECT * FROM `products_description` WHERE  products_id='" . $products['products_id'] . "'");
+ $id = tep_db_fetch_array($query);
+
+
+$sql_status_update_array = array('stock_nivel' => 6,
+                            'products_status' => 1,
+                            'codigo_proveedor' => $proveedor_id,
+                            'referencia_padre' => $referencia_padre,
+                            'referencia_padre_g2' => $referencia_padre_g2,
+                            'referencia_padre_g3' => $referencia_padre_g3,
+                            'products_image' => $products_image,
+                            'products_cpe' => $products_cpe,
+                            'products_cpf' => $products_cpf,
+                            'products_youtube_1' => $products_youtube_1,
+                            'products_youtube_2' => $products_youtube_2,
+                            'products_rc' => $products_rc,
+                            'products_price' => $products_price);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_model='" . $codigobarras . "'");
+
+
+
+$sql_status_update_array = array('products_description' => $products_description,
+                            'products_name' => $products_name);
+            tep_db_perform('products_description', $sql_status_update_array, 'update', " products_id='" . $id['products_id'] . "'");
+
 
 
 

@@ -480,7 +480,7 @@ $admin_email_address = $scsh['admin_email_address'];
 
    }else{
 
-   tep_redirect(tep_href_link('create_order_tienda.php'));
+   tep_redirect(tep_href_link('categories.php'));
    
 }
  //tep_redirect(tep_href_link(FILENAME_FORBIDEN));

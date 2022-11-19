@@ -73,6 +73,9 @@ $new_product_pre = tep_db_fetch_array($query);
 
 $action_in = $_GET['action_in'];
 $codigobarras_in = $_GET['codigobarras_in'];
+
+
+
   if ($action_in == 'true'){
 
        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras_in . "' or codigo_barras = '" . $codigobarras_in . "'");
@@ -101,8 +104,64 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
 
            if (NEW_PRODUCT == 1){
-        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras . "' or codigo_barras = '" . $codigobarras . "'");
+
+        $newproducts_values = tep_db_query("select pd.products_name from " . 'products' . " p, products_description pd where p.products_id = pd.products_id and p.products_model = '" . $codigobarras . "'");
       if ($newproducts = tep_db_fetch_array($newproducts_values)){
+
+                  if ($newproducts['products_name'] == $codigobarras){
+
+                if (NEW_PRODUCT_PRE == 1){
+                                                    //zona envío
+               $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+                      }
+    //   echo  header("Location: '" . $PHP_SELF.'?codigobarras=' . $codigobarras . '&oID='.$oID.'&action=edit' . "'");
+
+         ?>
+
+           <script type="text/javascript">
+    var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
+    var segundos = 999999999999999999999;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+   <?php
+    }
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }else{
@@ -110,14 +169,7 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
                  if (NEW_PRODUCT_PRE == 1){
 
- 	//tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
-				//	configuration_value = '" . 2 . "'
-			//		WHERE configuration_key = '" . 'NEW_PRODUCT_PRE' . "'");
-
-
-
-
-                                                       //zona envío
+                                                     //zona envío
                 $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
@@ -127,12 +179,13 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
                               }
 
 
-
+       if  ($codigobarras){
 
     //   echo  header("Location: '" . $PHP_SELF.'?codigobarras=' . $codigobarras . '&oID='.$oID.'&action=edit' . "'");
 
          ?>
-
+            <?php $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>
+            
            <script type="text/javascript">
     var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
     var segundos = 9999999999999999999999999;
@@ -154,17 +207,9 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
     <?php
 
-
+            }
 
                }
-
-
-
-
-
-
-
-
 
 
 }

@@ -293,6 +293,7 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
                                 'stock_nivel' => (int)tep_db_prepare_input($HTTP_POST_VARS['stock_nivel']),
                                 'products_regladeprecios' => (int)tep_db_prepare_input($HTTP_POST_VARS['products_regladeprecios']),
                                 'products_cpf' => tep_db_prepare_input($HTTP_POST_VARS['products_cpf']),
+                                'manufacturers_name' => tep_db_prepare_input($HTTP_POST_VARS['manufacturers_name']),
                                 'products_descuento_onoff' => tep_db_prepare_input($HTTP_POST_VARS['products_descuento_onoff']),
                                 'products_descuento' => tep_db_prepare_input($HTTP_POST_VARS['products_descuento']),
                                 'products_shoptoshop' => tep_db_prepare_input($HTTP_POST_VARS['products_shoptoshop']),
@@ -378,10 +379,27 @@ tep_db_query("delete from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" .
         $languages = tep_get_languages();
         for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
           $language_id = $languages[$i]['id'];
+          
+                          IF  (tep_db_prepare_input($HTTP_POST_VARS['products_name'][$language_id])){
 
+
+                                      
           $sql_data_array = array('products_name' => tep_db_prepare_input($HTTP_POST_VARS['products_name'][$language_id]),
                                   'products_description' => tep_db_prepare_input($HTTP_POST_VARS['products_description'][$language_id]),
                                   'products_url' => tep_db_prepare_input($HTTP_POST_VARS['products_url'][$language_id]));
+
+
+                          }else{
+
+
+          $sql_data_array = array('products_name' => tep_db_prepare_input($HTTP_POST_VARS['products_model']),
+                                  'products_description' => tep_db_prepare_input($HTTP_POST_VARS['products_description'][$language_id]),
+                                  'products_url' => tep_db_prepare_input($HTTP_POST_VARS['products_url'][$language_id]));
+                      }
+          
+
+          
+
 
           if ($action == 'insert_product') {
             $insert_sql_data = array('products_id' => $products_id,
@@ -726,10 +744,10 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
               $messageStack->add_session(ERROR_CANNOT_LINK_TO_SAME_CATEGORY, 'error');
             }
           } elseif ($HTTP_POST_VARS['copy_as'] == 'duplicate') {
-            $product_query = tep_db_query("select products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, products_youtube_1, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model, products_image, products_price, products_date_available, products_weight, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
+            $product_query = tep_db_query("select products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, 	manufacturers_name, products_youtube_1, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model, products_image, products_price, products_date_available, products_weight, products_tax_class_id, manufacturers_id from " . TABLE_PRODUCTS . " where products_id = '" . (int)$products_id . "'");
             $product = tep_db_fetch_array($product_query);
 
-            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model,products_image, products_price, products_date_added, products_date_available, products_weight, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");
+            tep_db_query("insert into " . TABLE_PRODUCTS . " (products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf,	manufacturers_name, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, products_model,products_image, products_price, products_date_added, products_date_available, products_weight, products_status, products_tax_class_id, manufacturers_id) values ('" . tep_db_input($product['products_quantity']) . "', '" . tep_db_input($product['products_model']) . "', '" . tep_db_input($product['products_image']) . "', '" . tep_db_input($product['products_price']) . "',  now(), " . (empty($product['products_date_available']) ? "null" : "'" . tep_db_input($product['products_date_available']) . "'") . ", '" . tep_db_input($product['products_weight']) . "', '0', '" . (int)$product['products_tax_class_id'] . "', '" . (int)$product['manufacturers_id'] . "')");
             $dup_products_id = tep_db_insert_id();
 
             $description_query = tep_db_query("select language_id, products_name, products_description, products_url from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$products_id . "'");
@@ -795,6 +813,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
                        'products_regladeprecios' => '',
                        'products_cpf' => '',
                        'products_cpe' => '',
+                       'manufacturers_name' => '',
                        'codigo_barras' => '',
                        'products_rc' => '',
                        'opcion_1' => '',
@@ -882,7 +901,7 @@ while ($customers_group = tep_db_fetch_array($customers_group_query)) // Gets al
     
 
     if (isset($HTTP_GET_VARS['pID']) && empty($HTTP_POST_VARS)) {
-      $product_query = tep_db_query("select pd.products_name, products_descuento_onoff, products_descuento, products_shoptoshop, pd.products_description, pd.products_url, p.products_id, p.products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status,
+      $product_query = tep_db_query("select pd.products_name, products_descuento_onoff, products_descuento, products_shoptoshop, pd.products_description, pd.products_url, p.products_id, p.products_quantity, codigo_proveedor, stock_nivel, products_regladeprecios, products_cpf, 	manufacturers_name, referencia_padre, referencia_padre_g2, referencia_padre_g3, products_youtube_1, products_youtube_2, opcion_1, opcion_1_1, opcion_2, opcion_2_2, opcion_3, opcion_3_3, opcion_4, opcion_4_4, opcion_5, opcion_5_5, opcion_6, opcion_6_6, opcion_7, opcion_7_7, opcion_8, opcion_8_8, opcion_9, opcion_9_9, opcion_10, opcion_10_10, opcion_11, opcion_11_11, opcion_12, opcion_12_12, opcion_13, opcion_13_13, opcion_14, opcion_14_14, opcion_15, opcion_15_15, opcion_16, opcion_16_16, opcion_17, opcion_17_17, opcion_18, opcion_18_18, opcion_19, opcion_19_19, opcion_20, opcion_20_20, codigo_barras, products_rc, products_cpe, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status,
       p.products_tax_class_id, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$HTTP_GET_VARS['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
@@ -1068,6 +1087,11 @@ $ayuda_reglacategoria = '<p><a href="cpe.php">Ir Crear reglas de caegoria </a> '
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
           </tr>
+          
+
+          
+          
+          
 <?php
     for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
 ?>
@@ -1643,6 +1667,13 @@ function showPiDelConfirm(piId) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
 
 
+
+          <tr>
+            <td class="main"><?php echo 'Nombre de Fabricante'; ?></td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('manufacturers_name', $pInfo->manufacturers_name); ?></td>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
 
 
 
@@ -2314,9 +2345,28 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
 
            if (NEW_PRODUCT == 1){
-        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $HTTP_GET_VARS['search'] . "' or codigo_barras = '" . $HTTP_GET_VARS['search'] . "'");
+        $newproducts_values = tep_db_query("select pd.products_name from " . 'products' . " p, products_description pd where p.products_id = pd.products_id and p.products_model = '" . $HTTP_GET_VARS['search'] . "'");
       if ($newproducts = tep_db_fetch_array($newproducts_values)){
 
+
+                //si el nombre es el mismo que la busqueda
+         if ($newproducts['products_name'] == $HTTP_GET_VARS['search']){
+
+
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+
+
+             //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
+        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?cPath=' . (int)$current_category_id . '&codigobarras='.$HTTP_GET_VARS['search'].'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+
+
+
+
+
+
+                              }
+}
 
     }else{
 

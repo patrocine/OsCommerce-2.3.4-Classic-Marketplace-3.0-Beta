@@ -50,7 +50,7 @@ $tempdir2 = "/temp/";
 // uncomment this if you are not on a safe mode server and you are getting timeouts
 // set_time_limit(330);
 
-// if you are splitting files, thssssssssssssssssssssssis will set the maximum number of records to put in each file.
+// if you are splitting files, this will set the maximum number of records to put in each file.
 // if you set your php.ini to a long time, you can make this number bigger
 
 
@@ -233,7 +233,7 @@ global $filelayout, $filelayout_count, $filelayout_sql, $langcode, $fileheaders;
 // these are the fields that will be defaulted to the current values in the database if they are not found in the incoming file
 global $default_these;
 $default_these = array(
-	'image_link',
+	'v_products_image',
 	#'v_products_mimage',
 	#'v_products_bimage',
 	#'v_products_subimage1',
@@ -245,7 +245,7 @@ $default_these = array(
 	'v_categories_id',
 	'v_products_price',
 	'v_products_quantity',
-	'v_products_weight',
+	'products_weight',
 	'v_date_avail',
 	'v_instock',
 	'v_tax_class_title',
@@ -312,7 +312,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		$endofrow = "\n";
 	} else {
 		// default to normal end of row
-		$endofrow = $separator . 'EOREOR' . "\n";
+		$endofrow = $separator . '' . "\n";
 	}
 	$filestring .= $endofrow;
 
@@ -322,7 +322,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 
 		// if the filelayout says we need a products_name, get it
 		// build the long full froogle image path
-		$row['v_products_fullpath_image'] = $froogle_image_path . $row['image_link'];
+		$row['v_products_fullpath_image'] = $froogle_image_path . $row['v_products_image'];
 		// Other froogle defaults go here for now
 		$row['v_froogle_instock'] 		= 'Y';
 		$row['v_froogle_shipping'] 		= '';
@@ -369,8 +369,10 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 				}
 			}
 
-			$row['title'] 	= $row2['products_name'];
-			$row['description'] 	= $row2['products_description'];
+			$row['v_products_name_' . $lid] 	= $row2['products_name'];
+			$row['título'] 	= ucfirst(strtolower($row2['products_name']));
+			$row['v_products_description_' . $lid] 	= $row2['products_description'];
+			$row['descripción'] 	= $row2['products_description'];
 			$row['v_products_url_' . $lid] 		= $row2['products_url'];
 
 			// froogle advanced format needs the quotes around the name and desc
@@ -406,7 +408,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 				$result2 = tep_db_query($sql2);
 				$row2 =  tep_db_fetch_array($result2);
 				// only set it if we found something
-				$temprow['v_categories_name_' . $categorylevel] = $row2['categories_name'];
+				//$temprow['v_categories_name_' . $categorylevel] = $row2['categories_name'];
 				// now get the parent ID if there was one
 				$sql3 = "SELECT parent_id
 					FROM ".TABLE_CATEGORIES."
@@ -423,9 +425,9 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 					$thecategory_id = false;
 				}
 				//$fullcategory .= " > " . $row2['categories_name'];
-				$fullcategory = $row2['categories_name'] . " > " . $fullcategory;
+			//	$fullcategory = $row2['categories_name'] . " > " . $fullcategory;
 			} else {
-				$temprow['v_categories_name_' . $categorylevel] = '';
+			//	$temprow['v_categories_name_' . $categorylevel] = '';
 			}
 		}
 		// now trim off the last ">" from the category stack
@@ -436,7 +438,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		// let's turn them into high to low level categories
 		for( $categorylevel=6; $categorylevel>0; $categorylevel--){
 			if ($temprow['v_categories_name_' . $categorylevel] != ''){
-				$row['v_categories_name_' . $newlevel++] = $temprow['v_categories_name_' . $categorylevel];
+				//$row['v_categories_name_' . $newlevel++] = $temprow['v_categories_name_' . $categorylevel];
 			}
 		}
 		// if the filelayout says we need a manufacturers name, get it
@@ -609,6 +611,35 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
 		} else {
 			$row['v_status'] = $inactive;
 		}
+
+  $products_images_name_values = tep_db_query("select * from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_name = tep_db_fetch_array($products_images_name_values);
+  $products_images_name_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_para = tep_db_fetch_array($products_images_name_values);
+  $products_images_name_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $row['v_products_id']. "'");
+  $pro_stock = tep_db_fetch_array($products_images_name_values);
+
+       $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where proveedor_id = '" . $pro_para['codigo_proveedor'] . "'");
+       $product_compartir = tep_db_fetch_array($product_compartir_values);
+
+           if ($pro_stock['products_stock_real'] >= 1){
+
+               $stock = 'in_stock';
+               }else{
+            $stock = 'out_of_stock';
+
+           }
+
+       	$row['id'] = $row['v_products_id'];
+       	$row['gtin'] = $row['v_products_model'];
+       	$row['image_link'] =$product_compartir['ruta_url'] .'images/'. $row['v_products_image'];
+        $row['precio'] 	= $pro_para['products_price'].'EUR';
+       	$row['disponibilidad'] 	= $stock;
+       	$row['estado'] = 'new';
+       	$row['enlace'] = HTTPS_SERVER.DIR_WS_CATALOG. 'product_info.php?products_id='.$row['v_products_id'];
+       	$row['product_weight'] = '0.30';
+
+
 
 		// remove any bad things in the texts that could confuse EasyPopulate
 		$therow = '';
@@ -840,7 +871,7 @@ if (is_uploaded_file($usrfl) && $split==1) {
       <table width="75%" border="2">
         <tr>
           <td width="75%">
-           <FORM ENCTYPE="multipart/form-data" ACTION="easypopulate.php?split=0" METHOD=POST>
+           <FORM ENCTYPE="multipart/form-data" ACTION="easypopulate_googleshopping.php?split=0" METHOD=POST>
               <p>
                 <div align = "left">
                 <p><b>Subir Catalogo a la base de datos</b></p>
@@ -858,13 +889,13 @@ if (is_uploaded_file($usrfl) && $split==1) {
 		<p><b>Decargue todo su Catálogo</b></p>
 
 	      <!-- Download file links -  Add your custom fields here -->
-	  <a href="easypopulate.php?download=stream&dltype=full">Descargar <b>Catalogo completo</b> Editar el archivo con .txt</a><br>
+	  <a href="easypopulate_googleshopping.php?download=stream&dltype=full">Descargar <b>Catalogo completo</b> Editar el archivo con .txt</a><br>
 
 			<!-- VJ product attributes begin //-->
 <?php
   if ($products_with_attributes == true) {
 ?>
-	  <a href="easypopulate.php?download=stream&dltype=attrib">Download <b>Model/Attributes</b> tab-delimited .txt file</a><br>
+	  <a href="easypopulate_googleshopping.php?download=stream&dltype=attrib">Download <b>Model/Attributes</b> tab-delimited .txt file</a><br>
 <?php
   }
 ?>
@@ -974,12 +1005,19 @@ function ep_create_filelayout($dltype){
 	$fieldmap = array(); // default to no mapping to change internal field names to external.
 	switch( $dltype ){
 	case 'full':
+
 		// The file layout is dynamically made depending on the number of languages
 		$iii = 0;
 		$filelayout = array(
-			'v_products_model'		=> $iii++,
-			'v_customer_price_2'		=> $iii++,
+			'id'		=> $iii++,
+			'título'		=> $iii++,
+			'descripción'	=> $iii++,
+			'enlace'		=> $iii++,
+			'estado'		=> $iii++,
+			'precio'		=> $iii++,
+			'disponibilidad'		=> $iii++,
 			'image_link'		=> $iii++,
+			'gtin'		=> $iii++,
 			);
 
 		foreach ($langcode as $key => $lang){
@@ -988,25 +1026,20 @@ function ep_create_filelayout($dltype){
 			// Linda's Header Tag Controller 2.0
 			//echo $langcode['id'] . $langcode['code'];
 			$filelayout  = array_merge($filelayout , array(
-					'title'		=> $iii++,
-					'description'	=> $iii++,
-					'v_products_url_' . $l_id	=> $iii++,
-			//		'v_products_head_title_tag_'.$l_id	=> $iii++,
-			//		'v_products_head_desc_tag_'.$l_id	=> $iii++,
+					'v_products_head_desc_tag_'.$l_id	=> $iii++,
 			//		'v_products_head_keywords_tag_'.$l_id	=> $iii++,
 					));
 		}
 
 
 		// uncomment the customer_price and customer_group to support multi-price per product contrib
+  
 
     // VJ product attribs begin
      $header_array = array(
-			'v_products_price'		=> $iii++,
-			'v_products_weight'		=> $iii++,
-			'v_date_avail'			=> $iii++,
-			'v_date_added'			=> $iii++,
-			'v_products_quantity'		=> $iii++,
+
+            'products_weight'		=> $iii++,
+			'google_product_category'		=> $iii++,
 			);
 
 			$languages = tep_get_languages();
@@ -1050,34 +1083,33 @@ function ep_create_filelayout($dltype){
 					$header_array[$key6] = $iii++;
 	}				
 //// attributes stock add end 		
-					
+
 					$attribute_values_count++;
 				}
 
 				$attribute_options_count++;
      }
 
-    $header_array['v_manufacturers_name'] = $iii++;
+                 $header_array['v_manufacturers_name'] = $iii++;
+
 
     $filelayout = array_merge($filelayout, $header_array);
     // VJ product attribs end
 
 		// build the categories name section of the array based on the number of categores the user wants to have
 		for($i=1;$i<$max_categories+1;$i++){
-			$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
+		//	$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
 		}
 
 		$filelayout = array_merge($filelayout, array(
-			'v_tax_class_title'		=> $iii++,
-			'v_status'			=> $iii++,
 			));
 
 		$filelayout_sql = "SELECT
 			p.products_id as v_products_id,
 			p.products_model as v_products_model,
-			p.products_image as image_link,
+			p.products_image as v_products_image,
 			p.products_price as v_products_price,
-			p.products_weight as v_products_weight,
+			p.products_weight as products_weight,
 			p.products_date_available as v_date_avail,
 			p.products_date_added as v_date_added,
 			p.products_tax_class_id as v_tax_class_id,
@@ -1132,7 +1164,7 @@ function ep_create_filelayout($dltype){
 
 		// build the categories name section of the array based on the number of categores the user wants to have
 		for($i=1;$i<$max_categories+1;$i++){
-			$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
+		//	$filelayout = array_merge($filelayout, array('v_categories_name_' . $i => $iii++));
 		}
 
 
@@ -1166,8 +1198,6 @@ function ep_create_filelayout($dltype){
 //		foreach ($langcode as $key => $lang){
 //			$l_id = $lang['id'];
 			$filelayout  = array_merge($filelayout , array(
-					'v_froogle_products_name_' . $l_id		=> $iii++,
-					'v_froogle_products_description_' . $l_id	=> $iii++,
 					));
 //		}
 		$filelayout  = array_merge($filelayout , array(
@@ -1178,7 +1208,7 @@ function ep_create_filelayout($dltype){
 			'v_froogle_instock'		=> $iii++,
 			'v_froogle_ shipping'		=> $iii++,
 			'v_manufacturers_name'		=> $iii++,
-			'v_froogle_ upc'		=> $iii++,
+   'v_froogle_ upc'		=> $iii++,
 			'v_froogle_color'		=> $iii++,
 			'v_froogle_size'		=> $iii++,
 			'v_froogle_quantitylevel'	=> $iii++,
@@ -1215,9 +1245,9 @@ function ep_create_filelayout($dltype){
 		$filelayout_sql = "SELECT
 			p.products_id as v_products_id,
 			p.products_model as v_products_model,
-			p.products_image as image_link,
+			p.products_image as v_products_image,
 			p.products_price as v_products_price,
-			p.products_weight as v_products_weight,
+			p.products_weight as products_weight,
 			p.products_date_added as v_date_avail,
 			p.products_tax_class_id as v_tax_class_id,
 			p.products_quantity as v_products_quantity,
@@ -1379,7 +1409,7 @@ function walk( $item1 ) {
 	$sql = "SELECT
 		p.products_id as v_products_id,
 		p.products_model as v_products_model,
-		p.products_image as image_link,
+		p.products_image as v_products_image,
 		p.products_price as v_products_price,
 		p.products_weight as v_products_weight,
 		p.products_date_added as v_date_avail,
@@ -1424,8 +1454,8 @@ function walk( $item1 ) {
 			$result2 = tep_db_query($sql2);
 			$row2 =  tep_db_fetch_array($result2);
                         // Need to report from ......_name_1 not ..._name_0
-			$row['title'] 		= $row2['products_name'];
-			$row['description'] 	= $row2['products_description'];
+			$row['v_products_name_' . $lang['id']] 		= $row2['products_name'];
+			$row['v_products_description_' . $lang['id']] 	= $row2['products_description'];
 			$row['v_products_url_' . $lang['id']] 		= $row2['products_url'];
 
 			// support for Linda's Header Controller 2.0 here
@@ -1441,7 +1471,6 @@ function walk( $item1 ) {
 		// Get the category description
 		// set the appropriate variable name
 		// if parent_id is not null, then follow it up.
-		$thecategory_id = $row['v_categories_id'];
 
 		for( $categorylevel=1; $categorylevel<$max_categories+1; $categorylevel++){
 			if ($thecategory_id){
@@ -1524,10 +1553,10 @@ function walk( $item1 ) {
 	foreach ($langcode as $lang){
 		//echo "Langid is " . $lang['id'] . "<br>";
 		$l_id = $lang['id'];
-		if (isset($filelayout['title'])){
+		if (isset($filelayout['v_products_name_' . $l_id ])){
 			//we set dynamically the language values
-			$title 	= $items[$filelayout['title']];
-			$description 	= $items[$filelayout['description']];
+			$v_products_name[$l_id] 	= $items[$filelayout['v_products_name_' . $l_id]];
+			$v_products_description[$l_id] 	= $items[$filelayout['v_products_description_' . $l_id ]];
 			$v_products_url[$l_id] 		= $items[$filelayout['v_products_url_' . $l_id ]];
 			// support for Linda's Header Controller 2.0 here
 			if(isset($filelayout['v_products_head_title_tag_' . $l_id])){
@@ -1603,8 +1632,8 @@ function walk( $item1 ) {
 		$v_manufacturer_id="NULL";
 	}
 
-	if (trim($image_link)==''){
-		$image_link = $default_image_product;
+	if (trim($v_products_image)==''){
+		$v_products_image = $default_image_product;
 	}
 
 	if (strlen($v_products_model) > $modelsize ){
@@ -1827,7 +1856,7 @@ if ($vv_stock_nivel){
                        //seguridad products_status_exel
                               if ($vv_seguridad == 5 and $status_exel == 1){
 
-              $sql_data_array = array('products_image' => $image_link,
+              $sql_data_array = array('products_image' => $v_products_image,
                               'products_model' => $v_products_model,
                               'products_status' => $v_db_status,
                               'products_last_modified' => $oldday2,
@@ -1858,7 +1887,6 @@ if ($vv_stock_nivel){
                               'products_weight' => $v_products_weight,
                               'products_price_sin' => $v_products_price,
                               'products_quantity' => $v_products_quantity,
-                              'part_number' => $vv_part_number,
                               'opcion_1' => $vv_opcion_1,
                               'opcion_1_1' => $vv_opcion_1_1,
                               'opcion_2' => $vv_opcion_2,
@@ -2195,7 +2223,7 @@ $oldday1 = date("Y-m-d", $time1);
                                     if ($vv_seguridad == 5 and $status_exel == 1 and $tiempo_permiso == 1){
 //chivato
                                    echo 'producto-a1';
-      $sql_data_array = array('products_image' => $image_link,
+      $sql_data_array = array('products_image' => $v_products_image,
                               'products_weight' => $v_products_weight,
                               'products_status' => $v_db_status,
                               'products_balance_stock_control' => $vv_products_balance_stock_control,
@@ -2282,7 +2310,7 @@ $oldday1 = date("Y-m-d", $time1);
                                     if ($vv_seguridad == 5 and $status_exel == 1 and $tiempo_permiso == 1){
                                    //chivato
                                    echo 'producto-b1';
-      $sql_data_array = array('products_image' => $image_link,
+      $sql_data_array = array('products_image' => $v_products_image,
                               'products_weight' => $v_products_weight,
                               'products_status' => $vvv_db_status,
                               'products_balance_stock_control' => $vv_products_balance_stock_control,
@@ -2505,7 +2533,7 @@ $oldday1 = date("Y-m-d", $time1);
                                    echo 'producto-2';
                                    
                                    
-      $sql_data_array = array('products_image' => $image_link,
+      $sql_data_array = array('products_image' => $v_products_image,
                               'products_weight' => $v_products_weight,
                               'products_status' => $v_db_status,
                               'products_balance_stock_control' => $vv_products_balance_stock_control,
@@ -2597,7 +2625,7 @@ $oldday1 = date("Y-m-d", $time1);
                                                          //seguridad
                                     if ($vv_seguridad == 5 and $status_exel == 1 and $tiempo_permiso == 1){
 
-      $sql_data_array = array('products_image' => $image_link,
+      $sql_data_array = array('products_image' => $v_products_image,
                               'products_weight' => $v_products_weight,
                               'products_status' => $vvv_db_status,
                               'products_balance_stock_control' => $vv_products_balance_stock_control,
@@ -2874,7 +2902,7 @@ $oldday1 = date("Y-m-d", $time1);
                            //   'referencia_fabricante' => $vv_referencia_fabricante,
 
                          /*
-                             'products_image' => $image_link,
+                             'products_image' => $v_products_image,
                               'products_weight' => $v_products_weight,
                               'products_status' => $v_db_status,
                               'products_balance_stock_control' => $vv_products_balance_stock_control,
@@ -2903,7 +2931,7 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-         if ($image_link <> $sql_data_array['products_image']) $sql_data_array['products_image'] = $image_link;
+         if ($v_products_image <> $sql_data_array['products_image']) $sql_data_array['products_image'] = $v_products_image;
          if ($v_products_weight <> $sql_data_array['products_weight']) $sql_data_array['products_weight'] = $v_products_weight;
          if ($v_db_status <> $sql_data_array['products_status']) $sql_data_array['products_status'] = $v_db_status;
          if ($vv_products_balance_stock_control <> $sql_data_array['products_balance_stock_control']) $sql_data_array['products_balance_stock_control'] = $vv_products_balance_stock_control;
@@ -2935,7 +2963,6 @@ $oldday1 = date("Y-m-d", $time1);
          if ($vv_products_cpf) $sql_data_array['products_cpf'] = $vv_products_cpf;
          if ($vv_products_youtube_1) $sql_data_array['products_youtube_1'] = $vv_products_youtube_1;
          if ($vv_products_youtube_2) $sql_data_array['products_youtube_2'] = $vv_products_youtube_2;
-          if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
          if ($vv_opcion_1) $sql_data_array['opcion_1'] = $vv_opcion_1;
          if ($vv_opcion_1) $sql_data_array['opcion_1'] = $vv_opcion_1;
          if ($vv_opcion_1_1) $sql_data_array['opcion_1_1'] = $vv_opcion_1_1;
@@ -3976,8 +4003,8 @@ if ($pr_grupo2 = tep_db_fetch_array($pr_grupo2_values)){
                                                          //seguridad
                                     if ($vv_seguridad == 5 and $status_exel == 1 and $tiempo_permiso == 1){
 		// the following is common in both the updating an existing product and creating a new product
-                if ( isset($title)){
-   foreach( $title as $key => $name){
+                if ( isset($v_products_name)){
+   foreach( $v_products_name as $key => $name){
 
                  // crea un espacio junto a la comilla ejemplo (,space)
                    $name = ereg_replace(",", ", ", $name);
@@ -4007,7 +4034,7 @@ if ($pr_grupo2 = tep_db_fetch_array($pr_grupo2_values)){
 									" . $key . ",
 									'" . $name  . "',
 									'" . $vv_products_add_1  . "',
-									'". $description . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9 . "',
+									'". $v_products_description[$key] . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9 . "',
 						            '". $v_products_url[$key] . "'
 									)";
 						// support for Linda's Header Controller 2.0
@@ -4040,7 +4067,7 @@ if ($pr_grupo2 = tep_db_fetch_array($pr_grupo2_values)){
 										" . $key . ",
 										'" . $name . "',
 										'" . $vv_products_add_1  . "',
-									    '". $description . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9 . "',
+									    '". $v_products_description[$key] . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9 . "',
 									    '". $v_products_url[$key] . "',
 										'". $v_products_head_title_tag[$key] . "',
 										'". $v_products_head_desc_tag[$key] . "',
@@ -4074,7 +4101,7 @@ if ($pr_grupo2 = tep_db_fetch_array($pr_grupo2_values)){
                                             'products_add_1' => $vv_products_add_1,
                                             'products_url' => $v_products_url[$key],);
 
-                            if ($description) $sql_status_update_array['products_description'] = $description . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9;
+                            if ($v_products_description[$key]) $sql_status_update_array['products_description'] = $v_products_description[$key] . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9;
 
 
             tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $sql_status_update_array, 'update', " products_id= '" . $v_products_id . "' and language_id = '".$key."' ");
@@ -4117,7 +4144,7 @@ if ($pr_grupo2 = tep_db_fetch_array($pr_grupo2_values)){
                                             'products_head_desc_tag' => $v_products_head_desc_tag[$key],
                                             'products_head_keywords_tag' => $v_products_head_keywords_tag[$key],);
 
-                            if ($description) $sql_status_update_array['products_description'] = $description . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9;
+                            if ($v_products_description[$key]) $sql_status_update_array['products_description'] = $v_products_description[$key] . ' ' . $vv_description_add_1 . ' ' . $vv_description_add_2 . ' ' . $vv_description_add_3 . ' ' . $vv_description_add_4 . ' ' . $vv_description_add_5 . ' ' . $vv_description_add_6 . ' ' . $vv_description_add_7 . ' ' . $vv_description_add_8 . ' ' . $vv_description_add_9;
 
 
             tep_db_perform(TABLE_PRODUCTS_DESCRIPTION, $sql_status_update_array, 'update', " products_id= '" . $v_products_id . "' and language_id = '".$key."' ");

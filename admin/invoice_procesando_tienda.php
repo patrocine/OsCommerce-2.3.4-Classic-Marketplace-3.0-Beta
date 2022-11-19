@@ -88,7 +88,7 @@
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp;<?php ECHO TEXT_NUMERO_FACTURA ?>
           </b><?php echo $factura_orders['orders_id'] ?></p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp;<?php ECHO TEXT_FECHA; ?>
-          </b><?php echo $factura_orders['date_purchased'] ?> </p>
+          </b><?php echo $factura_orders['last_modified'] ?> </p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp; <?php echo TEXT_MODO_ENVIO; ?>
            </b><?php echo $factura_shipping['title'] ?> </td>
         </tr>

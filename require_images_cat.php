@@ -2,8 +2,14 @@
 
  if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_WS_IMAGES. $products_imagen)) {
                                           }else{
+
+
+               if (ereg("^https://", $products_imagen) ) {
+
+                 $image_product = $products_imagen;
+               }else{
         $image_product = 'images/' . 'imnd.svg';
-}
+}                }
 
                                //IMAGENES PRODUCTOS
   $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $codigo_proveedor . "'");

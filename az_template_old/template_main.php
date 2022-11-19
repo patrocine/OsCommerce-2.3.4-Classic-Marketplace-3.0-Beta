@@ -115,6 +115,10 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
                                          <?php echo 'Programa de Afiliados ' . $affiliate_idd; ?></a></li>
                                                       <li><a href="<?php echo $tmpl['url']['specials'] ?>">
                                          <?php echo $tmpl['txt']['specials'] ?></a></li>
+
+                                        <li><a href="<?php echo 'shipping.php' ?>">
+                                         <?php echo 'Envíos y Devoluciones' ?></a></li>
+                                         
                                                             <?php
                                                      } ?>
 
@@ -134,8 +138,8 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
 			<!--categ-->
 			
 			<?php if ( $tmpl['cfg']['main_page'] ) { 
-			require(TMPL_BOXES . 'az_slider.php');
-		require(TMPL_BOXES . 'az_slider_new_products.php');
+			//require(TMPL_BOXES . 'az_slider.php');
+	//	require(TMPL_BOXES . 'az_slider_new_products.php');
 
 			 } ?>
 			

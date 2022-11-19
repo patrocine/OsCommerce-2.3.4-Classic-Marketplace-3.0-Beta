@@ -35,6 +35,10 @@
          $quick_cliente = 'quick_cliente.php';
          $Mod_Productos = 'Mod Productos';
         }
+            if (@tep_admin_files_boxes('easypopulate_googleshopping.php')){
+         $easypopulate_googleshopping = 'easypopulate_googleshopping.php';
+         $Actualizar_Catalagos_s = 'Google Shopping export';
+     }
 
            if (@tep_admin_files_boxes('easypopulate.php')){
          $easypopulate = 'easypopulate.php';
@@ -46,11 +50,48 @@
          $Actualizar_Catalagos_por_precios = 'Actualizar Catalagos por precio';
         }
 
-           if (@tep_admin_files_boxes('easypopulate_extraimage_description.php')){
-         $Actualizar_ExImag_Descripciones = 'easypopulate_extraimage_description.php';
-         $Actualizar_Catalagos = 'Actualizar Catalagos';
+           if (@tep_admin_files_boxes('easypopulate_referencias_actualizar.php')){
+         $easypopulate_referencias_actualizar = 'easypopulate_referencias_actualizar.php';
+         $referencias_actualizar = 'Actualizar Catalagos';
         }
-        
+
+           if (@tep_admin_files_boxes('regladeprecios.php')){
+         $easypopulate_referencias_actualizar = 'regladeprecios.php';
+         $regladeprecios_text = 'Regla de Precios';
+        }
+           if (@tep_admin_files_boxes('products_attributes.php')){
+         $products_attributes = 'products_attributes.php';
+         $products_attributes_text = 'Atributos';
+        }
+
+           if (@tep_admin_files_boxes(FILENAME_MANUFACTURERS)){
+         $FILENAME_MANUFACTURERS = FILENAME_MANUFACTURERS;
+         $BOX_CATALOG_MANUFACTURERS = BOX_CATALOG_MANUFACTURERS;
+        }
+           if (@tep_admin_files_boxes(FILENAME_REVIEWS)){
+         $FILENAME_REVIEWS = FILENAME_REVIEWS;
+         $BOX_CATALOG_REVIEWS = BOX_CATALOG_REVIEWS;
+        }
+
+            if (@tep_admin_files_boxes(FILENAME_SPECIALS)){
+         $FILENAME_SPECIALS = FILENAME_SPECIALS;
+         $BOX_CATALOG_SPECIALS = BOX_CATALOG_SPECIALS;
+        }
+             if (@tep_admin_files_boxes(FILENAME_DISCOUNT_COUPONS)){
+         $FILENAME_DISCOUNT_COUPONS = FILENAME_DISCOUNT_COUPONS;
+         $BOX_CATALOG_DISCOUNT_COUPONS = BOX_CATALOG_DISCOUNT_COUPONS;
+        }
+
+           if (@tep_admin_files_boxes('filtro_images_selec.php')){
+         $filtro_images_selec = 'filtro_images_selec.php';
+         $filtro_images_selec_text = 'Filtrar Imagenes';
+        }
+           if (@tep_admin_files_boxes(FILENAME_PRODUCTS_EXPECTED)){
+         $FILENAME_PRODUCTS_EXPECTED = FILENAME_PRODUCTS_EXPECTED;
+         $BOX_CATALOG_PRODUCTS_EXPECTED = BOX_CATALOG_PRODUCTS_EXPECTED;
+                           }
+          
+          
 
 //echo tep_admin_files_boxes('cpe.php', 'REGLAS CATEGORIAS');
   //echo tep_admin_files_boxes('products_multi.php', 'Multiples Cambios');
@@ -83,6 +124,11 @@
         'title' => $Actualizar_Catalagos,
         'link' => $easypopulate
       ),
+            array(
+        'code' => $easypopulate_googleshopping,
+        'title' => $Actualizar_Catalagos_s ,
+        'link' => $easypopulate_googleshopping
+      ),
       array(
         'code' => $easypopulate_referencias,
         'title' => $Actualizar_Catalagos_por_precios,
@@ -99,52 +145,52 @@
         'link' => $easypopulate_extraimage_description
       ),
       array(
-        'code' => 'easypopulate_referencias_actualizar.php',
-        'title' => 'Cambiar Referencias',
-        'link' => tep_href_link('easypopulate_referencias_actualizar.php')
+        'code' => $easypopulate_referencias_actualizar,
+        'title' => $referencias_actualizar,
+        'link' => $easypopulate_referencias_actualizar
       ),
       array(
-        'code' => 'regladeprecios.php',
-        'title' => 'Regla de Precios',
-        'link' => tep_href_link('regladeprecios.php')
+        'code' => $regladeprecios,
+        'title' => $regladeprecios_text,
+        'link' => $regladeprecios
       ),
       array(
-        'code' => FILENAME_PRODUCTS_ATTRIBUTES,
-        'title' => BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES,
-        'link' => tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES)
+        'code' => $products_attributes,
+        'title' => $products_attributes_text,
+        'link' => $products_attributes
       ),
       array(
-        'code' => FILENAME_MANUFACTURERS,
-        'title' => BOX_CATALOG_MANUFACTURERS,
-        'link' => tep_href_link(FILENAME_MANUFACTURERS)
+        'code' => $FILENAME_MANUFACTURERS,
+        'title' => $BOX_CATALOG_MANUFACTURERS,
+        'link' => $FILENAME_MANUFACTURERS
       ),
       array(
-        'code' => FILENAME_REVIEWS,
-        'title' => BOX_CATALOG_REVIEWS,
-        'link' => tep_href_link(FILENAME_REVIEWS)
+        'code' => $FILENAME_REVIEWS ,
+        'title' => $BOX_CATALOG_REVIEWS,
+        'link' => $FILENAME_REVIEWS
       ),
       array(
-        'code' => FILENAME_SPECIALS,
-        'title' => BOX_CATALOG_SPECIALS,
-        'link' => tep_href_link(FILENAME_SPECIALS)
+        'code' => $FILENAME_SPECIALS,
+        'title' => $BOX_CATALOG_SPECIALS,
+        'link' => $FILENAME_SPECIALS
       ),
       array(
-     'code' => FILENAME_DISCOUNT_COUPONS,
-     'title' => BOX_CATALOG_DISCOUNT_COUPONS,
-     'link' => tep_href_link(FILENAME_DISCOUNT_COUPONS)
+     'code' => $FILENAME_DISCOUNT_COUPONS,
+     'title' => $BOX_CATALOG_DISCOUNT_COUPONS,
+     'link' => $FILENAME_DISCOUNT_COUPONS
      ),
 
 
       array(
-        'code' => 'filtro_images_selec.php',
-        'title' => 'Filtrar Imagenes',
-        'link' => tep_href_link('filtro_images_selec.php')
+        'code' => $filtro_images_selec,
+        'title' => $filtro_images_selec_text,
+        'link' => $filtro_images_selec
       ),
 
       array(
-        'code' => FILENAME_PRODUCTS_EXPECTED,
-        'title' => BOX_CATALOG_PRODUCTS_EXPECTED,
-        'link' => tep_href_link(FILENAME_PRODUCTS_EXPECTED)
+        'code' => $FILENAME_PRODUCTS_EXPECTED,
+        'title' => $BOX_CATALOG_PRODUCTS_EXPECTED,
+        'link' => $FILENAME_PRODUCTS_EXPECTED
       )
     )
   );

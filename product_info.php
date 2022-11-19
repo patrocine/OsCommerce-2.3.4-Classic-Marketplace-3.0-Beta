@@ -71,7 +71,7 @@ require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
                                                opcion_8, opcion_8_8,
                                                opcion_9, opcion_9_9,
                                                opcion_10, opcion_10_10,
-                                               products_youtube_1, products_youtube_2, p.codigo_proveedor, p.modificar_categoria_rdc, p.stock_disponible_proveedor, p.products_cpe, p.products_cpf, p.products_id, p.manufacturers_name, referencia_fabricante, time_mercancia_entregado_procesando, p.products_status, pd.products_name, pd.products_description, pd.products_viewed, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_last_modified, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' or p.products_status = '1' and p.products_model = '" . $pro_mo . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+                                               products_youtube_1, products_youtube_2, p.codigo_proveedor, p.part_number, p.modificar_categoria_rdc, p.stock_disponible_proveedor, p.products_cpe, p.products_cpf, p.products_id, p.manufacturers_name, referencia_fabricante, time_mercancia_entregado_procesando, p.products_status, pd.products_name, pd.products_description, pd.products_viewed, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_last_modified, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' or p.products_status = '1' and p.products_model = '" . $pro_mo . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
     $product_info = tep_db_fetch_array($product_info_query);
 
 
@@ -930,27 +930,8 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
 
       if ($redirect_fabricante){
                             }else{
+       //    echo '?products_id=' . (int)$HTTP_GET_VARS['products_id'] . '&redirect_fabricante=ok'.'&cPath='.$cPath
 
-          ?>
-        <script type="text/javascript">
-
-       var pagina = 'product_info.php<?php echo '?products_id=' . (int)$HTTP_GET_VARS['products_id'] . '&redirect_fabricante=ok'.'&cPath='.$cPath ?>';
-    var segundos = 0;
-
-    function redireccion() {
-
-        document.location.href=pagina;
-
-    }
-
-    setTimeout("redireccion()",segundos);
-
-     </script>
-
-
-
-
-   <?php
    } // redirect
 
 }   // reffab
@@ -1010,21 +991,50 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
 
 }
 
+ $stock_query = tep_db_query("select * from " . 'products_stock' . " where  products_id = '" . $product_info['products_id'] . "'");
+ $p_stock = tep_db_fetch_array($stock_query);
 
 
          $product_info_referencia_fabricante = ereg_replace("[[:blank:]]", '', $product_info['referencia_fabricante']);
           $product_info_manufacturers_name = ereg_replace("[[:blank:]]", '', $product_info['manufacturers_name']);
           $product_info['products_model'] = ereg_replace("[[:blank:]]", '', $product_info['products_model']);
+          
+          
+                                     if ($p_stock ['products_stock_real']){
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" >Stock en tienda: [' . $p_stock ['products_stock_real'] . 'Pcs]</font></b></span> ';
+                                                                       }else{
+$products_parametros .= '<br /><span class="smallText"><font color="#ff0000" >Stock en tienda: [' . 0 . 'Pcs]</font></b></span> ';
+
+                                                                   }
+
+                                     if ($product_info['products_quantity']){
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" > Stock en Almacen: [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
+                                                                       }
+
+          
 
                if (INFO_REFERENCIA == 'True'){
 $products_parametros .= '<br /><span class="smallText"> Referencia: [' . $product_info['products_model'] . ']</span>';
                                  }
+                                 
+                                     if ($product_info['part_number']){
+$products_parametros .= '<br /><span class="smallText"> Part Number: [' . $product_info['part_number'] . ']</span>';
+                                                                       }
+                                     if ($product_info['manufacturers_name']){
+$products_parametros .= '<br /><span class="smallText"> Fabricante: [' . $product_info['manufacturers_name'] . ']</span>';
+                                                                       }
+
+
+                                 
                if (INFO_FABRICANTE == 'True' and $products_price <> 0){
 $products_parametros .= '<br /><span class="smallText"> Frabricante: [' . $product_info_manufacturers_name . ']</span>';
                                  }
                                      if ($product_info['products_cpe']){
 $products_parametros .= '<br /><span class="smallText"> Categoria Regla: [' . $product_info['products_cpe'] . ']</span>';
                                                                        }
+                                                                       
+
+                                                                       
                                                if ($product_info['products_cpf']){
 $products_parametros .= '<br /><span class="smallText"> Fabricante Regla: [' . $product_info['products_cpf'] . ']</span>';
                                                                       }
@@ -1065,8 +1075,9 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
 }
                                echo $products_parametros;
 
-
-
+                         ?>
+                         
+                   <?php
 
  if  ($_GET['imagen']){
   echo '<p><a target="_blank" href="'.$_GET['url_imagen'].'">' .
@@ -1160,7 +1171,29 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
         }
         
         
+        
+        
+        
+           if (BOTON_COMPRA == 'True' and $product_info['products_price'] <> 0 or BOTON_COMPRA == 'True' and $customer_group_price['customers_group_price'] <> 0){
+
+   echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'primary');
+
+                             }
+
+
+
+        
         echo '</p></p>';
+
+
+
+
+               if ( $product_info['part_number'] <> '' and  $product_info['manufacturers_name'] <> ''){
+
+               ?>
+ <IFRAME WIDTH='700px' HEIGHT='900px' FRAMEBORDER='0' style='overflow-X: none;overflow-Y:auto;' src='https://prf.icecat.biz/?prod_id=<?php ECHO $product_info['part_number'] ?>&vendor=<?php ECHO $product_info['manufacturers_name'] ?>&shopname=patrocinees&lang=es'></IFRAME>
+        <?php
+ }
 
     echo stripslashes($product_info['products_description']);
     
@@ -2303,23 +2336,8 @@ $fecha = date("Y-m-d", $time1);
           <?php
 
              $ref_fabri = ereg_replace("[[:space:]]", '', $product_info['referencia_fabricante']);
-           //patrocine
-        if  ($product_info['manufacturers_name'] <> '' and $product_info['referencia_fabricante'] <> ''){
-      ?>
-      <IFRAME WIDTH='700px' HEIGHT='900px' FRAMEBORDER='0' style='overflow-X: none;overflow-Y:auto;' src='http://prf.icecat.biz/?shopname=openIcecat-url;smi=product;vendor=<?php echo $product_info['manufacturers_name']; ?>;prod_id=
-<?php echo $ref_fabri; ?>;lang=es'></IFRAME>
-
-
-
-<?php
-    }
-       //patrocine
 
       ?>
-
-
-
-
 
 
 
@@ -2353,7 +2371,7 @@ $fecha = date("Y-m-d", $time1);
     echo  $salidas_os.' Pcs/Kg';
                   }
 
-       $INFO_HISTORIAL_ANALITICO_DIAS = INFO_HISTORIAL_ANALITICO_DIAS;
+       $INFO_HISTORIAL_ANALITICO_DIAS = 365;
 
         ?>
 

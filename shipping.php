@@ -19,11 +19,11 @@
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 
-<h1><?php echo 'CONDICIONES Y PROTOCOLO'; ?></h1>
+<h1><?php echo 'ENVIOS Y DEVOLUCIONES'; ?></h1>
 
 <div class="contentContainer">
   <div class="contentText">
-   <?php include(DIR_WS_LANGUAGES . $language . '/' . 'define_shipping.php'); ?>
+   <?php include(DIR_WS_LANGUAGES . $language . '/' . 'define_devoluciones.php'); ?>
   </div>
 
 

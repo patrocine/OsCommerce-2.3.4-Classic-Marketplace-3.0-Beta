@@ -23,29 +23,33 @@
 
 
 
-               $factura_orders_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-                while   ( $factura_orders = mysql_fetch_array($factura_orders_values)) {
+               $factura_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
+                while   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
 
 
           $factura_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $factura_orders['orders_id'] . "'";
-  $factura_price_query = mysql_query($factura_price_raw);
-  $factura_price= mysql_fetch_array($factura_price_query);
+  $factura_price_query = tep_db_query($factura_price_raw);
+  $factura_price= tep_db_fetch_array($factura_price_query);
 
 
 
- $factura_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = mysql_fetch_array($factura_shipping_values);
+ $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
+              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
 
- $factura_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = mysql_fetch_array($factura_total_values);
+ $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
+              $factura_total = tep_db_fetch_array($factura_total_values);
 
 
- $factura_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = mysql_fetch_array($factura_subtotal_values);
+ $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
+              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
 
-     $admin_lof_values = mysql_query("select * from " . TABLE_ADMIN . " where id = '" . $admin['id'] . "'");
- $admin_lof = mysql_fetch_array($admin_lof_values);
+     $admin_lof_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . 3 . "'");
+ $admin_lof = tep_db_fetch_array($admin_lof_values);
+     $addbook_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . 3 . "'");
+ $addbook = tep_db_fetch_array($addbook_values);
 
+     $zone_values = tep_db_query("select * from " . 'zones' . " where zone_id = '" . $addbook['entry_zone_id'] . "'");
+ $zone = tep_db_fetch_array($zone_values);
   ?>
 
 <div align="center">
@@ -57,26 +61,26 @@
         <tr>
           <td width="191" height="147">
           <p align="center">
-          <img  src="<?php echo HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'logo_sts.jpg';  ?>" border="0"  width="120" ></td>
+          <img  src="<?php echo HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'store_logo.png';  ?>" border="0"  width="120" ></td>
           <td width="323" height="147" valign="top">
           <p style="margin-top: 0; margin-bottom: 0" align="center"><b>
           <a href="http://<?php ECHO FACTURA_WEB; ?>" style="text-decoration: none">
           <font color="#000000" size="2"><?php ECHO FACTURA_WEB; ?></font></a></b></p>
           <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
           <p style="margin-top: 0; margin-bottom: 0"><font size="2"><b>&nbsp;<?php ECHO STORE_FACTURA; ?></b></font></p>
-          <p style="margin-top: 0; margin-bottom: 0"><font size="1">&nbsp; <?php echo $admin_lof['admin_direccion'] ?> </p>
-          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $admin_lof['admin_poblacion'] ?>
-          <?php ECHO $admin_lof['admin_cp']; ?></p>
-          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $admin_lof['admin_provincia'] ?> </p>
-          <p style="margin-top: 0; margin-bottom: 0">&nbsp; <?php ECHO PAIS; ?></p>
-          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $admin_lof['admin_telefono'] ?> </p>
+          <p style="margin-top: 0; margin-bottom: 0"><font size="1">&nbsp;  <?php echo $addbook['entry_street_address'] ?> </p>
+          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $addbook['entry_city'] ?>
+          <?php ECHO $addbook['entry_postcode']; ?></p>
+          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $zone['zone_name'] ?> </p>
+          <p style="margin-top: 0; margin-bottom: 0">&nbsp; <?php ECHO Spain; ?></p>
+          <p style="margin-top: 0; margin-bottom: 0">&nbsp;<?php echo $admin_lof['customers_telephone'] ?> </p>
           <p style="margin-top: 0; margin-bottom: 0">&nbsp;</font><a href="mailto:<?php echo FACTURA_EMAIL; ?>"><font size="1" color="#000000"><?php echo  $email['value_name']; ?></font></a></td>
           <td width="381" height="147" valign="top">
           <p align="right" style="margin-top: 0; margin-bottom: 0"><b>
           <font size="3"><?php echo TEXT_FACTURA_A_CLIENTES; ?></font></b></p>
           <p align="right" style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp;<?php ECHO TEXT_NUMERO_FACTURA ?>
-          </b><?php echo $factura_orders['orders_id'] ?></p>
+          </b><?php echo $factura_orders['factura_id'].'/'.$factura_orders['orders_id'] ?></p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp;<?php ECHO TEXT_FECHA; ?>
           </b><?php echo $factura_orders['date_purchased'] ?> </p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp; <?php echo TEXT_MODO_ENVIO; ?>
@@ -220,8 +224,8 @@
               <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
                              <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
@@ -245,15 +249,15 @@
               <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
                  <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 5pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
              <?php
 
-           $donde_esta_c_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $login_id . "'");
- $donde_esta_c= mysql_fetch_array($donde_esta_c_values);
+           $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $login_id . "'");
+ $donde_esta_c= tep_db_fetch_array($donde_esta_c_values);
 
 
 
@@ -294,8 +298,8 @@
 
 
                                 <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
@@ -326,8 +330,8 @@
 
 
                             <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
                 <tr>
@@ -358,8 +362,8 @@
               </td>
               <td width="11%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
                       <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
                 <tr>
                   <td width="100%"><?php ECHO TIPO_IMPUESTO ?></td>
@@ -369,8 +373,8 @@
               </td>
               <td width="21%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
                                          <?php
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {  ?>
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
               <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="89%">
                 <tr>
