@@ -69,7 +69,7 @@ while ($products_image = tep_db_fetch_array($query)){
 
 
 
-   if (ereg("^http://", $products_image['products_image']) ) {
+   if (ereg("^https://", $products_image['products_image']) ) {
 
       $image_sc = $products_image['products_image'];
 }else{

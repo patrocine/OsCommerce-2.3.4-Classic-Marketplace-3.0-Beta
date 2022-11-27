@@ -4,7 +4,7 @@
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
-
+                               mysql_fetch_array
   Copyright (c) 2003 osCommerce
 
   Released under the GNU General Public License
@@ -72,13 +72,13 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
       if ($eliminar_cm == 'edit'){
 
 
-   $categoriesmt_values = mysql_query("select p.products_id, pc.categories_id from " . 'products' . " p, " . 'products_to_categories' . " pc  where pc.products_id = p.products_id");
-  while($categoriesmt = mysql_fetch_array($categoriesmt_values)){
+   $categoriesmt_values = tep_db_query("select p.products_id, pc.categories_id from " . 'products' . " p, " . 'products_to_categories' . " pc  where pc.products_id = p.products_id");
+  while($categoriesmt = tep_db_fetch_array($categoriesmt_values)){
 
 
 
-        $admin_values = mysql_query("select * from " . 'categories' . " where categories_id = '" . $categoriesmt['categories_id'] . "'");
-    if  ($ca_c = mysql_fetch_array($admin_values)){
+        $admin_values = tep_db_query("select * from " . 'categories' . " where categories_id = '" . $categoriesmt['categories_id'] . "'");
+    if  ($ca_c = tep_db_fetch_array($admin_values)){
 
 
 
@@ -145,8 +145,8 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
           // borra el producto seleccionado.
     if ($borrar_product_proveedor == 'edit'){
 
-   $borrar_values = mysql_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "'");
-  while  ($borrar = mysql_fetch_array($borrar_values)){
+   $borrar_values = tep_db_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "'");
+  while  ($borrar = tep_db_fetch_array($borrar_values)){
 
 
      tep_db_query("delete from " . TABLE_PRODUCTS . " where products_id = '" . $borrar['products_id'] . "'");
@@ -164,8 +164,8 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
           // borra el producto seleccionado.
     if ($borrar_spacio_image == 'edit'){                           // 104744 codigo_proveedor = '" . $baja_proveedor_id . "'
 
-   $borrar_values = mysql_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "'");
-  while  ($borrar = mysql_fetch_array($borrar_values)){
+   $borrar_values = tep_db_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "'");
+  while  ($borrar = tep_db_fetch_array($borrar_values)){
                                                          //$borrar['products_image'] = $borrar;
                                                          
 
@@ -201,8 +201,8 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
           // borra el producto seleccionado.
     if ($vaciar_easypopulate_time2 == 'edit'){                           // 104744 codigo_proveedor = '" . $baja_proveedor_id . "'
 
-   $vaciar_values = mysql_query("select * from " . 'products' . " where easypopulate_time2 <> 0 ");
-  while  ($vaciar = mysql_fetch_array($vaciar_values)){
+   $vaciar_values = tep_db_query("select * from " . 'products' . " where easypopulate_time2 <> 0 ");
+  while  ($vaciar = tep_db_fetch_array($vaciar_values)){
                                                          //$borrar['products_image'] = $borrar;
 
 
@@ -226,15 +226,15 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
           // borra el producto seleccionado.
     if ($stock_almacen == 'edit'){                           // 104744 codigo_proveedor = '" . $baja_proveedor_id . "'
 
-   $vaciar_values = mysql_query("select * from " . 'products' . "");
-  while  ($vaciar = mysql_fetch_array($vaciar_values)){
+   $vaciar_values = tep_db_query("select * from " . 'products' . "");
+  while  ($vaciar = tep_db_fetch_array($vaciar_values)){
                                                          //$borrar['products_image'] = $borrar;
 
 
-    $permisog2_values = mysql_query("select * from " . 'products_groups' . " where products_id = '" . $vaciar['products_id']  . "' and customers_group_id = 2");
-    $permisog2 = mysql_fetch_array($permisog2_values);
-    $stock_values = mysql_query("select * from " . 'products_stock' . " where products_id = '" . $vaciar['products_id']  . "'");
-    $stock = mysql_fetch_array($stock_values);
+    $permisog2_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $vaciar['products_id']  . "' and customers_group_id = 2");
+    $permisog2 = tep_db_fetch_array($permisog2_values);
+    $stock_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $vaciar['products_id']  . "'");
+    $stock = tep_db_fetch_array($stock_values);
 
          ?>     '<p>' <?php      ECHO $stock['products_stock_real'] . ' X ' . $permisog2['products_price']  . '  ' .  ($total = $stock['products_stock_real'] *  $permisog2['customers_group_price']);
 
@@ -259,8 +259,8 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
           // borra el producto seleccionado.
     if ($borrar_product_proveedor_inactivo == 'edit'){
 
-   $borrar_values = mysql_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "' and products_status = '" . 0 . "'");
-  while  ($borrar = mysql_fetch_array($borrar_values)){
+   $borrar_values = tep_db_query("select * from " . 'products' . " where codigo_proveedor = '" . $baja_proveedor_id . "' and products_status = '" . 0 . "'");
+  while  ($borrar = tep_db_fetch_array($borrar_values)){
 
 
      tep_db_query("delete from " . TABLE_PRODUCTS . " where products_id = '" . $borrar['products_id'] . "'");
@@ -306,8 +306,8 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
                        
 
 
-   $admin_values = mysql_query("select * from " . 'admin' . " where admin_id = '" . $log_id . "'");
-   $admin_c = mysql_fetch_array($admin_values);
+   $admin_values = tep_db_query("select * from " . 'administrators' . " where admin_id = '" . $log_id . "'");
+   $admin_c = tep_db_fetch_array($admin_values);
 
 
                      ?>

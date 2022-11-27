@@ -75,7 +75,7 @@ $action_in = $_GET['action_in'];
 $codigobarras_in = $_GET['codigobarras_in'];
 
 
-
+        echo $codigobarras;
   if ($action_in == 'true'){
 
        $newproducts_values = tep_db_query("select * from " . 'products' . " where products_model = '" . $codigobarras_in . "' or codigo_barras = '" . $codigobarras_in . "'");
@@ -116,7 +116,8 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
              //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
-        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+
+         echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
                       }
     //   echo  header("Location: '" . $PHP_SELF.'?codigobarras=' . $codigobarras . '&oID='.$oID.'&action=edit' . "'");
 
@@ -175,7 +176,8 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
 
              //   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='. $codigobarras .'&url='. HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'products_stock_nuevaalta.php' . '"> </script>';
-        echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
+
+   echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_exterior.php?codigobarras='.$codigobarras.'&url='. HTTPS_SERVER . DIR_WS_CATALOG . 'admin/products_stock_nuevaalta.php' . '&proveedor_id=' . $product_compartir['proveedor_id'] . '"> </script>';
                               }
 
 
@@ -4630,14 +4632,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
   <?php
     }
       ?>
-  	  <td class="dataTableHeadingContent"><?php echo 'EDITAR'; ?>
-                <?php
-  if (AYUDA_ADMIN == 'true'){
-      ?>
-  <a class="hastip"  title="<?php echo AYUDA_TEXT_EDITAR;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
-  <?php
-    }
-      ?>
+
      <td class="dataTableHeadingContent"><?php echo 'IMAG'; ?>
               <?php
   if (AYUDA_ADMIN == 'true'){

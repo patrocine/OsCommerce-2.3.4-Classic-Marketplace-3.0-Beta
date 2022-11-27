@@ -30,8 +30,8 @@
   $col = 0;
   while ($default_specials = tep_db_fetch_array($new)) {
 
-             $stock_nivel_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $default_specials['products_id'] . "'");
-             $stock_nivel= mysql_fetch_array($stock_nivel_values);
+             $stock_nivel_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $default_specials['products_id'] . "'");
+             $stock_nivel= tep_db_fetch_array($stock_nivel_values);
 
 
 

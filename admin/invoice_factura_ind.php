@@ -14,6 +14,28 @@
   require('includes/conf_status.php');
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
 
   $oID = tep_db_prepare_input($HTTP_GET_VARS['oID']);
   $orders_query = tep_db_query("select orders_id from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
@@ -23,8 +45,31 @@
 
 
 
+
+// Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
+require_once 'pdf/dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
+
+// Introducimos HTML de prueba
+
+
+
+
+
+
+
+
                $factura_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . tep_db_input($oID) . "'");
-                while   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
+                if   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
+
+
+
+
+
+
+
+
+
 
 
           $factura_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $factura_orders['orders_id'] . "'";
@@ -50,10 +95,17 @@
 
      $zone_values = tep_db_query("select * from " . 'zones' . " where zone_id = '" . $addbook['entry_zone_id'] . "'");
  $zone = tep_db_fetch_array($zone_values);
+ 
+ 
+ 
+
+    ob_start();
+
   ?>
 
 <div align="center">
   <center>
+
   <table border="2" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="656" height="199">
     <tr>
       <td width="652" height="161">
@@ -85,6 +137,7 @@
           </b><?php echo $factura_orders['date_purchased'] ?> </p>
           <p align="left" style="margin-top: 0; margin-bottom: 0"><b>&nbsp; <?php echo TEXT_MODO_ENVIO; ?>
            </b><?php echo $factura_shipping['title'] ?> </td>
+
         </tr>
       </table>
       </td>
@@ -116,13 +169,20 @@
                       <td width="41%" height="52" valign="top">
                       <table border="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%" height="54">
                         <tr>
-                          <td width="100%" height="28">
+                        
+                           <td width="100%" height="28">
                           <p style="margin-top: 0; margin-bottom: 0"><b>
-                          <font size="1"><?php echo TEXT_NOMBRE_M; ?></font></b></p>
+                                                     <font size="1"><?php echo TEXT_NOMBRE_M; ?></font></b></p>
                           <p style="margin-top: 0; margin-bottom: 0">
+                        
+
                           <font size="2"><?php echo $factura_orders['delivery_name'] ?></font></td>
+                        
+
                         </tr>
                         <tr>
+                        
+                        
                           <td width="100%" height="11"></td>
                         </tr>
                       </table>
@@ -131,6 +191,8 @@
                       <td width="56%" height="52">
                       <table border="2" cellspacing="5" style="border-collapse: collapse" bordercolor="#C0C0C0" width="100%">
                         <tr>
+                        
+                        
                           <td width="100%" colspan="2">
                           <p style="margin-top: 0; margin-bottom: 0">
                           <font size="1"><b><?php ECHO TEXT_DIRECCION_DE_ENVIO_M; ?></b></font></p>
@@ -223,7 +285,8 @@
 
               <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
-                             <?php
+
+               <?php
           $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
@@ -247,6 +310,14 @@
               </td>
 
               <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
+                        
+                        
+                        
+                        
+
+
+
+
 
                  <?php
           $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
@@ -295,6 +366,12 @@
                 <tr>
                   <td width="100%">
                   <p align="center">
+                        
+                        
+
+
+
+
 
 
                                 <?php
@@ -491,6 +568,29 @@
 
 
 
+                        
+                        
+                        
+                        
+                       <?php
+
+
+    echo    $html=ob_get_clean();
+
+
+
+
+
+                           ?>
+                        
+                        
+                        
+                        
+                        
+
+
+
+
 
 
 
@@ -506,10 +606,36 @@
 
 
 
-
-
-
                              }
+          /*
+
+// Instanciamos un objeto de la clase DOMPDF.
+$pdf = new DOMPDF();
+
+// Definimos el tamaño y orientación del papel que queremos.
+$pdf->set_paper("letter", "portrait");
+//$pdf->set_paper(array(0,0,104,250));
+
+// Cargamos el contenido HTML.
+$pdf->load_html(utf8_decode($html));
+
+// Renderizamos el documento PDF.
+$pdf->render();
+
+// Enviamos el fichero PDF al navegador.
+$pdf->stream('reportePdf.pdf');
+
+
+function file_get_contents_curl($url) {
+	$crl = curl_init();
+	$timeout = 5;
+	curl_setopt($crl, CURLOPT_URL, $url);
+	curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
+	$ret = curl_exec($crl);
+	curl_close($crl);
+	return $ret;
+}
 
 
 

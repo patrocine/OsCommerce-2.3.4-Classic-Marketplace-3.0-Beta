@@ -886,7 +886,7 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
 
     if (preg_match("/\b".$manufact['manufacturers_name']."\b/i", $product_info['products_name'])){
 
- $reffab_query = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and manufacturers_name = '" . $manufact['manufacturers_name'] . "'");
+ $reffab_query = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and manufacturers_name = '" . $manufact['manufacturers_name'] . "' and manufacturers_id = '" . $manufact['manufacturers_id'] . "'");
  if ($reffab = tep_db_fetch_array($reffab_query)){
 
 
@@ -895,7 +895,8 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
 
 
 }else{
-            $sql_status_update_array = array('manufacturers_name' => $manufact['manufacturers_name'],);
+            $sql_status_update_array = array('manufacturers_id' => $manufact['manufacturers_id'],
+                                             'manufacturers_name' => $manufact['manufacturers_name']);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id = '" . $product_info['products_id'] . "'");
 
 
@@ -1003,15 +1004,46 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
                                      if ($p_stock ['products_stock_real']){
 $products_parametros .= '<br /><span class="smallText"><font color="#008000" >Stock en tienda: [' . $p_stock ['products_stock_real'] . 'Pcs]</font></b></span> ';
                                                                        }else{
-$products_parametros .= '<br /><span class="smallText"><font color="#ff0000" >Stock en tienda: [' . 0 . 'Pcs]</font></b></span> ';
+//$products_parametros .= '<br /><span class="smallText"><font color="#ff0000" >Stock en tienda: [' . 0 . 'Pcs]</font></b></span> ';
 
                                                                    }
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   
 
                                      if ($product_info['products_quantity']){
-$products_parametros .= '<br /><span class="smallText"><font color="#008000" > Stock en Almacen: [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
-                                                                       }
 
-          
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" > Stock en Almacen: [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
+
+                                                                       
+
+
+                                                                       
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" >COMPRAS Y RESERVAS</font></b></span> ';
+
+     $pdv_values = tep_db_query("select * from " . 'products_compartir' . " where activo= '" . 1 . "' order by direccion");
+    while ($pdv = tep_db_fetch_array($pdv_values)){
+
+
+$products_parametros .= '<br /><a href="' . $pdv['ruta_products'] . '' . $product_info['products_model'] . '"><b><span class="smallText"><font color="#008000" >' . $pdv['direccion'] . ': [' . $pdv['nombre_oculto'] . ' Tf: ' . $pdv['telefono'] . ']</a></b></font></b></span> ';
+$products_parametros .= '<span class="smallText"><font color="#008000" > <br /><a target="_blank"  href="' . $pdv['googlemaps'] . '"><img border="0" src="/images/googlemaps.jpg" width="" height="35"> ';
+                   if ($pdv['ruta_products']){
+$products_parametros .= '<a target="_blank"  href="' . $pdv['ruta_products'] . '' . $product_info['products_model'] . '"><img border="0" src="/images/comprar.png" width="" height="35"> </font></b></a></span>';
+                               }
+
+
+
+                                               }
+                                               
+$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
+
+
+
+                                                                  }
 
                if (INFO_REFERENCIA == 'True'){
 $products_parametros .= '<br /><span class="smallText"> Referencia: [' . $product_info['products_model'] . ']</span>';
@@ -1142,6 +1174,38 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
                                                                  }
 
 }
+
+
+
+
+
+
+                   $referpadrep_values = tep_db_query("select *  from " . TABLE_PRODUCTS . " p,  " . TABLE_PRODUCTS_DESCRIPTION . " pd  where p.products_id = pd.products_id and products_status = 1 and p.referencia_padre_g3 = '" . $referpadre['referencia_padre_g3'] . "'  GROUP BY p.referencia_padre_g2 ORDER BY pd.products_name");
+     while ($referpadrepg1 = tep_db_fetch_array($referpadrep_values)){
+                                        $referpadrepg1['referencia_padre_g3'] = str_replace('_', ' ', $referpadrepg1['referencia_padre_g3']);
+   ECHO '<p>&nbsp;</p><p><b><font size="2">'.'+ productos del Fabricante '.$product_info['manufacturers_name'].' en esta categoria</font></b></p>';
+                                                }
+
+
+                                   //referencia padre
+       $referpadrep_values = tep_db_query("select *  from " . TABLE_PRODUCTS . " p,  " . TABLE_PRODUCTS_DESCRIPTION . " pd  where p.products_id = pd.products_id and products_status = 1 and referencia_padre_g3 = '" . $referpadre['referencia_padre_g3'] . "'and referencia_padre_g3 <> '" . '' . "'");
+     while ($referpadrep = tep_db_fetch_array($referpadrep_values)){
+
+
+        if ($referpadrep['products_id'] == $product_info['products_id']){
+
+  ECHO '<p><b><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></b></p>';
+
+                                                                     }else{
+  ECHO '<p><font size="0"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></p>';
+
+                                                                 }
+
+}
+
+
+
+
 
 
 
