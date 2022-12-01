@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-11-2022 a las 20:01:07
+-- Tiempo de generación: 29-11-2022 a las 02:14:21
 -- Versión del servidor: 5.6.51-cll-lve
 -- Versión de PHP: 7.4.30
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `action_recorder` (
   KEY `idx_action_recorder_user_id` (`user_id`),
   KEY `idx_action_recorder_identifier` (`identifier`),
   KEY `idx_action_recorder_date_added` (`date_added`)
-) ENGINE=MyISAM AUTO_INCREMENT=8051 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8050 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `action_recorder`
@@ -8110,8 +8110,7 @@ INSERT INTO `action_recorder` (`id`, `module`, `user_id`, `user_name`, `identifi
 (8046, 'ar_admin_login', 1, 'tienda', '77.211.5.219', '1', '2022-11-03 14:41:46'),
 (8047, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-29 01:20:42'),
 (8048, 'ar_admin_login', 38, 'repositorio', '77.211.5.225', '1', '2022-11-29 02:13:08'),
-(8049, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-29 02:13:24'),
-(8050, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-30 18:57:10');
+(8049, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-29 02:13:24');
 
 -- --------------------------------------------------------
 
@@ -8722,7 +8721,7 @@ CREATE TABLE IF NOT EXISTS `affiliate_clickthroughs` (
   `affiliate_banner_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`affiliate_clickthrough_id`),
   KEY `refid` (`affiliate_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `affiliate_clickthroughs`
@@ -8730,16 +8729,7 @@ CREATE TABLE IF NOT EXISTS `affiliate_clickthroughs` (
 
 INSERT INTO `affiliate_clickthroughs` (`affiliate_clickthrough_id`, `affiliate_id`, `affiliate_clientdate`, `affiliate_clientbrowser`, `affiliate_clientip`, `affiliate_clientreferer`, `affiliate_products_id`, `affiliate_banner_id`) VALUES
 (1, 1, '2022-09-26 16:06:22', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', '31.4.242.79', '', 365, 0),
-(2, 1, '2022-11-29 01:00:36', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/103.0.5060.134 Safari/537.36', '40.77.167.31', '', 0, 0),
-(3, 1, '2022-11-29 05:27:51', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '65.108.142.143', '', 0, 0),
-(4, 1, '2022-11-29 09:57:47', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '167.114.158.215', '', 0, 0),
-(5, 1, '2022-11-29 09:57:50', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '167.114.158.215', '', 0, 0),
-(6, 1, '2022-11-29 16:15:15', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', '77.211.5.225', 'http://qic.es/', 0, 0),
-(7, 1, '2022-11-29 16:46:21', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', '65.108.203.159', '', 0, 0),
-(8, 1, '2022-11-29 18:44:04', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', '77.211.5.225', 'https://qic.es/', 0, 0),
-(9, 1, '2022-11-29 19:22:07', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/19G82 [FBAN/FBIOS;FBDV/iPhone12,1;FBMD/iPhone;FBSN/iOS;FBSV/15.6.1;FBSS/2;FBID/phone;FBLC/en_US', '65.23.249.235', 'https://qic.es/', 0, 0),
-(10, 1, '2022-11-30 07:09:18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.6626.250 Safari/537.36', '118.169.156.192', 'https://theowergrow.lumatek.es/index.php?ref=1', 0, 0),
-(11, 1, '2022-11-30 18:53:35', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', '77.211.5.225', 'https://qic.es/', 0, 0);
+(2, 1, '2022-11-29 01:00:36', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/103.0.5060.134 Safari/537.36', '40.77.167.31', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -8772,6 +8762,7 @@ CREATE TABLE IF NOT EXISTS `affiliate_compartir_empresas` (
 INSERT INTO `affiliate_compartir_empresas` (`id_banners`, `url_empresa_catalog`, `url_enlace`, `numero_productos`, `nombre`, `url_web`, `url_affiliate`, `email`, `aut`, `epigrafe_sector`, `nombre_sector`, `nombre_ciudad`, `desactivar`) VALUES
 (64, 'https://insideseed.es/affiliate_banners_products.php?pro_ale=', 'https://insideseed.es/enlace.php', 10, 'Insideseed', 'https://insideseed.es/', '', 'simervimportacion@gmail.com', 1, 'inactivo', 'Grow Shop', 'San Isidro, Granadilla', 1),
 (69, 'https://elcogollo2.com/affiliate_banners_products.php?pro_ale=', 'https://elcogollo2.com/enlace.php', 10, 'El Cogollo 2', 'https://elcogollo2.com/', '', 'marinsweed@gmail.com', 1, 'inactivo', 'Grow Shop', 'San Isidro, Granadilla', 1),
+(79, 'https://ownat.empresa30.es/affiliate_banners_products.php?pro_ale=', 'https://ownat.empresa30.es/enlace.php', 10, 'OWNAT', 'https://ownat.empresa30.es/', 'https://ownat.empresa30.es/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 1),
 (75, 'https://tasmaniapetshop.es/affiliate_banners_products.php?pro_ale=', 'https://tasmaniapetshop.es/enlace.php', 10, 'Tasmania Pet Shop', 'https://tasmaniapetshop.es/', 'https://tasmaniapetshop.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, 'inactivo', 'Animales', 'Granadilla Pueblo', 1),
 (92, 'https://qic.es/affiliate_banners_products.php?pro_ale=', 'https://qic.es/enlace.php', 10, 'Qi Canarias Marketplace Informatica Tenerife', 'https://qic.es/', 'https://qic.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, 'inactivo', 'Informatica', 'Tenerife', 1),
 (87, 'https://amanova.me/affiliate_banners_products.php?pro_ale=', 'https://amanova.me/enlace.php', 10, 'AMANOVA', 'https://amanova.me/', 'https://amanova.me/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 0),
@@ -21920,8 +21911,8 @@ CREATE TABLE IF NOT EXISTS `configuration` (
 --
 
 INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configuration_key`, `configuration_value`, `configuration_description`, `configuration_group_id`, `sort_order`, `last_modified`, `date_added`, `use_function`, `set_function`) VALUES
-(1, 'Store Name', 'STORE_NAME', 'The Over Grow', 'The name of my store', 1, 1, '2022-11-30 18:59:47', '2012-06-16 19:37:02', NULL, NULL),
-(2, 'Store Owner', 'STORE_OWNER', 'The Over Grow', 'The name of my store owner', 1, 2, '2022-11-30 18:59:55', '2012-06-16 19:37:02', NULL, NULL),
+(1, 'Store Name', 'STORE_NAME', 'The Ower Grow', 'The name of my store', 1, 1, '2022-11-29 01:40:10', '2012-06-16 19:37:02', NULL, NULL),
+(2, 'Store Owner', 'STORE_OWNER', 'The Ower Grow', 'The name of my store owner', 1, 2, '2022-11-29 01:40:22', '2012-06-16 19:37:02', NULL, NULL),
 (3, 'E-Mail Address', 'STORE_OWNER_EMAIL_ADDRESS', 'email@gmail.com', 'The e-mail address of my store owner', 1, 3, '2022-09-26 23:47:46', '2012-06-16 19:37:02', NULL, NULL),
 (4, 'E-Mail From', 'EMAIL_FROM', 'empresa\" <email@gmail.com>', 'The e-mail address used in (sent) e-mails', 1, 4, '2022-11-29 01:57:26', '2012-06-16 19:37:02', NULL, NULL),
 (5, 'Country', 'STORE_COUNTRY', '195', 'The country my store is located in <br /><br /><strong>Note: Please remember to update the store zone.</strong>', 1, 6, '2012-06-16 20:14:54', '2012-06-16 19:37:02', 'tep_get_country_name', 'tep_cfg_pull_down_country_list('),
@@ -22153,7 +22144,7 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (111431, 'Provincia 2', 'STORE_ZONE_NEWSLETTERS2', '170', 'Selecciona la provincia (2) que recibirá publicidad', 1, 20, '2014-05-19 20:50:23', '2012-10-31 15:51:19', 'tep_cfg_get_zone_name', 'tep_cfg_pull_down_zone_list('),
 (111432, 'Maximo para envio contrareembolso.', 'MAXIMO_ENVIO_CONTRAREEMBOLSO', '10', 'Establece el maximo para que se permita el envio contrareembolso.', 1, 20, '2015-03-29 16:57:28', '0000-00-00 00:00:00', NULL, NULL),
 (111433, 'Codigo de Barras', 'CODIGODEBARRAS', '', 'La referencia es EAN8500000000, lo que hace es que cuando pasemos el codigo de barras del productO añade a la lectura EAN o el codigo configurado.', 1, 20, '2015-09-25 00:17:10', '0000-00-00 00:00:00', NULL, NULL),
-(111434, 'Store Factura', 'STORE_FACTURA', 'The Over Grow', 'Nombre de la Empresa', 1, 2, '2022-11-30 19:00:02', '2013-04-21 10:47:37', NULL, NULL),
+(111434, 'Store Factura', 'STORE_FACTURA', 'The Ower Grow', 'Nombre de la Empresa', 1, 2, '2022-11-29 01:40:35', '2013-04-21 10:47:37', NULL, NULL),
 (111768, 'SUB3/ Desactivar los no-foto.jpg', 'ACTIVO_NOFOTO', 'True', 'Activo por defecto permite desactivar los productos que dependen que la imagen este en nuestro servidor y la imagen se sustitulle por no-foto.jpg', 6099, 300, '2022-05-21 21:29:09', '2014-03-13 00:33:49', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111463, 'Facebook', 'USER_FACEBOOK', 'https://www.facebook.com/', 'Poner el link completo de su pagina en facebook ejm. https://www.facebook.com/pages/PatrocineES-Tiendas/171850336266922', 1, 2, '2022-11-03 13:42:41', '2013-04-21 10:47:37', NULL, NULL),
 (111990, 'Enable Zones Method', 'MODULE_SHIPPING_ZONES2_STATUS', 'True', 'Do you want to offer zone rate shipping?', 6, 0, NULL, '2022-04-04 17:53:56', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
@@ -22460,7 +22451,7 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (112038, 'BTC Payment Zone', 'MODULE_PAYMENT_BTC_ZONE', '0', 'If a zone is selected, enable this payment method for that zone only.', 6, 2, NULL, '2022-04-04 18:24:42', 'tep_get_zone_class_title', 'tep_cfg_pull_down_zone_classes('),
 (112039, 'BTC Set Order Status', 'MODULE_PAYMENT_BTC_ORDER_STATUS_ID', '24', 'Set the status of orders made with this payment module to this value', 6, 0, NULL, '2022-04-04 18:24:42', 'tep_get_order_status_name', 'tep_cfg_pull_down_order_statuses('),
 (112040, 'Titulo BitCoin y Criptos', 'MODULE_PAGO_BTC', 'Pagar con Busd, Binance.com', 'Titulo BitCoin y Criptos', 6, 0, NULL, '2022-04-04 18:24:42', NULL, NULL),
-(112088, 'SECTOR', 'NOMBRE_SECTOR', 'Grow Shop', '', 1, 0, '2022-11-30 18:57:35', '0000-00-00 00:00:00', NULL, NULL),
+(112088, 'SECTOR', 'NOMBRE_SECTOR', 'Animales', '', 1, 0, '2022-08-24 12:56:58', '0000-00-00 00:00:00', NULL, NULL),
 (112087, 'QUE PRODUCTOS SE IMPRIMIRÁN EN EL BANNER? ', 'SHOPTOSHOP_MODO', '1', 'Selecciona el modo que quieres que se vean los productos en el banner TODO (1), SOLO OFERTAS (2), SOLO DESCUENTOS PRODUCTOS (3),  DESCUENTOS Y PRODUCTOS (4), TODO (5).', 6126, NULL, '2022-08-24 14:23:55', '0000-00-00 00:00:00', NULL, ''),
 (112049, 'Enable PayPal Website Payments Standard', 'MODULE_PAYMENT_PAYPAL_STANDARD_STATUS', 'False', 'Do you want to accept PayPal Website Payments Standard payments?', 6, 3, NULL, '2022-04-04 18:31:23', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (112050, 'E-Mail Address', 'MODULE_PAYMENT_PAYPAL_STANDARD_ID', '', 'The PayPal seller e-mail address to accept payments for', 6, 4, NULL, '2022-04-04 18:31:23', NULL, NULL),
@@ -22495,9 +22486,9 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (112084, 'Longitud del codigo de validacion', 'ENTRY_VALIDATION_LENGTH', '3', 'Longitud por defecto = 5  Max = 10', 736, 20, '2022-07-13 23:59:57', '2022-07-13 23:58:45', NULL, NULL),
 (112085, 'DNI/NIE/CIF', '', '', 'NUMERO DE DNI/NIE CON LA LETRA.', 5, 6, NULL, '2022-05-30 17:13:17', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (112086, 'Descuento registro cliente por defecto ', 'DESCUENTO_CLIENTE', '0', 'Permite aplicar un descuento por defecto cuando el cliente se registra.', 5, NULL, '2022-09-09 20:07:01', '0000-00-00 00:00:00', NULL, ''),
-(112089, 'Ciudad Tienda', 'NOMBRE_CIUDAD_TIENDA', 'Los Majuelos', '', 1, 0, '2022-11-30 18:58:54', '0000-00-00 00:00:00', NULL, NULL),
+(112089, 'Ciudad Tienda', 'NOMBRE_CIUDAD_TIENDA', 'La Orotava', '', 1, 0, '2022-09-09 19:09:24', '0000-00-00 00:00:00', NULL, NULL),
 (112090, 'Ciudad Tienda', 'NOMBRE_CIUDAD_TIENDA', '', '', 1, 0, NULL, '0000-00-00 00:00:00', NULL, NULL),
-(112091, 'Facturación si el producto no existe lo crea nuevo 1 activado 0 desactivado.', 'NEW_PRODUCT', '1', 'Por defecto desactivado permite desde facturación si la referencia o el codigo de barras no existe te redirige a la pagina de nuevo producto.', 8, 0, '2022-09-13 02:42:56', '0000-00-00 00:00:00', NULL, NULL),
+(112091, 'Facturación si el producto no existe lo crea nuevo 1 activado 0 desactivado.', 'NEW_PRODUCT', '2', 'Por defecto desactivado permite desde facturación si la referencia o el codigo de barras no existe te redirige a la pagina de nuevo producto.', 8, 0, '2022-09-13 02:42:56', '0000-00-00 00:00:00', NULL, NULL),
 (112092, 'Enable Table Method', 'MODULE_SHIPPING_TABLE_STATUS', 'True', 'Do you want to offer table rate shipping?', 6, 0, NULL, '2022-09-17 14:09:53', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (112093, 'Shipping Table', 'MODULE_SHIPPING_TABLE_COST', '25:3.00,50:5.50,10000:0.00', 'The shipping cost is based on the total cost or weight of items. Example: 25:8.50,50:5.50,etc.. Up to 25 charge 8.50, from there to 50 charge 5.50, etc', 6, 0, NULL, '2022-09-17 14:09:53', NULL, NULL),
 (112094, 'Table Method', 'MODULE_SHIPPING_TABLE_MODE', 'weight', 'The shipping cost is based on the order total or the total weight of the items ordered.', 6, 0, NULL, '2022-09-17 14:09:53', NULL, 'tep_cfg_select_option(array(\'weight\', \'price\'), '),
@@ -22558,7 +22549,7 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (112149, 'Show Account Details', 'VIEW_COUNTER_SHOW_ACCOUNT_DETAILS', 'true', 'Display the account details of the visitor, if possible. If multiple accounts exist, they will all be shown. Enabling this option may cause a slow-down, depending upon the site. <br>(true=on false=off)', 6132, 22, NULL, '2022-09-26 17:32:46', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (112150, 'Version Checker', 'VIEW_COUNTER_ENABLE_VERSION_CHECKER', 'false', 'Enable to automatically check if a new version is available. <br>(true=on false=off)', 6132, 23, NULL, '2022-09-26 17:32:46', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'), '),
 (112151, 'Numero de afiliado para monitorizar su merkaplace. ', 'AFFILIATE_MARKETPLACE', '1', 'Mantengase informado todo lo que pasa en su merkaplace a través de una cuenta de afiliado.', 900, NULL, NULL, '0000-00-00 00:00:00', NULL, ''),
-(112152, 'Facturacion, si el producto no existe comparando con ean redirige a ventana Nuevo producto, 1 activado, 2 Desactivado. ', 'NEW_PRODUCT', '1', 'Por defecto desactivado permite desde facturaci�n si la referencia o el codigo de barras no existe te redirige a la pagina de nuevo producto.', 8, NULL, NULL, '0000-00-00 00:00:00', NULL, ''),
+(112152, 'Facturacion, si el producto no existe comparando con ean redirige a ventana Nuevo producto, 1 activado, 2 Desactivado. ', 'NEW_PRODUCT', '2', 'Por defecto desactivado permite desde facturaci�n si la referencia o el codigo de barras no existe te redirige a la pagina de nuevo producto.', 8, NULL, NULL, '0000-00-00 00:00:00', NULL, ''),
 (112153, 'Cliente perpetuo', 'AFFILIATE_OPTION', 'true', 'Si el afiliado es perpetuo se llevará siempre la comisión, esto es bueno si quieres tener una comunidad de afliados fieles o trabajar con comerciales o revendedores.', 900, NULL, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (112154, 'Activa o desactiva la ayuda', 'AYUDA_ADMIN', 'false', 'Activa o desactiva la ayuda', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),');
 
@@ -22724,7 +22715,7 @@ CREATE TABLE IF NOT EXISTS `counter` (
 --
 
 INSERT INTO `counter` (`startdate`, `counter`) VALUES
-('20120616', 15841677);
+('20120616', 15841578);
 
 -- --------------------------------------------------------
 
@@ -23692,16 +23683,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `admin_level_borrar` int(1) NOT NULL DEFAULT '0',
   `admin_level_usuario` varchar(255) NOT NULL,
   PRIMARY KEY (`orders_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `orders`
 --
 
 INSERT INTO `orders` (`orders_id`, `customers_id`, `factura_id`, `customers_name`, `customers_company`, `customers_street_address`, `customers_suburb`, `customers_city`, `customers_postcode`, `customers_state`, `customers_country`, `customers_telephone`, `customers_email_address`, `customers_address_format_id`, `delivery_name`, `delivery_company`, `delivery_street_address`, `delivery_suburb`, `delivery_city`, `delivery_postcode`, `delivery_state`, `delivery_country`, `delivery_address_format_id`, `billing_name`, `billing_company`, `billing_street_address`, `billing_suburb`, `billing_city`, `billing_postcode`, `billing_state`, `billing_country`, `billing_address_format_id`, `payment_method`, `payment_method_email`, `payment_id`, `cc_type`, `cc_owner`, `cc_number`, `cc_expires`, `last_modified`, `date_purchased`, `orders_status`, `orders_date_finished`, `currency`, `currency_value`, `orders_cambios`, `certificado`, `f_reclamacion`, `n_reclamacion`, `proveedor_id`, `porcentage_tienda`, `publicar_order`, `orders_cuenta_dev`, `orders_titular_dev`, `orders_observaciones_dev`, `orders_fecha_dev`, `orders_medas`, `orders_cambio_dev`, `admin_level_price`, `admin_level_borrar`, `admin_level_usuario`) VALUES
-(1, 3, 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:49:26', '2022-11-29 01:29:44', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '-20.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
-(2, 3, 0, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:34:56', '2022-11-30 15:34:45', 38, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
-(3, 3, 2, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:50:17', '2022-11-30 15:49:40', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda');
+(1, 3, 0, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-29 00:39:20', '2022-11-29 01:29:44', 30, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda');
 
 -- --------------------------------------------------------
 
@@ -23744,16 +23733,14 @@ CREATE TABLE IF NOT EXISTS `orders_products` (
   `lista_prov` int(1) NOT NULL DEFAULT '0',
   `cambio_de_productos` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`orders_products_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `orders_products`
 --
 
 INSERT INTO `orders_products` (`orders_products_id`, `orders_id`, `products_id`, `products_model`, `products_name`, `products_price`, `final_price`, `products_descuento`, `final_price_total`, `final_price_euro`, `final_price_tienda`, `products_tax`, `products_quantity`, `value_cliente`, `value_grupo1`, `value_grupo2`, `value_grupo3`, `value_grupo4`, `value_grupo5`, `value_grupo6`, `value_grupo7`, `value_grupo8`, `value_grupo9`, `value_grupo10`, `value_afiliado_remoto`, `orders_cambios_quantity`, `orders_cambios`, `pagado`, `products_inventario`, `donde_esta`, `lista_prov`, `cambio_de_productos`) VALUES
-(2, 1, 1, 'P1', 'P1', '10.0000', '8.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
-(3, 2, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
-(4, 3, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0);
+(1, 1, 1, 'P1', 'P1', '10.0000', '9.0000', '-10.00', '0.0000', '0.00', '0.00', '0.0000', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -23949,7 +23936,7 @@ CREATE TABLE IF NOT EXISTS `orders_status_history` (
   `comments` text,
   PRIMARY KEY (`orders_status_history_id`),
   KEY `idx_orders_status_history_orders_id` (`orders_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `orders_status_history`
@@ -23961,15 +23948,7 @@ INSERT INTO `orders_status_history` (`orders_status_history_id`, `orders_id`, `o
 (3, 1, 30, '2022-11-29 00:38:56', 0, NULL),
 (4, 1, 30, '2022-11-29 00:39:03', 0, NULL),
 (5, 1, 30, '2022-11-29 00:39:10', 0, NULL),
-(6, 1, 30, '2022-11-29 00:39:20', 0, NULL),
-(7, 1, 30, '2022-11-29 05:54:08', 0, NULL),
-(8, 1, 30, '2022-11-29 05:54:27', 0, NULL),
-(9, 2, 30, '2022-11-30 15:34:45', 0, NULL),
-(10, 2, 38, '2022-11-30 14:34:56', 0, NULL),
-(11, 1, 30, '2022-11-30 14:35:09', 0, NULL),
-(12, 1, 33, '2022-11-30 14:49:26', 0, NULL),
-(13, 3, 30, '2022-11-30 15:49:40', 0, NULL),
-(14, 3, 33, '2022-11-30 14:50:17', 0, NULL);
+(6, 1, 30, '2022-11-29 00:39:20', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -23989,28 +23968,18 @@ CREATE TABLE IF NOT EXISTS `orders_total` (
   `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`orders_total_id`),
   KEY `idx_orders_total_orders_id` (`orders_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `orders_total`
 --
 
 INSERT INTO `orders_total` (`orders_total_id`, `orders_id`, `title`, `text`, `value`, `value2`, `class`, `sort_order`) VALUES
-(1, 1, 'Subtotal:', '8.00€', '8.00', '-2.00', 'ot_subtotal', 1),
-(2, 1, 'Descuento: ', '0.00€', '0.00', '-2.00', 'ot_customer_discount', 2),
-(3, 1, 'Gastos Envï¿½o: ', '0.00€', '0.00', '-2.00', 'ot_shipping', 3),
-(4, 1, 'Impuesto:', '0.00€', '0.00', '-2.00', 'ot_tax', 4),
-(5, 1, 'Total:', '<b>8.00€</b>', '8.00', '-2.00', 'ot_total', 5),
-(6, 2, 'Subtotal:', '20€', '20.00', '0.00', 'ot_subtotal', 1),
-(7, 2, 'Descuento: ', '0.00€', '0.00', '0.00', 'ot_customer_discount', 2),
-(8, 2, 'Gastos Envï¿½o: ', '0.00€', '0.00', '0.00', 'ot_shipping', 3),
-(9, 2, 'Impuesto:', '0.00€', '0.00', '0.00', 'ot_tax', 4),
-(10, 2, 'Total:', '20€', '20.00', '0.00', 'ot_total', 5),
-(11, 3, 'Subtotal:', '10.00€', '10.00', '0.00', 'ot_subtotal', 1),
-(12, 3, 'Descuento: ', '0.00€', '0.00', '0.00', 'ot_customer_discount', 2),
-(13, 3, 'Gastos Envï¿½o: ', '0.00€', '0.00', '0.00', 'ot_shipping', 3),
-(14, 3, 'Impuesto:', '0.00€', '0.00', '0.00', 'ot_tax', 4),
-(15, 3, 'Total:', '<b>10.00€</b>', '10.00', '0.00', 'ot_total', 5);
+(1, 1, 'Subtotal:', '45.00€', '45.00', '0.00', 'ot_subtotal', 1),
+(2, 1, 'Descuento: ', '0.00€', '0.00', '0.00', 'ot_customer_discount', 2),
+(3, 1, 'Gastos Envï¿½o: ', '0.00€', '0.00', '0.00', 'ot_shipping', 3),
+(4, 1, 'Impuesto:', '0.00€', '0.00', '0.00', 'ot_tax', 4),
+(5, 1, 'Total:', '<b>45.00€</b>', '45.00', '0.00', 'ot_total', 5);
 
 -- --------------------------------------------------------
 
@@ -24157,7 +24126,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`products_id`, `products_id_patrocine`, `products_url_patrocine`, `products_image_patrocine`, `sistema_patrocine`, `referencia_padre`, `referencia_padre_g2`, `referencia_padre_g3`, `products_model`, `products_model_2`, `products_model_3`, `part_number`, `manufacturers_name`, `products_image`, `products_price`, `products_porcentage`, `products_price_sin`, `products_date_added`, `products_last_modified`, `products_date_available`, `products_featured`, `products_featured_until`, `products_weight`, `products_extrapeso_precio`, `products_status`, `products_status_exel`, `products_tax_class_id`, `manufacturers_id`, `products_ordered`, `grupo_comision`, `style_extra_images`, `banners_affiliate`, `filtro`, `proveedor`, `proveedes`, `codigo_proveedor`, `codigo_barras`, `proveedor_price`, `proveedor_price_general`, `contencion`, `stock_nivel`, `products_regladeprecios`, `regladeprecios`, `time_proveedores`, `time_pagado`, `time_credito`, `time_cobrados`, `time_no_recogido`, `time_pagado_transferencia`, `time_paypal_enviado`, `time_entregado`, `time_pendiente_entrada_total`, `time_entradasysalidas`, `stock_total_costo`, `products_stock_obs`, `time_mercancia_entregado_procesando`, `products_balance_stock`, `products_balance_stock_control`, `time_ultimaactualizacion`, `modificar_precio_siempre`, `pdf`, `priceminister`, `costo`, `referencia_fabricante`, `modificar_producto`, `nobuscar`, `products_quantity`, `comprobar_images`, `stock_disponible_proveedor`, `image_display`, `image_folder`, `products_cpe`, `products_talla`, `products_cpf`, `easypopulate_time`, `easypopulate_time2`, `easypopulate_time3`, `control3`, `modificar_categoria_rdc`, `getimagesize_proveedor_ruta_images_time`, `products_youtube_1`, `products_youtube_2`, `opcion_1`, `opcion_1_1`, `opcion_2`, `opcion_2_2`, `opcion_3`, `opcion_3_3`, `opcion_4`, `opcion_4_4`, `opcion_5`, `opcion_5_5`, `opcion_6`, `opcion_6_6`, `opcion_7`, `opcion_7_7`, `opcion_8`, `opcion_8_8`, `opcion_9`, `opcion_9_9`, `opcion_10`, `opcion_10_10`, `opcion_11`, `opcion_11_11`, `opcion_12`, `opcion_12_12`, `opcion_13`, `opcion_13_13`, `opcion_14`, `opcion_14_14`, `opcion_15`, `opcion_15_15`, `opcion_16`, `opcion_16_16`, `opcion_17`, `opcion_17_17`, `opcion_18`, `opcion_18_18`, `opcion_19`, `opcion_19_19`, `opcion_20`, `opcion_20_20`, `products_stock_min`, `products_rc`, `products_descuento`, `products_descuento_onoff`, `products_shoptoshop`) VALUES
-(1, '', '', '', '', '', '', '', 'P1', '', '', '', '', NULL, '10.00', '0.00', '0.00', '2022-11-29 01:30:33', NULL, NULL, '', '', '0.00', '0.00', 1, 1, 0, 0, -1, 1, 1, '0', 1, '', '', 1, '', '0.00', '0.00', '1', 6, 1, 0, 1669892438, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 'TODO', 0, '0.00', 0, '2022-11-30 00:00:00', 0, '', 0, 1, '', 1, 0, 0, 0, '', '', '', '', '', '', 0, 0, 0, 0, 0, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 2, '0.00', 1, 0);
+(1, '', '', '', '', '', '', '', 'P1', '', '', '', '', NULL, '10.00', '0.00', '0.00', '2022-11-29 01:30:33', NULL, NULL, '', '', '0.00', '0.00', 1, 1, 0, 0, 4, 1, 1, '0', 1, '', '', 1, '', '0.00', '0.00', '1', 6, 1, 0, 1669686948, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'TODO', 0, '0.00', 0, '2022-11-29 00:00:00', 0, '', 0, 1, '', 1, 0, 0, 0, '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 2, '0.00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -24246,7 +24215,7 @@ CREATE TABLE IF NOT EXISTS `products_description` (
 --
 
 INSERT INTO `products_description` (`products_id`, `language_id`, `products_name`, `products_short`, `products_description`, `products_cp_ce_menosnombre_1`, `products_cp_ce_menosnombre_2`, `products_cp_ce_menosnombre_3`, `products_add_1`, `products_url`, `products_viewed`) VALUES
-(1, 1, 'P1', '', '', '', '', '', '', '', 9);
+(1, 1, 'P1', '', '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -24473,7 +24442,7 @@ CREATE TABLE IF NOT EXISTS `products_stock` (
 --
 
 INSERT INTO `products_stock` (`products_id`, `products_stock_real`, `products_stock_pendiente`, `products_stock_ultimaactualizacion`, `products_stock_min`) VALUES
-('1', '0.00', 0, '2022-11-30', 0);
+('1', '-5.00', 0, '2022-11-29', 0);
 
 -- --------------------------------------------------------
 
@@ -24625,13 +24594,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`sesskey`, `expiry`, `value`) VALUES
-('s8ealtogc10l9m6469kg5tmbf0', 1669831232, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
-('b81rvv5q046n89c7mo6gb3vik5', 1669832694, 'sessiontoken|s:32:\"ed2f28b8deeba4a701f05a75cfc75c31\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
-('n81h5t2o35g327m458q5luq1l1', 1669823979, 'sessiontoken|s:32:\"8c03ecbac7e1e727571caff1eff56b27\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:2:{i:0;a:4:{s:4:\"page\";s:25:\"product_reviews_write.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:6:\"imagen\";s:3:\"big\";s:8:\"language\";s:2:\"en\";}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:9:\"login.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:1:{s:6:\"osCsid\";s:26:\"n81h5t2o35g327m458q5luq1l1\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:25:\"product_reviews_write.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:6:\"imagen\";s:3:\"big\";s:8:\"language\";s:2:\"en\";}s:4:\"post\";a:0:{}}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
-('sud2p6r8qtoc2h45kmnl4ruqm5', 1669823960, 'sessiontoken|s:32:\"025cd9d335df7c03e4e03067ec932d61\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:2:{i:0;a:4:{s:4:\"page\";s:25:\"product_reviews_write.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:8:\"language\";s:2:\"en\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:6:\"imagen\";s:3:\"big\";}s:4:\"post\";a:0:{}}i:1;a:4:{s:4:\"page\";s:9:\"login.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:1:{s:6:\"osCsid\";s:26:\"sud2p6r8qtoc2h45kmnl4ruqm5\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:4:{s:4:\"page\";s:25:\"product_reviews_write.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:8:\"language\";s:2:\"en\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:6:\"imagen\";s:3:\"big\";}s:4:\"post\";a:0:{}}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
-('d5eri7ai5jmhlg8p2us2l6bn67', 1669835877, 'sessiontoken|s:32:\"0b50e3f10e4ad566f4aa55c167bd868c\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|s:1:\"1\";affiliate_clickthroughs_id|i:11;'),
-('hns99mvv4ogvnre5bm4bgip1g7', 1669834596, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
-('r3m8vt26jjjcbvhto59ff6dsh6', 1669823943, 'sessiontoken|s:32:\"a1c6a166bcc8df56c47df261bb1b3d79\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:6:\"imagen\";s:3:\"big\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:8:\"language\";s:2:\"en\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;');
+('d5eri7ai5jmhlg8p2us2l6bn67', 1669683917, 'sessiontoken|s:32:\"4d92eb5bb32dd3ebfeb274915df9fef2\";cart|O:12:\"shoppingCart\":5:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:6:\"cartID\";N;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:6:\"NONSSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
+('hns99mvv4ogvnre5bm4bgip1g7', 1669684406, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
+('n6621s2ahiaroli9ahfcjmqop5', 1669685076, 'sessiontoken|s:32:\"b269e97cebc25e05b5865912efb0d025\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:1:{s:3:\"ref\";s:1:\"1\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|s:1:\"1\";affiliate_clickthroughs_id|i:2;');
 
 -- --------------------------------------------------------
 
@@ -24781,11 +24746,11 @@ CREATE TABLE IF NOT EXISTS `view_counter` (
 --
 
 INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `session_id`, `file_name`, `arg`, `view_count`, `last_date`, `bot_name`, `referrer`, `referrer_query`, `user_agent`, `language_id`) VALUES
-(1, 0, '', 1305675233, 'd5eri7ai5jmhlg8p2us2l6bn67', 'index.php', '', 6, '2022-11-30 19:53:57', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '', 1305675233, 'd5eri7ai5jmhlg8p2us2l6bn67', 'index.php', '', 4, '2022-11-29 01:41:17', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'login.php', 'osCAdminID=hns99mvv4ogvnre5bm4bgip1g7', 1, '2022-11-29 01:20:20', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'login.php', '', 5, '2022-11-29 02:13:18', '', 'https://theowergrow.lumatek.es/admin/login.php', 'osCAdminID=hns99mvv4ogvnre5bm4bgip1g7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'login.php', 'action=process', 3, '2022-11-29 02:13:24', '', 'https://theowergrow.lumatek.es/admin/login.php', 'osCAdminID=hns99mvv4ogvnre5bm4bgip1g7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'actualizar_tabla_fabricantes.php', '', 454, '2022-11-30 19:56:36', '', 'https://theowergrow.lumatek.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'actualizar_tabla_fabricantes.php', '', 126, '2022-11-29 02:13:26', '', 'https://theowergrow.lumatek.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1', 3, '2022-11-29 01:57:04', '', 'https://theowergrow.lumatek.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'administrators.php', '', 4, '2022-11-29 02:12:41', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'administrators.php', 'aID=35&action=edit', 1, '2022-11-29 01:27:45', '', 'https://theowergrow.lumatek.es/admin/administrators.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
@@ -24815,16 +24780,16 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'administrators.php', 'aID=13', 2, '2022-11-29 01:29:28', '', 'https://theowergrow.lumatek.es/admin/administrators.php', 'aID=16', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'administrators.php', 'aID=13&action=edit', 1, '2022-11-29 01:29:26', '', 'https://theowergrow.lumatek.es/admin/administrators.php', 'aID=13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'administrators.php', 'aID=13&action=save', 1, '2022-11-29 01:29:28', '', 'https://theowergrow.lumatek.es/admin/administrators.php', 'aID=13&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'create_order_tienda.php', '', 3, '2022-11-30 15:49:38', '', 'https://theowergrow.lumatek.es/admin/administrators.php', 'aID=13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'create_order_process_tienda.php', '', 3, '2022-11-30 15:49:40', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'create_order_tienda.php', '', 1, '2022-11-29 01:29:41', '', 'https://theowergrow.lumatek.es/admin/administrators.php', 'aID=13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'create_order_process_tienda.php', '', 1, '2022-11-29 01:29:44', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1', 1, '2022-11-29 01:29:44', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', '', 50, '2022-11-30 16:01:29', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', '', 47, '2022-11-29 02:13:14', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=&action=new_product', 1, '2022-11-29 01:30:01', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=&action=insert_product', 1, '2022-11-29 01:30:33', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=&action=new_product', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=&pID=1', 1, '2022-11-29 01:30:33', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=&action=new_product', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'new_products_cat=1&search=&cPath=+&B1=Buscar', 2, '2022-11-30 16:01:22', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=&pID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=%20pID=', 3, '2022-11-30 16:01:23', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'new_products_cat=1&search=&cPath= &B1=Buscar', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=&action=new_category', 92, '2022-11-30 15:56:47', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'new_products_cat=1&search=&cPath=+&B1=Buscar', 1, '2022-11-29 01:30:38', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=&pID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=%20pID=', 2, '2022-11-29 01:35:49', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'new_products_cat=1&search=&cPath= &B1=Buscar', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=&action=new_category', 1, '2022-11-29 01:31:42', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'conceptos_compartir_products.php', '', 1, '2022-11-29 01:32:04', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=&action=new_category', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'admin_files.php', '', 1, '2022-11-29 01:33:29', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'admin_files.php', 'cID=3', 1, '2022-11-29 01:33:33', '', 'https://theowergrow.lumatek.es/admin/admin_files.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
@@ -24846,13 +24811,13 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=0&pID=2&action=delete_product', 1, '2022-11-29 01:35:55', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=0&pID=2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'action=delete_product_confirm&cPath=0', 1, '2022-11-29 01:35:57', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=0&pID=2&action=delete_product', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'categories.php', 'cPath=0', 1, '2022-11-29 01:35:57', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=0&pID=2&action=delete_product', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'orders_tienda.php', '', 26, '2022-11-30 15:50:28', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=1&action=edit', 4, '2022-11-30 15:49:15', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=edit&action_cod=o&escbot=ok', 2, '2022-11-29 06:54:11', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'page=1&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=1&conf_actualizar=&conf_insertar=ok', 2, '2022-11-29 06:54:11', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1&action=edit&action_cod=o&escbot=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'orders_tienda.php', '', 2, '2022-11-29 01:39:35', '', 'https://theowergrow.lumatek.es/admin/categories.php', 'cPath=0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=1&action=edit', 1, '2022-11-29 01:37:21', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=edit&action_cod=o&escbot=ok', 1, '2022-11-29 01:37:23', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'page=1&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=1&conf_actualizar=&conf_insertar=ok', 1, '2022-11-29 01:37:24', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1&action=edit&action_cod=o&escbot=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&conf_actualizar=&conf_insertar=ok&action=update_order', 1, '2022-11-29 01:38:52', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=1&conf_actualizar=&conf_insertar=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=1&action=edit', 102, '2022-11-30 15:49:27', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1&conf_actualizar=&conf_insertar=ok&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=update_order', 5, '2022-11-29 06:54:27', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=1&action=edit', 5, '2022-11-29 01:39:21', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=1&conf_actualizar=&conf_insertar=ok&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=update_order', 4, '2022-11-29 01:39:20', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=1', 2, '2022-11-29 01:40:10', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=1&action=edit', 1, '2022-11-29 01:39:45', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=1&action=save', 1, '2022-11-29 01:40:10', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
@@ -24869,7 +24834,7 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=111466', 2, '2022-11-29 01:41:05', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111465', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=111466&action=edit', 1, '2022-11-29 01:40:59', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111466', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=111466&action=save', 1, '2022-11-29 01:41:05', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111466&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', '', 39, '2022-11-30 19:56:35', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111466', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', '', 14, '2022-11-29 02:11:30', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111466', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'borrar=ok&id_banners=85', 1, '2022-11-29 01:42:49', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'insertar=Array', 1, '2022-11-29 01:44:44', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'configuration.php', 'gID=1&cID=4', 2, '2022-11-29 01:57:27', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
@@ -24885,122 +24850,7 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'desactivar=ok&id_banners=91', 1, '2022-11-29 02:11:25', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'desactivar=ok&id_banners=87', 1, '2022-11-29 02:11:30', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'login.php', 'action=logoff', 2, '2022-11-29 02:13:18', '', 'https://theowergrow.lumatek.es/admin/administrators.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'quick_cliente.php', '', 1, '2022-11-29 02:13:13', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 2525559302, 'd9riopc72muoovdlngkb85bm53', 'index.php', '', 1, '2022-11-29 03:35:30', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 1),
-(1, 0, '', 1097633423, '5q9spu16ie8b59bgqbbp4bbg82', 'index.php', 'ref=1', 1, '2022-11-29 06:27:51', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=1&action=update_order', 3, '2022-11-30 15:49:26', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'page=1&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=edit', 1, '2022-11-29 06:54:20', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=1&conf_actualizar=&conf_insertar=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 2809306839, '24litn7rctevlcmu6qk1i6k9e3', 'account_edit.php', '', 1, '2022-11-29 10:57:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '24litn7rctevlcmu6qk1i6k9e3', 'login.php', '', 1, '2022-11-29 10:57:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'ag97fv5g1mt1s7h4le3e6a65k0', 'account_history.php', '', 1, '2022-11-29 10:57:24', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'fd1iqg9gh5gldru45l81ddq732', 'account_newsletters.php', '', 1, '2022-11-29 10:57:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'o4nplk42hn1jv7msmaritroaa5', 'account_password.php', '', 1, '2022-11-29 10:57:31', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '7bcp2mj3bhtoca4jddnqf83hu0', 'address_book.php', '', 1, '2022-11-29 10:57:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'rb7v2i61je3lesclq7po2640o4', 'checkout_shipping.php', '', 1, '2022-11-29 10:57:37', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'rb7v2i61je3lesclq7po2640o4', 'create_account.php', '', 1, '2022-11-29 10:57:38', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'c8u5dencjrgqhpf5r1agju7hj5', 'conditions.php', '', 1, '2022-11-29 10:57:40', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'ai8rrutdfhirnmfdscsknnu593', 'contact_us.php', '', 1, '2022-11-29 10:57:42', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '4kfk5c5g0q9qe11ejufisu2ml7', 'index.php', '', 1, '2022-11-29 10:57:45', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '5e1virkfchg5apucd4768jiao5', 'index.php', 'language=en&ref=1', 1, '2022-11-29 10:57:47', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '9hr4c405o1uv4qb2m6oppfaar6', 'shopping_cart.php', 'ref=1', 1, '2022-11-29 10:57:50', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'bev6h8e5n28l526ojqbo9tmdd3', 'product_info.php', 'products_id=1', 1, '2022-11-29 10:57:54', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '0vgl03uitf3ph2j8psepljlge5', 'privacy.php', '', 1, '2022-11-29 10:57:56', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'vvv9mouru3nrro4vt9fms42r44', 'products_new.php', '', 1, '2022-11-29 10:57:57', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'fso5rpsgmhd01hkga5ov7gr6h1', 'reviews.php', '', 1, '2022-11-29 10:57:59', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'vip9k5mmsli8vrnl2djtpvl573', 'shipping.php', '', 1, '2022-11-29 10:58:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '683o7t6noqvjjl565oqunsac35', 'shopping_cart.php', '', 1, '2022-11-29 10:58:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '8jrthgj2ho3gmrku5763q60580', 'specials.php', '', 1, '2022-11-29 10:58:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1305675233, 'erst50k2pu9quc06bgtbsvp260', 'index.php', 'ref=1', 2, '2022-11-29 19:44:04', '', 'http://qic.es/', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 1097649055, '7c9op6v60dp0hnccfn9tgmlk82', 'index.php', '', 1, '2022-11-29 17:27:26', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '073f9jg724edtddmietcaecj37', 'affiliate_affiliate.php', '', 1, '2022-11-29 17:27:28', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 's51p6r2s67p8vspo0t52iijt77', 'affiliate_faq.php', '', 1, '2022-11-29 17:27:30', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'jrbse0r6qcldgmhcqjhsrdhfi0', 'affiliate_info.php', '', 1, '2022-11-29 17:27:32', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '23avl09m8bd9vlak9cf9j70pp0', 'ask_a_question.php', 'products_id=1', 1, '2022-11-29 17:27:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'ru07se800m7d63c6gi1of0kqc3', 'conditions.php', 'language=en', 1, '2022-11-29 17:27:44', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '4ikr0kh583fod2h3i3ktl6rne3', 'contact_us.php', 'language=en', 1, '2022-11-29 17:27:48', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'bfvha8qsrthlgln0hsheu2bdf5', 'create_account.php', 'language=en', 1, '2022-11-29 17:27:50', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '4n4i6rclns8p7umk7h3ng1uce5', 'index.php', 'language=en', 1, '2022-11-29 17:27:51', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'i6qtcudn23cgjlr7sbl4mq1632', 'login.php', 'language=en', 1, '2022-11-29 17:45:55', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '76i0c8ihb98ga0729hmp58l5v3', 'my_points_help.php', '', 1, '2022-11-29 17:45:57', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'ddjdbrnt1r8773m22gi7jfm6p3', 'product_info.php', 'products_id=1&language=en', 1, '2022-11-29 17:45:59', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'a701r4mlbn8q134n47mc1jnm12', 'product_reviews.php', 'products_id=1', 1, '2022-11-29 17:46:01', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '87ehrrr42j51vro69lam7amc41', 'password_forgotten.php', '', 1, '2022-11-29 17:46:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '9gk49otng1rgu6nimbjmihp4k1', 'privacy.php', 'language=en', 1, '2022-11-29 17:46:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '0ljpjoml2riu8ocojl5o0heal0', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-29 17:46:06', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '3f9guj7mprnec4mmlie4eaf3j1', 'shopping_cart.php', '', 1, '2022-11-29 17:46:09', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '1p28pa4830lfcf849loima3f11', 'products_new.php', 'language=en', 1, '2022-11-29 17:46:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'uqcfqrckv4o558v64m9dqff6r6', 'reviews.php', 'language=en', 1, '2022-11-29 17:46:13', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '5mq2vg619iqj98v76ij2rf50v0', 'shipping.php', 'language=en', 1, '2022-11-29 17:46:14', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '1f0ln48ljvf2f8jkfk0h6iif40', 'shopping_cart.php', 'language=en', 1, '2022-11-29 17:46:16', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '9vhdcbvov2cm3k4qe4lk8p8b86', 'shopping_cart.php', 'ref=1&language=en', 1, '2022-11-29 17:46:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'a2bp2kjfafaigflu5a5di2fs93', 'specials.php', 'language=en', 1, '2022-11-29 17:46:22', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1092090347, 'bhgv4cj0noauq05r9b6b50qeh6', 'index.php', 'ref=1', 1, '2022-11-29 20:22:07', '', 'https://qic.es/', '', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/19G82 [FBAN/FBIOS;FBDV/iPhone12,1;FBMD/iPhone;FBSN/iOS;FBSV/15.6.1;FBSS/2;FBID/phone;FBLC/en_US;FBOP/5]', 1),
-(1, 0, '', 1049232115, 'ss8m4lb6b3bg9rtgmh4enlsh73', 'affiliate_affiliate.php', 'language=en', 1, '2022-11-29 21:57:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'vd6dm5u69clrdso835npcl9bb0', 'affiliate_contact.php', '', 1, '2022-11-29 21:57:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'vd6dm5u69clrdso835npcl9bb0', 'affiliate_affiliate.php', '', 1, '2022-11-29 21:57:03', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'ldroee5ri944nqpmulemmreas2', 'affiliate_faq.php', 'language=en', 1, '2022-11-29 21:57:05', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'jqcvqe0rih6iqqhqndac5acbp4', 'affiliate_info.php', 'language=en', 1, '2022-11-29 21:57:06', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'riodbp1550n3t07nkaljakro72', 'affiliate_password_forgotten.php', '', 1, '2022-11-29 21:57:08', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '68pt4omo3ekjr6vmshn7ao3e05', 'affiliate_signup.php', '', 1, '2022-11-29 21:57:09', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '726rigbatl1p2n6gtng351vls3', 'ask_a_question.php', 'products_id=1&language=en', 1, '2022-11-29 21:57:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '3s2rv0986culndv8ppk9i02tj5', 'shopping_cart.php', 'language=en', 1, '2022-11-29 21:57:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '9uj6gh884l1v0cuqc8lcvgf5f2', 'my_points.php', '', 1, '2022-11-29 21:57:17', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '9uj6gh884l1v0cuqc8lcvgf5f2', 'login.php', '', 1, '2022-11-29 21:57:19', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'ff6hq5td25ngbfn19ei6dqqnl7', 'my_points_help.php', 'language=en', 1, '2022-11-29 21:57:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'jsem7uiu4606k47n73dfp8bie4', 'product_info.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-29 21:57:22', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'd39qf3se9qfg95vt10btshc0i1', 'product_reviews.php', 'products_id=1&language=en', 1, '2022-11-29 21:57:24', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'hgtoof96qhodd8d9u18durc3p7', 'product_reviews.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-29 21:57:26', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '7snfq89s4dfnpf7a0ri2eg1rg6', 'password_forgotten.php', 'language=en', 1, '2022-11-29 21:57:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'n2ehmlae0npsj5gtqh91bupn41', 'product_reviews_write.php', 'products_id=1', 1, '2022-11-29 21:57:29', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1396512904, 's4c1o9kapq9k55rq6omfjqrim1', 'index.php', '', 1, '2022-11-29 23:51:05', '', '', '', 'Mozilla/5.0 (Linux; Android 9.0; MI 8 SE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.119 Mobile Safari/537.36', 1),
-(1, 0, '', 1097679697, 'qcclio2pd6n23nni0klb3nrec7', 'affiliate_password_forgotten.php', 'language=en', 1, '2022-11-30 02:12:13', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '890gj00uf3tjlg1e9de36ju1f3', 'affiliate_signup.php', 'language=en', 1, '2022-11-30 02:12:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '1df65137g7tr9s81gv5594v3r6', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:18', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'd1amudaiqb5jo3t83q6b9aguk0', 'product_info.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '9om71j2fv4crets03t1qrln306', 'product_reviews.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '4hp8vqrs00u2tv3iajqnortuc0', 'product_reviews.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 02:12:25', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'kcflg4aumos93tt2vsvfeqs8q1', 'product_reviews.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'ji7cm9l66f56tv7i90tn7t6bt1', 'product_reviews_write.php', 'products_id=1&language=en', 1, '2022-11-30 02:12:31', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1);
-INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `session_id`, `file_name`, `arg`, `view_count`, `last_date`, `bot_name`, `referrer`, `referrer_query`, `user_agent`, `language_id`) VALUES
-(1, 0, '', 1097679697, 'ji7cm9l66f56tv7i90tn7t6bt1', 'login.php', '', 1, '2022-11-30 02:12:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'tqj287jehrhode1qopm35ievb7', 'product_reviews_write.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 02:12:38', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1100669608, 'b4cbqkjr087oqhpgptik8jlbh5', 'index.php', '', 1, '2022-11-30 02:21:54', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.71 Safari/537.36', 1),
-(1, 0, '', 2809292097, 'ehoc3as4g1lqem624ffilgjo71', 'product_info.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 06:50:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'pmqjd0dtd3496knstgladgeo56', 'product_info.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 06:50:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, '7ahspcc2n25u9m2dgpdkv7b9e3', 'product_reviews.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 06:50:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'n4dahui5cu7ec3lvbkvi4s3lj7', 'product_reviews.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 06:50:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'a9d0c8jtfd90peq5m140lm4gv7', 'product_reviews_write.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 06:50:19', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'a9d0c8jtfd90peq5m140lm4gv7', 'login.php', '', 1, '2022-11-30 06:50:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'n5kjesspjnfd2u1qlmc2qfk0e3', 'product_reviews_write.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 06:50:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'ke2242cqe360m64f10e9bbj623', 'product_reviews_write.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 06:50:32', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1990827200, 'lfg9avvi220blhu1puraplcbi0', 'index.php', 'ref=1', 1, '2022-11-30 08:09:18', '', 'https://theowergrow.lumatek.es/index.php', 'ref=1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.6626.250 Safari/537.36', 1),
-(1, 0, '', 3450414911, '8mc3fhj5e5be83gifbfv66vdr4', 'index.php', '', 1, '2022-11-30 12:41:26', '', '', '', 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=2', 1, '2022-11-30 15:34:46', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=2&action=update_order', 1, '2022-11-30 15:34:56', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=2&action=edit', 1, '2022-11-30 15:34:56', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=2&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'orders_tienda.php', 'page=1&oID=1', 2, '2022-11-30 15:49:13', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=2&action=edit', 2, '2022-11-30 15:45:15', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3', 1, '2022-11-30 15:49:40', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3&action=edit&action_cod=o&escbot=ok', 3, '2022-11-30 15:50:07', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=3&conf_actualizar=&conf_insertar=ok', 1, '2022-11-30 15:50:07', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3&action=edit&action_cod=o&escbot=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3&conf_actualizar=&conf_insertar=ok&action=update_order', 1, '2022-11-30 15:50:17', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=3&conf_actualizar=&conf_insertar=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=3&action=edit', 1, '2022-11-30 15:50:18', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3&conf_actualizar=&conf_insertar=ok&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 3164985294, 'r3m8vt26jjjcbvhto59ff6dsh6', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 16:35:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'sud2p6r8qtoc2h45kmnl4ruqm5', 'product_reviews_write.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 16:35:14', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'sud2p6r8qtoc2h45kmnl4ruqm5', 'login.php', '', 1, '2022-11-30 16:35:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'n81h5t2o35g327m458q5luq1l1', 'product_reviews_write.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 16:35:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 1, '', 1123631169, '', 'index.php', '', 1, '2022-11-30 16:49:52', 'Google', '', '', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.110 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 1, '', 1123631198, '', 'index.php', '', 2, '2022-11-30 18:53:29', 'Google', '', '', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 1, '', 1123631199, '', 'index.php', '', 1, '2022-11-30 17:30:37', 'Google', '', '', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'login.php', 'osCAdminID=s8ealtogc10l9m6469kg5tmbf0', 1, '2022-11-30 18:57:04', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088', 3, '2022-11-30 18:59:31', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088&action=edit', 2, '2022-11-30 18:57:36', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088&action=save', 1, '2022-11-30 18:57:35', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089', 2, '2022-11-30 18:58:55', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089&action=edit', 1, '2022-11-30 18:57:40', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112089', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089&action=save', 1, '2022-11-30 18:58:54', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112089&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112154', 1, '2022-11-30 18:59:36', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111895', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'affiliate_empresa_banner.php', 'borrar=ok&id_banners=79', 1, '2022-11-30 19:00:32', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'quick_cliente.php', '', 1, '2022-11-29 02:13:13', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1);
 
 -- --------------------------------------------------------
 
@@ -25303,122 +25153,7 @@ INSERT INTO `view_counter_storage` (`ip_active`, `isbot`, `isadmin`, `ip_number`
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'desactivar=ok&id_banners=91', 1, '2022-11-29 02:11:25', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'affiliate_empresa_banner.php', 'desactivar=ok&id_banners=87', 1, '2022-11-29 02:11:30', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'login.php', 'action=logoff', 1, '2022-11-29 02:12:58', '', 'https://theowergrow.lumatek.es/admin/administrators.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'quick_cliente.php', '', 1, '2022-11-29 02:13:13', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 2525559302, 'd9riopc72muoovdlngkb85bm53', 'index.php', '', 1, '2022-11-29 03:35:30', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 1),
-(1, 0, '', 1097633423, '5q9spu16ie8b59bgqbbp4bbg82', 'index.php', 'ref=1', 1, '2022-11-29 06:27:51', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=1&action=update_order', 1, '2022-11-29 06:54:08', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'page=1&oID=1&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=1&action=edit', 1, '2022-11-29 06:54:20', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=1&conf_actualizar=&conf_insertar=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 2809306839, '24litn7rctevlcmu6qk1i6k9e3', 'account_edit.php', '', 1, '2022-11-29 10:57:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '24litn7rctevlcmu6qk1i6k9e3', 'login.php', '', 1, '2022-11-29 10:57:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'ag97fv5g1mt1s7h4le3e6a65k0', 'account_history.php', '', 1, '2022-11-29 10:57:24', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'fd1iqg9gh5gldru45l81ddq732', 'account_newsletters.php', '', 1, '2022-11-29 10:57:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'o4nplk42hn1jv7msmaritroaa5', 'account_password.php', '', 1, '2022-11-29 10:57:31', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '7bcp2mj3bhtoca4jddnqf83hu0', 'address_book.php', '', 1, '2022-11-29 10:57:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'rb7v2i61je3lesclq7po2640o4', 'checkout_shipping.php', '', 1, '2022-11-29 10:57:37', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'rb7v2i61je3lesclq7po2640o4', 'create_account.php', '', 1, '2022-11-29 10:57:38', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'c8u5dencjrgqhpf5r1agju7hj5', 'conditions.php', '', 1, '2022-11-29 10:57:40', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'ai8rrutdfhirnmfdscsknnu593', 'contact_us.php', '', 1, '2022-11-29 10:57:42', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '4kfk5c5g0q9qe11ejufisu2ml7', 'index.php', '', 1, '2022-11-29 10:57:45', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '5e1virkfchg5apucd4768jiao5', 'index.php', 'language=en&ref=1', 1, '2022-11-29 10:57:47', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '9hr4c405o1uv4qb2m6oppfaar6', 'shopping_cart.php', 'ref=1', 1, '2022-11-29 10:57:50', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'bev6h8e5n28l526ojqbo9tmdd3', 'product_info.php', 'products_id=1', 1, '2022-11-29 10:57:54', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '0vgl03uitf3ph2j8psepljlge5', 'privacy.php', '', 1, '2022-11-29 10:57:56', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'vvv9mouru3nrro4vt9fms42r44', 'products_new.php', '', 1, '2022-11-29 10:57:57', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'fso5rpsgmhd01hkga5ov7gr6h1', 'reviews.php', '', 1, '2022-11-29 10:57:59', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, 'vip9k5mmsli8vrnl2djtpvl573', 'shipping.php', '', 1, '2022-11-29 10:58:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '683o7t6noqvjjl565oqunsac35', 'shopping_cart.php', '', 1, '2022-11-29 10:58:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809306839, '8jrthgj2ho3gmrku5763q60580', 'specials.php', '', 1, '2022-11-29 10:58:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1305675233, 'erst50k2pu9quc06bgtbsvp260', 'index.php', 'ref=1', 1, '2022-11-29 17:15:15', '', 'http://qic.es/', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 1097649055, '7c9op6v60dp0hnccfn9tgmlk82', 'index.php', '', 1, '2022-11-29 17:27:26', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '073f9jg724edtddmietcaecj37', 'affiliate_affiliate.php', '', 1, '2022-11-29 17:27:28', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 's51p6r2s67p8vspo0t52iijt77', 'affiliate_faq.php', '', 1, '2022-11-29 17:27:30', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'jrbse0r6qcldgmhcqjhsrdhfi0', 'affiliate_info.php', '', 1, '2022-11-29 17:27:32', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '23avl09m8bd9vlak9cf9j70pp0', 'ask_a_question.php', 'products_id=1', 1, '2022-11-29 17:27:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'ru07se800m7d63c6gi1of0kqc3', 'conditions.php', 'language=en', 1, '2022-11-29 17:27:44', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '4ikr0kh583fod2h3i3ktl6rne3', 'contact_us.php', 'language=en', 1, '2022-11-29 17:27:48', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'bfvha8qsrthlgln0hsheu2bdf5', 'create_account.php', 'language=en', 1, '2022-11-29 17:27:50', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '4n4i6rclns8p7umk7h3ng1uce5', 'index.php', 'language=en', 1, '2022-11-29 17:27:51', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'i6qtcudn23cgjlr7sbl4mq1632', 'login.php', 'language=en', 1, '2022-11-29 17:45:55', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '76i0c8ihb98ga0729hmp58l5v3', 'my_points_help.php', '', 1, '2022-11-29 17:45:57', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'ddjdbrnt1r8773m22gi7jfm6p3', 'product_info.php', 'products_id=1&language=en', 1, '2022-11-29 17:45:59', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'a701r4mlbn8q134n47mc1jnm12', 'product_reviews.php', 'products_id=1', 1, '2022-11-29 17:46:01', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '87ehrrr42j51vro69lam7amc41', 'password_forgotten.php', '', 1, '2022-11-29 17:46:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '9gk49otng1rgu6nimbjmihp4k1', 'privacy.php', 'language=en', 1, '2022-11-29 17:46:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '0ljpjoml2riu8ocojl5o0heal0', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-29 17:46:06', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '3f9guj7mprnec4mmlie4eaf3j1', 'shopping_cart.php', '', 1, '2022-11-29 17:46:09', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '1p28pa4830lfcf849loima3f11', 'products_new.php', 'language=en', 1, '2022-11-29 17:46:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'uqcfqrckv4o558v64m9dqff6r6', 'reviews.php', 'language=en', 1, '2022-11-29 17:46:13', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '5mq2vg619iqj98v76ij2rf50v0', 'shipping.php', 'language=en', 1, '2022-11-29 17:46:14', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '1f0ln48ljvf2f8jkfk0h6iif40', 'shopping_cart.php', 'language=en', 1, '2022-11-29 17:46:16', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, '9vhdcbvov2cm3k4qe4lk8p8b86', 'shopping_cart.php', 'ref=1&language=en', 1, '2022-11-29 17:46:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097649055, 'a2bp2kjfafaigflu5a5di2fs93', 'specials.php', 'language=en', 1, '2022-11-29 17:46:22', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1092090347, 'bhgv4cj0noauq05r9b6b50qeh6', 'index.php', 'ref=1', 1, '2022-11-29 20:22:07', '', 'https://qic.es/', '', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/19G82 [FBAN/FBIOS;FBDV/iPhone12,1;FBMD/iPhone;FBSN/iOS;FBSV/15.6.1;FBSS/2;FBID/phone;FBLC/en_US;FBOP/5]', 1),
-(1, 0, '', 1049232115, 'ss8m4lb6b3bg9rtgmh4enlsh73', 'affiliate_affiliate.php', 'language=en', 1, '2022-11-29 21:57:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'vd6dm5u69clrdso835npcl9bb0', 'affiliate_contact.php', '', 1, '2022-11-29 21:57:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'vd6dm5u69clrdso835npcl9bb0', 'affiliate_affiliate.php', '', 1, '2022-11-29 21:57:03', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'ldroee5ri944nqpmulemmreas2', 'affiliate_faq.php', 'language=en', 1, '2022-11-29 21:57:05', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'jqcvqe0rih6iqqhqndac5acbp4', 'affiliate_info.php', 'language=en', 1, '2022-11-29 21:57:06', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'riodbp1550n3t07nkaljakro72', 'affiliate_password_forgotten.php', '', 1, '2022-11-29 21:57:08', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '68pt4omo3ekjr6vmshn7ao3e05', 'affiliate_signup.php', '', 1, '2022-11-29 21:57:09', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '726rigbatl1p2n6gtng351vls3', 'ask_a_question.php', 'products_id=1&language=en', 1, '2022-11-29 21:57:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '3s2rv0986culndv8ppk9i02tj5', 'shopping_cart.php', 'language=en', 1, '2022-11-29 21:57:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '9uj6gh884l1v0cuqc8lcvgf5f2', 'my_points.php', '', 1, '2022-11-29 21:57:17', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '9uj6gh884l1v0cuqc8lcvgf5f2', 'login.php', '', 1, '2022-11-29 21:57:19', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'ff6hq5td25ngbfn19ei6dqqnl7', 'my_points_help.php', 'language=en', 1, '2022-11-29 21:57:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'jsem7uiu4606k47n73dfp8bie4', 'product_info.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-29 21:57:22', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'd39qf3se9qfg95vt10btshc0i1', 'product_reviews.php', 'products_id=1&language=en', 1, '2022-11-29 21:57:24', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'hgtoof96qhodd8d9u18durc3p7', 'product_reviews.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-29 21:57:26', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, '7snfq89s4dfnpf7a0ri2eg1rg6', 'password_forgotten.php', 'language=en', 1, '2022-11-29 21:57:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1049232115, 'n2ehmlae0npsj5gtqh91bupn41', 'product_reviews_write.php', 'products_id=1', 1, '2022-11-29 21:57:29', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1396512904, 's4c1o9kapq9k55rq6omfjqrim1', 'index.php', '', 1, '2022-11-29 23:51:05', '', '', '', 'Mozilla/5.0 (Linux; Android 9.0; MI 8 SE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.119 Mobile Safari/537.36', 1),
-(1, 0, '', 1097679697, 'qcclio2pd6n23nni0klb3nrec7', 'affiliate_password_forgotten.php', 'language=en', 1, '2022-11-30 02:12:13', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '890gj00uf3tjlg1e9de36ju1f3', 'affiliate_signup.php', 'language=en', 1, '2022-11-30 02:12:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '1df65137g7tr9s81gv5594v3r6', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:18', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'd1amudaiqb5jo3t83q6b9aguk0', 'product_info.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '9om71j2fv4crets03t1qrln306', 'product_reviews.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, '4hp8vqrs00u2tv3iajqnortuc0', 'product_reviews.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 02:12:25', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'kcflg4aumos93tt2vsvfeqs8q1', 'product_reviews.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 02:12:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'ji7cm9l66f56tv7i90tn7t6bt1', 'product_reviews_write.php', 'products_id=1&language=en', 1, '2022-11-30 02:12:31', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1);
-INSERT INTO `view_counter_storage` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `session_id`, `file_name`, `arg`, `view_count`, `last_date`, `bot_name`, `referrer`, `referrer_query`, `user_agent`, `language_id`) VALUES
-(1, 0, '', 1097679697, 'ji7cm9l66f56tv7i90tn7t6bt1', 'login.php', '', 1, '2022-11-30 02:12:34', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1097679697, 'tqj287jehrhode1qopm35ievb7', 'product_reviews_write.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 02:12:38', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1100669608, 'b4cbqkjr087oqhpgptik8jlbh5', 'index.php', '', 1, '2022-11-30 02:21:54', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.71 Safari/537.36', 1),
-(1, 0, '', 2809292097, 'ehoc3as4g1lqem624ffilgjo71', 'product_info.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 06:50:00', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'pmqjd0dtd3496knstgladgeo56', 'product_info.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 06:50:04', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, '7ahspcc2n25u9m2dgpdkv7b9e3', 'product_reviews.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 06:50:11', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'n4dahui5cu7ec3lvbkvi4s3lj7', 'product_reviews.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 06:50:15', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'a9d0c8jtfd90peq5m140lm4gv7', 'product_reviews_write.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 06:50:19', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'a9d0c8jtfd90peq5m140lm4gv7', 'login.php', '', 1, '2022-11-30 06:50:21', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'n5kjesspjnfd2u1qlmc2qfk0e3', 'product_reviews_write.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 06:50:23', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 2809292097, 'ke2242cqe360m64f10e9bbj623', 'product_reviews_write.php', 'products_id=1&language=en&imagen=big&url_imagen=images/imnd.svg', 1, '2022-11-30 06:50:32', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 1990827200, 'lfg9avvi220blhu1puraplcbi0', 'index.php', 'ref=1', 1, '2022-11-30 08:09:18', '', 'https://theowergrow.lumatek.es/index.php', 'ref=1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.6626.250 Safari/537.36', 1),
-(1, 0, '', 3450414911, '8mc3fhj5e5be83gifbfv66vdr4', 'index.php', '', 1, '2022-11-30 12:41:26', '', '', '', 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=2', 1, '2022-11-30 15:34:46', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=2&action=update_order', 1, '2022-11-30 15:34:56', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=2&action=edit', 1, '2022-11-30 15:34:56', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=2&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'orders_tienda.php', 'page=1&oID=1', 1, '2022-11-30 15:35:03', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'page=1&oID=2&action=edit', 1, '2022-11-30 15:35:14', '', 'https://theowergrow.lumatek.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3', 1, '2022-11-30 15:49:40', '', 'https://theowergrow.lumatek.es/admin/create_order_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3&action=edit&action_cod=o&escbot=ok', 1, '2022-11-30 15:49:43', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=3&conf_actualizar=&conf_insertar=ok', 1, '2022-11-30 15:50:07', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3&action=edit&action_cod=o&escbot=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'oID=3&conf_actualizar=&conf_insertar=ok&action=update_order', 1, '2022-11-30 15:50:17', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'action=edit&oID=3&conf_actualizar=&conf_insertar=ok', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'edit_orders_tienda.php', 'action=edit&oID=3&action=edit', 1, '2022-11-30 15:50:18', '', 'https://theowergrow.lumatek.es/admin/edit_orders_tienda.php', 'oID=3&conf_actualizar=&conf_insertar=ok&action=update_order', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '', 3164985294, 'r3m8vt26jjjcbvhto59ff6dsh6', 'product_info.php', 'products_id=1&imagen=big&url_imagen=images/imnd.svg&language=en', 1, '2022-11-30 16:35:02', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'sud2p6r8qtoc2h45kmnl4ruqm5', 'product_reviews_write.php', 'products_id=1&language=en&url_imagen=images/imnd.svg&imagen=big', 1, '2022-11-30 16:35:14', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'sud2p6r8qtoc2h45kmnl4ruqm5', 'login.php', '', 1, '2022-11-30 16:35:20', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 0, '', 3164985294, 'n81h5t2o35g327m458q5luq1l1', 'product_reviews_write.php', 'products_id=1&url_imagen=images/imnd.svg&imagen=big&language=en', 1, '2022-11-30 16:35:27', '', '', '', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)', 1),
-(1, 1, '', 1123631169, '', 'index.php', '', 1, '2022-11-30 16:49:52', 'Google', '', '', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.110 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 1, '', 1123631198, '', 'index.php', '', 1, '2022-11-30 17:30:33', 'Google', '', '', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 1, '', 1123631199, '', 'index.php', '', 1, '2022-11-30 17:30:37', 'Google', '', '', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'login.php', 'osCAdminID=s8ealtogc10l9m6469kg5tmbf0', 1, '2022-11-30 18:57:04', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088', 1, '2022-11-30 18:57:23', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088&action=edit', 1, '2022-11-30 18:57:25', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112088&action=save', 1, '2022-11-30 18:57:35', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089', 1, '2022-11-30 18:57:39', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112088&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089&action=edit', 1, '2022-11-30 18:57:40', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112089', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112089&action=save', 1, '2022-11-30 18:58:54', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=112089&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'configuration.php', 'gID=1&cID=112154', 1, '2022-11-30 18:59:36', '', 'https://theowergrow.lumatek.es/admin/configuration.php', 'gID=1&cID=111895', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 1305675233, 's8ealtogc10l9m6469kg5tmbf0', 'affiliate_empresa_banner.php', 'borrar=ok&id_banners=79', 1, '2022-11-30 19:00:32', '', 'https://theowergrow.lumatek.es/admin/affiliate_empresa_banner.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 1305675233, 'hns99mvv4ogvnre5bm4bgip1g7', 'quick_cliente.php', '', 1, '2022-11-29 02:13:13', '', 'https://theowergrow.lumatek.es/admin/categories.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 1);
 
 -- --------------------------------------------------------
 
@@ -25442,7 +25177,7 @@ CREATE TABLE IF NOT EXISTS `whos_online` (
 --
 
 INSERT INTO `whos_online` (`customer_id`, `full_name`, `session_id`, `ip_address`, `time_entry`, `time_last_click`, `last_page_url`) VALUES
-(0, 'Guest', 'd5eri7ai5jmhlg8p2us2l6bn67', '77.211.5.225', '1669834415', '1669834437', '/index.php');
+(0, 'Guest', 'n6621s2ahiaroli9ahfcjmqop5', '40.77.167.31', '1669683636', '1669683636', '/index.php?ref=1');
 
 -- --------------------------------------------------------
 

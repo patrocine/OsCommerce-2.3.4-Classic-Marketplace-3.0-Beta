@@ -1022,23 +1022,7 @@ $products_parametros .= '<br /><span class="smallText"><font color="#008000" > S
                                                                        
 
 
-                                                                       
-$products_parametros .= '<br /><span class="smallText"><font color="#008000" >COMPRAS Y RESERVAS</font></b></span> ';
 
-     $pdv_values = tep_db_query("select * from " . 'products_compartir' . " where activo= '" . 1 . "' order by direccion");
-    while ($pdv = tep_db_fetch_array($pdv_values)){
-
-
-$products_parametros .= '<br /><a href="' . $pdv['ruta_products'] . '' . $product_info['products_model'] . '"><b><span class="smallText"><font color="#008000" >' . $pdv['direccion'] . ': [' . $pdv['nombre_oculto'] . ' Tf: ' . $pdv['telefono'] . ']</a></b></font></b></span> ';
-$products_parametros .= '<span class="smallText"><font color="#008000" > <br /><a target="_blank"  href="' . $pdv['googlemaps'] . '"><img border="0" src="/images/googlemaps.jpg" width="" height="35"> ';
-                   if ($pdv['ruta_products']){
-$products_parametros .= '<a target="_blank"  href="' . $pdv['ruta_products'] . '' . $product_info['products_model'] . '"><img border="0" src="/images/comprar.png" width="" height="35"> </font></b></a></span>';
-                               }
-
-
-
-                                               }
-                                               
 $products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
 
 
@@ -1260,6 +1244,60 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
  }
 
     echo stripslashes($product_info['products_description']);
+    
+    
+    
+    
+echo $products_comprar = '<br /><span class="smallText"><font ></font></b></span> ';
+echo $products_comprar = '<br /><span class="smallText"><font " ></font></b></span> ';
+
+echo $products_comprar = '<br /><span class="smallText"><font size="5" >COMPRA Y RESERVA CERCA DE TI ...</font></b></span> ';
+echo $products_comprar = '<br /><span class="smallText"><font ></font></b></span> ';
+
+
+
+
+                                     if ($product_info['products_quantity']){
+
+echo $products_comprar  = '<br /><span class="smallText"><font ></font></b></span> ';
+echo $products_comprar  = '<br /><span class="smallText"><font color="#008000"size="5" > en stock [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
+echo $products_comprar  = '<br /><span class="smallText"><font ></font></b></span> ';
+echo $products_comprar  = '<br /><span class="smallText"><font size="5" > Codigo: [' . $product_info['products_model'] . ']</font></b></span> ';
+
+
+
+
+
+echo $products_comprar  = '<br /><span class="smallText"><font ></font></b></span> ';
+
+
+
+                                                                  }
+
+
+
+
+
+
+
+echo $products_comprar = '<br /><span class="smallText"><font ></font></b></span> ';
+
+     $pdv_values = tep_db_query("select * from " . 'products_compartir' . " where activo= '" . 1 . "' order by direccion");
+    while ($pdv = tep_db_fetch_array($pdv_values)){
+
+                                                     // ruta_products   . $product_info['products_model']
+echo $products_comprar = '<br /><a target="_blank"  href="' . $pdv['googlemaps'] . ''. '"><b><span class="smallText"><font  >' . $pdv['direccion'] . ': [' . $pdv['nombre_oculto'] . ' Tf: ' . $pdv['telefono'] . ']</a></b></font></b></span> ';
+echo $products_comprar = '<span class="smallText"><font > <br /><a target="_blank"  href="' . $pdv['googlemaps'] . '"><img border="0" src="/images/googlemaps.jpg" width="" height="35"> ';
+                   if ($pdv['ruta_products']){
+//$products_parametros .= '<a target="_blank"  href="' . $pdv['ruta_products'] . '' . $product_info['products_model'] . '"><img border="0" src="/images/comprar.png" width="" height="35"> </font></b></a></span>';
+                               }
+
+
+
+                                               }
+
+    
+    
     
     
 

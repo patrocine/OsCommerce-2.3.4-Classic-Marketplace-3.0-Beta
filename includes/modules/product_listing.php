@@ -97,6 +97,26 @@ if ( ($listing_split->number_of_rows > 0) && ( (PREV_NEXT_BAR_LOCATION == '1') |
             $prod_list_contents .= '<tr>';
         }
 
+    $ctc_values = tep_db_query("select * from " . TABLE_PRODUCTS_TO_CATEGORIES . " where products_id = '" . $listing['products_id'] . "'");
+    $ctc = tep_db_fetch_array($ctc_values);
+    $ctcp_values = tep_db_query("select * from " . TABLE_CATEGORIES . " where categories_id= '" . $ctc['categories_id'] . "'");
+    $ctcp = tep_db_fetch_array($ctcp_values);
+    $ctcp2_values = tep_db_query("select * from " . TABLE_CATEGORIES . " where categories_id= '" . $ctcp['parent_id'] . "'");
+    $ctcp2 = tep_db_fetch_array($ctcp2_values);
+
+
+                       if ($listing['products_image']){
+            $sql_status_update_array = array('categories_image' => $listing['products_image']);
+
+            tep_db_perform(TABLE_CATEGORIES, $sql_status_update_array, 'update', " categories_id= '" . $ctc['categories_id'] . "'");
+
+             $sql_status_update_array = array('categories_image' => $listing['products_image']);
+
+            tep_db_perform(TABLE_CATEGORIES, $sql_status_update_array, 'update', " categories_id= '" . $ctcp['parent_id'] . "'");
+                                              }
+             $sql_status_update_array = array('categories_image' => $listing['products_image']);
+
+            tep_db_perform(TABLE_CATEGORIES, $sql_status_update_array, 'update', " categories_id= '" . $ctcp2['parent_id'] . "'");
 
 
    if (PERMISO_PORCENTAGE_PRECIO == 'True'){

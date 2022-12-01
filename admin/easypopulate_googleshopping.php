@@ -234,6 +234,7 @@ global $filelayout, $filelayout_count, $filelayout_sql, $langcode, $fileheaders;
 global $default_these;
 $default_these = array(
 	'v_products_image',
+	'vv_part_number',
 	#'v_products_mimage',
 	#'v_products_bimage',
 	#'v_products_subimage1',
@@ -629,9 +630,18 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
             $stock = 'out_of_stock';
 
            }
+  if ($pro_para['products_quantity'] >= 1){
+
+               $stock = 'in_stock';
+               }else{
+            $stock = 'out_of_stock';
+
+           }
+           
 
        	$row['id'] = $row['v_products_id'];
        	$row['gtin'] = $row['v_products_model'];
+       	$row['mpn'] = $row['vv_part_number'];
        	$row['image_link'] =$product_compartir['ruta_url'] .'images/'. $row['v_products_image'];
         $row['precio'] 	= $pro_para['products_price'].'EUR';
        	$row['disponibilidad'] 	= $stock;
@@ -1018,6 +1028,7 @@ function ep_create_filelayout($dltype){
 			'disponibilidad'		=> $iii++,
 			'image_link'		=> $iii++,
 			'gtin'		=> $iii++,
+			'mpn'		=> $iii++,
 			);
 
 		foreach ($langcode as $key => $lang){
@@ -1108,6 +1119,7 @@ function ep_create_filelayout($dltype){
 			p.products_id as v_products_id,
 			p.products_model as v_products_model,
 			p.products_image as v_products_image,
+			p.part_number as vv_part_number,
 			p.products_price as v_products_price,
 			p.products_weight as products_weight,
 			p.products_date_available as v_date_avail,
@@ -1246,6 +1258,7 @@ function ep_create_filelayout($dltype){
 			p.products_id as v_products_id,
 			p.products_model as v_products_model,
 			p.products_image as v_products_image,
+			p.part_number as vv_part_number,
 			p.products_price as v_products_price,
 			p.products_weight as products_weight,
 			p.products_date_added as v_date_avail,

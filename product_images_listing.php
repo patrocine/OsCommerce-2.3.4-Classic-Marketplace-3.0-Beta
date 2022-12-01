@@ -54,7 +54,7 @@ $product['image']			=       '<a href="'. DIR_WS_IMAGES . $products_images['produ
                           }
                                                            
                                                            
-                                                           
+
 
         require(TMPL_DIR. 'templ_product_box.php');
 

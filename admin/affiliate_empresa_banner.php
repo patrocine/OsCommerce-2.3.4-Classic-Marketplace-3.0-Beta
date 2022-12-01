@@ -104,7 +104,19 @@ tep_redirect('affiliate_empresa_banner.php');
 }
  
  
- 
+ if ($HTTP_GET_VARS['desactivar']){
+
+
+                      $sql_status_update_array = array('desactivar' => 0,
+                                                     );
+
+             tep_db_perform('affiliate_compartir_empresas', $sql_status_update_array, 'update', " id_banners= '" . $_GET['id_banners'] . "'");
+
+
+
+  tep_redirect('affiliate_empresa_banner.php');
+}
+
  
 ?>
 
@@ -299,7 +311,7 @@ tep_redirect('affiliate_empresa_banner.php');
 
 
 
-    $selec_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . "");
+    $selec_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where desactivar = 1");
       while  ($selec = tep_db_fetch_array($selec_values)){
 
 ?>
@@ -341,7 +353,8 @@ tep_redirect('affiliate_empresa_banner.php');
     <td width="7%" align="center"><?php echo $selec['nombre_ciudad'] ?>&nbsp;</td>
     <td width="7%" align="center"><?php echo $selec['nombre_sector'] ?>&nbsp;</td>
      <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?actualizar=ok&id_banners=' . $selec['id_banners']; ?>">Editar</a></p></td>
-   <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?borrar=ok&id_banners=' . $selec['id_banners']; ?>">Borrar</a></p></td>
+  <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?desactivar=ok&id_banners=' . $selec['id_banners']; ?>">Desactivar</a></p></td>
+    <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?borrar=ok&id_banners=' . $selec['id_banners']; ?>">Borrar</a></p></td>
    <td width="10%" align="center"><p><?php  echo ' <td class="smallText" align="center"><br><script language="javascript" src="'. $selec['url_enlace'].'?url_affiliate='.$url_affiliate.'&linkbanner='.$image_sc.'&linkenlace='.$image_en.'&url_web='.$url_web.'&nombre='.$nombre.'&nombre_sector='.$nombre_sector.'&nombre_ciudad='.$nombre_ciudad.'&email='.$email.'"> </script></td>' . '</a><br />';
 
    ?></a></p></td>

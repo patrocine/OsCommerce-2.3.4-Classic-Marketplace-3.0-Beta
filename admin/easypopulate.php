@@ -1825,7 +1825,7 @@ if ($vv_stock_nivel){
 
                                               // echo  $vv_products_cpe;
                              
-                       //seguridad products_status_exel  referencia_padre_g3
+                       //seguridad products_status_exel
                               if ($vv_seguridad == 5 and $status_exel == 1){
 
               $sql_data_array = array('products_image' => $v_products_image,
@@ -1839,6 +1839,7 @@ if ($vv_stock_nivel){
                               'products_cpe' => $vv_products_cpe,
                               'products_shoptoshop' => $vv_products_shoptoshop,
                               'products_cpf' => $vv_products_cpf,
+                              'part_number' => $vv_part_number,
                               'manufacturers_name' => $v_manufacturers_name,
                               'referencia_padre_g3' => $vv_products_cpf.$vv_products_cpe,
                               'products_regladeprecios' => $vv_regladeprecios,
@@ -2229,6 +2230,7 @@ $oldday1 = date("Y-m-d", $time1);
 
          if ($vv_products_cpe) $sql_data_array['products_cpe'] = $vv_products_cpe;
          if ($vv_products_cpf) $sql_data_array['products_cpe'] = $vv_products_cpf;
+         if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
          if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
          if ($referencia_padre_g3) $sql_data_array['referencia_padre_g3'] = $vv_products_cpf.$vv_products_cpe;
          if ($v_products_price <> 0) $sql_data_array['products_price'] = $v_products_price;
@@ -2318,6 +2320,7 @@ $oldday1 = date("Y-m-d", $time1);
 
          if ($vv_products_cpe) $sql_data_array['products_cpe'] = $vv_products_cpe;
          if ($vv_products_cpf) $sql_data_array['products_cpe'] = $vv_products_cpf;
+         if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
          if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
           if ($referencia_padre_g3) $sql_data_array['referencia_padre_g3'] = $vv_products_cpf.$vv_products_cpe;
          if ($v_products_price <> 0) $sql_data_array['products_price'] = $v_products_price;
@@ -2544,7 +2547,8 @@ $oldday1 = date("Y-m-d", $time1);
 
          if ($vv_products_cpe) $sql_data_array['products_cpe'] = $vv_products_cpe;
          if ($vv_products_cpf) $sql_data_array['products_cpe'] = $vv_products_cpf;
-          if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
+        if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
+           if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
          if ($referencia_padre_g3) $sql_data_array['referencia_padre_g3'] = $vv_products_cpf.$vv_products_cpe;
          if ($v_products_price <> 0) $sql_data_array['products_price'] = $v_products_price;
          if ($vv_customers_group_price_2 <> 0) $sql_data_array['proveedor_price_general'] = $vv_customers_group_price_2;
@@ -2636,6 +2640,7 @@ $oldday1 = date("Y-m-d", $time1);
 
          if ($vv_products_cpe) $sql_data_array['products_cpe'] = $vv_products_cpe;
          if ($vv_products_cpf) $sql_data_array['products_cpe'] = $vv_products_cpf;
+         if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
          if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
           if ($referencia_padre_g3) $sql_data_array['referencia_padre_g3'] = $vv_products_cpf.$vv_products_cpe;
          if ($v_products_price <> 0) $sql_data_array['products_price'] = $v_products_price;
@@ -2948,6 +2953,7 @@ $oldday1 = date("Y-m-d", $time1);
          if ($vv_filtro == 125125) $sql_data_array['products_price'] = 0;
          if ($vv_products_cpe) $sql_data_array['products_cpe'] = $vv_products_cpe;
          if ($vv_products_cpf) $sql_data_array['products_cpf'] = $vv_products_cpf;
+         if ($vv_part_number) $sql_data_array['part_number'] = $vv_part_number;
          if ($vv_products_shoptoshop) $sql_data_array['products_shoptoshop'] = $vv_products_shoptoshop;
          if ($referencia_padre_g3) $sql_data_array['referencia_padre_g3'] = $vv_products_cpf.$vv_products_cpe;
          if ($vv_products_youtube_1) $sql_data_array['products_youtube_1'] = $vv_products_youtube_1;

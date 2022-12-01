@@ -62,6 +62,13 @@ function imageRestrict_bs($image) {
    } // fin ref_fabricante
 
 
+   if (ereg("^https://", $best_viewed['products_image']) ) {
+
+      $image_sc = '' . $best_viewed['products_image'];
+}
+
+
+
                          // Total CON EL DESCUENTO DEL PRODUCTO
                               if ($customer_id <> 0 OR DESCUENTO_CLIENTE <> 0){
        $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $best_viewed['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");

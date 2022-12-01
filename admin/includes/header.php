@@ -80,7 +80,7 @@
  | <a href="customers_points_pending.php">Programa de Puntos</a>
  | <a href="coupons.php">Cupones</a>
  | <a href="whos_online.php">Clientes Online</a>
- | <a href="https://www.youtube.com/playlist?list=PLv6_VqQZKB8ZSEhfF9nlTvjpjyDiQKqaE">Tutoriales</a>
+ | <a href="https://www.youtube.com/playlist?list=PLv6_VqQZKB8YaM2XMbuEd6MO6n3lP7VGv">Tutoriales</a>
 
  
  <?php

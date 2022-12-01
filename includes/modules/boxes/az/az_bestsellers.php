@@ -78,7 +78,7 @@ function imageRestrict_bs($image) {
   }else{
 
 // si en la imagan el nombre empieza por http:// pues elimina la ruta actual para que la imagen del producto siempre se vea.
-   if (ereg("^http://", $best_viewed['products_image']) ) {
+   if (ereg("^https://", $best_viewed['products_image']) ) {
 
       $image_sc = '' . $best_viewed['products_image'];
 }else{
@@ -89,9 +89,12 @@ function imageRestrict_bs($image) {
 
 
    } // fin ref_fabricante
+   
+   
+   if (ereg("^https://", $best_viewed['products_image']) ) {
 
-
-
+      $image_sc = '' . $best_viewed['products_image'];
+}
 
 
 
