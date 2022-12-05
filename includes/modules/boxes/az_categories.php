@@ -112,10 +112,10 @@
 }else{
     $categories_a = $tree[$counter]['name'];
 }
-        if  ($tree[$counter]['productos'] == 0){
-          $categories_string .=  '<b><font color="#3581F1">' . $categories_a . '</font></b>';
+        if  ($tree[$counter]['parent'] == 0){
+          $categories_string .= $categories_a;
 }else{
-          $categories_string .=  $categories_a;
+          $categories_string .=   '<b><font color="#FF3300">->></font></b>' . $categories_a . '';
 
 }
       //if (isset($cPath_array) && in_array($counter, $cPath_array)) {
