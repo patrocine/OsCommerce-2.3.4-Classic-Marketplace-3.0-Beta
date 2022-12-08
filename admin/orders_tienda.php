@@ -101,7 +101,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     if ($check_status['orders_status'] != $status) {
 
 
-     $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+     $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' or orders_status = '" .  $status_liquidacion. "' order by factura_id desc");
     $id_factura_ultimo = tep_db_fetch_array($id_factura_ultimo_values);
 
 
@@ -115,7 +115,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     $id_factura = tep_db_fetch_array($id_factura_values);
 
 
-         if ($pagado == tep_db_input($status)){
+         if ($pagado == tep_db_input($status) and $pro_last_modified['orders_status'] >= 1 or $status_liquidacion == tep_db_input($status) and $pro_last_modified['orders_status'] >= 1 ){
 	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
 					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
 					WHERE orders_id = '" . (int)$this_orderID . "' ");

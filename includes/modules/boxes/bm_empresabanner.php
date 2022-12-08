@@ -226,7 +226,7 @@ $f .='</p>';
       $infobox->azSetBoxHeading($f.'<a href="https://oscommerce.com"><img src="images/logo_oscommerce.png"></a>' .
       '<p><b><a href="https://github.com/patrocine/OsCommerce-2.3.4-Classic-Empresa-3.0-Beta"><font size="2">Descargar Tienda</a></font></b> <img border="0" src="'.'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'.'" width="30" height="">'   .
       '<p><b><font size="2">MARKETPLACE ' . NOMBRE_SECTOR . ' en ' . NOMBRE_CIUDAD_TIENDA . '</font></b></p> ');
-      $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script>'.$a.'</td>' . '</a><br />');
+      $infobox->azSetBoxContent(' '.$b.'<td class="smallText" align="center"><br><script language="javascript" src="'.$empresa_banner.'"> </script></td>' . '</a><br />');
       $infobox->azSetBoxFooter();
       $data = $infobox->azCreateBox('', '', '', '', false);
               

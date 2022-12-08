@@ -46,11 +46,7 @@
 
 
 
-// Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
-require_once 'pdf/dompdf/autoload.inc.php';
-use Dompdf\Dompdf;
 
-// Introducimos HTML de prueba
 
 
 

@@ -29,7 +29,15 @@ jQuery(".gallery2").jCarouselLite({
 	
 	<div class="main_part_left_box">
 		<div class="main_part_left_box_pad">
+  
+
+   
+   
    <?php require(TMPL_BOXES . 'az_categ_intro.php'); ?>
+   
+     <?php// require(TMPL_BOXES . 'az_market_intro.php'); ?>
+   
+   
       <p>&nbsp;</p>
   <?php
 
@@ -208,59 +216,3 @@ jQuery(".gallery2").jCarouselLite({
 
 
 
-    $tiendas_values = mysql_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" .  1 . "' order by nombre_sector asc");
-   while ($tiendas = mysql_fetch_array($tiendas_values)){
-
-
-              if ($tiendas['url_affiliate']){
-
-          }else{
-        $tiendas['url_affiliate'] = $tiendas['url_web'];
-
-      }
-
-
-
-
-           ?>
-
-
-
-
-
-
-<hr size="15" noshade color="#000000">
-
-
-<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td colspan="2">
-		<p align="center"><b><font size="4"><?php echo '<a href="'.$tiendas['url_affiliate'] .'"><img border="0" src="'.$tiendas['url_web'] .'/images/store_logo.png'.'" width="120" height="">' ?></a></font></b></td>
-	</tr>
-	<tr>
-		<td width="100%" colspan="2">
-		<p align="center"><b><font size="4"><?php echo $tiendas['nombre'] ?></font></b></td>
->	</tr>
-	<tr>
-		<td width="6%"><b>Empresa:</b></td>
-		<td width="94%"><b>&nbsp;<?php echo $tiendas['nombre_sector'] ?></b></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-		<b>Ubicación: <?php echo $tiendas['nombre_ciudad'] ?></b></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-		<p align="right"><b><a href="<?php echo $tiendas['url_affiliate'] ?>"><font size="3">Visitar Marketplace
-		-&gt;&gt;</font></a></b></td>
-	</tr>
-</table>
-
-
-                   <?php
-           }
-
-
-
-
-       ?>

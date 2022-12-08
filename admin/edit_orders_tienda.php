@@ -690,10 +690,10 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
     $pro_last_modified_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "'");
     $pro_last_modified = tep_db_fetch_array($pro_last_modified_values);
 
-    $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_ultimo_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" .  $pagado. "' or orders_status = '" .  $status_liquidacion. "' order by factura_id desc");
     $id_factura_ultimo = tep_db_fetch_array($id_factura_ultimo_values);
     
-    $id_factura_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "' order by factura_id desc");
+    $id_factura_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" .  $oID. "' and orders_status = '" .  $pagado. "'or orders_id = '" .  $oID. "' and orders_status = '" .  $status_liquidacion. "' order by factura_id desc");
     $id_factura = tep_db_fetch_array($id_factura_values);
 
                              
@@ -724,7 +724,7 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
       if ($id_factura['factura_id']){
 
             }else{
-                if ($pagado == $_POST['status']){
+                if ($pagado == $_POST['status'] or $status_liquidacion == $_POST['status']){
 	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
 					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
 					WHERE orders_id = '" . $oID . "' ");
@@ -1278,7 +1278,7 @@ $oldday1 = date("Y-m-d", $time1);
       
       
 
-                                echo 'serie C';
+                                echo 'Procesando .....';
                            $serie_c = 'ok';
 require('includes/proveedores_precios.php');
 
