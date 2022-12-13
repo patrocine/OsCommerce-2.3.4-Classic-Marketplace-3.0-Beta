@@ -11,7 +11,7 @@ wasap +34677595953
 
 REQUISITOS
 HOSTING LINUX 
-PHP 5.6
+PHP 5.6 proximamente actualizado a PHP 8.3
 
 Demostración: https://empresa30.es
 
