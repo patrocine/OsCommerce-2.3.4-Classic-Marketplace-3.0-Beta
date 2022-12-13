@@ -1,16 +1,12 @@
 # OsCommerce-2.3.4-Classic-MarketPlace-3.0
 
 Red de Binance Smart Chain
-
 token BitShop
-
 0x4F9C69652ecaFBd1c7B3f14429e7411e1A197713
 
 
 envía billetera te regalamos una muestra de nuestra moneda
-
 a patrocinees@gmail.com
-
 wasap +34677595953
 
 REQUISITOS
