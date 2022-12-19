@@ -1,4 +1,6 @@
 <?php
+  $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $codigo_proveedor . "'");
+  $codigo_proveedor= tep_db_fetch_array($codigo_proveedor_values);
 
  if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_WS_IMAGES. $products_imagen)) {
                                           }else{
@@ -8,7 +10,11 @@
 
                  $image_product = $products_imagen;
                }else{
-        $image_product = 'images/' . 'imnd.svg';
+
+      //  $image_product = 'images/' . 'imnd.svg';
+        
+       $image_product = $codigo_proveedor['proveedor_ruta_images'] . $products_imagen;
+        
 }                }
 
                                //IMAGENES PRODUCTOS

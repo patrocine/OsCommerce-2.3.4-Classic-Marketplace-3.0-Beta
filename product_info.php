@@ -532,7 +532,7 @@ $('#piGal ul').bxGallery({
                           
  if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_WS_IMAGES. $pi['products_extra_image'])) {
                                           }else{
-        $image_product = 'images/' . 'imnd.svg';
+     //   $image_product = 'images/' . 'imnd.svg';
 }
   $codigo_proveedor_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "'");
   $codigo_pro= tep_db_fetch_array($codigo_proveedor_values);
@@ -545,8 +545,8 @@ $('#piGal ul').bxGallery({
  if (file($codigo_proveedor['proveedor_ruta_images'] . $pi['products_extra_image'])) {
 
     
-       $extra_imagenes .= '<p><a href="'.'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='. $codigo_proveedor['proveedor_ruta_images'].$pi['products_extra_image'].'">' .
- '<img border="0" src="'. $codigo_proveedor['proveedor_ruta_images'] . $pi['products_extra_image'] .'" width="200" height=""></a></p>';
+     //  $extra_imagenes .= '<p><a href="'.'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='. $codigo_proveedor['proveedor_ruta_images'].$pi['products_extra_image'].'">' .
+ //'<img border="0" src="'. $codigo_proveedor['proveedor_ruta_images'] . $pi['products_extra_image'] .'" width="200" height=""></a></p>';
 
 }
 
@@ -558,8 +558,8 @@ $('#piGal ul').bxGallery({
 if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'images/' . $pi['products_extra_image'])) {
 
           
-       $extra_imagenes .= '<p><a href="'.'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='.DIR_WS_IMAGES.$pi['products_extra_image'].'">' .
- '<img border="0" src="'. DIR_WS_IMAGES . $pi['products_extra_image'] .'" width="200" height=""></a></p>';
+    //   $extra_imagenes .= '<p><a href="'.'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='.DIR_WS_IMAGES.$pi['products_extra_image'].'">' .
+ //'<img border="0" src="'. DIR_WS_IMAGES . $pi['products_extra_image'] .'" width="200" height=""></a></p>';
 
           
 }
