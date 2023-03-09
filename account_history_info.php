@@ -107,7 +107,7 @@ $products = mysql_fetch_array($query);
 
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
     echo '          <tr>' . "\n" .
-         '            <td align="right" valign="top" width="40">' . $order->products[$i]['model'] . ' ' . $order->products[$i]['qty'] . '&nbsp;x&nbsp;</td>' . "\n" .
+         '            <td align="right" valign="top" width="40">' . $order->products[$i]['model'] . ' ' . $order->products[$i]['qty'] . '&nbsp;x&nbsp;' . $currencies->format(tep_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']). "</td>\n" .
          '            <td valign="top">' . $order->products[$i]['name'];
 
 

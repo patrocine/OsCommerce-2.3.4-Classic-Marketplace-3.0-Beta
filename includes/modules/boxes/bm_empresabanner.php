@@ -71,7 +71,7 @@ $f .='</p>';
   if ($pro_ale <= 11){
 
 
-   $banner_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" . 1 . "'   ORDER BY RAND() LIMIT 1");
+   $banner_values = tep_db_query("select * from " . 'affiliate_compartir_empresas' . " where aut = '" . 1 . "' and epigrafe_sector <> '" . EPIGRAFE_SECTOR . "'   ORDER BY RAND() LIMIT 1");
    if ($banner = tep_db_fetch_array($banner_values)){
 
 

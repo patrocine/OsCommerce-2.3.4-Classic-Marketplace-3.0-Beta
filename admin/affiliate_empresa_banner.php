@@ -345,6 +345,7 @@ tep_redirect('affiliate_empresa_banner.php');
 
     
    <td width="10%" align="center"><?php echo $selec['nombre']; ?></td>
+     <td width="10%" align="center"><?php echo $selec['epigrafe_sector']; ?></td>
      <td width="10%" align="center"><?php echo $selec['email']; ?></td>
     <td width="20%" align="center"><?php echo $selec['url_web']; ?>&nbsp;</td>
     <td width="20%" align="center"><?php echo $selec['url_enlace']; ?>&nbsp;</td>
@@ -355,7 +356,7 @@ tep_redirect('affiliate_empresa_banner.php');
      <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?actualizar=ok&id_banners=' . $selec['id_banners']; ?>">Editar</a></p></td>
   <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?desactivar=ok&id_banners=' . $selec['id_banners']; ?>">Desactivar</a></p></td>
     <td width="5%" align="center"><p><a href="<?php echo $PHP_SELF . '?borrar=ok&id_banners=' . $selec['id_banners']; ?>">Borrar</a></p></td>
-   <td width="10%" align="center"><p><?php  echo ' <td class="smallText" align="center"><br><script language="javascript" src="'. $selec['url_enlace'].'?url_affiliate='.$url_affiliate.'&linkbanner='.$image_sc.'&linkenlace='.$image_en.'&url_web='.$url_web.'&nombre='.$nombre.'&nombre_sector='.$nombre_sector.'&nombre_ciudad='.$nombre_ciudad.'&email='.$email.'"> </script></td>' . '</a><br />';
+   <td width="10%" align="center"><p><?php  echo ' <td class="smallText" align="center"><br><script language="javascript" src="'. $selec['url_enlace'].'?url_affiliate='.$url_affiliate.'&linkbanner='.$image_sc.'&linkenlace='.$image_en.'&url_web='.$url_web.'&nombre='.$nombre.'&nombre_sector='.$nombre_sector.'&epigrafe_sector='. EPIGRAFE_SECTOR .'&nombre_ciudad='.$nombre_ciudad.'&email='.$email.'"> </script></td>' . '</a><br />';
 
    ?></a></p></td>
     </tr>

@@ -21,7 +21,7 @@
 
 
 
- $product['image']			='<a href="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image'] .'"><img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+ $product['image']			='<img src="'. $ref_fabricante['proveedor_ruta_images'] . $new_products['products_image']  .'" height="'. HEADING_IMAGE_HEIGHT .'"  width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
                                      }else{
 $product['image']			='<img src="images/'. 'imnd.svg'  .'" height="'. HEADING_IMAGE_HEIGHT .'"   width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
 

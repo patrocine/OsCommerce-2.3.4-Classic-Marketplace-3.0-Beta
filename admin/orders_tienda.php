@@ -115,6 +115,11 @@ if (isset($HTTP_POST_VARS['submit'])){
     $id_factura = tep_db_fetch_array($id_factura_values);
 
 
+
+
+
+
+
          if ($pagado == tep_db_input($status) and $pro_last_modified['orders_status'] >= 1 or $status_liquidacion == tep_db_input($status) and $pro_last_modified['orders_status'] >= 1 ){
 	tep_db_query ("UPDATE " . TABLE_ORDERS . " SET
 					factura_id = '" . ++$id_factura_ultimo['factura_id'] . "'
@@ -133,11 +138,13 @@ if (isset($HTTP_POST_VARS['submit'])){
         tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = now() where orders_id = '" . (int)$this_orderID . "'");
                                                          }
 
+
+
                                                               }else{
    if ($pro_last_modified['orders_status'] <> $pagado or $pro_last_modified['orders_status'] <> $status_liquidacion){
 
-}ELSE{
-        tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = now() where orders_id = '" . (int)$this_orderID . "'");
+       tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . tep_db_input($status) . "', last_modified = now() where orders_id = '" . (int)$this_orderID . "'");
+ }ELSE{
   }
                                                           }
 

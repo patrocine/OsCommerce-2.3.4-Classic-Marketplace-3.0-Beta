@@ -213,7 +213,7 @@ if ($categoriestime = tep_db_fetch_array($categoriestime_values)){
       $categories_string = '';
       $tree = array();
 
-      $categories_query = tep_db_query("select c.categories_id, c.categories_productos, cd.categories_name_http, cd.categories_name, cd.categories_name_suple, c.categories_image, c.parent_id from " . 'marketplace' . " c, " . 'marketplace_description' . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and cd.categories_status_visible='" . 1 ."' order by sort_order, cd.categories_name");
+      $categories_query = tep_db_query("select c.categories_id, c.categories_productos, cd.categories_name_http, cd.categories_name, cd.categories_name_suple, c.categories_image, c.parent_id from " . 'marketplace' . " c, " . 'marketplace_description' . " cd where c.parent_id = '0' and c.categories_id = cd.categories_id and c.categories_id <> '" . EPIGRAFE_SECTOR ."' and  cd.language_id='" . (int)$languages_id ."' and cd.categories_status_visible='" . 1 ."' order by sort_order, cd.categories_name");
       while ($categories = tep_db_fetch_array($categories_query))  {
         $tree[$categories['categories_id']] = array('name' => $categories['categories_name'],
                                                     'name_http' => $categories['categories_name_http'],

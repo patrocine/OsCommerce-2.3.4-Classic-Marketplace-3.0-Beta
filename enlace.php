@@ -24,7 +24,9 @@ var s=""+
 
 
               $linkbanner = $_GET['linkbanner'];
+              $epigrafesector = $_GET['epigrafesector'];
               $linkenlace = $_GET['linkenlace'];
+              $epigrafe_sector = $_GET['epigrafe_sector'];
               $url_web = $_GET['url_web'];
               $url_affiliate = $_GET['url_affiliate'];
               $nombre = $_GET['nombre'];
@@ -42,6 +44,7 @@ var s=""+
 
                       $sql_status_update_array = array('nombre' => $nombre,
                                                       'email' => $email,
+                                                      'epigrafe_sector' => $epigrafe_sector,
                                                       'url_empresa_catalog' => $linkbanner,
                                                       'url_web' => $url_web,
                                                       'url_affiliate' => $url_affiliate,

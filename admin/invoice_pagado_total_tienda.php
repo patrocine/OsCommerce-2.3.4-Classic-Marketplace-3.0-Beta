@@ -45,44 +45,44 @@
                            
                            
                            
-                $factura_orders_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC");
-                if   ( $factura_orders = mysql_fetch_array($factura_orders_values)) {
+                $factura_orders_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC");
+                if   ( $factura_orders = tep_db_fetch_array($factura_orders_values)) {
 
 
           $factura_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $factura_orders['orders_id'] . "'";
-  $factura_price_query = mysql_query($factura_price_raw);
-  $factura_price= mysql_fetch_array($factura_price_query);
+  $factura_price_query = tep_db_query($factura_price_raw);
+  $factura_price= tep_db_fetch_array($factura_price_query);
 
 
 
 
- $liquidacion_values = mysql_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $tienda_cuenta_cliente . "'");
-              $liquidacion = mysql_fetch_array($liquidacion_values);
+ $liquidacion_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $tienda_cuenta_cliente . "'");
+              $liquidacion = tep_db_fetch_array($liquidacion_values);
 
 
- $liquidacion_h_values = mysql_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $tienda_cuenta_cliente . "'");
-              $liquidacion_h = mysql_fetch_array($liquidacion_h_values);
+ $liquidacion_h_values = tep_db_query("select * from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . $tienda_cuenta_cliente . "'");
+              $liquidacion_h = tep_db_fetch_array($liquidacion_h_values);
 
 
 
- $factura_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = mysql_fetch_array($factura_shipping_values);
+ $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
+              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
 
- $factura_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = mysql_fetch_array($factura_total_values);
+ $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
+              $factura_total = tep_db_fetch_array($factura_total_values);
 
 
- $factura_subtotal_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = mysql_fetch_array($factura_subtotal_values);
+ $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
+              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
               
 
           $sd_raw = "select sum(final_price_euro) as value, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $status . "'  and o.last_modified >= '" . $fecha_inicio . "' and o.last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC";
-  $sd_query = mysql_query($sd_raw);
-  $sd= mysql_fetch_array($sd_query);
+  $sd_query = tep_db_query($sd_raw);
+  $sd= tep_db_fetch_array($sd_query);
 
           $sds_raw = "select sum(final_price_tienda) as value, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o  where o.orders_id = op.orders_id and o.orders_status = '" . $status . "'  and o.last_modified >= '" . $fecha_inicio . "' and o.last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC";
-  $sds_query = mysql_query($sds_raw);
-  $sds= mysql_fetch_array($sds_query);
+  $sds_query = tep_db_query($sds_raw);
+  $sds= tep_db_fetch_array($sds_query);
 
             $suma = 78;
 
@@ -97,14 +97,14 @@
          <?php
 
 
-       //   $factura_products_values = mysql_query("select op.products_quantity, op.products_name, op.products_model, op.products_price, op.final_price_tienda, op.final_price_euro, o.orders_id, pv.proveedor_name from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'proveedor' . " pv where op.products_id = p.products_id and pv.proveedor_id = p.codigo_proveedor and o.orders_id = op.orders_id and  o.orders_status = '" . $status . "'  and o.last_modified >= '" . $fecha_inicio . "' and o.last_modified <= '" . $fecha_final . "'");
-          $factura_products_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC");
-         while      ($factura_products = mysql_fetch_array($factura_products_values)) {
+       //   $factura_products_values = tep_db_query("select op.products_quantity, op.products_name, op.products_model, op.products_price, op.final_price_tienda, op.final_price_euro, o.orders_id, pv.proveedor_name from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o, " . TABLE_PRODUCTS . " p, " . 'proveedor' . " pv where op.products_id = p.products_id and pv.proveedor_id = p.codigo_proveedor and o.orders_id = op.orders_id and  o.orders_status = '" . $status . "'  and o.last_modified >= '" . $fecha_inicio . "' and o.last_modified <= '" . $fecha_final . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . $status . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' or orders_status = '" . $status2 . "'  and last_modified >= '" . $fecha_inicio . "' and last_modified <= '" . $fecha_final . "' ORDER BY last_modified ASC");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
 
 
 
-          $cus_values = mysql_query("select * from " . 'customers' . " where customers_id = '" . $factura_products['customers_id'] . "'");
-        $customers = mysql_fetch_array($cus_values);  ?>
+          $cus_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $factura_products['customers_id'] . "'");
+        $customers = tep_db_fetch_array($cus_values);  ?>
 
 
 
@@ -138,8 +138,8 @@
 
           }
 
-     $cliente_values = mysql_query("select * from " . 'orders_total' . " where orders_id = '" . $factura_products['orders_id'] . "' and class = '" . ot_total . "'");
-              $cliente = mysql_fetch_array($cliente_values);
+     $cliente_values = tep_db_query("select * from " . 'orders_total' . " where orders_id = '" . $factura_products['orders_id'] . "' and class = '" . ot_total . "'");
+              $cliente = tep_db_fetch_array($cliente_values);
 
 
      echo $currencies->format($cliente['value']);
@@ -261,11 +261,11 @@
 
 
 
-          $total_print_values = mysql_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value >= 0 and orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
-      $total_print = mysql_fetch_array($total_print_values);
+          $total_print_values = tep_db_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value >= 0 and orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
+      $total_print = tep_db_fetch_array($total_print_values);
 
-          $total_print2_values = mysql_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value >= 0 and orders_status = '" . $status2 . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
-      $total_print2 = mysql_fetch_array($total_print2_values);
+          $total_print2_values = tep_db_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value >= 0 and orders_status = '" . $status2 . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
+      $total_print2 = tep_db_fetch_array($total_print2_values);
 
 
 
@@ -274,8 +274,8 @@
 
 
 
-        $total_print_values = mysql_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value <= 0 and orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
-      $total_print = mysql_fetch_array($total_print_values);
+        $total_print_values = tep_db_query("select sum(value) as valu from " . TABLE_ORDERS . " o, orders_total ot where o.orders_id = ot.orders_id and class = '" . ot_total . "' and value <= 0 and orders_status = '" . $status . "'  and last_modified  >= '" . $fecha_inicio . "' and last_modified  <= '" . $fecha_final . "'");
+      $total_print = tep_db_fetch_array($total_print_values);
 
 
 

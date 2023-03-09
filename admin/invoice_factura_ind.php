@@ -113,7 +113,7 @@
           <td width="323" height="147" valign="top">
           <p style="margin-top: 0; margin-bottom: 0" align="center"><b>
           <a href="http://<?php ECHO FACTURA_WEB; ?>" style="text-decoration: none">
-          <font color="#000000" size="2"><?php ECHO FACTURA_WEB; ?></font></a></b></p>
+          <font color="#000000" size="2"><?php ECHO 'DATOS DE EMPRESA'; ?></font></a></b></p>
           <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
           <p style="margin-top: 0; margin-bottom: 0"><font size="2"><b>&nbsp;<?php ECHO STORE_FACTURA; ?></b></font></p>
           <p style="margin-top: 0; margin-bottom: 0"><font size="1">&nbsp;  <?php echo $addbook['entry_street_address'] ?> </p>
@@ -150,7 +150,7 @@
               <td width="52%" height="35">
               <table border="2" cellpadding="5" cellspacing="5" style="border-collapse: collapse; font-size: 10pt" bordercolor="#C0C0C0" width="100%">
                 <tr>
-                  <td width="100%"><?php ECHO TEXT_AFILIADO_TX; ?></td>
+                  <td width="100%"><?php ECHO 'DNI/CIF: '. $factura_orders['customers_dni']; ?></td>
                 </tr>
               </table>
               </td>
@@ -253,18 +253,17 @@
             <tr>
               <td width="12%" align="center"><b><font size="1" face="Verdana">
               <?php ECHO TEXT_REF_M ?></font></b></td>
-              <td width="40%" align="center"><b><font size="1" face="Verdana">
+              <td width="39%" align="center"><b><font size="1" face="Verdana">
               <?php ECHO TEXT_DESCRIPCION_M ?></font></b></td>
-              <td width="13%" align="center"><b><font size="1" face="Verdana">
+              <td width="6%" align="center"><b><font size="1" face="Verdana">
               <?php ECHO TEXT_PRECIO_M ?></font></b></td>
               <td width="6%" align="center"><b><font face="Verdana" size="1">
               <?php ECHO TEXT_CANT_M ?></font></b></td>
-              <td width="11%" align="center"><b><font size="1" face="Verdana">
+              <td width="6%" align="center"><b><font size="1" face="Verdana">
               <?php ECHO TEXT_IMP_M ?></font></b></td>
-              <td width="18%" align="center"><b><font size="1" face="Verdana">
+              <td width="6%" align="center"><b><font size="1" face="Verdana">
               <?php ECHO TEXT_PRECIO_TOTAL_M ?></font></b></td>
             </tr>
-
 
 
 
@@ -279,20 +278,19 @@
 
             <tr>
 
-              <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
+              <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 6pt">
 
-
-               <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+                             <?php
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
-      <table border="0" cellpadding="-7" cellspacing="-7" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
+      <table border="-1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
 
-                  <?php echo $factura_products['products_id'] ?>
+                  <?php echo $factura_products['products_model'] ?>
                   </td>
                 </tr>
 
@@ -305,25 +303,17 @@
 
               </td>
 
-              <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
-                        
-                        
-                        
-                        
-
-
-
-
+              <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
                  <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
-              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 5pt" bordercolor="#111111" width="100%" height="13">
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
              <?php
 
-           $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $login_id . "'");
+           $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $log_id . "'");
  $donde_esta_c= tep_db_fetch_array($donde_esta_c_values);
 
 
@@ -332,10 +322,10 @@
                   if ($featured_products_array[$i]['shortdescription'] != '') {
 
   } else {
-   $bah = explode(" ", $factura_products['products_model'] . ' | ' . $factura_products['products_name']);
-   for($desc=0 ; $desc<8 ; $desc++)
+   $bah = explode(" ", $factura_products['products_name']);
+   for($desc=0 ; $desc<6 ; $desc++)
       {
-      echo "$bah[$desc] ";
+   echo " $bah[$desc]" ;
       }
       echo '...'.$donde_esta_c['donde_esta'];
   }
@@ -350,40 +340,40 @@
 
 
 
-                  </td>
-                </tr>
+
               </table>
 
                <?php   } ?>
 
               </td>
-              <td width="13%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
-              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
-                <tr>
-                  <td width="100%">
-                  <p align="center">
-                        
-                        
 
-
-
+              <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
 
 
                                 <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
 
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
+                <tr>
+                  <td width="100%" height="13">&nbsp;
 
 
 
-                   <p style="margin-top: 0; margin-bottom: 0"><?php echo $currencies->format($factura_products['final_price']);?>  </p>
+              <?php
+                             $precio =    $factura_products['products_price']  -  $factura_products['products_price'] / 100 * 3;
+
+
+              echo number_format( $precio, 2, '.', '').'Eur';?>  </p>
 
 
 
-
+                          </td>
+                </tr>
+              </table>
 
                      <?php   } ?>
 
@@ -395,22 +385,18 @@
 
 
 
-                  </td>
-                </tr>
-              </table>
               </td>
-              <td width="6%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
 
+              <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
                             <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
-              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
-                <tr>
-                  <td width="100%">
-                  <p align="center">
 
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
+                <tr>
+                  <td width="100%" height="13">&nbsp;
 
 
 
@@ -433,26 +419,29 @@
               </table>
                <?php   } ?>
               </td>
-              <td width="11%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
-                      <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+
+              <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
+
+        <?php
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
-              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="100%">
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                  <td width="100%"><?php ECHO TIPO_IMPUESTO ?></td>
+                  <td width="100%" height="13">&nbsp;
+<?php ECHO '3%' ?></td>
                 </tr>
               </table>
                      <?php   } ?>
               </td>
-              <td width="21%" height="305" valign="top" style="font-family: Verdana; font-size: 8pt">
-                                         <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' ORDER BY products_model");
+
+              <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
+                           <?php
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
-              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 8pt" bordercolor="#111111" width="89%">
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                  <td width="100%">
-                  <p align="right">
+                  <td width="100%" height="13">&nbsp;
 
 
 
@@ -475,6 +464,7 @@
               <?php   } ?>
                               </td>
             </tr>
+
 
 
 
@@ -564,29 +554,6 @@
 
 
 
-                        
-                        
-                        
-                        
-                       <?php
-
-
-    echo    $html=ob_get_clean();
-
-
-
-
-
-                           ?>
-                        
-                        
-                        
-                        
-                        
-
-
-
-
 
 
 
@@ -602,36 +569,10 @@
 
 
 
+
+
+
                              }
-          /*
-
-// Instanciamos un objeto de la clase DOMPDF.
-$pdf = new DOMPDF();
-
-// Definimos el tamaño y orientación del papel que queremos.
-$pdf->set_paper("letter", "portrait");
-//$pdf->set_paper(array(0,0,104,250));
-
-// Cargamos el contenido HTML.
-$pdf->load_html(utf8_decode($html));
-
-// Renderizamos el documento PDF.
-$pdf->render();
-
-// Enviamos el fichero PDF al navegador.
-$pdf->stream('reportePdf.pdf');
-
-
-function file_get_contents_curl($url) {
-	$crl = curl_init();
-	$timeout = 5;
-	curl_setopt($crl, CURLOPT_URL, $url);
-	curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$ret = curl_exec($crl);
-	curl_close($crl);
-	return $ret;
-}
 
 
 

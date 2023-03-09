@@ -19,6 +19,8 @@
 
    $codigobarrasID = $codigobarras;
 
+       $sel_iten_1 = $_POST['sel_iten_1'];
+      $level_iten = $_GET['level_iten'];
 
 
 
@@ -263,8 +265,54 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
 
 
 
+if ($level_iten==2 ){
 
 
+	tep_db_query ("UPDATE " . 'orders' . " SET
+					sel_iten_max = '" . 2 . "'
+					WHERE orders_id = '" . $oID . "' ");
+         ?>
+
+ <script language=javascript>
+window.open('<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>', '_blank');
+</script>
+
+
+<?php
+
+
+                    }
+
+if ($level_iten==1 ){
+ 	tep_db_query ("UPDATE " . 'orders' . " SET
+					sel_iten_max = '" . 1 . "'
+					WHERE orders_id = '" . $oID . "' ");
+
+                   
+         ?>
+
+ <script language=javascript>
+window.open('<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>', '_blank');
+</script>
+
+
+<?php
+
+                   
+                   
+                    }
+if ($porcentage_tienda['sel_iten_max'] == 2){
+
+    $sel_iten_max = 10;
+    
+}else{
+  $sel_iten_max = 9999;
+}
+
+
+
+
+                                                                                                              
          /*
 
                       $sql_status_update_array = array('products_quantity' => $unidades + $codigobarras_a['products_quantity'],
@@ -858,7 +906,7 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 		}//end if (is_array())
 		        
 		// 1.3.1 Update orders_products Table
-		if (is_array ($_POST['update_products'])){
+		if (is_array($_POST['update_products'])){
 		foreach($_POST['update_products'] as $orders_products_id => $products_details)	{
 
 
@@ -929,6 +977,19 @@ $oldday1 = date("Y-m-d", $time1);
 					WHERE products_id = '" . (int)$order['products_id'] . "' ");
 
                         }
+
+
+               if (isset($products_details["products_news_update"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET
+					products_name = '" . $products_details["name"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+
+
 
 
                                //NUEVO PRODUCTO
@@ -1279,6 +1340,12 @@ $oldday1 = date("Y-m-d", $time1);
       
 
                                 echo 'Procesando .....';
+                                
+
+                                
+                                
+                                
+                                
                            $serie_c = 'ok';
 require('includes/proveedores_precios.php');
 
@@ -1734,7 +1801,7 @@ $oldday1 = date("Y-m-d", $time1);
                                                            //CHIVATOS
                                                 echo '<font color="#008000" face="Verdana" size="1"><b>Actualizado Correctamente (Pendiente de Entrada) Serie A</b></font>';
 
-                                                              //FIN
+                                                             //FIN
                              //
                               $serie_a = 'ok';
   require('includes/proveedores_precios.php');
@@ -2115,14 +2182,16 @@ $oldday1 = date("Y-m-d", $time1);
           $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
 
 
-                                                           }
+                                                     }
                                                            
 
+                                if ($products_details["name"]){
 
+                                    }
                           
 				$Query = "UPDATE " . TABLE_ORDERS_PRODUCTS . " set
 					products_model = '" . $products_details["model"] . "',
-					products_name = '" . tep_html_quotes($products_details["name"]) . "',
+					products_name = '" . $products_details["name"] . "',
 					final_price = '" . $products_details["final_price"] . "',
 					products_descuento = '" . $products_details["products_descuento"] . "',
 					final_price_euro = '" . $total_pago_euro . "',
@@ -2193,7 +2262,6 @@ $oldday1 = date("Y-m-d", $time1);
  $unidades = $products_details['unidades_nuevo_pedido_stock'];
  $numero_pedido = $products_details['numero_nuevo_pedido_stock'];
 }}
-
 
 
 
@@ -2583,6 +2651,7 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+          echo 'Procesando 16..'.$products_details["name"];
 
 
 
@@ -2591,8 +2660,25 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+   ?>
+
+            <script type="text/javascript">
+
+    var pagina = '<?php echo FILENAME_EDIT_ORDERS_TIENDA . '?action=edit&oID=' . $oID; ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
 
 
+   <?php
 
 
 
@@ -2641,7 +2727,7 @@ $oldday1 = date("Y-m-d", $time1);
 
 	// 2. ADD A PRODUCT ###############################################################################################
 	case 'add_product':
-	
+
 		if($_POST['step'] == 5)
 		{
 			// 2.1 GET ORDER INFO #####
@@ -2713,7 +2799,7 @@ $oldday1 = date("Y-m-d", $time1);
 			// 2.2 UPDATE ORDER ####
    
 
-
+                                   echo 'Procesando .13....';
 
                                    $serie_d = 'ok';
    require(DIR_WS_INCLUDES . 'proveedores_precios.php');
@@ -2802,16 +2888,16 @@ $oldday1 = date("Y-m-d", $time1);
 
 			// 2.3 REDIRECTION #####
    
-   
+
           $ro = $_GET['ro'];
 
            if ($ro=='ok'){
 
 
          }else{
-   
+
    ?>
-   
+
             <script type="text/javascript">
 
     var pagina = '<?php echo FILENAME_EDIT_ORDERS_TIENDA . '?action=edit&ro=ok&oID=' . $oID; ?>';
@@ -2827,7 +2913,7 @@ $oldday1 = date("Y-m-d", $time1);
 
      </script>
 
-   
+
    <?php
       }
         // Header("Location: http://www.euroconsolas.com/euroconsolas/spain/index.php");
@@ -3507,6 +3593,7 @@ if (($action == 'edit') && ($order_exists == true)) {
 
 
 
+
  <form name="f"  method="post" action="<?php echo $PHP_SELF.'?oID='.$oID.'&action=edit&action_cod=o&escbot=ok'; ?>">
   <p style="margin-top: 0; margin-bottom: 0"><b><font face="Verdana" size="1">Codigo Barras / Referencia /
 
@@ -3522,7 +3609,8 @@ if (($action == 'edit') && ($order_exists == true)) {
   <?php
        
        
-       
+
+
 
                               //NUEVO PRODUCTO
          if ($new_product == 1){
@@ -3542,10 +3630,35 @@ if (($action == 'edit') && ($order_exists == true)) {
 					WHERE configuration_key = '" . 'NEW_PRODUCT' . "' ");
 
                     }
+                    
+                              //NUEVO PRODUCTO
+         if ($sel_iten_1 == 1){
+
+	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 1 . "'
+					WHERE configuration_key = '" . 'SEL_ITEN_1' . "'");
+
+
+
+
+
+
+                        }else if ($sel_iten_1 == 2){
+	tep_db_query ("UPDATE " . TABLE_CONFIGURATION . " SET
+					configuration_value = '" . 2 . "'
+					WHERE configuration_key = '" . 'SEL_ITEN_1' . "' ");
+
+                    }
+                    
+                    
+                    
+                    
 
  $new_product_configuration_values = tep_db_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'NEW_PRODUCT' . "'");
  $new_product_configuration = tep_db_fetch_array($new_product_configuration_values);
 
+ $selitem_values = tep_db_query("select * from " . TABLE_CONFIGURATION . " where configuration_key = '" . 'SEL_ITEN_1' . "'");
+ $selitem = tep_db_fetch_array($selitem_values);
 
 if ($new_product_configuration['configuration_value'] == 1 ){
 
@@ -3554,7 +3667,20 @@ $checked_1 = 'checked';
 if ($new_product_configuration['configuration_value'] == 2 ){
 
 $checked_0 = 'checked';
-}                    if (AYUDA_ADMIN == 'true'){
+}
+
+if ($selitem['configuration_value'] == 1 ){
+
+$selitem_1 = 'checked';
+}
+if ($selitem['configuration_value'] == 2 ){
+
+$selitem_0 = 'checked';
+}
+
+
+
+                   if (AYUDA_ADMIN == 'true'){
                  $ayuda_buscar_facturacion_regular= '<a class="hastip"  title="' . AYUDA_TEXT_FACTURACION_REGULAR . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
                  $ayuda_buscar_facturacion_nuevo_producto = '<a class="hastip"  title="' . AYUDA_TEXT_FACTURACION_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
                  $ayuda_codigo_barras = '<a class="hastip"  title="' . AYUDA_TEXT_CODIGO_BARRAS . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>';
@@ -3580,18 +3706,38 @@ $checked_0 = 'checked';
 <input type="radio" value="1" <?php echo $checked_1; ?> name="new_product">   <?php  echo     $ayuda_buscar_facturacion_regular; ?><input type="radio" value="2" <?php echo $checked_0; ?> name="new_product">
 
 
+ | <input type="radio" value="1" <?php echo $selitem_1; ?> name="sel_iten_1">   <?php  echo     $ayuda_selitem; ?><input type="radio" value="2" <?php echo $selitem_0; ?> name="sel_iten_1">
+
+  | <?php
+         echo $sel_iten_max . ' <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=2'. '"> Max 10 </a> <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=1'. '"> Todos</a>';
+
+     ?>
        
-       
-       
-       
+
   <p style="margin-top: 0; margin-bottom: 0">
 
 
-            <?php     echo     $ayuda_codigo_barras; ?>
+            <?php     echo     $ayuda_codigo_barras;
+
+
+             if (SEL_ITEN_1 == 1){
+           ?>
+
+  <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3" style="font-size: 37pt"></b></font>
+
+
+  <?php
+   }
+    ?>
+
+
+
+
+
 
 
     <font size="1" face="Verdana"><b>
-    <input  name="codigobarras" value ="<?php echo $codigobarras_negativos.$codigobarras_in; ?>" type="text" size="20">
+    <input  name="codigobarras" value ="<?php echo $codigobarras_negativos.$codigobarras_in; ?>" type="text"  size="18" style="font-size: 37pt">
 
    <?php   if ($login_groups_id == 1){
     //<input name="proveedorprice" type="text" value="" size="6">
@@ -3609,9 +3755,16 @@ $checked_0 = 'checked';
       // seleccionado busca todos los productos que esten activados o desactivados.
             echo     $ayuda_udidades;
 
+
+             if (SEL_ITEN_1 == 2){
            ?>
 
-  <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3"> </b></font>
+  <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3" style="font-size: 37pt"></b></font>
+  
+  
+  <?php
+   }
+    ?>
   </p>
   <p style="margin-top: 0; margin-bottom: 0"><b><font face="Verdana" size="1">
   Búsquedas</font></b></p>
@@ -3624,7 +3777,7 @@ $checked_0 = 'checked';
        ?>
 <input type="checkbox" name="stock_disponible" value="ON">
     
-    <input name="palabraclave" type="text" value="" size="20" style="font-family: Verdana; font-size: 8pt; color: #000080; border-style: outset; border-width: 3; background-color: #FFFF00">
+    <input name="palabraclave" type="text" value="" size="18" style="font-family: Verdana; font-size: 37pt; color: #000080; border-style: outset; border-width: 3; background-color: #FFFF00">
      <input type="hidden" name="add_product">
 
 
@@ -3633,7 +3786,7 @@ $checked_0 = 'checked';
             echo     $ayuda_buscar_producto;
        ?>
 
-                <input type="submit" name="Submit" value="Buscar" style="color: #FFFFFF; font-family: ve; font-size: 8pt; background-color: #008080">
+                <input type="submit" name="Submit" value="Buscar" style="color: #FFFFFF; font-family: ve; font-size: 40pt; background-color: #008080">
     </b></font>
 
 </form>
@@ -4420,7 +4573,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                                       op.final_price,
                                                       op.products_descuento,
                                                       p.products_descuento_onoff,
-                                                      op.orders_products_id from " . TABLE_ORDERS_PRODUCTS .  " op, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pde.login_id = '" . $log_id . "'  where op.products_quantity <> 0 and p.products_id = pd.products_id and op.products_id = p.products_id and op.orders_id = '" . (int)$oID . "' group by op.orders_products_id ORDER BY op.orders_products_id DESC");
+                                                      op.orders_products_id from " . TABLE_ORDERS_PRODUCTS .  " op, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pde.login_id = '" . $log_id . "'  where op.products_quantity <> 0 and p.products_id = pd.products_id and op.products_id = p.products_id and op.orders_id = '" . (int)$oID . "' group by op.orders_products_id ORDER BY op.orders_products_id DESC LIMIT $sel_iten_max");
 		while ($orders_products = tep_db_fetch_array($orders_products_query)) {                                                                                                                                                       //p.products_id = pde.products_id and
 		$order->products[$index] = array('qty' => $orders_products['products_quantity'],
                                      'name' => tep_html_quotes($orders_products['products_name']),
@@ -5131,8 +5284,8 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 
 
-                $stock_exteriors = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_admin.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $order->products[$i]['model'] .'&almacen=' . $product_compartir['nombre_publico'] .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
-   echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exteriors . '/'  . '</td>     ' . "\n";
+              $stock_exteriors = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_admin.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $order->products[$i]['model'] .'&almacen=' . $product_compartir['nombre_publico'] .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
+ echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exteriors . '/'  . '</td>     ' . "\n";
 
 
     }
@@ -5248,7 +5401,7 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
                      // nombre del producto y cantidad
         echo '	    </td>' . "\n" .
-             '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='38' value='" . $order->products[$i]['name'] . "'><input name='update_products[$orders_products_id][products_news]' type='checkbox' />" . '<a class="hastip"  title="' . AYUDA_TEXT_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>'  . $products_parametros ;
+             '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='38' value='" . $order->products[$i]['name'] . "'><input name='update_products[$orders_products_id][products_news]' type='checkbox' />" . ' ' . " | <input name='update_products[$orders_products_id][products_news_update]' type='checkbox' />" . '<a class="hastip"  title="' . AYUDA_TEXT_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>'  . $products_parametros ;
  		//'	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][peso]' size='7' value='" . $order->products[$i]['peso'] . "
                           // NUEVO PRODUCTO
 

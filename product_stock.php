@@ -116,6 +116,14 @@ if ($stock_nivel['stock_nivel'] == 6){
     $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
     $sumar_entregado_total= tep_db_fetch_array($sumar_entregado_total_sales_query);
 
+
+    $sumar_abono_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id_stock . "'and o.orders_status =a.abono_true and a.admin_groups_id=6";
+    $sumar_abono_total_sales_query = tep_db_query($sumar_abono_total_sales_raw);
+    $sumar_abono_total= tep_db_fetch_array($sumar_abono_total_sales_query);
+
+
+
+
     $sumar_mercancia_entregado_procesando_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id_stock . "'and o.orders_status =a.status_entregas and a.admin_groups_id=6";
     $sumar_mercancia_entregado_procesando_sales_query = tep_db_query($sumar_mercancia_entregado_procesando_sales_raw);
     $sumar_mercancia_entregado_procesando= tep_db_fetch_array($sumar_mercancia_entregado_procesando_sales_query);
@@ -166,7 +174,7 @@ if ($stock_nivel['stock_nivel'] == 6){
     $sumar_pagos_procesando_sales_query = tep_db_query($sumar_pagos_procesando_sales_raw);
     $sumar_pagos_procesando= tep_db_fetch_array($sumar_pagos_procesando_sales_query);
 
-    $entradas_os = $sumar_entregado_total['value'];
+    $entradas_os = $sumar_entregado_total['value']+$sumar_abono_total['value'];
     $salidas_os = $sumar_pagos_procesando['value'] + $sumar_credito['value'] + $sumar_albaran['value'] + $sumar_albaran_cobrar['value'] + $sumar_retirado['value'] + $sumar_cobrados_total['value'] + $sumar_pagado_total['value'] + $sumar_pagado_transferencia['value'] + $sumar_paypal_enviado['value'];
 
 

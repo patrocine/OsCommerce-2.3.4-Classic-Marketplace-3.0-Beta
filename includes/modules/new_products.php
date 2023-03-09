@@ -98,7 +98,11 @@ $customer_group = tep_db_fetch_array($customer_group_query);
 $customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $new_products['products_id'] . "' and customers_group_id =  '" . $customer_group['customers_group_id'] . "'");
 if ( $customer_group['customers_group_id'] != 0) {
   if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
-    $products_price = ''.$currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($new_products['products_tax_class_id'])) . '';
+    $products_price = '<font color="#000000" size="3"><b>'.$currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($new_products['products_tax_class_id'])) . '</b></font>';
+
+
+
+
   }
 }
 
@@ -199,7 +203,6 @@ if ($customers_porcentage == 0){
 
 
 
-
         #Include template layout for the product box
         #build variables map
         $product['id']				= $new_products['products_id'];
@@ -228,9 +231,18 @@ if ($customers_porcentage == 0){
         $product['more_info_btn']	= tep_image_button('', AZ_BUTTON_MORE_INFO, '', '3');
 
                       if (BOTON_COMPRA == 'True' and $new_products['products_price'] <> 0){
+
+ $stock_query = tep_db_query("select * from " . 'products_stock' . " where  products_id = '" . $new_products['products_id'] . "'");
+ $p_stock = tep_db_fetch_array($stock_query);
+
+                          if ($p_stock['products_stock_real'] >= 1){
+
         $product['buy_now_url']		= tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $new_products['products_id']);
          $product['buy_now_btn']	    = tep_image_button('button_in_cart.gif', AZ_BUTTON_CART, '', '2', false);
+                                                                                                     }else{
 
+                                                             $product['buy_now_btn']	    = '';
+                                                        }
                                        }
         
         $product['review_stars']	= az_get_products_rating($new_products['products_id']);

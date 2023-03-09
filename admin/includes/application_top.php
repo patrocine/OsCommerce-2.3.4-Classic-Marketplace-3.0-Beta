@@ -410,6 +410,7 @@ $login_cambio_procesando = $scs['cambio_procesando'];
 $cobrado = $scs['cobrado'];
 $reserva = $scs['reserva'];
 $abono = $scs['abono'];
+$abono_true = $scs['abono_true'];
 $pagado = $scs['pagado'];
 $pagado_internacional = $scs['pagado_internacional'];
 $pagado_transferencia = $scs['pagado_transferencia'];

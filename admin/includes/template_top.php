@@ -88,7 +88,9 @@ function popupWindow(url) {
 
 }
 
- if ($comprobar){ ?>
+ if ($comprobar){
+
+        ?>
 <SCRIPT>
 <!--
 function sf(){document.fh.codigobarras_inv.focus();}
@@ -124,6 +126,27 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
       <?php
 }else{
+
+
+
+
+
+       if (SEL_ITEN_1 == 1){
+        ?>
+        <SCRIPT>
+<!--
+function sf(){document.f.unidades.focus();}
+function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURIComponent ? encodeURIComponent : escape;var u="";var oi_param="";var cad_param="";if (url) u="&url="+e(url.replace(/#.*/,"")).replace(/\+/g,"%2B");if (oi) oi_param="&oi="+e(oi);if (cad) cad_param="&cad="+e(cad);new Image().src="/url?sa=T"+oi_param+cad_param+"&ct="+e(ct)+"&cd="+e(cd)+u+"&ei=yzHqRPLoGpy2QP6B_X0"+sg;}return true;}
+// -->
+</SCRIPT>
+   <?php
+
+  }else{
+
+
+
+
+
        ?>
 
 <SCRIPT>
@@ -133,7 +156,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 // -->
 </SCRIPT>
 
-     <?php } ?>
+     <?php }} ?>
 
 
 

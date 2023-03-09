@@ -424,7 +424,18 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+         foreach($_POST['products_new_twitter'] as $id => $new_twitter){
 
+
+
+
+          $sql_status_update_array = array('products_twitter' => $new_twitter);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+
+
+     }
 
 
          foreach($_POST['products_new_specialprice'] as $id => $new_status_special_price){
@@ -897,6 +908,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.codigo_barras,
                                                       p.codigo_barras,
                                                       p.products_youtube_1,
+                                                      p.products_twitter,
                                                       p.products_youtube_2,
                                                       p.filtro,
                                                       p.products_rc,
@@ -945,6 +957,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.codigo_barras,
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
+                                                      p.products_twitter,
                                                       p.products_youtube_1,
                                                       p.products_youtube_2,
                                                       p.filtro,
@@ -991,6 +1004,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_cpf,
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
+                                                      p.products_twitter,
                                                       p.products_youtube_1,
                                                       p.products_youtube_2,
                                                       p.referencia_padre,
@@ -1032,6 +1046,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_cpf,
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
+                                                      p.products_twitter,
                                                       p.products_youtube_1,
                                                       p.products_youtube_2,
                                                       p.referencia_padre,
@@ -1074,9 +1089,10 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.referencia_padre_g2,
                                                       p.referencia_padre,
                                                       p.products_stock_min,
-                                                    p.products_youtube_2,
-                                                       p.products_youtube_1,
-                                                       o.billing_name,
+                                                      p.products_twitter,
+                                                      p.products_youtube_2,
+                                                      p.products_youtube_1,
+                                                      o.billing_name,
                                                       o.orders_id,
                                                       o.orders_status,
                                                       o.date_purchased,
@@ -1122,6 +1138,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
                                                       p.products_stock_min,
+                                                      p.products_twitter,
                                                       p.products_youtube_1,
                                                       p.products_youtube_2,
                                                       p.products_image,
@@ -1261,6 +1278,8 @@ if (getimagesize($ref_fabricante['proveedor_ruta_images']. $products_images['pro
             //echo "<td class=\"smallText\" valign=\"top\" align=\"right\"></td>\n";
 
             echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_padre_filtrar .">Filtrar</a><input size=\"10\" type=\"text\" name=\"products_new_referencia_padre[".$row['products_id']."]\" value={$row['referencia_padre']}></td>\n";
+            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left.">Twitter</a><input size=\"10\" type=\"text\" name=\"products_new_twitter[".$row['products_id']."]\" value={$row['products_twitter']}></td>\n";
+
 
                                             if ($codigo_proveedor_up == 'update'){
 

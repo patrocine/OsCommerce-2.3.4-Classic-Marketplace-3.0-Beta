@@ -196,9 +196,8 @@ $products_price = '<font color="#000000" size="3"><b>'.$currencies->display_pric
             if ($products_price <> $listing['products_price']){
 
 //$products_price = '<font color="#000000" size="3"><b>'.$currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id']));
-
-
             }
+            
 
 
       }else{
@@ -210,18 +209,29 @@ $products_price = '<font color="#000000" size="3"><b>'.$currencies->display_pric
 
       $customers_porcentage = $customers_porcentage['customers_porcentage'];
 
+
+
+
+
+
+
             $products_price = '<s>' .  $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</s>&nbsp;
               <font color="#FF0000" size="5"><b>' . $currencies->display_price($listing['products_price'] *$customers_porcentage/100+$listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</b></font></span>';
 
+
+
+
       
  }else{
-
 
       $customers_porcentage = DESCUENTO_CLIENTE;
               if (DESCUENTO_CLIENTE <> 0){
             $products_price = '<s>' .  $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</s>&nbsp;
               <font color="#FF0000" size="5"><b>' . $currencies->display_price($listing['products_price'] *$customers_porcentage/100+$listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</b></font></span>';
-                                  }
+
+
+
+                                                                                     }
 
 
 }
@@ -263,7 +273,7 @@ if ($customers_porcentage){
 
               
               
-              
+
               
         if (tep_not_null($listing['specials_new_products_price'])) {
             $products_price = '<s>' .  $currencies->display_price($listing['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</s>&nbsp;
@@ -290,6 +300,18 @@ if ($customers_porcentage){
 
         if ($listing['products_price'] <> 0 or $customer_group_price['customers_group_price'] <> 0){
 
+
+    $pro_g1_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" .  $customer_id . "'");
+    $pro_g1 =tep_db_fetch_array($pro_g1_values);
+
+    $pro_g_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" .  $pro_g1['customers_group_id'] . "' and products_id = '" .  $listing['products_id'] . "'");
+    if ($pro_g =tep_db_fetch_array($pro_g_values)){
+
+       $products_price = '<p><b><font size="6" color="#000000">' .  $currencies->display_price($pro_g['customers_group_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</font></b></p></b></p>';
+}
+
+
+
         $product['price']			= $products_price.$pdc_price_final;//.' <font color="#FF0000"><b>'.$customers_porcentage.'</b></font>';
 
 		                            }else{
@@ -314,14 +336,22 @@ if ($customers_porcentage){
         $product['desc']			= $listing['products_description'];
         $product['more_info_btn']	= tep_image_button('', AZ_BUTTON_MORE_INFO, '', '3');
 
+  $stock_query = tep_db_query("select * from " . 'products_stock' . " where  products_id = '" . $listing['products_id'] . "'");
+                         $p_stock = tep_db_fetch_array($stock_query);
 
 
                 if (BOTON_COMPRA == 'True' and $listing['products_price'] <> 0){
+
+                                         if ($p_stock['products_stock_real'] >= 1){
                   // $product['buy_now_url'] = tep_draw_button(IMAGE_BUTTON_BUY_NOW, 'cart', tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id']))
         $product['buy_now_url']		= tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id']);
         
          $product['buy_now_btn']	    = tep_image_button('button_in_cart.gif', AZ_BUTTON_CART, '', '2', false);
+         
+                                                            }else{
 
+                                                             $product['buy_now_btn']	    = '';
+                                                        }
                             }
         $product['review_stars']	= az_get_products_rating($listing['products_id']);
 
