@@ -895,6 +895,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.codigo_barras,
                                                       p.products_youtube_1,
                                                       p.products_youtube_2,
                                                       p.filtro,
@@ -941,6 +942,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.codigo_barras,
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
                                                       p.products_youtube_1,
@@ -981,6 +983,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
   		$result = "select p.products_id,
                                                       p.proveedor_price_general,
                                                       pd.products_name,
+                                                      p.codigo_barras,
                                                       p.products_image,
                                                       p.filtro,
                                                       p.products_rc,
@@ -1022,6 +1025,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.codigo_barras,
                                                       p.filtro,
                                                       p.products_rc,
                                                       p.products_cpe,
@@ -1062,6 +1066,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.filtro,
+                                                      p.codigo_barras,
                                                       p.products_rc,
                                                       p.products_cpe,
                                                       p.products_cpf,
@@ -1108,6 +1113,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
 		$result = "select p.products_id,
                                                       p.proveedor_price_general,
                                                       pd.products_name,
+                                                      p.codigo_barras,
                                                       p.codigo_barras,
                                                       p.filtro,
                                                       p.products_rc,
@@ -1389,7 +1395,7 @@ window.open('<? echo 'categories.php?cPath=&pID='.$row['products_id'].'&action=n
 echo "<td class=\"smallText\" valign=\"top\">".$text_int."</td>\n";
 echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
 
-              echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left."><a href=". $referencia_model_filtrar .">Filtrar</a><input size=\"12\" type=\"text\" name=\"products_new_model[".$row['products_id']."]\" value={$row['products_model']}><input size=\"8\" type=\"text\" name=\"products_new_model_2[".$row['products_id']."]\" value={$row['products_model_2']}><input size=\"8\" type=\"text\" name=\"products_new_model_3[".$row['products_id']."]\" value={$row['products_model_3']}></td>\n";
+              echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><p align=".left.">Filtrar ".$row['codigo_barras']."</a><input size=\"12\" type=\"text\" name=\"products_new_model[".$row['products_id']."]\" value={$row['products_model']}><input size=\"8\" type=\"text\" name=\"products_new_model_2[".$row['products_id']."]\" value={$row['products_model_2']}><input size=\"8\" type=\"text\" name=\"products_new_model_3[".$row['products_id']."]\" value={$row['products_model_3']}></td>\n";
 
 
 

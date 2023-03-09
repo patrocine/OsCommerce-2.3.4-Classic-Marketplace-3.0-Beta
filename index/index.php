@@ -129,7 +129,9 @@
     if (ereg("^https://", $categories['categories_image']) ) {
     echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image($categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
     }else{
-    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
+//    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
+    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . '<img border="0" src="'. DIR_WS_IMAGES . $categories['categories_image'] .'" width="' . SUBCATEGORY_IMAGE_WIDTH . '" height="' . SUBCATEGORY_IMAGE_HEIGHT . '">' . '<br />' . $categories_a . '</a></td>' . "\n";
+
      }
 
 
