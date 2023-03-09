@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-03-2023 a las 21:20:56
+-- Tiempo de generación: 09-03-2023 a las 23:59:55
 -- Versión del servidor: 5.7.36-cll-lve
 -- Versión de PHP: 7.4.29
 
@@ -8766,21 +8766,18 @@ CREATE TABLE IF NOT EXISTS `affiliate_compartir_empresas` (
   `nombre_ciudad` varchar(54) NOT NULL,
   `desactivar` int(1) NOT NULL DEFAULT '1',
   KEY `id` (`id_banners`)
-) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `affiliate_compartir_empresas`
 --
 
 INSERT INTO `affiliate_compartir_empresas` (`id_banners`, `url_empresa_catalog`, `url_enlace`, `numero_productos`, `nombre`, `url_web`, `url_affiliate`, `email`, `aut`, `epigrafe_sector`, `nombre_sector`, `nombre_ciudad`, `desactivar`) VALUES
-(64, 'https://insideseed.es/affiliate_banners_products.php?pro_ale=', 'https://insideseed.es/enlace.php', 10, 'Insideseed', 'https://insideseed.es/', '', 'simervimportacion@gmail.com', 1, 'inactivo', 'Grow Shop', 'San Isidro, Granadilla', 1),
-(69, 'https://elcogollo2.com/affiliate_banners_products.php?pro_ale=', 'https://elcogollo2.com/enlace.php', 10, 'El Cogollo 2', 'https://elcogollo2.com/', '', 'marinsweed@gmail.com', 1, 'inactivo', 'Grow Shop', 'San Isidro, Granadilla', 1),
-(75, 'https://tasmaniapetshop.es/affiliate_banners_products.php?pro_ale=', 'https://tasmaniapetshop.es/enlace.php', 10, 'Tasmania Pet Shop', 'https://tasmaniapetshop.es/', 'https://tasmaniapetshop.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, 'inactivo', 'Animales', 'Granadilla Pueblo', 1),
-(92, 'https://qic.es/affiliate_banners_products.php?pro_ale=', 'https://qic.es/enlace.php', 10, 'Qi Canarias Marketplace Informatica Tenerife', 'https://qic.es/', 'https://qic.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, 'inactivo', 'Informatica', 'Tenerife', 1),
-(87, 'https://amanova.me/affiliate_banners_products.php?pro_ale=', 'https://amanova.me/enlace.php', 10, 'AMANOVA', 'https://amanova.me/', 'https://amanova.me/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 0),
-(88, 'https://advanceaffinity.online/affiliate_banners_products.php?pro_ale=', 'https://advanceaffinity.online/enlace.php', 10, 'Advance Affinity', 'https://advanceaffinity.online/', 'https://advanceaffinity.online/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 0),
-(91, 'https://royalcanin.website/affiliate_banners_products.php?pro_ale=', 'https://royalcanin.website/enlace.php', 10, 'Royal Canin', 'https://royalcanin.website/', 'https://royalcanin.website/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 0),
-(90, 'https://optimanova.online/affiliate_banners_products.php?pro_ale=', 'https://optimanova.online/enlace.php', 10, 'Optima Nova', 'https://optimanova.online/', 'https://optimanova.online/index.php?ref=1', 'email@gmail.com', 1, 'inactivo', 'Animales', 'SPAIN', 0);
+(93, 'https://elcogollo2.com/affiliate_banners_products.php?pro_ale=', 'https://elcogollo2.com/enlace.php', 10, 'El Cogollo 2', 'https://elcogollo2.com/', 'https://elcogollo2.com/index.php?ref=1', 'marinsweed@gmail.com', 1, '100000000', 'Grow Shop', 'San Isidro, Granadilla', 1),
+(75, 'https://tasmaniapetshop.es/affiliate_banners_products.php?pro_ale=', 'https://tasmaniapetshop.es/enlace.php', 10, 'Tasmania Pet Shop', 'https://tasmaniapetshop.es/', 'https://tasmaniapetshop.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, '100000001', 'Animales', 'Granadilla Pueblo', 1),
+(105, 'https://qic.es/affiliate_banners_products.php?pro_ale=', 'https://qic.es/enlace.php', 10, 'Qic Informatica', 'https://qic.es/', 'https://qic.es/index.php?ref=1', 'tasmaniadvilshop@hotmail.es', 1, '6597', 'Informatica', 'Tenerife', 1),
+(109, 'https://deliciaitaliana.com/affiliate_banners_products.php?pro_ale=', 'https://deliciaitaliana.com/enlace.php', 10, 'Delicias Italianas', 'https://deliciaitaliana.com/', 'https://deliciaitaliana.com/index.php?ref=1', 'deliciaitalianaes@gmail.com', 1, '100000017', 'Alimentación', 'San Isidro', 1),
+(111, 'https://srmarihuano.es/affiliate_banners_products.php?pro_ale=', 'https://srmarihuano.es/enlace.php', 10, 'Sr.Marihuano', 'https://srmarihuano.es/', 'https://srmarihuano.es/index.php?ref=1', 'clubgrowes@gmail.com', 1, '100000000', 'Grow Shop', 'Granadilla de Abona', 1);
 
 -- --------------------------------------------------------
 
@@ -21916,7 +21913,7 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `use_function` varchar(255) DEFAULT NULL,
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=112160 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=112163 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `configuration`
@@ -22105,10 +22102,10 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (197, 'Sort Order', 'MODULE_ADMIN_DASHBOARD_VERSION_CHECK_SORT_ORDER', '900', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2012-06-16 19:37:02', NULL, NULL),
 (198, 'Enable Latest Reviews Module', 'MODULE_ADMIN_DASHBOARD_REVIEWS_STATUS', 'True', 'Do you want to show the latest reviews on the dashboard?', 6, 1, NULL, '2012-06-16 19:37:02', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (199, 'Sort Order', 'MODULE_ADMIN_DASHBOARD_REVIEWS_SORT_ORDER', '1000', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2012-06-16 19:37:02', NULL, NULL),
-(200, 'Installed Modules', 'MODULE_BOXES_INSTALLED', 'bm_login.php;az_manufacturer_info.php;bm_search.php;az_categories.php;bm_affiliate.php;bm_compbuild.php;bm_empresabanner.php;bm_esbanner.php;bm_manufacturer_info.php;bm_whats_new.php;bm_information.php;bm_shopping_cart.php;bm_order_history.php;bm_product_notifications.php;bm_product_social_bookmarks.php;bm_specials.php;bm_languages.php;bm_whos_online.php;bm_newsletter_boxe.php', 'List of box module filenames separated by a semi-colon. This is automatically updated. No need to edit.', 6, 0, '2022-09-26 17:20:23', '2012-06-16 19:37:02', NULL, NULL),
+(200, 'Installed Modules', 'MODULE_BOXES_INSTALLED', 'az_marketplace.php;bm_login.php;az_categories.php;az_manufacturer_info.php;bm_search.php;bm_affiliate.php;bm_compbuild.php;bm_empresabanner.php;bm_esbanner.php;bm_manufacturer_info.php;bm_whats_new.php;bm_information.php;bm_shopping_cart.php;bm_order_history.php;bm_product_notifications.php;bm_product_social_bookmarks.php;bm_specials.php;bm_languages.php;bm_whos_online.php;bm_newsletter_boxe.php', 'List of box module filenames separated by a semi-colon. This is automatically updated. No need to edit.', 6, 0, '2023-03-09 23:50:40', '2012-06-16 19:37:02', NULL, NULL),
 (111685, 'Enable Categories Module', 'MODULE_BOXES_AZ_CATEGORIES_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2014-01-26 18:55:40', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111686, 'Content Placement', 'MODULE_BOXES_AZ_CATEGORIES_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2014-01-26 18:55:40', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
-(111687, 'Sort Order', 'MODULE_BOXES_AZ_CATEGORIES_SORT_ORDER', '1010', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-01-26 18:55:40', NULL, NULL),
+(111687, 'Sort Order', 'MODULE_BOXES_AZ_CATEGORIES_SORT_ORDER', '3', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-01-26 18:55:40', NULL, NULL),
 (111634, 'Enable Information Module', 'MODULE_BOXES_INFORMATION_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2014-01-26 11:55:22', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111635, 'Content Placement', 'MODULE_BOXES_INFORMATION_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2014-01-26 11:55:22', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
 (111636, 'Sort Order', 'MODULE_BOXES_INFORMATION_SORT_ORDER', '1050', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-01-26 11:55:22', NULL, NULL),
@@ -22340,7 +22337,7 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (111790, 'Display Greeting', 'MODULE_BOXES_LOGIN_GREETING', 'True', 'Do you want to display the welcome greeting?', 6, 1, NULL, '2014-07-29 17:11:58', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111791, 'Display Name', 'MODULE_BOXES_LOGIN_NAME_DISPLAY', 'First', 'How do you want the name to be displayed in the welcome greeting?', 6, 1, NULL, '2014-07-29 17:11:58', NULL, 'tep_cfg_select_option(array(\'First\', \'Last\', \'Both\', \'None\'), '),
 (111792, 'Content Placement', 'MODULE_BOXES_LOGIN_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2014-07-29 17:11:58', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
-(111793, 'Sort Order', 'MODULE_BOXES_LOGIN_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-07-29 17:11:58', NULL, NULL),
+(111793, 'Sort Order', 'MODULE_BOXES_LOGIN_SORT_ORDER', '2', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-07-29 17:11:58', NULL, NULL),
 (111794, 'Enable Information Module', 'MODULE_BOXES_WHOS_ONLINE_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2014-07-29 17:12:11', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111795, 'Content Placement', 'MODULE_BOXES_WHOS_ONLINE_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2014-07-29 17:12:11', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
 (111796, 'Sort Order', 'MODULE_BOXES_WHOS_ONLINE_SORT_ORDER', '7900', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2014-07-29 17:12:11', NULL, NULL),
@@ -22565,7 +22562,10 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (112153, 'Cliente perpetuo', 'AFFILIATE_OPTION', 'true', 'Si el afiliado es perpetuo se llevará siempre la comisión, esto es bueno si quieres tener una comunidad de afliados fieles o trabajar con comerciales o revendedores.', 900, NULL, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (112154, 'Activa o desactiva la ayuda', 'AYUDA_ADMIN', 'false', 'Activa o desactiva la ayuda', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 (112158, 'Activar Punto de venta en produc_info.php', 'CONFIGURATION_PRODUCTS_PUNTODEVENTA', 'false', 'Indica en la ficha del producto los puntos de ventas mas cercano donde puede comprar el producto, este dato es fijo en todos los productos del catalogo, Active o Inactive', 8, 200, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-(112159, 'Facturacion, Selecciona la cantidada antes del codigo de barras 1 despues del codigo de barras 2. ', 'SEL_ITEN_1', '1', 'Seliciona que prefieres la cantidad del producto primero 1 o despues del ean 2', 8, NULL, NULL, '0000-00-00 00:00:00', NULL, '');
+(112159, 'Facturacion, Selecciona la cantidada antes del codigo de barras 1 despues del codigo de barras 2. ', 'SEL_ITEN_1', '1', 'Seliciona que prefieres la cantidad del producto primero 1 o despues del ean 2', 8, NULL, NULL, '0000-00-00 00:00:00', NULL, ''),
+(112160, 'Enable Categories Module', 'MODULE_BOXES_AZ_MARKETPLACE_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2023-03-09 23:49:26', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
+(112161, 'Content Placement', 'MODULE_BOXES_AZ_MARKETPLACE_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2023-03-09 23:49:26', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
+(112162, 'Sort Order', 'MODULE_BOXES_AZ_MARKETPLACE_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2023-03-09 23:49:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -22729,7 +22729,7 @@ CREATE TABLE IF NOT EXISTS `counter` (
 --
 
 INSERT INTO `counter` (`startdate`, `counter`) VALUES
-('20120616', 15841678);
+('20120616', 15841680);
 
 -- --------------------------------------------------------
 
@@ -23576,6 +23576,85 @@ CREATE TABLE IF NOT EXISTS `manufacturers_info` (
   `date_last_click` datetime DEFAULT NULL,
   PRIMARY KEY (`manufacturers_id`,`languages_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marketplace`
+--
+
+DROP TABLE IF EXISTS `marketplace`;
+CREATE TABLE IF NOT EXISTS `marketplace` (
+  `categories_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sistema_patrocine` int(1) NOT NULL DEFAULT '0',
+  `categories_image` varchar(64) DEFAULT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `sort_order` int(3) DEFAULT NULL,
+  `date_added` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  `categories_time` int(50) NOT NULL,
+  `categories_productos` int(11) NOT NULL,
+  `categories_status` int(1) NOT NULL,
+  `categories_marketplace` int(1) NOT NULL,
+  PRIMARY KEY (`categories_id`),
+  KEY `idx_categories_parent_id` (`parent_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=100000022 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `marketplace`
+--
+
+INSERT INTO `marketplace` (`categories_id`, `sistema_patrocine`, `categories_image`, `parent_id`, `sort_order`, `date_added`, `last_modified`, `categories_time`, `categories_productos`, `categories_status`, `categories_marketplace`) VALUES
+(99999999, 0, NULL, 0, NULL, NULL, NULL, 1670234910, 0, 0, 0),
+(100000000, 0, NULL, 0, 0, '2022-12-05 06:32:39', NULL, 1678373064, 0, 0, 0),
+(100000001, 0, NULL, 0, 0, '2022-12-05 06:33:11', NULL, 1678362702, 0, 0, 0),
+(100000002, 0, NULL, 0, 0, '2022-12-05 06:33:37', NULL, 1678366784, 0, 0, 0),
+(100000003, 0, 'https://qic.es/images/store_logo.png', 100000002, 0, '2022-12-05 06:34:15', NULL, 1678328386, 0, 0, 0),
+(100000004, 0, 'https://elcogollo2.com/images/store_logo.png', 100000000, 0, '2022-12-05 07:40:56', NULL, 1678433348, 0, 0, 0),
+(100000021, 0, 'https://srmarihuano.es/images/store_logo.png', 100000000, 0, '2023-03-01 17:42:42', NULL, 1678387857, 0, 0, 0),
+(100000006, 0, 'https://tasmaniapetshop.es/images/store_logo.png', 100000001, 0, '2022-12-05 07:42:02', NULL, 1678286295, 0, 0, 0),
+(100000017, 0, NULL, 0, 0, '2023-01-13 06:44:53', NULL, 1678082142, 0, 0, 0),
+(100000018, 0, 'https://deliciaitaliana.com/images/store_logo.png', 100000017, 0, '2023-01-13 06:45:46', NULL, 1678015187, 0, 0, 0),
+(100000016, 0, NULL, 0, 3, '2022-12-18 14:51:50', NULL, 1678337941, 0, 0, 0),
+(100000019, 0, NULL, 0, 0, '2023-02-17 21:20:05', NULL, 1678406131, 0, 0, 0),
+(100000020, 0, 'https://vainillachocolate.enterprise30.es/images/store_logo.png', 100000019, 0, '2023-02-17 23:59:57', NULL, 1678427082, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marketplace_description`
+--
+
+DROP TABLE IF EXISTS `marketplace_description`;
+CREATE TABLE IF NOT EXISTS `marketplace_description` (
+  `categories_id` int(11) NOT NULL DEFAULT '0',
+  `language_id` int(11) NOT NULL DEFAULT '1',
+  `categories_name` varchar(255) NOT NULL DEFAULT '',
+  `categories_name_suple` varchar(255) NOT NULL,
+  `categories_name_http` varchar(255) NOT NULL,
+  `categories_name_http_mobil` varchar(244) NOT NULL,
+  `categories_status_visible` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`categories_id`,`language_id`),
+  KEY `idx_categories_name` (`categories_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `marketplace_description`
+--
+
+INSERT INTO `marketplace_description` (`categories_id`, `language_id`, `categories_name`, `categories_name_suple`, `categories_name_http`, `categories_name_http_mobil`, `categories_status_visible`) VALUES
+(100000004, 1, 'San Isidro, El Cogollo 2', '', 'https://elcogollo2.com/', 'https://elcogollo2.com/', 1),
+(100000000, 1, 'GROW SHOP', '', '/-c-100000000.html', '/-c-100000000.html', 1),
+(100000001, 1, 'TIENDA DE ANIMALES', '', '/-c-100000001.html', '/-c-100000001.html', 1),
+(100000002, 1, 'INFORMATICA', '', '/-c-100000002.html', '/-c-100000002.html', 1),
+(100000003, 1, 'Tenerife, Qic.es', '', 'https://qic.es', 'https://qic.es', 1),
+(100000006, 1, 'Granadilla, Tasmina PetShop', '', 'https://tasmaniapetshop.es/', 'https://tasmaniapetshop.es/', 1),
+(100000021, 1, 'Granadilla, SrMarihuano', '', 'https://srmarihuano.es', '', 1),
+(100000017, 1, 'ALIMENTACION', '', '/-c-100000017.html', '', 1),
+(100000016, 1, 'CANARIAS TOKEN', '', 'https://canariastoken.marketplace30.es', '', 1),
+(100000018, 1, 'DELICIA ITALIANA', '', 'https://deliciaitaliana.com', '', 1),
+(100000019, 1, 'MODAS Y COMPLEMENTOS', '', '/-c-100000019.html', '', 1),
+(100000020, 1, 'VAINILLA Y CHOCOLATE', '', 'https://vainillachocolate.enterprise30.es', '', 1);
 
 -- --------------------------------------------------------
 
@@ -24645,8 +24724,10 @@ INSERT INTO `sessions` (`sesskey`, `expiry`, `value`) VALUES
 ('hns99mvv4ogvnre5bm4bgip1g7', 1669834596, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
 ('r3m8vt26jjjcbvhto59ff6dsh6', 1669823943, 'sessiontoken|s:32:\"a1c6a166bcc8df56c47df261bb1b3d79\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:4:{s:11:\"products_id\";s:1:\"1\";s:6:\"imagen\";s:3:\"big\";s:10:\"url_imagen\";s:15:\"images/imnd.svg\";s:8:\"language\";s:2:\"en\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
 ('e4cqdrim00h0nanabrfeh0sn51', 1678392425, 'sessiontoken|s:32:\"6b2c25edecddc18bdc4c281c8e78d952\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
-('ogmo9bhgspa24ogs1hull4qg94', 1678392845, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
-('e1imocke0efebhhu6ehk1uqeu0', 1678393244, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}');
+('ogmo9bhgspa24ogs1hull4qg94', 1678402293, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
+('e1imocke0efebhhu6ehk1uqeu0', 1678397678, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
+('12j78sogh69b26gg55ugq8b201', 1678403693, 'sessiontoken|s:32:\"eb46369ae4a2c091aca87d53578773be\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
+('h7elk6nbh02t46fhcace7sfkd2', 1678399062, 'sessiontoken|s:32:\"7a42034009648b1daac7bce757d6f927\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;');
 
 -- --------------------------------------------------------
 
@@ -24800,11 +24881,24 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'login.php', 'osCAdminID=ogmo9bhgspa24ogs1hull4qg94', 1, '2023-03-09 20:51:54', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'login.php', '', 1, '2023-03-09 20:52:15', '', 'https://thcan.es/admin/login.php', 'osCAdminID=ogmo9bhgspa24ogs1hull4qg94', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'login.php', 'action=process', 1, '2023-03-09 20:52:35', '', 'https://thcan.es/admin/login.php', 'osCAdminID=ogmo9bhgspa24ogs1hull4qg94', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'actualizar_tabla_fabricantes.php', '', 6, '2023-03-09 21:14:05', '', 'https://thcan.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'orders_tienda.php', '', 1, '2023-03-09 20:52:52', '', 'https://thcan.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'configuration.php', 'gID=1', 3, '2023-03-09 21:14:03', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'actualizar_tabla_fabricantes.php', '', 58, '2023-03-09 23:51:33', '', 'https://thcan.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'orders_tienda.php', '', 2, '2023-03-09 21:23:03', '', 'https://thcan.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'configuration.php', 'gID=1', 17, '2023-03-09 23:41:20', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'login.php', 'osCAdminID=e1imocke0efebhhu6ehk1uqeu0', 1, '2023-03-09 20:58:59', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'edit_orders_tienda.php', 'page=1&oID=3&action=edit', 3, '2023-03-09 21:20:33', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'edit_orders_tienda.php', 'page=1&oID=3&action=edit', 10, '2023-03-09 22:34:37', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'configuration.php', 'gID=1&cID=112089', 1, '2023-03-09 23:48:41', '', 'https://thcan.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes', 2, '2023-03-09 23:49:47', '', 'https://thcan.es/admin/configuration.php', 'gID=1&cID=112089', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&list=new', 3, '2023-03-09 23:49:36', '', 'https://thcan.es/admin/modules.php', 'set=boxes', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=install', 1, '2023-03-09 23:49:26', '', 'https://thcan.es/admin/modules.php', 'set=boxes&list=new', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace', 4, '2023-03-09 23:49:59', '', 'https://thcan.es/admin/modules.php', 'set=boxes&list=new', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=edit', 1, '2023-03-09 23:49:53', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=save', 1, '2023-03-09 23:49:58', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories', 3, '2023-03-09 23:50:40', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login', 2, '2023-03-09 23:50:25', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=edit', 1, '2023-03-09 23:50:19', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=save', 1, '2023-03-09 23:50:24', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=edit', 1, '2023-03-09 23:50:34', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
 
 -- --------------------------------------------------------
 
@@ -25011,7 +25105,20 @@ INSERT INTO `view_counter_storage` (`ip_active`, `isbot`, `isadmin`, `ip_number`
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'orders_tienda.php', '', 1, '2023-03-09 20:52:52', '', 'https://thcan.es/admin/index.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'configuration.php', 'gID=1', 1, '2023-03-09 20:53:50', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'login.php', 'osCAdminID=e1imocke0efebhhu6ehk1uqeu0', 1, '2023-03-09 20:58:59', '', '', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'edit_orders_tienda.php', 'page=1&oID=3&action=edit', 1, '2023-03-09 21:00:09', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 520417955, 'e1imocke0efebhhu6ehk1uqeu0', 'edit_orders_tienda.php', 'page=1&oID=3&action=edit', 1, '2023-03-09 21:00:09', '', 'https://thcan.es/admin/orders_tienda.php', '', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'configuration.php', 'gID=1&cID=112089', 1, '2023-03-09 23:48:41', '', 'https://thcan.es/admin/configuration.php', 'gID=1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes', 1, '2023-03-09 23:49:17', '', 'https://thcan.es/admin/configuration.php', 'gID=1&cID=112089', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&list=new', 1, '2023-03-09 23:49:20', '', 'https://thcan.es/admin/modules.php', 'set=boxes', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=install', 1, '2023-03-09 23:49:26', '', 'https://thcan.es/admin/modules.php', 'set=boxes&list=new', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace', 1, '2023-03-09 23:49:26', '', 'https://thcan.es/admin/modules.php', 'set=boxes&list=new', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=edit', 1, '2023-03-09 23:49:53', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_marketplace&action=save', 1, '2023-03-09 23:49:58', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories', 1, '2023-03-09 23:50:05', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_marketplace', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login', 1, '2023-03-09 23:50:11', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=edit', 1, '2023-03-09 23:50:19', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=save', 1, '2023-03-09 23:50:24', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=edit', 1, '2023-03-09 23:50:34', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
 
 -- --------------------------------------------------------
 
@@ -25035,7 +25142,7 @@ CREATE TABLE IF NOT EXISTS `whos_online` (
 --
 
 INSERT INTO `whos_online` (`customer_id`, `full_name`, `session_id`, `ip_address`, `time_entry`, `time_last_click`, `last_page_url`) VALUES
-(0, 'Guest', 'e4cqdrim00h0nanabrfeh0sn51', '31.4.242.163', '1678390982', '1678390982', '/');
+(0, 'Guest', '12j78sogh69b26gg55ugq8b201', '31.4.242.163', '1678402253', '1678402253', '/');
 
 -- --------------------------------------------------------
 
