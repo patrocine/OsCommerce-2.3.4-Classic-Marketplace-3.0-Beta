@@ -22,7 +22,7 @@
        $sel_iten_1 = $_POST['sel_iten_1'];
       $level_iten = $_GET['level_iten'];
 
-
+       $ot_tax_iva = 0;
 
 // TAREA EN 270
 
@@ -62,13 +62,52 @@
    require(DIR_WS_INCLUDES . 'template_top.php');
 
 
+   if( $_POST['numero_filas'] ){
+
+                      $sql_status_update_array = array('configuration_value' => $_POST['numero_filas'],  );
+             tep_db_perform('configuration', $sql_status_update_array, 'update', " configuration_key= '" . 'MAX_FILAS' . "'");
+
+
+
+}
+
+         $ortotal_group_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_tax' . "'");
+      if ($ortotal_group = tep_db_fetch_array($ortotal_group_values)){
+
+
+
+  }else{
+
+           $Query = "INSERT INTO " . TABLE_ORDERS_TOTAL . " set
+              orders_id = '" . $oID . "',
+              class = '" . 'ot_tax' . "',
+              title = '" . 'Impuestos' . "',
+              text = '" . 0 . "',
+              value = '" . 0 . "',
+              sort_order = '" . 2 . "'";
+              tep_db_query($Query);
+              $new_product_id = tep_db_insert_id();
+
+
+
+
+           $sql_status_update_array = array('sort_order' => 8,);
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $oID. "' and class = '" . 'ot_total' . "'");
 
 
 
 
 
- $query = tep_db_query("SELECT * FROM `configuration` WHERE  configuration_key='" . 'NEW_PRODUCT_PRE' . "'");
-$new_product_pre = tep_db_fetch_array($query);
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -84,13 +123,9 @@ $codigobarras_in = $_GET['codigobarras_in'];
       if ($newproducts = tep_db_fetch_array($newproducts_values)){
              echo '<font color="#008000" size="1" face="Arial Black">Producto con ean '.$codigobarras_in.' se importo correctamente</font>';
      }else{
-             echo '<font color="#ff0000" size="1" face="Arial Black">Producto con ean '.$codigobarras_in.' No Disponible</font>';
+             echo '<font color="#ff0000" size="1" face="Arial Black">Producto con ean '.$codigobarras_in.' No Disponible</font> <a target="_blank" href="' . 'categories.php?cPath=' . $categories['parent_id'] . '&action=new_product&codigobarras='.$codigobarras_in.'&action_in=true'  . '">DAR DE ALTA NUEVO PRODUCTO</a>';
        ?>
 
-
- <script language=javascript>
-window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&action=new_product&codigobarras='.$codigobarras_in.'&action_in=true';  ?>', '_blank');
-</script>
 
 
 
@@ -188,10 +223,10 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
     //   echo  header("Location: '" . $PHP_SELF.'?codigobarras=' . $codigobarras . '&oID='.$oID.'&action=edit' . "'");
 
          ?>
-            <?php $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>
+            <?php $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&unidades_in=' . $unidades . '&oID='.$oID.'&action=edit&action_in=true'; ?>
             
            <script type="text/javascript">
-    var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
+    var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&unidades_in=' . $unidades . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
     var segundos = 9999999999999999999999999;
 
     function redireccion() {
@@ -263,8 +298,9 @@ window.open('categories.php<? echo '?cPath=' . $categories['parent_id'] . '&acti
        $porcentage_tienda_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
    $porcentage_tienda = tep_db_fetch_array($porcentage_tienda_values);
 
-
-
+              $pagado2 = $pagado;
+              
+              
 if ($level_iten==2 ){
 
 
@@ -273,9 +309,20 @@ if ($level_iten==2 ){
 					WHERE orders_id = '" . $oID . "' ");
          ?>
 
- <script language=javascript>
-window.open('<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>', '_blank');
-</script>
+            <script type="text/javascript">
+
+    var pagina = '<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
 
 
 <?php
@@ -291,9 +338,25 @@ if ($level_iten==1 ){
                    
          ?>
 
- <script language=javascript>
-window.open('<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>', '_blank');
-</script>
+
+
+            <script type="text/javascript">
+
+    var pagina = '<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+
+
 
 
 <?php
@@ -301,12 +364,12 @@ window.open('<? echo 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod
                    
                    
                     }
-if ($porcentage_tienda['sel_iten_max'] == 2){
+if ($porcentage_tienda['sel_iten_max'] == 1){
 
-    $sel_iten_max = 10;
+    $sel_iten_max = MAX_FILAS;
     
 }else{
-  $sel_iten_max = 9999;
+  $sel_iten_max = 1000;
 }
 
 
@@ -702,6 +765,7 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 			customers_country = '" . tep_db_input(stripslashes($_POST['update_customer_country'])) . "',
 			customers_telephone = '" . tep_db_input($_POST['update_customer_telephone']) . "',
 			last_modified = '" . tep_db_input($_POST['update_last_modified']) . "',
+			date_purchased = '" . tep_db_input($_POST['update_last_create']) . "',
 			customers_email_address = '" . tep_db_input($_POST['update_customer_email_address']) . "',";
 
 		$UpdateOrders .= "billing_name = '" . tep_db_input(stripslashes($_POST['update_billing_name'])) . "',
@@ -988,8 +1052,348 @@ $oldday1 = date("Y-m-d", $time1);
            }
 
 
+               if (isset($products_details["products_news_update"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS_DESCRIPTION . " SET
+					products_name = '" . $products_details["name"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
 
 
+               if (isset($products_details["opcion_1"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_1 = '" . $products_details["opcion_1"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_2"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_2 = '" . $products_details["opcion_2"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_3"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_3 = '" . $products_details["opcion_3"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_4"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_4 = '" . $products_details["opcion_4"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_5"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_5 = '" . $products_details["opcion_5"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_6"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_6 = '" . $products_details["opcion_6"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_7"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_7 = '" . $products_details["opcion_7"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_8"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_8 = '" . $products_details["opcion_8"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_9"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_9 = '" . $products_details["opcion_9"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_10"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_10 = '" . $products_details["opcion_10"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_11"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_11 = '" . $products_details["opcion_11"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_12"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_12 = '" . $products_details["opcion_12"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_13"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_13 = '" . $products_details["opcion_13"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_14"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_14 = '" . $products_details["opcion_14"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_15"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_15 = '" . $products_details["opcion_15"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_16"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_16 = '" . $products_details["opcion_16"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_17"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_17 = '" . $products_details["opcion_17"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_18"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_18 = '" . $products_details["opcion_18"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_19"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_19 = '" . $products_details["opcion_19"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_20"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_20 = '" . $products_details["opcion_20"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_1_1"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_1_1 = '" . $products_details["opcion_1_1"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_2_2"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_2_2 = '" . $products_details["opcion_2_2"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_3_3"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_3_3 = '" . $products_details["opcion_3_3"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_4_4"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_4_4 = '" . $products_details["opcion_4_4"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_5_5"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_5_5 = '" . $products_details["opcion_5_5"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_6_6"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_6_6 = '" . $products_details["opcion_6_6"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_7_7"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_7_7 = '" . $products_details["opcion_7_7"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_8_8"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_8_8 = '" . $products_details["opcion_8_8"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_9_9"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_9_9 = '" . $products_details["opcion_9_9"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_10_10"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_10_10 = '" . $products_details["opcion_10_10"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_11_11"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_11_11 = '" . $products_details["opcion_11_11"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_12_12"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_12_12 = '" . $products_details["opcion_12_12"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_13_13"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_13_13 = '" . $products_details["opcion_13_13"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+
+
+                if (isset($products_details["opcion_14_14"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_14_14 = '" . $products_details["opcion_14_14"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+                if (isset($products_details["opcion_15_15"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_15_15 = '" . $products_details["opcion_15_15"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+
+
+
+                if (isset($products_details["opcion_16_16"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_16_16 = '" . $products_details["opcion_16_16"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_17_17"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_17_17 = '" . $products_details["opcion_17_17"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_18_18"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_18_18 = '" . $products_details["opcion_18_18"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_19_19"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_19_19 = '" . $products_details["opcion_19_19"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
+
+
+                if (isset($products_details["opcion_20_20"])){
+
+             	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					opcion_20_20 = '" . $products_details["opcion_20_20"] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+
+           }
 
 
                                //NUEVO PRODUCTO
@@ -1103,16 +1507,18 @@ $oldday1 = date("Y-m-d", $time1);
                      if (isset($products_details['products_aut_codigo'])){
 
 
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
-        WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
+          //      $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+       // WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
 
-                echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_codigo.php?products_id=' . (int)$order['products_id'] . '&codigo='. $products_details["codigo_barras"] .'"> </script>';
+      //          echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_codigo.php?products_id=' . (int)$order['products_id'] . '&codigo='. $products_details["codigo_barras"] .'"> </script>';
 
 
-    }
-
+  //  }
+	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
+					part_number = '" . $products_details['part_number'] . "'
+					WHERE products_id = '" . (int)$order['products_id'] . "'");
 
 
                                    }
@@ -1146,8 +1552,70 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+
+
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 1 . "'");
+   if ($pr_grupos1 = tep_db_fetch_array($pr_grupos_values)){
+
+             $sql_status_update_array = array('customers_group_price' =>  $products_details['price_g1'],);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 1 . "'");
+
+
+}else{
+       $sql_data_array = array(//Comment out line you don't need
+							'customers_group_price' => $products_details['price_g1'],
+							'products_id' => (int)$order['products_id'],
+							'products_price' => $products_details["price"],
+							'customers_group_id' => 1);
+     tep_db_perform('products_groups', $sql_data_array);
+
+
+}
+
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 2 . "'");
+   if ($pr_grupos2 = tep_db_fetch_array($pr_grupos_values)){
+
+             $sql_status_update_array = array('customers_group_price' =>  $products_details['price_g2'],);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 2 . "'");
+
+
+}else{
+
+       $sql_data_array = array(//Comment out line you don't need
+							'customers_group_price' => $products_details['price_g2'],
+							'products_id' => (int)$order['products_id'],
+							'products_price' => $products_details["price"],
+							'customers_group_id' => 2);
+     tep_db_perform('products_groups', $sql_data_array);
+}
+
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 3 . "'");
+   if ($pr_grupos3 = tep_db_fetch_array($pr_grupos_values)){
+
+             $sql_status_update_array = array('customers_group_price' =>  $products_details['price_g3'],);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id = '" . (int)$order['products_id'] . "' and customers_group_id = '" . 3 . "'");
+
+
+}else{
+
+       $sql_data_array = array(//Comment out line you don't need
+							'customers_group_price' => $products_details['price_g3'],
+							'products_id' => (int)$order['products_id'],
+							'products_price' => $products_details["price"],
+							'customers_group_id' => 3);
+     tep_db_perform('products_groups', $sql_data_array);
+}
+
+
+
+
+
+
+
+
+
 	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-					products_price = '" . $products_details["price"] . "'
+					products_price = '" . $products_details["products_price"] . "'
 					WHERE products_id = '" . (int)$order['products_id'] . "'");
 
                 }
@@ -1156,6 +1624,10 @@ $oldday1 = date("Y-m-d", $time1);
 	tep_db_query ("UPDATE " . 'orders_products' . " SET
 					products_price = '" . $products_details["price"] . "'
 					WHERE orders_products_id = '" . $orders_products_id . "'");
+
+
+
+
 
 
 
@@ -2163,7 +2635,65 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+      if ($products_details['precio_especial_validar']){
 
+
+        $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+       $customers_ppe = tep_db_fetch_array($customers_ppe_values);
+
+
+
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . (int)$order['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+                                                                if ($products_details["precio_especial"] == 0){
+                   	$Query = "DELETE from " . 'products_descuento_especial' . "
+					WHERE products_id = '" . (int)$order['products_id'] . "'
+					AND customers_id = '" . $customers_ppe['customers_id'] . "'";
+					tep_db_query($Query);
+                                                            }else{
+             $sql_status_update_array = array('precio_especial' => $products_details["precio_especial"]);
+            tep_db_perform('products_descuento_especial', $sql_status_update_array, 'update', " products_id='" . (int)$order['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+                                                              }
+
+
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . (int)$order['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+
+
+                    if ($customers_porcentage['precio_especial'] == 0){
+					$Query = "DELETE from " . 'products_descuento_especial' . "
+					WHERE products_id = '" . $ppe['products_id'] . "'
+					AND customers_id = '" . $ppe['customers_id'] . "'";
+					tep_db_query($Query);
+                      }
+
+                                                     }
+
+
+
+
+
+}else{
+
+
+
+
+
+           $Query = "INSERT INTO " . 'products_descuento_especial' . " set
+              products_id = '" . (int)$order['products_id'] . "',
+              customers_id = '" . $customers_ppe['customers_id'] . "',
+              precio_especial = '" . $products_details["precio_especial"] . "'";
+              tep_db_query($Query);
+
+
+}
+
+
+
+
+
+
+  }
 
 
       if ($products_details['deson_detail']){
@@ -2183,7 +2713,24 @@ $oldday1 = date("Y-m-d", $time1);
 
 
                                                      }
-                                                           
+        $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+       $customers_ppe = tep_db_fetch_array($customers_ppe_values);
+
+
+
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . (int)$order['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+                                                     
+
+
+          $products_details["final_price"] = $ppe['precio_especial'];
+
+
+                                                     }
+
+
+
+                                                               
 
                                 if ($products_details["name"]){
 
@@ -2295,7 +2842,32 @@ $oldday1 = date("Y-m-d", $time1);
    $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
    $producto = tep_db_fetch_array($producto_values);
 
-    $importe = $producto['products_price']*$unidades;
+       $porcentage_tienda_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $numero_pedido . "'");
+       $porcentage_tienda = tep_db_fetch_array($porcentage_tienda_values);
+
+
+         $customers_group_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+       $customers_group = tep_db_fetch_array($customers_group_values);
+
+
+        $products_groups = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id']. "' and customers_group_id = '" . $customers_group['customers_group_id']. "'");
+       $groups_ = tep_db_fetch_array($products_groups);
+
+
+
+
+
+
+            if ($customers_group['customers_group_id'] == 0 ){
+
+}else{
+
+   $producto['products_price'] =  $groups_['customers_group_price'];
+}
+
+
+
+            $importe = $producto['products_price']*$unidades;
 
                   // ot_total
            $sql_status_update_array = array('value' => $precioactual_total['value']+$importe,
@@ -2312,6 +2884,24 @@ $oldday1 = date("Y-m-d", $time1);
 
          // fin
 
+         $ortotal_group_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_tax' . "'");
+      if ($ortotal_group = tep_db_fetch_array($ortotal_group_values)){
+
+
+
+  }else{
+
+           $Query = "INSERT INTO " . TABLE_ORDERS_TOTAL . " set
+              orders_id = '" . $oID . "',
+              class = '" . 'ot_tax' . "',
+              title = '" . 'Impuestos' . "',
+              text = '" . (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) . "',
+              value = '" . (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) . "',
+              sort_order = '" . 2 . "'";
+              tep_db_query($Query);
+              $new_product_id = tep_db_insert_id();
+
+}
 
 
 
@@ -2330,6 +2920,85 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+       $porcentage_tienda_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $numero_pedido . "'");
+       $porcentage_tienda = tep_db_fetch_array($porcentage_tienda_values);
+
+
+       $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "' and customers_porcentage <> '" . 0 . "'");
+       $customers_porcentage = tep_db_fetch_array($customers_porcentage_values);
+       
+       
+       $customers_group_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+       $customers_group = tep_db_fetch_array($customers_group_values);
+
+
+
+       $tienda_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $numero_pedido. "'");
+       $tienda = tep_db_fetch_array($tienda_values);
+
+              if ($customers_porcentage['customers_porcentage'] <> 0){
+                $descuento_insert = $customers_porcentage['customers_porcentage'];
+         }
+             if  ($porcentage_tienda['porcentage_tienda'] <> 0){
+                  $descuento_insert = $porcentage_tienda['porcentage_tienda'];
+          }
+
+
+
+
+      if ($products_details['deson_detail']){
+   $products_details["final_price"] = $products_details["price"] *$descuento_insert/100+$products_details["price"] ;
+                                         }
+                  if ($products_details['products_descuento'] <> 0){
+  $products_details["final_price"] = $products_details["price"] * $products_details["products_descuento"]/100+$products_details["price"] ;
+                                            }
+                                      //descuento
+
+
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
+
+
+          $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
+
+
+                                                     }
+                                                     
+                                                     
+        $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+       $customers_ppe = tep_db_fetch_array($customers_ppe_values);
+
+
+
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . (int)$order['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+
+
+
+          $products_details["final_price"] = $ppe['precio_especial'];
+
+
+                                                     }
+                                                     
+                                                     
+                                                     
+
+                                                     
+        $products_groups = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id']. "' and customers_group_id = '" . $customers_group['customers_group_id']. "'");
+       $groups_ = tep_db_fetch_array($products_groups);
+
+
+
+                                                     
+                                                     
+                                                     
+            if ($customers_group['customers_group_id'] == 0 ){
+
+}else{
+
+   $products_details["final_price"] =  $groups_['customers_group_price'];
+}
+
 
 
 
@@ -2339,7 +3008,7 @@ $oldday1 = date("Y-m-d", $time1);
               products_model = '" . $codigobarras_c['products_model'] . "',
               products_name = '" . $codigobarras_c['products_name'] . "',
               products_price = '". $codigobarras_c['products_price'] . "',
-              final_price = '" . $codigobarras_c['products_price'] . "',
+              final_price = '" . $products_details["final_price"] . "',
               final_price_euro = '" . $total_pago_euro . "',
               final_price_tienda = '" . $ganancias_tiendas . "',
               products_tax = '" . $ProductsTax . "',
@@ -2367,6 +3036,34 @@ $oldday1 = date("Y-m-d", $time1);
    $producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . (int)$order['products_id'] . "'");
    $producto = tep_db_fetch_array($producto_values);
 
+
+       $porcentage_tienda_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $numero_pedido . "'");
+       $porcentage_tienda = tep_db_fetch_array($porcentage_tienda_values);
+
+
+         $customers_group_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+       $customers_group = tep_db_fetch_array($customers_group_values);
+
+
+        $products_groups = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . (int)$order['products_id']. "' and customers_group_id = '" . $customers_group['customers_group_id']. "'");
+       $groups_ = tep_db_fetch_array($products_groups);
+
+
+
+
+
+
+            if ($customers_group['customers_group_id'] == 0 ){
+
+}else{
+
+   $producto['products_price'] =  $groups_['customers_group_price'];
+}
+
+
+
+
+
     $importe = $producto['products_price']*$unidades;
 
                   // ot_total
@@ -2383,7 +3080,24 @@ $oldday1 = date("Y-m-d", $time1);
          // fin
               
               
-              
+         $ortotal_group_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_tax' . "'");
+      if ($ortotal_group = tep_db_fetch_array($ortotal_group_values)){
+
+
+
+  }else{
+
+           $Query = "INSERT INTO " . TABLE_ORDERS_TOTAL . " set
+              orders_id = '" . $oID . "',
+              class = '" . 'ot_tax' . "',
+              title = '" . 'Impuestos' . "',
+              text = '" . (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) . "',
+              value = '" . (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) . "',
+              sort_order = '" . 2 . "'";
+              tep_db_query($Query);
+              $new_product_id = tep_db_insert_id();
+
+}
               
               
               
@@ -2498,7 +3212,7 @@ $oldday1 = date("Y-m-d", $time1);
 	///////////////////////This section is, for reasons I cannot yet comprehend, necessary for section 1.4.1.1, below, to work properly.  Without it the text value is written to the db as '0'
 		if ($ot_class == "ot_total" || $ot_class == "ot_tax" || $ot_class == "ot_subtotal" || $ot_class == "ot_shipping" || $ot_class == "ot_custom" || $ot_class == "ot_loworderfee") {
 		$order = new order($oID);
-        $RunningTax += 0 * $products_details['tax'] / $order->info['currency_value'] / 100 ; 
+        $RunningTax += 0 * $products_details['tax'] / $order->info['currency_value'] / 100 ;
 		 }
 	///////////////////End bizarro code section
 			
@@ -2573,7 +3287,7 @@ $oldday1 = date("Y-m-d", $time1);
 						$ot_value = $RunningSubTotal;
 					}						
 					if ($ot_class == "ot_tax") {
-						$ot_value = $RunningTax;
+     $ot_value = $RunningSubTotal * OT_TAX_IVA / 100;
 					}
 
 				    // Check for existence of subtotals (CWS)                      
@@ -2856,7 +3570,7 @@ $oldday1 = date("Y-m-d", $time1);
 
 // This calculatiion of Subtotal and Tax is part of the 'add a product' process
 		$RunningSubTotal += ($order->products[$i]['qty'] * $order->products[$i]['final_price']);
-		$RunningTax += (($order->products[$i]['tax'] / 100) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));
+		$RunningTax += ((OT_TAX_IVA / 100) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));
 			}
 
 			// 2.2.2.1 Tax
@@ -3164,12 +3878,28 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
                                     // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
 
-
-
-
-
-
                                                                   }
+                                                                  
+                                                                  
+        $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+       $customers_ppe = tep_db_fetch_array($customers_ppe_values);
+
+
+
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . $codigobarras_c['products_id'] . "' and customers_id = '" . $customers_ppe['customers_id'] . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+
+
+
+         $producto_precio_final = $ppe['precio_especial'];
+
+
+                                                     }
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
                                      // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
                              // inserta desde el formulario principal.
 
@@ -3222,7 +3952,7 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
 // This calculatiion of Subtotal and Tax is part of the 'add a product' process
 		$RunningSubTotal += ($order->products[$i]['qty'] * $order->products[$i]['final_price']);
-		$RunningTax += (($order->products[$i]['tax'] / 100) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));
+		$RunningTax += ((OT_TAX_IVA / 100) * ($order->products[$i]['qty'] * $order->products[$i]['final_price']));
 
       $Total_price  += ($order->products[$i]['qty'] *$order->products[$i]['price']);
 
@@ -3450,11 +4180,11 @@ if (($action == 'edit') && ($order_exists == true)) {
                
                    <?php   $escbot = $_GET['escbot'];
 
-                     if ($escbot == 'ok'){
+                  //   if ($escbot == 'ok'){
 
 
 
-                 }else{
+              //   }else{
 
 
                       ?>
@@ -3462,15 +4192,17 @@ if (($action == 'edit') && ($order_exists == true)) {
 
 
                                                               <td class="pageHeading" align="left">
-            <a target="_blank" href="invoice_factura_ind_tiket.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/tpv_tiketimprimir_1.jpg" onmouseover="this.src='images/tpv_tiketimprimir_2.jpg';" onmouseout="this.src='images/tpv_tiketimprimir_1.jpg';"/>
-            <a target="_blank" href="invoice_factura_ind.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/tpv_facturaimprimir_1.jpg" onmouseover="this.src='images/tpv_facturaimprimir_2.jpg';" onmouseout="this.src='images/tpv_facturaimprimir_1.jpg';"/>
-             <a target="_blank" href="invoice_factura_alb.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/tpv_albaranimprimir_1.jpg" onmouseover="this.src='images/tpv_albaranimprimir_2.jpg';" onmouseout="this.src='images/tpv_albaranimprimir_1.jpg';"/>
+             <a target="_blank" href="invoice_factura_ind_tiket.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/tiket.png" onmouseover="this.src='images/tiket2.png';" onmouseout="this.src='images/tiket.png';"/>
+            <a target="_blank" href="invoice_factura_ind.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/factura.png" onmouseover="this.src='images/factura2.png';" onmouseout="this.src='images/factura.png';"/>
+             <a target="_blank" href="invoice_factura_alb.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/albaran.png" onmouseover="this.src='images/albaran2.png';" onmouseout="this.src='images/albaran.png';"/>
+             <a target="_blank" href="invoice_factura_control.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/control.png" onmouseover="this.src='images/control2.png';" onmouseout="this.src='images/control.png';"/>
+             <a target="_blank" href="invoice_factura_abono.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/abono.png" onmouseover="this.src='images/abono2.png';" onmouseout="this.src='images/abono2.png';"/>
 
 
                              <?php
 
 
-             }
+          //   }
 
 
 
@@ -3487,8 +4219,13 @@ if (($action == 'edit') && ($order_exists == true)) {
           
 
           
-          
         <?php  // comienzo 1
+        
+        
+        
+
+        
+        
         
         
   $estatuspmw_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $oID . "'");
@@ -3516,6 +4253,47 @@ if (($action == 'edit') && ($order_exists == true)) {
 
 }else{
 
+  if ($estatuspmw['sel_iten_max']==1 ){
+      ?>
+<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="126" align="center">ID PRODUCTS</td>
+		<td width="126" align="center">EAN</td>
+		<td width="126" align="center">UBICACION</td>
+		<td width="55" align="center">&nbsp;</td>
+		<td width="364" align="left">NOMBRE</td>
+		<td width="102" align="center">CANTIDAD</td>
+		<td width="102" align="center">PVP</td>
+		<td align="center">TOTALES</td>
+     <?php
+
+
+
+
+
+       $listar_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $oID . "' order by orders_products_id desc");
+ WHILE ($listar = tep_db_fetch_array($listar_values)){
+
+
+    $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_model = '" . $listar['products_model'] . "' and login_id = '" . $log_id . "'");
+$donde_esta_c= tep_db_fetch_array($donde_esta_c_values);
+
+
+
+      ?>
+	</tr>
+	<tr>
+		<td width="126" align="center"><?php ECHO $listar['products_id'] ?></td>
+		<td width="126" align="center"><?php ECHO $listar['products_model'] ?></td>
+		<td width="126" align="center"><?php ECHO $donde_esta_c['donde_esta'] ?></td>
+		<td width="55" align="center"></td>
+		<td width="364" align="left"><font face="Verdana" size="1"><b><?php ECHO $listar['products_name'] ?></b></font></td>
+		<td width="102" align="center"><?php ECHO $listar['products_quantity'] ?></td>
+		<td width="102" align="center"><?php ECHO $currencies->format($listar['final_price'], true, $order->info['currency'], $order->info['currency_value'])?></td>
+		<td align="center"><?php ECHO $currencies->format($listar['products_quantity'] * $listar['final_price'], true, $order->info['currency'], $order->info['currency_value']) ?></td>	</tr>
+     <?php
+}      }
+
          ?>
          
          
@@ -3523,9 +4301,9 @@ if (($action == 'edit') && ($order_exists == true)) {
          
          
          
-         
-         
-         
+
+
+
          
 
 
@@ -3549,9 +4327,25 @@ if (($action == 'edit') && ($order_exists == true)) {
 
     echo  '<p><font color="#FFFFFF" face="Verdana" size="2"><span style="background-color: #0000FF"><b>Actualizado</b></span></font></p>';
 
+   ?>
+<audio autoplay>
+    <source src="sonido/pitidook.mp3" type="audio/mp3">
 
+        Tu navegador no soporta audio HTML5.
+</audio>
+
+<?php
 
 }else if ($conf_insertar){
+
+   ?>
+<audio autoplay>
+    <source src="sonido/pitidook.mp3" type="audio/mp3">
+
+        Tu navegador no soporta audio HTML5.
+</audio>
+
+<?php
  echo '<p><span style="background-color: #00FF00"><b><font face="Verdana" size="2">Insertado</font></b></span></p>';
 
 }
@@ -3648,6 +4442,11 @@ if (($action == 'edit') && ($order_exists == true)) {
 					configuration_value = '" . 2 . "'
 					WHERE configuration_key = '" . 'SEL_ITEN_1' . "' ");
 
+
+
+
+
+
                     }
                     
                     
@@ -3709,7 +4508,7 @@ $selitem_0 = 'checked';
  | <input type="radio" value="1" <?php echo $selitem_1; ?> name="sel_iten_1">   <?php  echo     $ayuda_selitem; ?><input type="radio" value="2" <?php echo $selitem_0; ?> name="sel_iten_1">
 
   | <?php
-         echo $sel_iten_max . ' <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=2'. '"> Max 10 </a> <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=1'. '"> Todos</a>';
+         echo $sel_iten_max . ' <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=2'. '"> TODOS </a> <a href="'. 'edit_orders_tienda.php?oID='.$oID.'&action=edit&action_cod=o&escbot=ok&level_iten=1'. '"> MAX 5</a>';
 
      ?>
        
@@ -3723,7 +4522,7 @@ $selitem_0 = 'checked';
              if (SEL_ITEN_1 == 1){
            ?>
 
-  <input name="unidades" value="<?php echo $unidades_negativos; ?>"type="text" size="3" style="font-size: 37pt"></b></font>
+  <input name="unidades" value="<?php echo $unidades_negativos.$_GET['unidades_in']; ?>"type="text" size="3" style="font-size: 37pt"></b></font>
 
 
   <?php
@@ -4214,7 +5013,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
              
                ?>
       <p><font size="4">LINEAS: <b><font color="#FF0000"><?php echo $contar['value']; ?></font></b> TOTAL: <b>
-	<font color="#FF0000"><?php echo $total_condes.'€' . $descuento_value2 ; ?></font> Busd: <b>
+	<font color="#FF0000"><?php echo $currencies->format($total_condes) . $descuento_value2 ; ?></font> Busd: <b>
  <font color="#FF0000"><?php echo number_format($busdtotal, 2, '.', '').'b$ ' .$descuento_busd ; ?></font></b></font></p>
 
              <?php                                                        //  and  $login_groups_id <> 1
@@ -4305,6 +5104,12 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
        $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "' and customers_porcentage <> '" . 0 . "'");
   $customers_porcentage = tep_db_fetch_array($customers_porcentage_values);
+
+
+
+
+
+
 
 
 
@@ -4402,7 +5207,13 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
                      
                      
-                     
+              <td class="main" bgcolor="#C9C9C9" width="10">
+
+                  <?php echo tep_draw_form('numero_filas', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
+           <?php echo 'Numero de Filas:' . tep_draw_input_field('numero_filas', '', 'size="12"'); ?>
+                                                 </form>
+
+              <td class="main" bgcolor="#C9C9C9" width="10">
 
           <td class="main" bgcolor="#C9C9C9" width="10">
 
@@ -4530,6 +5341,17 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 	<?php
 
 
+
+
+
+
+
+
+
+
+
+
+
       $ord='orders_products_id';
  if ($ord){
 
@@ -4544,6 +5366,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 		$orders_products_query = tep_db_query("select  op.products_quantity,
                                                       op.products_name,
                                                       p.products_id,
+                                                      p.part_number,
                                                       p.products_stock_min,
                                                       p.products_stock_obs,
                                                       p.stock_nivel,
@@ -4564,7 +5387,47 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                                       op.products_inventario,
                                                       op.final_price_euro,
                                                       op.lista_prov,
-                                                      p.products_status_exel,
+                                                      p.opcion_1,
+                                                      p.opcion_2,
+                                                      p.opcion_3,
+                                                      p.opcion_4,
+                                                      p.opcion_5,
+                                                      p.opcion_6,
+                                                      p.opcion_7,
+                                                      p.opcion_8,
+                                                      p.opcion_9,
+                                                      p.opcion_10,
+                                                      p.opcion_11,
+                                                      p.opcion_12,
+                                                      p.opcion_13,
+                                                      p.opcion_14,
+                                                      p.opcion_15,
+                                                      p.opcion_16,
+                                                      p.opcion_17,
+                                                      p.opcion_18,
+                                                      p.opcion_19,
+                                                      p.opcion_20,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20_20,
+                                                     p.products_status_exel,
                                                       p.codigo_proveedor,
                                                       op.final_price_tienda,
                                                       p.proveedor_price,
@@ -4578,6 +5441,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 		$order->products[$index] = array('qty' => $orders_products['products_quantity'],
                                      'name' => tep_html_quotes($orders_products['products_name']),
                                      'products_id' => $orders_products['products_id'],
+                                     'part_number' => $orders_products['part_number'],
                                      'codigo_barras' => $orders_products['codigo_barras'],
                                      'codigo_proveedor' => $orders_products['codigo_proveedor'],
                                      'cambio_de_productos' => $orders_products['cambio_de_productos'],
@@ -4590,6 +5454,46 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                      'products_descuento_onoff' => $orders_products['products_descuento_onoff'],
                                      'proveedor_price_general' => $orders_products['proveedor_price_general'],
                                      'products_inventario' => $orders_products['products_inventario'],
+                                     'opcion_1' => $orders_products['opcion_1'],
+                                     'opcion_2' => $orders_products['opcion_2'],
+                                     'opcion_3' => $orders_products['opcion_3'],
+                                     'opcion_4' => $orders_products['opcion_4'],
+                                     'opcion_5' => $orders_products['opcion_5'],
+                                     'opcion_6' => $orders_products['opcion_6'],
+                                     'opcion_7' => $orders_products['opcion_7'],
+                                     'opcion_8' => $orders_products['opcion_8'],
+                                     'opcion_9' => $orders_products['opcion_9'],
+                                     'opcion_10' => $orders_products['opcion_10'],
+                                     'opcion_11' => $orders_products['opcion_11'],
+                                     'opcion_12' => $orders_products['opcion_12'],
+                                     'opcion_13' => $orders_products['opcion_13'],
+                                     'opcion_14' => $orders_products['opcion_14'],
+                                     'opcion_15' => $orders_products['opcion_15'],
+                                     'opcion_16' => $orders_products['opcion_16'],
+                                     'opcion_17' => $orders_products['opcion_17'],
+                                     'opcion_18' => $orders_products['opcion_18'],
+                                     'opcion_19' => $orders_products['opcion_19'],
+                                     'opcion_20' => $orders_products['opcion_20'],
+                                     'opcion_1_1' => $orders_products['opcion_1_1'],
+                                     'opcion_2_2' => $orders_products['opcion_2_2'],
+                                     'opcion_3_3' => $orders_products['opcion_3_3'],
+                                     'opcion_4_4' => $orders_products['opcion_4_4'],
+                                     'opcion_5_$' => $orders_products['opcion_5_5'],
+                                     'opcion_6_%' => $orders_products['opcion_6_6'],
+                                     'opcion_7_7' => $orders_products['opcion_7_7'],
+                                     'opcion_8_8' => $orders_products['opcion_8_8'],
+                                     'opcion_9_9' => $orders_products['opcion_9_9'],
+                                     'opcion_10_10' => $orders_products['opcion_10_10'],
+                                     'opcion_11_11' => $orders_products['opcion_11_11'],
+                                     'opcion_12_12' => $orders_products['opcion_12_12'],
+                                     'opcion_13_13' => $orders_products['opcion_13_13'],
+                                     'opcion_14_14' => $orders_products['opcion_14_14'],
+                                     'opcion_15_16' => $orders_products['opcion_15_15'],
+                                     'opcion_16_17' => $orders_products['opcion_16_16'],
+                                     'opcion_17_17' => $orders_products['opcion_17_17'],
+                                     'opcion_18_18' => $orders_products['opcion_18_18'],
+                                     'opcion_19_19' => $orders_products['opcion_19_19'],
+                                     'opcion_20_20' => $orders_products['opcion_20_20'],
                                      'model' => $orders_products['products_model'],
                                      'model_2' => $orders_products['products_model_2'],
                                      'model_3' => $orders_products['products_model_3'],
@@ -4728,7 +5632,14 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
     }
       ?>
   	  <td class="dataTableHeadingContent"><?php echo 'PVP'; ?>
+
+
+
            <?php
+           
+
+
+           
   if (AYUDA_ADMIN == 'true'){
       ?>
   <a class="hastip"  title="<?php echo AYUDA_TEXT_PVP;?>"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>
@@ -4760,6 +5671,16 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
     }
       ?>
   	  <td class="dataTableHeadingContent"><?php echo 'ADD>>'; ?>
+     
+
+              <?php echo tep_draw_form('orders', 'edit_orders_tienda.php', '', 'get'); ?>
+        <?php echo ''  .$ayuda_actualizar.  ' ' . tep_draw_input_field('nuevo_pedido', '', 'size="5"') . tep_draw_hidden_field('action', 'edit') . tep_draw_hidden_field('oID', $oID); ?>
+
+                                          </form>
+
+     
+     
+     
            <?php
   if (AYUDA_ADMIN == 'true'){
       ?>
@@ -5098,7 +6019,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_imagen)) {
         $image_product = DIR_WS_CATALOG_IMAGES . $products_imagen;
 }
-                         
+
                          
                          
                          
@@ -5139,14 +6060,33 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' .  $order->products[$i]['
    //   '	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][products_aut_codigo]' type='checkbox' /></div></td>\n";
 
 
-      echo    '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][codigo_barras]' size='7' value='" . $order->products[$i]['codigo_barras'] . "'><input name='update_products[$orders_products_id][products_aut_codigo]' type='checkbox' />";
+      echo    '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][part_number]' size='7' value='" . $order->products[$i]['part_number'] . "'><input name='update_products[$orders_products_id][products_aut_codigo]' type='checkbox' />";
 
 
 
     $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 2 . "'");
-$pr_grupos = tep_db_fetch_array($pr_grupos_values);
+    $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
      $pvmver = $_GET['pvmver'];
+     
+     
+    $beneficio_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $oID . "' and products_id = '" . $order->products[$i]['products_id'] . "'");
+IF ($beneficio = tep_db_fetch_array($beneficio_values)){
+
+               $pvmtotal = $pr_grupos['customers_group_price'] * $order->products[$i]['qty'];
+               $pvptotal =  $order->products[$i]['final_price'] * $order->products[$i]['qty'];
+               
+             $sql_status_update_array = array('final_beneficio' =>  $pvptotal- $pvmtotal,
+                                              'final_price_total' =>  $pvptotal,
+                                                                 );
+            tep_db_perform('orders_products', $sql_status_update_array, 'update', " orders_id = '" . $oID . "' and products_id = '" . $order->products[$i]['products_id'] . "'");
+
+
+}
+
+     
+     
+     
 
               if ($pvmver == 'true'){
               $beneficio =  $order->products[$i]['final_price'] -  $pr_grupos['customers_group_price'];
@@ -5168,19 +6108,30 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
    echo '	    <td class="' . $RowStyle . '" align="left" valign="top"><a target="_blank" href=edit_orders_tienda.php?oID='.$oID.'&pvmver=' . 'true' . '>' . 'ver' .'</td>' . "\n";
                 }
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 1 . "'");
+    $pr_grupos_g1 = tep_db_fetch_array($pr_grupos_values);
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 2 . "'");
+    $pr_grupos_g2 = tep_db_fetch_array($pr_grupos_values);
+    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $order->products[$i]['products_id'] . "' and customers_group_id = '" . 3 . "'");
+    $pr_grupos_g3 = tep_db_fetch_array($pr_grupos_values);
+
+
+    $orders_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+    $orders = tep_db_fetch_array($orders_values);
+
+    $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . " where customers_id = '" . $orders['customers_id'] . "' and products_id = '" . $order->products[$i]['products_id'] . "'");
+    $ppe = tep_db_fetch_array($ppe_values);
+
 
 
 if (PERMISO_INSERTAR_PRODUCTO_EN_NUEVO_PEDIDO == 'True'){
 
 
  echo '	    </td>' . "\n" .
-     '	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][products_aut_referencia1]' type='checkbox' /><p> <input name='update_products[$orders_products_id][products_aut_referencia2]' type='checkbox' /><p> <input name='update_products[$orders_products_id][products_aut_referencia3]' type='checkbox' /><p> <input name='update_products[$orders_products_id][products_aut_referencia4]' type='checkbox' /></div></td>\n </div></td>\n";
+     '	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][products_aut_referencia1]' type='checkbox' /></div></td>\n </div></td>\n";
 
  	echo '	    </td>' . "\n" .
-  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][model]' size='5' value='" . $order->products[$i]['model'] . "'><p>" . "".
-  "<input name='update_products[$orders_products_id][model_2]' size='5' value='" . $order->products[$i]['model_2'] . "'><p>" . "" .
-  "<input name='update_products[$orders_products_id][model_3]' size='5' value='" . $order->products[$i]['model_3'] . "'><p>" . "" .
-   "<input name='update_products[$orders_products_id][model_4]' size='5' value='" . $order->products[$i]['model_4'] . "'>" . "";
+  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][model]' size='13' value='" . $order->products[$i]['model'] . "'><p>" . "";
 
 
 
@@ -5203,16 +6154,39 @@ echo '	    </td>' . "\n" .
 
        }else{
 
-	echo '	    </td>' . "\n" .
+
+
+                            $retail =  '';
+                          echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+
+                        if (PRECIO_VENTA_FACTURA == 'true'){
 		   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
-		      '	    <td class="' . $RowStyle . '" align="left" valign="top">' . "<input name='update_products[$orders_products_id][price]' size='4' value='" . number_format($order->products[$i]['price'], 2, '.', '') . "'><input name='update_products[$orders_products_id][products_price_modificar]' type='checkbox' /" . '<font color="#008080">PVP</font></td></b>' . "\n";
+		  echo    "<input name='update_products[$orders_products_id][price]' size='4' value='" . number_format($order->products[$i]['price'], 2, '.', '') . "'>";
+
+                          } if (PRECIO_VENTA_PUBLICO == 'true'){
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][products_price]' size='4' value='" . number_format($products['products_price'], 2, '.', '') . "'>" . "\n";
+
+                        }  if (PRECIO_VENTA_GRUP1 == 'true'){
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . " <input name='update_products[$orders_products_id][price_g1]' size='4' value='" . number_format($pr_grupos_g1['customers_group_price'], 2, '.', '') . "'>" . "\n";
+                        }  if (PRECIO_VENTA_GRUP2 == 'true'){
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][price_g2]' size='4' value='" . number_format($pr_grupos_g2['customers_group_price'], 2, '.', '') . "'>" . "\n";
+                        }  if (PRECIO_VENTA_GRUP3 == 'true'){
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][price_g3]' size='4' value='" . number_format($pr_grupos_g3['customers_group_price'], 2, '.', '') . "'>" . "\n";
+                                                       }
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][products_price_modificar]' type='checkbox' $checked /" . '<font color="#008080">PVP</font></td></b>' . "\n";
 
 
 
 
 	echo '	    </td>' . "\n" .
 		   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .      //descuento
-		      '	    <td class="' . $RowStyle . '" align="left" valign="top">' . "<input name='update_products[$orders_products_id][final_price]' size='4' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'><input name='update_products[$orders_products_id][deson_detail]' type='checkbox' />" . ' <font color="#008080">PVF</font></td></b>' . "\n";
+		      '	    <td class="' . $RowStyle . '" align="left" valign="top">' . "<input name='update_products[$orders_products_id][final_price]' size='4' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'><input name='update_products[$orders_products_id][deson_detail]' type='checkbox' /> PVF".
+                     "<input name='update_products[$orders_products_id][precio_especial]' size='4' value='" . number_format($ppe['precio_especial'], 2, '.', '') . "'><input name='update_products[$orders_products_id][precio_especial_validar]' type='checkbox' />" . ' <font color="#008080">PES</font></td></b>' . "\n";
 
 	echo '	    </td>' . "\n" .
 		   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .      //descuento
@@ -5237,12 +6211,12 @@ echo '	    </td>' . "\n" .
 
 
  // INSERTAR PRODUCTO EN OTRO PEDIDO
-echo    '	<td class="' . $RowStyle . '" valign="top">' . "Add>>order<input name='update_products[$orders_products_id][numero_nuevo_pedido]' size='6' value='" . '' . "'>"  .
+echo    '	<td class="' . $RowStyle . '" valign="top">' . "Add>>order<input name='update_products[$orders_products_id][numero_nuevo_pedido]' size='6' value='" . $_GET['nuevo_pedido'] . "'>"  .
                                                            "Add>>Stock<input name='update_products[$orders_products_id][numero_nuevo_pedido_stock]' size='6' value='" . $addstock['orders_id'] . "'>" .
                                                            "Add>>pdie<input name='update_products[$orders_products_id][numero_nuevo_pedido_pend]' size='6' value='" . $addpend['orders_id'] . "'>"  ;
 
 
-echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update_products[$orders_products_id][unidades_nuevo_pedido]' size='2' value='" . '' . "'>"  .
+echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update_products[$orders_products_id][unidades_nuevo_pedido]' size='2' value='" . $order->products[$i]['qty'] . "'>"  .
                                        "Pcs<input name='update_products[$orders_products_id][unidades_nuevo_pedido_stock]' size='2' value='" . '' . "'>".
                                        "Pcs<input name='update_products[$orders_products_id][unidades_nuevo_pedido_pend]' size='2' value='" . '' . "'>";
                                                  }
@@ -5368,6 +6342,29 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
 
 
         }   // DONDE ESTA
+        
+        
+
+
+      $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $order->products[$i]['products_id'] . "' and login_id = '" . $log_id . "'");
+   if  ($donde_esta_c= tep_db_fetch_array($donde_esta_c_values)){
+
+
+
+             $sql_status_update_array = array('donde_esta' => $donde_esta_c['donde_esta']);
+            tep_db_perform('orders_products', $sql_status_update_array, 'update', " products_id='" . $order->products[$i]['products_id'] . "' and orders_id= '" . $oID . "'");
+
+
+}else{
+             $sql_status_update_array = array('donde_esta' => $donde_esta_c['donde_esta']);
+            tep_db_perform('orders_products', $sql_status_update_array, 'update', " products_id='" . $order->products[$i]['products_id'] . "' and orders_id= '" . $oID . "'");
+
+}
+
+
+
+        
+        
      	//echo    '	<td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][proveedor_price]' size='6' value='" . $order->products[$i]['proveedor_price_general'] . "'>";
 
       $saber_stock_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o where o.orders_id = op.orders_id and o.orders_status = '" . $abono . "' and op.products_id = '" . $order->products[$i]['products_id'] . "' and op.products_quantity >= 1");
@@ -5404,8 +6401,154 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
              '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' size='38' value='" . $order->products[$i]['name'] . "'><input name='update_products[$orders_products_id][products_news]' type='checkbox' />" . ' ' . " | <input name='update_products[$orders_products_id][products_news_update]' type='checkbox' />" . '<a class="hastip"  title="' . AYUDA_TEXT_NUEVO_PRODUCTO . '"><b><font size="1" color="#FFFFFF"><span style="background-color: #000000">_?_</span></font></b>'  . $products_parametros ;
  		//'	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][peso]' size='7' value='" . $order->products[$i]['peso'] . "
                           // NUEVO PRODUCTO
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_1]' size='4' value='" . $order->products[$i]['opcion_1'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_2]' size='4' value='" . $order->products[$i]['opcion_2'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_3]' size='4' value='" . $order->products[$i]['opcion_3'] . "'>" . "\n";
 
 
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_4]' size='4' value='" . $order->products[$i]['opcion_4'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_5]' size='4' value='" . $order->products[$i]['opcion_5'] . "'>" . "\n";
+
+
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_1_1]' size='4' value='" . $order->products[$i]['opcion_1_1'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_2_2]' size='4' value='" . $order->products[$i]['opcion_2_2'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_3_3]' size='4' value='" . $order->products[$i]['opcion_3_3'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_4_4]' size='4' value='" . $order->products[$i]['opcion_4_4'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_5_5]' size='4' value='" . $order->products[$i]['opcion_5_5'] . "'>" . "\n";
+
+
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_6]' size='4' value='" . $order->products[$i]['opcion_6'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_7]' size='4' value='" . $order->products[$i]['opcion_7'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_8]' size='4' value='" . $order->products[$i]['opcion_8'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_9]' size='4' value='" . $order->products[$i]['opcion_9'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_10]' size='4' value='" . $order->products[$i]['opcion_10'] . "'>" . "\n";
+
+
+
+       echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_6_6]' size='4' value='" . $order->products[$i]['opcion_6_6'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_7_7]' size='4' value='" . $order->products[$i]['opcion_7_7'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_8_8]' size='4' value='" . $order->products[$i]['opcion_8_8'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_9_9]' size='4' value='" . $order->products[$i]['opcion_9_9'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_10_10]' size='4' value='" . $order->products[$i]['opcion_10_10'] . "'>" . "\n";
+
+
+
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_11]' size='4' value='" . $row['opcion_11'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_12]' size='4' value='" . $row['opcion_12'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_13]' size='4' value='" . $row['opcion_13'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_14]' size='4' value='" . $row['opcion_14'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_15]' size='4' value='" . $row['opcion_15'] . "'>" . "\n";
+
+
+
+       echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_11_11]' size='4' value='" . $row['opcion_11_11'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_12_12]' size='4' value='" . $row['opcion_12_12'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_13_13]' size='4' value='" . $row['opcion_13_13'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_14_14]' size='4' value='" . $row['opcion_14_14'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_15_15]' size='4' value='" . $row['opcion_15_15'] . "'>" . "\n";
+
+
+
+
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_16]' size='4' value='" . $row['opcion_16'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_17]' size='4' value='" . $row['opcion_17'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_18]' size='4' value='" . $row['opcion_18'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_19]' size='4' value='" . $row['opcion_19'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_20]' size='4' value='" . $row['opcion_20'] . "'>" . "\n";
+
+
+
+      echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_16_16]' size='4' value='" . $row['opcion_16_16'] . "'>" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_17_17]' size='4' value='" . $row['opcion_17_17'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_18_18]' size='4' value='" . $row['opcion_18_18'] . "'>" . "\n";
+
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_19_19]' size='4' value='" . $row['opcion_19_19'] . "'>" . "\n";
+
+ 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' . "<input name='update_products[$orders_products_id][opcion_20_20]' size='4' value='" . $row['opcion_20_20'] . "'>" . "\n";
 
 
 
@@ -5963,12 +7106,13 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
     	</td>
 			</tr>
 
-  <td class="main"><b><?php echo 'Fecha Ultima modificación'; ?>: </b></td>
-    <td><span class="main"><input name="update_last_modified" size="20" value="<?php echo $lastm['last_modified']; ?>" /> </span></td>
+
+  <td class="main"><b><?php echo 'Fecha Facturación'; ?>: </b></td>
+    <td><span class="main"><input name="update_last_create" size="20" value="<?php echo $lastm['date_purchased']; ?>" /> </span></td>
           <td>&nbsp;</td>   <p>&nbsp;</p>
     	</td>
 			</tr>
-   
+
    
 <!-- End Addresses Block -->
 
@@ -6435,11 +7579,75 @@ if($action == "add_product")
 
 
 
+
+
+
+
 <?php
+
+
+     $sumar_beneficio_sales_raw = "select sum(final_beneficio) as value, count(*) as final_beneficio from orders_products where orders_id = '" . $oID . "'";
+    $sumar_beneficio_sales_query = tep_db_query($sumar_beneficio_sales_raw);
+    $sumar_beneficio= tep_db_fetch_array($sumar_beneficio_sales_query);
+    $sumar_bruto_sales_raw = "select sum(final_price) as value, count(*) as final_price from orders_products where orders_id = '" . $oID . "'";
+    $sumar_bruto_sales_query = tep_db_query($sumar_bruto_sales_raw);
+    $sumar_bruto= tep_db_fetch_array($sumar_bruto_sales_query);
+    $sumar_total_sales_raw = "select sum(final_price_total) as value, count(*) as final_price_total from orders_products where orders_id = '" . $oID . "'";
+    $sumar_total_sales_query = tep_db_query($sumar_total_sales_raw);
+    $sumar_total= tep_db_fetch_array($sumar_total_sales_query);
+
+
+
+
+             $sql_status_update_array = array('total_beneficio' =>  $sumar_beneficio['value']);
+            tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id = '" . $oID . "'");
+
+
+ $query = tep_db_query("SELECT * FROM `configuration` WHERE  configuration_key='" . 'NEW_PRODUCT_PRE' . "'");
+$new_product_pre = tep_db_fetch_array($query);
+
+ $query = tep_db_query("SELECT * FROM `orders` WHERE  orders_id='" . $oID . "' and orders_status='" . $cobrado . "' or orders_id='" . $oID . "' and orders_status='" . $pagado . "'");
+if ($pagado = tep_db_fetch_array($query)){
+
+
+ $query = tep_db_query("SELECT * FROM `contabilidad_general` WHERE  orders_id='" . $oID . "'");
+if ($conta_general = tep_db_fetch_array($query)){
+
+                      $sql_status_update_array = array('orders_id' => $oID,
+                                                       'total_beneficio' => $sumar_beneficio['value'],
+                                                       'total_bruto' => $sumar_total['value'],
+                                                       'total_costo' => $sumar_total['value']-$sumar_beneficio['value'],
+                                                       'concepto' => 1);
+             tep_db_perform('contabilidad_general', $sql_status_update_array, 'update', " orders_id = '" . $oID . "'");
+
+
+
+}else{
+
+       $sql_data_array = array(//Comment out line you don't need
+							'orders_id' => $oID,
+							'concepto' => 1,
+							'total_beneficio' => $sumar_beneficio['value'],
+							'total_bruto' => $sumar_total['value'],
+                            'total_costo' => $sumar_total['value']-$sumar_beneficio['value']);
+     tep_db_perform('contabilidad_general', $sql_data_array);
+
+}
+}
+
+
+  $query = tep_db_query("SELECT * FROM `orders` WHERE  orders_id='" . $oID . "' and orders_status = '" . $cobrado . "' or orders_id='" . $oID . "' and orders_status = '" . $pagado2 . "'");
+if ($borrar = tep_db_fetch_array($query)){
+
+}else{
+
+			$Query = "DELETE FROM " . 'contabilidad_general' . "
+			WHERE orders_id = '" . $oID . "';";
+				tep_db_query($Query);
+}
+
+
 require(DIR_WS_INCLUDES . 'application_bottom.php');
-
-
-
 
 
 

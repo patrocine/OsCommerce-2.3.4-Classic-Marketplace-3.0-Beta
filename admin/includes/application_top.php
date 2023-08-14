@@ -484,20 +484,24 @@ $admin_email_address = $scsh['admin_email_address'];
    tep_redirect(tep_href_link('categories.php'));
    
 }
+
+
+
+
  //tep_redirect(tep_href_link(FILENAME_FORBIDEN));
 
  }
   
-  
-
-
- // Include OSC-AFFILIATE
+  // Include OSC-AFFILIATE
   include(DIR_WS_INCLUDES . 'affiliate_application_top.php');
-                       
-  /***** Begin View Counter *****/
+
+
+
+/*
+
   if (VIEW_COUNTER_ENABLED == 'true') {
 
-      /**** BEGIN FORCE CLEAR THE TABLES ****/
+
       if (VIEW_COUNTER_FORCE_RESET > 0) {
           $dateNow = @date("Y-m-d", time() - (VIEW_COUNTER_FORCE_RESET * 86400)) . ' 23:59:59';
           tep_db_query("delete from " . TABLE_VIEW_COUNTER . " where last_date < '" . $dateNow ."' ");
@@ -508,12 +512,12 @@ $admin_email_address = $scsh['admin_email_address'];
           $dateNow = @date("Y-m-d", time() - (VIEW_COUNTER_FORCE_RESET_STORAGE * 86400)) . ' 23:59:59';
           tep_db_query("delete from " . TABLE_VIEW_COUNTER_STORAGE . " where last_date < '" . $dateNow ."' ");
           tep_db_query("optimize table " . TABLE_VIEW_COUNTER_STORAGE);
+
       }
-      /**** END FORCE CLEAR THE TABLES ****/
 
       include(DIR_FS_CATALOG . DIR_WS_MODULES . FILENAME_VIEW_COUNTER);
   }
-  /***** End View Counter *****/
+  /
 
-                       
+                     */
 ?>

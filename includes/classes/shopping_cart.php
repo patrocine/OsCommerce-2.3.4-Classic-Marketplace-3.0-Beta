@@ -375,6 +375,19 @@ if ($customer_group_id['customers_group_id'] != 0){
   }
 }
 
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . $products_id . "' and customers_id = '" . $customer_id . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
+
+
+
+          $products_price = $ppe['precio_especial'];
+
+
+                                                     }
+
+
+
+
 
           $this->total += $currencies->calculate_price($products_price, $products_tax, $qty);
           $this->weight += ($qty * $products_weight);
@@ -530,7 +543,15 @@ if (($orders_customers = tep_db_fetch_array($orders_customers_price)) && ($custo
   $products_price = $orders_customers['customers_group_price'];
 }
 
+  $ppe_values = tep_db_query("select * from " . 'products_descuento_especial' . "  where products_id = '" . $products_id . "' and customers_id = '" . $customer_id . "'");
+ if  ($ppe = tep_db_fetch_array($ppe_values)){
 
+
+
+          $products_price = $ppe['precio_especial'];
+
+
+                                                     }
 
 
           $products_array[] = array('id' => $products_id,

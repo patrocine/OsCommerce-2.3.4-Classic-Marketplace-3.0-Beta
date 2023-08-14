@@ -24,6 +24,7 @@
         $customers_firstname = tep_db_prepare_input($HTTP_POST_VARS['customers_firstname']);
         $customers_lastname = tep_db_prepare_input($HTTP_POST_VARS['customers_lastname']);
          $customers_dni = tep_db_prepare_input($HTTP_POST_VARS['customers_dni']);
+         $comerciante_permiso = tep_db_prepare_input($HTTP_POST_VARS['comerciante_permiso']);
         $customers_email_address = tep_db_prepare_input($HTTP_POST_VARS['customers_email_address']);
         $customers_telephone = tep_db_prepare_input($HTTP_POST_VARS['customers_telephone']);
         $customers_observaciones = tep_db_prepare_input($HTTP_POST_VARS['customers_observaciones']);
@@ -194,6 +195,7 @@ if ($assigned == 0) {
                                 'customers_telephone' => $customers_telephone,
                                 'customers_observaciones' => $customers_observaciones,
                                 'customers_porcentage' => $customers_porcentage,
+                                'comerciante_permiso' => $comerciante_permiso,
                                 'customers_fax' => $customers_fax,
                                 'customers_newsletter' => $customers_newsletter,
 'customers_group_id' => $customers_group_id,
@@ -278,7 +280,7 @@ while ($group_ids = tep_db_fetch_array($multiple_groups_query)) {
         tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action'))));
         break;
       default:
-        $customers_query = tep_db_query("select c.customers_id, c.customers_dni, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_observaciones, c.customers_porcentage, c.customers_newsletter, c.customers_group_name, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . $HTTP_GET_VARS['cID'] . "'");
+        $customers_query = tep_db_query("select c.customers_id, c.customers_dni, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_observaciones, c.customers_porcentage, c.comerciante_permiso, c.customers_newsletter, c.customers_group_name, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . $HTTP_GET_VARS['cID'] . "'");
         $customers = tep_db_fetch_array($customers_query);
         $cInfo = new objectInfo($customers);
 
@@ -755,7 +757,19 @@ function check_form() {
 ?></td>
           </tr>
           
-          
+</td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'PVP Etiquetas'; ?></td>
+            <td class="main">
+<?php
+  if ($processed == true) {
+    echo $cInfo->customers_porcentage . tep_draw_hidden_field('comerciante_permiso');
+  } else {
+    echo tep_draw_input_field('comerciante_permiso', $cInfo->comerciante_permiso, 'maxlength="5"');
+  }
+?></td>
+          </tr>
         </table></td>
       </tr>
       <tr>

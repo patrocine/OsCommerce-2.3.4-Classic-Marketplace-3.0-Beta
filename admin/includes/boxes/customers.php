@@ -17,7 +17,11 @@
          $contabilidad_st = 'contabilidad_st.php';
          $Servicio_Asistencia = 'Servicio Asistencia';
         }
+            if (@tep_admin_files_boxes('contabilidad_general.php')){
 
+         $contabilidad_general = 'contabilidad_general.php';
+         $servicio_general = 'Contabilidad General';
+        }
             if (@tep_admin_files_boxes(FILENAME_CUSTOMERS)){
 
          $FILENAME_CUSTOMERS = FILENAME_CUSTOMERS;
@@ -115,6 +119,14 @@
         'title' => '<p><b><font color="#FF6600">'.$Servicio_Asistencia.'</font></b></p>',
         'link' => $contabilidad_st
       ),
+      
+
+      array(
+        'code' => $contabilidad_general,
+        'title' => '<p><b><font color="#FF6600">'.$servicio_general.'</font></b></p>',
+        'link' => $contabilidad_general
+      ),
+      
            ######## Points/Rewards Module V2.1beta BOF ##################
      array(
         'code' => $FILENAME_CUSTOMERS,

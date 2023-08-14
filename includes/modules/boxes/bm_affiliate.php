@@ -38,13 +38,7 @@
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_ACCOUNT) . '">' .  MODULE_BOXES_AFFILIATE_ACCOUNT . '</a><br />' .
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_PASSWORD) . '">' .  MODULE_BOXES_AFFILIATE_PASSWORD . '</a><br />' .
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_NEWSLETTER) . '">' .  MODULE_BOXES_AFFILIATE_NEWSLETTER . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_BANNERS . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_BUILD . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD_CAT) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_BUILD_CAT . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_CATEGORY) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_CATEGORY . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_PRODUCT) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_PRODUCT . '</a><br />' .
-              '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_TEXT) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_TEXT . '</a><br />' .
+             '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_BANNERS_BANNERS) . '">' .  MODULE_BOXES_AFFILIATE_BANNERS_BANNERS . '</a><br />' .
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_REPORTS) . '">' .  MODULE_BOXES_AFFILIATE_REPORTS . '</a><br />' .
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_CLICK) . '">' .  MODULE_BOXES_AFFILIATE_CLICKRATE . '</a><br />' .
               '    <a href="' .  tep_href_link(FILENAME_AFFILIATE_SALES) . '">' .  MODULE_BOXES_AFFILIATE_SALES . '</a><br />' .

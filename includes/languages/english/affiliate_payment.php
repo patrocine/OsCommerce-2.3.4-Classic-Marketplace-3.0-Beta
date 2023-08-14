@@ -11,10 +11,10 @@
   http://www.linuxuk.co.uk
 */
 
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program: Payment');
-define('TEXT_AFFILIATE_HEADER', 'Your Payments:');
-define('TABLE_HEADING_DATE', 'Payment Date');
+define('NAVBAR_TITLE', 'Programa de Afiliados');
+define('HEADING_TITLE', 'Programa de Afiliados: Pagos');
+define('TEXT_AFFILIATE_HEADER', 'Tus Pagos:');
+define('TABLE_HEADING_DATE', 'Fecha');
 define('TABLE_HEADING_PAYMENT', 'Affiliate Earnings');
 define('TABLE_HEADING_STATUS', 'Payment Status');
 define('TABLE_HEADING_PAYMENT_ID','Payment-ID');
@@ -28,5 +28,5 @@ define('TEXT_DATE_HELP', '<i>Date</i> represents the date of the payment made to
 define('TEXT_PAYMENT_ID_HELP', '<i>Payment-ID</i> represents the payment number associated to the payment.');
 define('TEXT_PAYMENT_HELPP', '<i>Affiliate Earnings</i> represents the value of payment made to the affiliate.');
 define('TEXT_STATUS_HELP', '<i>Payment Status</i> represents the status of the payment made to the affiliate');
-define('TEXT_PAYMENT_WAIT', 'Please note that Commision earned will not show up here till they are due for payment currently this is <strong>' . AFFILIATE_BILLING_TIME .'</strong> days');
+define('TEXT_PAYMENT_WAIT', 'Tenga en cuenta que la comisión ganada no aparecerá aquí hasta que venza el pago actualmente, esto es <strong>' . AFFILIATE_BILLING_TIME .'</strong> dia');
 ?>

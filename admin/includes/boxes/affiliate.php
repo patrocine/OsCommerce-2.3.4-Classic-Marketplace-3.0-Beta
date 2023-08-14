@@ -9,6 +9,12 @@
 
   Released under the GNU General Public License
 */
+// reports box text in includes/boxes/affiliate.php
+
+
+
+
+
 
   $cl_box_groups[] = array(
     'heading' => BOX_HEADING_AFFILIATE,

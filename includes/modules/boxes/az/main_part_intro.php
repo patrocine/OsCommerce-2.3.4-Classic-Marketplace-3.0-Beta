@@ -57,6 +57,9 @@ jQuery(".gallery2").jCarouselLite({
 	</tr>
 </table>
 
+
+
+
 			<div class="main_part_title review_price_blocks"><?php // echo BOX_TAGS; ?></div>
 
    <?php

@@ -19,8 +19,12 @@ function imageRestrict_bs($image) {
 ?>
 
 <?php $count = 0;
-		$products_bestsellers_query = tep_db_query("select distinct pd.products_id, .pd.products_name, pd.products_description, p.codigo_proveedor, p.products_id, p.products_image, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p where p.products_status = '1' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'   order by pd.products_viewed desc LIMIT 10");
+                   if (PERMISO_STOCK_NIVEL_6 == 'true'){
+		$products_bestsellers_query = tep_db_query("select distinct pd.products_id, .pd.products_name, pd.products_description, p.codigo_proveedor, p.products_id, p.products_image, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p, " . 'products_stock' . " ps  where p.products_status = '1' and ps.products_id = p.products_id and ps.products_stock_real >= 0.01 and  p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'   order by pd.products_viewed desc LIMIT 10");
+                                }else{
+		$products_bestsellers_query = tep_db_query("select distinct pd.products_id, .pd.products_name, pd.products_description, p.codigo_proveedor, p.products_id, p.products_image, p.products_price, p.products_tax_class_id from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p where p.products_status = '1' and  p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'   order by pd.products_viewed desc LIMIT 10");
 
+                            }
 
 		
 			while ($best_viewed = tep_db_fetch_array($products_bestsellers_query)) {

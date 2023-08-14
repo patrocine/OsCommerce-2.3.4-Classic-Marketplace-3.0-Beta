@@ -2381,7 +2381,8 @@ echo '<tr><td colspan="6">' . tep_black_line() . '</td></tr>';
      $contents[] = array('align' => 'center', 'text' => tep_draw_button('Editar', 'document', tep_href_link(FILENAME_ORDERS_TIENDA, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit')) . tep_draw_button('Actualizar', 'document', tep_href_link(FILENAME_EDIT_ORDERS_TIENDA, tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit')));
 
 
-     $contents[] = array('align' => 'center', 'text' => tep_draw_button('Etiquetas', 'document', DIR_WS_CATALOG.'barcode.php?oID=' . $oInfo->orders_id ));
+     $contents[] = array('align' => 'center', 'text' => tep_draw_button('Etiquetas Nutricional', 'document', DIR_WS_CATALOG.'barcode.php?oID=' . $oInfo->orders_id ));
+     $contents[] = array('align' => 'center', 'text' => tep_draw_button('Etiquetas PVP', 'document', DIR_WS_CATALOG.'barcode_pvp.php?oID=' . $oInfo->orders_id ));
      $contents[] = array('align' => 'center', 'ui-widget2', 'text' => tep_draw_button('Cerrar Caja', 'document', DIR_WS_CATALOG.'admin/invoice_procesando_tienda.php?invoice_status=37'));
      $contents[] = array('align' => 'center', 'ui-widget2', 'text' => tep_draw_button('Print Albaranes', 'document', 'invoice_selec_albaran.php?'.$_SERVER['QUERY_STRING']));
      $contents[] = array('align' => 'center', 'ui-widget2', 'text' => tep_draw_button('Print Facturas', 'document', 'invoice_selec_facturas.php?'.$_SERVER['QUERY_STRING']));

@@ -10,8 +10,8 @@
   Updated by Fimble (http://forums.oscommerce.com/user/15542-fimble/)
   http://www.linuxuk.co.uk
 */
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program');
-define('HEADING_AFFILIATE_PROGRAM_TITLE', 'The ' . STORE_NAME . ' Affiliate Program');
-define('TEXT_INFORMATION', 'Your Affiliate Information Goes in Here');
+define('NAVBAR_TITLE', 'Programa de Afiliados');
+define('HEADING_TITLE', 'Programa de Afiliados');
+define('HEADING_AFFILIATE_PROGRAM_TITLE', ' ' . STORE_NAME . ' Programa de Afiliados');
+define('TEXT_INFORMATION', 'Con nuestro programa de afiliados ganarás comisiones por cada cliente que refieras con tu link de referidos, registrate y facilita a tus amigos y familiares se registren. comiencen a comprar.');
 ?>

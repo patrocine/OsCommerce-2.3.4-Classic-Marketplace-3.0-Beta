@@ -319,6 +319,7 @@ $pendiente_er = '?pendiente_de_entrada_a=ok';
            
               <td class="dataTableContent"><?php echo $affiliate_sales['products_model'] . ' / ' . $affiliate_sales['products_model_2']; ?></a></td>
 <td class="dataTableContent" align="left"><?php echo $affiliate_sales['products_name']; ?></td>
+<td class="dataTableContent" align="left"><a target="_blank" href="http://fratelligiugliano.it/art-cerca/<?php echo $affiliate_sales['products_model']; ?>">PEDIR</a></td>
 
 
               <td class="dataTableContent"><a target="_blank" href="/product_info.php?products_id=<?php echo $affiliate_sales['products_id']; ?>">

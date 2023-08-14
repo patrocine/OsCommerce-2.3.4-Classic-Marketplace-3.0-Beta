@@ -630,7 +630,7 @@ if ( $download == 'stream' or  $download == 'tempfile' ){
             $stock = 'out_of_stock';
 
            }
-  if ($pro_para['products_quantity'] >= 1){
+  if ($pro_para['products_status'] == 1){
 
                $stock = 'in_stock';
                }else{

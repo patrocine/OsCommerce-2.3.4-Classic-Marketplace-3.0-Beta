@@ -13,11 +13,21 @@
 */
 
 
-  require(DIR_WS_INCLUDES . 'counter.php');
+
 ?>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9320897386156686"
+     crossorigin="anonymous"></script>
 
 
-
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ef+6k-30-ac+ty"
+     data-ad-client="ca-pub-9320897386156686"
+     data-ad-slot="3893773970"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <div class="grid_24 ui-widget infoBoxContainer">
 

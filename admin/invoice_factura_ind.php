@@ -76,6 +76,8 @@
 
  $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
               $factura_shipping = tep_db_fetch_array($factura_shipping_values);
+ $factura_tax_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_tax' . "'");
+              $factura_tax = tep_db_fetch_array($factura_tax_values);
 
  $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
               $factura_total = tep_db_fetch_array($factura_total_values);
@@ -86,13 +88,16 @@
 
      $admin_lof_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . 3 . "'");
  $admin_lof = tep_db_fetch_array($admin_lof_values);
+ 
      $addbook_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . 3 . "'");
  $addbook = tep_db_fetch_array($addbook_values);
 
      $zone_values = tep_db_query("select * from " . 'zones' . " where zone_id = '" . $addbook['entry_zone_id'] . "'");
  $zone = tep_db_fetch_array($zone_values);
  
- 
+     $admin_lof_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $factura_orders['customers_id'] . "'");
+ $customers = tep_db_fetch_array($admin_lof_values);
+
  
 
     ob_start();
@@ -150,7 +155,7 @@
               <td width="52%" height="35">
               <table border="2" cellpadding="5" cellspacing="5" style="border-collapse: collapse; font-size: 10pt" bordercolor="#C0C0C0" width="100%">
                 <tr>
-                  <td width="100%"><?php ECHO 'DNI/CIF: '. $factura_orders['customers_dni']; ?></td>
+                  <td width="100%"><?php ECHO 'DNI/CIF: '. $customers['customers_dni']; ?></td>
                 </tr>
               </table>
               </td>
@@ -281,8 +286,13 @@
               <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 6pt">
 
                              <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
+         $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
+
+
+    //      $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " op, products_donde_esta de where de.products_id = op.products_id and op.orders_id = '" . $factura_orders['orders_id'] . "'");
+   //      while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
+       // código aquí ?>
 
 
 
@@ -303,12 +313,12 @@
 
               </td>
 
-              <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
+              <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 5pt">
 
                  <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
-              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
+              <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 5pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
              <?php
@@ -317,17 +327,17 @@
  $donde_esta_c= tep_db_fetch_array($donde_esta_c_values);
 
 
-
+              echo $donde_esta_c['donde_esta'];
 
                   if ($featured_products_array[$i]['shortdescription'] != '') {
 
   } else {
    $bah = explode(" ", $factura_products['products_name']);
-   for($desc=0 ; $desc<6 ; $desc++)
+   for($desc=0 ; $desc<9 ; $desc++)
       {
-   echo " $bah[$desc]" ;
+   echo  " $bah[$desc]" ;
       }
-      echo '...'.$donde_esta_c['donde_esta'];
+ //     echo '...'.$donde_esta_c['donde_esta'];
   }
 
 
@@ -352,7 +362,7 @@
 
 
                                 <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
@@ -364,10 +374,10 @@
 
 
               <?php
-                             $precio =    $factura_products['products_price']  -  $factura_products['products_price'] / 100 * 3;
+                             $precio =    $factura_products['final_price'];
 
 
-              echo number_format( $precio, 2, '.', '').'Eur';?>  </p>
+              echo $currencies->format($precio);?>  </p>
 
 
 
@@ -390,7 +400,7 @@
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
                             <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
@@ -423,12 +433,12 @@
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
         <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
-<?php ECHO '3%' ?></td>
+<?php ECHO $currencies->format(($factura_products['final_price']*$factura_products['products_quantity']) * OT_TAX_IVA / 100); ?></td>
                 </tr>
               </table>
                      <?php   } ?>
@@ -436,7 +446,7 @@
 
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
                            <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "'");
+          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
@@ -446,7 +456,7 @@
 
 
 
-                  <?php echo $currencies->format($factura_products['final_price']*$factura_products['products_quantity']);?>
+                  <?php echo $currencies->format(($factura_products['final_price']*$factura_products['products_quantity']) * OT_TAX_IVA / 100 + ($factura_products['final_price']*$factura_products['products_quantity']) );?>
 
 
 
@@ -491,6 +501,26 @@
                   <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
                   <p style="margin-top: 0; margin-bottom: 0" align="right">
                   <?php echo $factura_subtotal['text'] ?></td>
+                </tr>
+              </table>
+              </td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="100%" height="19">
+          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+            <tr>
+              <td width="62%">&nbsp;</td>
+              <td width="38%">
+              <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="24">
+                <tr>
+                  <td width="100%" height="48">
+                  <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO IMPUESTOS ?></p>
+                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+                  <p style="margin-top: 0; margin-bottom: 0" align="right">
+                  <?php echo $factura_tax['text'] ?></td>
                 </tr>
               </table>
               </td>

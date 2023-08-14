@@ -11,7 +11,7 @@ $read_more_width = 90; //read more width in pixels
 $width_without_read_more = $box_cat_width - $read_more_width; //box width without read more
    
 //query
-$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
+$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
 //end query
 		
 $number_of_categories = tep_db_num_rows($categ_query); //number of all categories
@@ -28,7 +28,7 @@ while ($cat = tep_db_fetch_array($categ_query)) {
 }
 
 //query
-$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
+$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
 //end query
 		
 		
@@ -47,7 +47,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 				 $current_cat_id = $cat['categories_id'];
 				 
 	//sub category output
-				 $categories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_cat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+				 $categories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$current_cat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 				
 				$q1 = 0;
 				if (tep_db_num_rows($categories_query_sub) > 0) { 
@@ -60,7 +60,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 						//sub sub cat 
 						$last_subcat_id = $sub_cat['categories_id'];
 									
-						$subcategories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$last_subcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+						$subcategories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$last_subcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 						
 						$q2 = 0;		
 						
@@ -75,7 +75,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 								
 								//3 sub cat 
 								$last_subsubcat_id = $sub_subcat['categories_id'];
-								$subcategories_query_3sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$last_subsubcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+								$subcategories_query_3sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$last_subsubcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 								$q3 =0;
 											
 								//display block
@@ -132,7 +132,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 						
 						$last_id = $cat['categories_id']; //last category id
 						
-						$categories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$last_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+						$categories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$last_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 							$q1 =0;
 							if (tep_db_num_rows($categories_query_sub) > 0) { 
 								echo '<div class="drop-box-subcat">'; 
@@ -143,7 +143,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 									//sub sub cat 
 									$last_subcat_id = $sub_cat['categories_id'];
 									
-									$subcategories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$last_subcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+									$subcategories_query_sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$last_subcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 									$q2 =0;
 									if (tep_db_num_rows($subcategories_query_sub) > 0) {
 									
@@ -155,7 +155,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 											
 											//3 sub cat 
 											$last_subsubcat_id = $sub_subcat['categories_id'];
-											$subcategories_query_3sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$last_subsubcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
+											$subcategories_query_3sub = tep_db_query("select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.parent_id = '" . (int)$last_subsubcat_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' order by sort_order, cd.categories_name");
 											$q3 =0;
 											
 											//display block
@@ -207,7 +207,7 @@ $categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.ca
 			
 			
 //query
-$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
+$categ_query = tep_db_query("select distinct c.categories_id, c.parent_id, cd.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c, ".TABLE_CATEGORIES_DESCRIPTION . " cd where cd.categories_status_visible = '" . 1 . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id ."' and c.parent_id = '0' order by c.categories_id ");
 //end query
 
 	//drop box positioning

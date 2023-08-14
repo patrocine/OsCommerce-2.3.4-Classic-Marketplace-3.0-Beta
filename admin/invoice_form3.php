@@ -30,26 +30,26 @@
 
 
 
-   $datos_values = mysql_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 25 . "' or orders_status = '" . 119 . "' or orders_status = '" . 6 . "'");
-               while   ( $datos = mysql_fetch_array($datos_values)) {
+   $datos_values = tep_db_query("select * from " . TABLE_ORDERS . " where orders_status = '" . 25 . "' or orders_status = '" . 119 . "' or orders_status = '" . 6 . "'");
+               while   ( $datos = tep_db_fetch_array($datos_values)) {
 
 
           $reembolso_price_raw = "select sum(products_price) as value, sum(products_price) as price, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " where orders_id ='" . $datos['orders_id'] . "'";
-  $reembolso_price_query = mysql_query($reembolso_price_raw);
-  $reembolso_price= mysql_fetch_array($reembolso_price_query);
+  $reembolso_price_query = tep_db_query($reembolso_price_raw);
+  $reembolso_price= tep_db_fetch_array($reembolso_price_query);
 
 
 
- $ot_shipping_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $datos['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $ot_shipping = mysql_fetch_array($ot_shipping_values);
+ $ot_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $datos['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
+              $ot_shipping = tep_db_fetch_array($ot_shipping_values);
 
 
- $ot_total_values = mysql_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $datos['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $ot_total = mysql_fetch_array($ot_total_values);
+ $ot_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $datos['orders_id'] . "' and class =  '" . 'ot_total' . "'");
+              $ot_total = tep_db_fetch_array($ot_total_values);
 
 
-            $admin_lof_values = mysql_query("select * from " . TABLE_ADMIN . " where id = '" . $admin['id'] . "'");
- $admin_lof = mysql_fetch_array($admin_lof_values);
+            $admin_lof_values = tep_db_query("select * from " . TABLE_ADMIN . " where id = '" . $admin['id'] . "'");
+ $admin_lof = tep_db_fetch_array($admin_lof_values);
 
 
 

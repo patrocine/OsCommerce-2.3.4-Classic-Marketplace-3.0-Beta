@@ -1753,7 +1753,93 @@ function showPiDelConfirm(piId) {
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
 
 
+                   <?php
 
+                       if ($pInfo->opcion_1){
+                           }else{
+                           $pInfo->opcion_1 = OPCION_1;
+                           }
+                       if ($pInfo->opcion_2){
+                           }else{
+                           $pInfo->opcion_2 = OPCION_2;
+                           }
+                        if ($pInfo->opcion_3){
+                           }else{
+                           $pInfo->opcion_3 = OPCION_3;
+                           }
+                        if ($pInfo->opcion_4){
+                           }else{
+                           $pInfo->opcion_4 = OPCION_4;
+                           }
+                        if ($pInfo->opcion_5){
+                           }else{
+                           $pInfo->opcion_5 = OPCION_5;
+                           }
+                        if ($pInfo->opcion_1){
+                           }else{
+                           $pInfo->opcion_6 = OPCION_6;
+                           }
+                        if ($pInfo->opcion_6){
+                           }else{
+                           $pInfo->opcion_6 = OPCION_6;
+                           }
+                        if ($pInfo->opcion_7){
+                           }else{
+                           $pInfo->opcion_7 = OPCION_7;
+                           }
+                        if ($pInfo->opcion_8){
+                           }else{
+                           $pInfo->opcion_8 = OPCION_8;
+                           }
+                        if ($pInfo->opcion_9){
+                           }else{
+                           $pInfo->opcion_9 = OPCION_9;
+                           }
+                        if ($pInfo->opcion_10){
+                           }else{
+                           $pInfo->opcion_10 = OPCION_10;
+                           }
+                        if ($pInfo->opcion_11){
+                           }else{
+                           $pInfo->opcion_11 = OPCION_11;
+                           }
+                        if ($pInfo->opcion_12){
+                           }else{
+                           $pInfo->opcion_12 = OPCION_12;
+                           }
+                        if ($pInfo->opcion_13){
+                           }else{
+                           $pInfo->opcion_13 = OPCION_13;
+                           }
+                        if ($pInfo->opcion_14){
+                           }else{
+                           $pInfo->opcion_14 = OPCION_14;
+                           }
+                        if ($pInfo->opcion_15){
+                           }else{
+                           $pInfo->opcion_15 = OPCION_15;
+                           }
+                        if ($pInfo->opcion_16){
+                           }else{
+                           $pInfo->opcion_16 = OPCION_16;
+                           }
+                         ;if ($pInfo->opcion_17){
+                           }else{
+                           $pInfo->opcion_17 = OPCION_17;
+                           }
+                       if ($pInfo->opcion_18){
+                           }else{
+                           $pInfo->opcion_18 = OPCION_18;
+                           }
+                        if ($pInfo->opcion_19){
+                           }else{
+                           $pInfo->opcion_19 = OPCION_19;
+                           }
+                        if ($pInfo->opcion_20){
+                           }else{
+                           $pInfo->opcion_20 = OPCION_20;
+                           }
+                         ?>
 
                    </tr>
           <tr>
@@ -2409,7 +2495,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
          if ($newproducts['products_name'] == $HTTP_GET_VARS['search']){
 
 
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . "");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -2437,7 +2523,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
 
 
                                                        //zona envío
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . "");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
@@ -2713,7 +2799,7 @@ function clk(url,oi,cad,ct,cd,sg){if(document.images){var e = window.encodeURICo
             $contents[] = array('align' => 'center', 'text' => tep_draw_button(IMAGE_EDIT, 'document', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=edit_category')) . tep_draw_button(IMAGE_DELETE, 'trash', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=delete_category')) . tep_draw_button(IMAGE_MOVE, 'arrow-4', tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $category_path_string . '&cID=' . $cInfo->categories_id . '&action=move_category')));
             $contents[] = array('text' => '<br />' . TEXT_DATE_ADDED . ' ' . tep_date_short($cInfo->date_added));
             if (tep_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . tep_date_short($cInfo->last_modified));
-            $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT) . '<br />' . $cInfo->categories_image);
+            $contents[] = array('text' => '<br />' . tep_info_image($cInfo->categories_image, $cInfo->categories_name, 180, 180) . '<br />' . $cInfo->categories_image);
             $contents[] = array('text' => '<br />' . TEXT_SUBCATEGORIES . ' ' . $cInfo->childs_count . '<br />' . TEXT_PRODUCTS . ' ' . $cInfo->products_count);
           } elseif (isset($pInfo) && is_object($pInfo)) { // product info box contents
             $heading[] = array('text' => '<strong>' . tep_get_products_name($pInfo->products_id, $languages_id) . '</strong>');

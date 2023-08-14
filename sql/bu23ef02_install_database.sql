@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-03-2023 a las 23:59:55
+-- Tiempo de generación: 09-06-2023 a las 15:10:13
 -- Versión del servidor: 5.7.36-cll-lve
 -- Versión de PHP: 7.4.29
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `cz4seo7z_thcan`
+-- Base de datos: `cz4seo7z_vivelocripto`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `action_recorder` (
   KEY `idx_action_recorder_user_id` (`user_id`),
   KEY `idx_action_recorder_identifier` (`identifier`),
   KEY `idx_action_recorder_date_added` (`date_added`)
-) ENGINE=MyISAM AUTO_INCREMENT=8053 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8055 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `action_recorder`
@@ -8113,7 +8113,9 @@ INSERT INTO `action_recorder` (`id`, `module`, `user_id`, `user_name`, `identifi
 (8049, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-29 02:13:24'),
 (8050, 'ar_admin_login', 1, 'tienda', '77.211.5.225', '1', '2022-11-30 18:57:10'),
 (8051, 'ar_admin_login', 1, 'tienda', '31.4.242.163', '1', '2023-03-09 20:52:35'),
-(8052, 'ar_admin_login', 1, 'tienda', '31.4.242.163', '1', '2023-03-09 20:59:27');
+(8052, 'ar_admin_login', 1, 'tienda', '31.4.242.163', '1', '2023-03-09 20:59:27'),
+(8053, 'ar_admin_login', 0, 'tienda', '88.29.21.243', '0', '2023-06-09 15:06:20'),
+(8054, 'ar_admin_login', 1, 'tienda', '88.29.21.243', '1', '2023-06-09 15:06:29');
 
 -- --------------------------------------------------------
 
@@ -21750,9 +21752,9 @@ CREATE TABLE IF NOT EXISTS `cache` (
 --
 
 INSERT INTO `cache` (`cache_id`, `cache_language_id`, `cache_name`, `cache_data`, `cache_global`, `cache_gzip`, `cache_method`, `cache_date`, `cache_expires`) VALUES
-('5aea2ef0968befad405de776007fa7b2', 1, 'seo_urls_v2_PRODUCTS', 'S0lNy8xL1VAPCPJ3CXUOifdz9HWNN1TXUVAvMFTXtOYCAA==', 1, 1, 'EVAL', '2023-03-09 19:43:02', '2023-04-08 19:43:02'),
-('82c85abb1a53ab2274cf8f913897f181', 1, 'seo_urls_v2_CATEGORIES', 'AwA=', 1, 1, 'EVAL', '2023-03-09 19:43:02', '2023-04-08 19:43:02'),
-('3f99e969ab97a4ed9b2f66db76e4c167', 1, 'seo_urls_v2_MANUFACTURERS', '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', 1, 1, 'EVAL', '2023-03-09 19:43:02', '2023-04-08 19:43:02');
+('5aea2ef0968befad405de776007fa7b2', 1, 'seo_urls_v2_PRODUCTS', 'S0lNy8xL1VAPCPJ3CXUOifdz9HWNN1TXUVAvMFTXtOYCAA==', 1, 1, 'EVAL', '2023-06-09 13:07:23', '2023-07-09 13:07:23'),
+('82c85abb1a53ab2274cf8f913897f181', 1, 'seo_urls_v2_CATEGORIES', 'AwA=', 1, 1, 'EVAL', '2023-06-09 13:07:23', '2023-07-09 13:07:23'),
+('3f99e969ab97a4ed9b2f66db76e4c167', 1, 'seo_urls_v2_MANUFACTURERS', 'lZvNkuu4DYX3eYrsblIVVbUo948rq1upyW5mMZVZT1ESLbFNiWpSatv99DkEPEk28dHtNVqmeAgQ+AD17uRn95dvP3//5bd/fv/Hv3779adff//l+88//V5/+9ufv9m85W9//fuf+v9rZorZ4Afb3lb32LTRJ6bYnR8bHoqhn1cXHts9F7sp+8dWL8UquLi67rHhq6xvWVK8PjZ8K4ZdjKFllsdieYrXLs7z42fWT/LrU0/MRJby2y5Vk82rS+QfRKDeuaX8E7EVhbqYsvXssaLROro02bDaM5G+FqlWmwZ2nmqRyzqcEr5eUWxcyFuJXGWNEznLtchVDt6QLNkrI3plO/c+k+NsRLOzn4e8xrnCORznGOJwe7xuI8r98H+Jhn6On56cYiMS5jizdYh2eF4OfmavKurhtHduWVOcPXE5IwpiY8hWiISuixOxEwG3+Xa2jw0bUa91AaoQSxEv2M6TI96IXGEgjxN5Ttu7X/NGTEWfbfb0ZUSgT5dau3qyQ40IdEqOb2Yj2vzvsd1zahuRKtspbzPbC1Frstc1kmhzELku8UrD3UHkupAoehCtsrODZZfWQQRbYx59Sw7VQQQ7I9TGbX2s7UEkQwzwJRoQW42IHYv0B42Gdp7zAn3JQ0Wm4BAnIrEUldqPx1bPen2lbozEl59FIbssgSzxWURqUyy3DPl1EWmxCcbEUjRq3cze5+5TuOJJgHgWeWa3evbiog+Poc8qDY21zyJM8J9kH19Ems7O7E1eRBm34Ep4vIkvoszFz328kJd+EWXONi8u5TO5aV5EnMl3KeZ4Ikq+iEJLzP4UHLnqXkSjmOw8sM0SkWK4TYsn7v4iOrnZpeFWZY9UjMTeFxGsm5AFJGL6KprNX1eyCa8iWRe2tukfa/Yqmi3ssn8VvWzsyNNEqdFnN2eyo6+iU1zWOJENfVVPii2JSK+iESIXe54INLMc/VVkQb7ZWbLbb6JK/Iozeec39aS8xLQSB3kTXZL9YjHuTZT5IMXOmwjjcM5J/vqm7mO7s019hUyI2Ys4F38m4ryJOBdLc7U3UWexs0W8YXnim2i0BDtrVkk29ajug8WSSHbUywi50+R65vBHkarzuSN7cBSpVjf35IQeVa2JlqZHUWsupQmC7mPfPIpSPVX0KEp9sQToqDqlODlcxJZtqAh12k48v62fRCVfvUdyL9RPIlPvkS7R+vFJA12wt+yIP9dPIlQ8E6eqn0Snfku2o9taP6lWlpzR+kl0WvHImZqKVCxhqp9EKq1Ju8eHpH4SodYYP4ihgok1bXndxRtq0QpX8mQTqRbrWrWKV8/v8LoWsTwSmZ6dl1r0uriCR+ZKzg2r5+tX2TybutV3VWEPqLzZ1oiCS4RbVp/eXZi5qHhzX1/MUJYyRdRbt5VUB7VCC7swwRVY4NZ0ve0dO3HKLEDg3AnRmYSx2og0IASeBdxaqQOqT7IHRu+n+MnsRAPrmFZKGlBJdFvgby8CJN9FtvtGkwdco9UKwkjSulq5w9ndCgkiSUTdiCfNSNyrzrbU+xVAZMtS3LrR62nc7dKNuNMEUJxYzlU3otuXaxM7NIoi4M0pepK81soiQqRbJsKVtKvCGfcDjayN6DfBK8g5UwQR3KcLXDmlECULmz29sDSdteHENuwguuV4QxbAvF1ZBG7ANTI8qixCUovMvPIg3tbakYYEpRG9P52ActneimpjIRfMUuRaRh/8wmwVSfTOssOlRAJXRbK7bjgFEz6hUGEJxrNINrip9YkuQ5PBUk/i2LDz+Cx+tuuAKaFwH5tnR+FZbqhUTg0RQiEFft6VKMmMRbUSyPbEMeUV7hM3MJNYiUUzsAXcgYXmA/vSgTu4uON38oIKLlbwhYxsjgmt5MJPoLX0ulRyUZwzICGhCe2LCLi1HmKvLKtVgLGMNluWqCm6QPFR0b1WdGF5F61WePHfoo5sshKMcr+xW1YhxhTBWWJgUfVV3A6VIjJLXHER3Sy2EHG9K+IawU61Eo3Vr6xsqhVC2MSpRq0Uwl6pdyiFaHHqyQspg2j9ijYvji8jEbWiiDZseHSkSb4iiQ6pV2J5u0KJLoYNAZPJ8CZ3EXpNs0POTj1JwUSXHNyO3vYKJ7q0dZ4WDsomSodVygay14om+hLeWNRSOMEbBLWCiT55xkxrJRP9baK/rZdRQIOEmoo7nFxXsVcXwU6IZBGlGTOWSDa0/KmSPAyxPuKgPRxVqI9yDw2xZ7zYKJpAF3jOK04MCThG+cTo+9LOebwIo3xiRBJ5u1CYYJRQjB9kb40SCt9O1FDUQnNhx0pFL//RRiBC9lYi1xkoAzcmahtmLqKVoEvqNqOcIlg0d0hAMEoqAtpvpBI3yigmO492pbHZKKVI7sqYqlHusChU5UzV6FgECBDpb5n7VETmszOmFiV2DO7UokHV0rOlhGFXI84oZfiBAQAFDXujuNGhiB+YfzHKJnYNtRiFExXoBHMjxRM7emXGiBftKgGMQop9WbUxqt+40LVK2NvZgzOKKKowsMcqntiXZRmFE7MPLGcySicqdKroAuSO2jVqYBRL7IGtRrkEJ6NGocSu0QCjYxG8+WsUSOwwVCCxo6ozSiP+GOQgkfkgSHbfMIlRIjH4FHKFUD6SRNMolbj4HqGXXRGKJRa/uH7HDaxgYnnfWCRVLlH6ln72K0lIzUF8LI+RtfHMQZxsdWjkgQTeSHpjFE50sS2xBiUYxuiIMH9QinmgliJhuSroKgRPIMvp41SNcWO9XPMsLodOWRuw7MLiWfvIKKjAltA2j1FQkd31VmGUCUCGyaO8Ijtk9WuFQpLai5yoo5Gose0WPT99S0CMUVyB3hBNKpVWoMacmYLKK8qPV2X4xS7sxZRW9D4ObMbTKKt4j+8krzeKKfKIOS66Xs3sAdbHsCMMKKVAGs7IkbnPWKSIO5EdZmUU6H5BX1KYG4UUASyXHANlFKttI509VD5xcuh7fXr2WHG88+gwFlMNdmLlkLlTigIoN3Am9nhJ8lsMLValjQVGx06xkooMvD1XWiNHuuH3OYxcekph9fwdxPvchukeUDIaURWJgLIw4RWIZMw+buGN7Mx9MuO62uyqcgtsNKlXOoIrgD1aNG39e9yuFWajMCeAsEQXLxEVsbH3e/pnRhEJxqkwYpsqtE3deomRlWfKSjDDmHz1hQDEXkVqiM4Gf4oJ7b/KXWNpi+5VWvEJpMM/0UkUowAFEX8EEmUHVfnJ7Wq9Z76r/GSyrmrJ+ypAad1CA60ClPeI/WfPvF+VmLXNpItodLwD4uRuI4ze6HhHmY/bYSs6FtaEri9br3gn5lzZ6KhRjDJtKHMfP7NRjJLtiajaKEAB5vYTueoa5SdpO7HfFndEMsHiUqPs5AQvQp810aVKbMU92yNUpsjCQqNjHu9xnDHnxNYseiFX+joEBNVEgkdzH/hwE5bSOxAdOkndKE+J4+RbFjUaBSp0QrhRnDJPHXk9BSnTDS/ILEU8GwLSqioA2SILYv8i/hY2llw1d+hS+s5l6AtRjj1ZspsMQ3LvNspeMMoXUQPgCx2LIM0eLm4XbH/Lo12otWSlJdPdka03CmOkfNpRkzSKYpDVo7HJZl8aBTETBhnoJwdKYDJWzQJhowBmSX5iO6EABsODaEGwaqtRBqMuhdn4yW8TkUVJTL64ni5EBLRInDZqKurlC+sGNcpgJBziRqxiGpDVdiwaKJDBXD1yRBrGFMh0ZZihpe6oTAbHWipVsnU6LRJuIW7MUkJpKcZiQp8F37MF21rm6MpnStvQsVZdo4jG9ltYK8Q7FnaU0qz44obFBMU0fi6Toywq3EdHcERo5t4oq0E62DnMRc707lJcUxK74G4o4UO48XSwOUh4HZxHzCEaKbI5ORe+djiaQhvo6CrXs0GkRqENhtcT+1atUWzz7qfp9g7h2aLFJ5ewDTuoQKPoBrOCLlToHSCtBvwLzNuU4KB+Q+eLlAaNsps+XtkB1NESh++ceBu20eES27P2VKPUpnWnE/198ch7soIDuCdpuVMbMCx83JhD5PLcsc1ot73/IHr2NqGYJdLrVzEJgylIzmjeqfCmdLJLocyOlQIctP0xtE6WoQRntlNkRLJRdnOyAU0Q9lTJccS95KAyc1Hz7DM7y/+ZMsFQCkEnjcIb1IWctzWKbwZk1qXryyaiGyU49tPOX2x/FeAUAony6oPevIpxarJf929k4NL4QGdH7qZzJoCgs22B3lhJ2CjEOcpfWcq/AQ==', 1, 1, 'EVAL', '2023-06-09 13:07:23', '2023-07-09 13:07:23');
 
 -- --------------------------------------------------------
 
@@ -21913,7 +21915,7 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `use_function` varchar(255) DEFAULT NULL,
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=112163 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=112166 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `configuration`
@@ -22391,7 +22393,7 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (111870, 'Imagen dentor del Twitter del producto', 'PERMISO_IMAGE_TWITTER', 'True', 'Desactivado por defecto permite reordenar productos en sus categorias ', 8, 201, '2014-11-19 17:19:46', '2014-11-19 17:16:29', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (111893, 'Categoria por Defecto RDC', 'CATEGORIA_DEFECTO_RDC', '5', 'La Categoría por defecto, donde estan los productos que no tienen categoria asignada', 8, 100, '2015-04-02 14:45:21', '2013-04-21 10:47:37', NULL, NULL),
 (111894, 'Activar Regla de Categorias en Products_info.php', 'PERMISO_REGLADEPRECIOS_PRODUCTSINFO', 'False', 'Desactivado por defecto permite reordenar productos en sus categorias ', 8, 101, '2022-05-21 21:36:21', '2015-01-15 12:02:12', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
-(111895, 'Ultima Versi?n Actualizada OsEm30', 'VERSION_UPDATE', 'v82', 'Ultima versión OsCommerce Empresa 3.0.', 1, 0, '2015-04-06 20:26:11', '2013-04-21 10:47:37', NULL, NULL),
+(111895, 'Ultima Versi?n Actualizada OsEm30', 'VERSION_UPDATE', 'v86-3', 'Ultima versión OsCommerce Empresa 3.0.', 1, 0, '2015-04-06 20:26:11', '2013-04-21 10:47:37', NULL, NULL),
 (112068, 'Sort Order', 'MODULE_BOXES_AZ_MANUFACTURER_INFO_SORT_ORDER', '200', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2022-04-05 12:11:59', NULL, NULL),
 (112067, 'Content Placement', 'MODULE_BOXES_AZ_MANUFACTURER_INFO_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 66, 1, NULL, '2022-04-05 12:11:59', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
 (112066, 'Enable Manufacturer Info Module', 'MODULE_BOXES_AZ_MANUFACTURER_INFO_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2022-04-05 12:11:59', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
@@ -22565,7 +22567,10 @@ INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configu
 (112159, 'Facturacion, Selecciona la cantidada antes del codigo de barras 1 despues del codigo de barras 2. ', 'SEL_ITEN_1', '1', 'Seliciona que prefieres la cantidad del producto primero 1 o despues del ean 2', 8, NULL, NULL, '0000-00-00 00:00:00', NULL, ''),
 (112160, 'Enable Categories Module', 'MODULE_BOXES_AZ_MARKETPLACE_STATUS', 'True', 'Do you want to add the module to your shop?', 6, 1, NULL, '2023-03-09 23:49:26', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'), '),
 (112161, 'Content Placement', 'MODULE_BOXES_AZ_MARKETPLACE_CONTENT_PLACEMENT', 'Left Column', 'Should the module be loaded in the left or right column?', 6, 1, NULL, '2023-03-09 23:49:26', NULL, 'tep_cfg_select_option(array(\'Left Column\', \'Right Column\'), '),
-(112162, 'Sort Order', 'MODULE_BOXES_AZ_MARKETPLACE_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2023-03-09 23:49:26', NULL, NULL);
+(112162, 'Sort Order', 'MODULE_BOXES_AZ_MARKETPLACE_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', 6, 0, NULL, '2023-03-09 23:49:26', NULL, NULL),
+(112163, 'Activar imagen en categoria products listing', 'ACTIVAR_IMAGEN_AUTOMATICA', 'false', 'La Categoría adquiere automaticamente la imagen de uno de los productos de la categoria.', 8, 300, NULL, '0000-00-00 00:00:00', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+(112164, 'IMPUESTO', 'OT_TAX_IVA', '0', '', 6081, 2, NULL, '0000-00-00 00:00:00', NULL, ''),
+(112165, 'MAX.FILAS', 'MAX_FILAS', '10', '', 6081, 2, NULL, '0000-00-00 00:00:00', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -22650,6 +22655,62 @@ INSERT INTO `contabilidad_ciber_tabla_porcentage` (`porcentage_id`, `porcentage_
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `contabilidad_general`
+--
+
+DROP TABLE IF EXISTS `contabilidad_general`;
+CREATE TABLE IF NOT EXISTS `contabilidad_general` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` int(11) NOT NULL,
+  `total_bruto` decimal(11,2) NOT NULL,
+  `total_beneficio` decimal(11,2) NOT NULL,
+  `total_costo` decimal(14,2) NOT NULL,
+  `importe` decimal(11,2) NOT NULL,
+  `concepto` int(11) NOT NULL,
+  `observaciones` varchar(125) NOT NULL,
+  `status` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `contabilidad_general`
+--
+
+INSERT INTO `contabilidad_general` (`id`, `orders_id`, `total_bruto`, `total_beneficio`, `total_costo`, `importe`, `concepto`, `observaciones`, `status`, `fecha`) VALUES
+(3, 25, '101.50', '38.50', '63.00', '0.00', 1, '', 0, '0000-00-00'),
+(4, 10, '37.00', '37.00', '0.00', '0.00', 1, '', 0, '0000-00-00'),
+(6, 0, '0.00', '0.00', '0.00', '256.50', 2, 'ToÃ±o', 3, '2023-04-08'),
+(12, 5, '50.00', '50.00', '0.00', '0.00', 1, '', 0, '0000-00-00'),
+(13, 14, '0.00', '0.00', '0.00', '0.00', 1, '', 0, '0000-00-00'),
+(14, 1, '8.00', '8.00', '0.00', '0.00', 1, '', 0, '0000-00-00'),
+(15, 28, '9.00', '9.00', '0.00', '0.00', 1, '', 0, '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contabilidad_general_conceptos`
+--
+
+DROP TABLE IF EXISTS `contabilidad_general_conceptos`;
+CREATE TABLE IF NOT EXISTS `contabilidad_general_conceptos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `concepto` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `contabilidad_general_conceptos`
+--
+
+INSERT INTO `contabilidad_general_conceptos` (`id`, `concepto`) VALUES
+(2, 'Gastos'),
+(3, 'Inversión'),
+(4, 'Retiros Socios');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `contabilidad_st`
 --
 
@@ -22729,7 +22790,7 @@ CREATE TABLE IF NOT EXISTS `counter` (
 --
 
 INSERT INTO `counter` (`startdate`, `counter`) VALUES
-('20120616', 15841680);
+('20120616', 15841682);
 
 -- --------------------------------------------------------
 
@@ -23606,17 +23667,17 @@ CREATE TABLE IF NOT EXISTS `marketplace` (
 
 INSERT INTO `marketplace` (`categories_id`, `sistema_patrocine`, `categories_image`, `parent_id`, `sort_order`, `date_added`, `last_modified`, `categories_time`, `categories_productos`, `categories_status`, `categories_marketplace`) VALUES
 (99999999, 0, NULL, 0, NULL, NULL, NULL, 1670234910, 0, 0, 0),
-(100000000, 0, NULL, 0, 0, '2022-12-05 06:32:39', NULL, 1678373064, 0, 0, 0),
-(100000001, 0, NULL, 0, 0, '2022-12-05 06:33:11', NULL, 1678362702, 0, 0, 0),
-(100000002, 0, NULL, 0, 0, '2022-12-05 06:33:37', NULL, 1678366784, 0, 0, 0),
+(100000000, 0, NULL, 0, 0, '2022-12-05 06:32:39', NULL, 1686323495, 0, 0, 0),
+(100000001, 0, NULL, 0, 0, '2022-12-05 06:33:11', NULL, 1686377296, 0, 0, 0),
+(100000002, 0, NULL, 0, 0, '2022-12-05 06:33:37', NULL, 1686327625, 0, 0, 0),
 (100000003, 0, 'https://qic.es/images/store_logo.png', 100000002, 0, '2022-12-05 06:34:15', NULL, 1678328386, 0, 0, 0),
 (100000004, 0, 'https://elcogollo2.com/images/store_logo.png', 100000000, 0, '2022-12-05 07:40:56', NULL, 1678433348, 0, 0, 0),
 (100000021, 0, 'https://srmarihuano.es/images/store_logo.png', 100000000, 0, '2023-03-01 17:42:42', NULL, 1678387857, 0, 0, 0),
 (100000006, 0, 'https://tasmaniapetshop.es/images/store_logo.png', 100000001, 0, '2022-12-05 07:42:02', NULL, 1678286295, 0, 0, 0),
-(100000017, 0, NULL, 0, 0, '2023-01-13 06:44:53', NULL, 1678082142, 0, 0, 0),
+(100000017, 0, NULL, 0, 0, '2023-01-13 06:44:53', NULL, 1686364283, 0, 0, 0),
 (100000018, 0, 'https://deliciaitaliana.com/images/store_logo.png', 100000017, 0, '2023-01-13 06:45:46', NULL, 1678015187, 0, 0, 0),
-(100000016, 0, NULL, 0, 3, '2022-12-18 14:51:50', NULL, 1678337941, 0, 0, 0),
-(100000019, 0, NULL, 0, 0, '2023-02-17 21:20:05', NULL, 1678406131, 0, 0, 0),
+(100000016, 0, NULL, 0, 3, '2022-12-18 14:51:50', NULL, 1686370076, 0, 0, 0),
+(100000019, 0, NULL, 0, 0, '2023-02-17 21:20:05', NULL, 1686389454, 0, 0, 0),
 (100000020, 0, 'https://vainillachocolate.enterprise30.es/images/store_logo.png', 100000019, 0, '2023-02-17 23:59:57', NULL, 1678427082, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -23718,6 +23779,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `sel_iten_max` int(1) NOT NULL DEFAULT '1',
   `customers_id` int(11) NOT NULL DEFAULT '0',
   `factura_id` int(11) NOT NULL,
+  `total_beneficio` decimal(11,2) NOT NULL,
   `customers_name` varchar(200) NOT NULL DEFAULT '',
   `customers_dni` varchar(125) NOT NULL,
   `customers_company` varchar(32) NOT NULL DEFAULT '',
@@ -23784,10 +23846,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Volcado de datos para la tabla `orders`
 --
 
-INSERT INTO `orders` (`orders_id`, `sel_iten_max`, `customers_id`, `factura_id`, `customers_name`, `customers_dni`, `customers_company`, `customers_street_address`, `customers_suburb`, `customers_city`, `customers_postcode`, `customers_state`, `customers_country`, `customers_telephone`, `customers_email_address`, `customers_address_format_id`, `delivery_name`, `delivery_company`, `delivery_street_address`, `delivery_suburb`, `delivery_city`, `delivery_postcode`, `delivery_state`, `delivery_country`, `delivery_address_format_id`, `billing_name`, `billing_company`, `billing_street_address`, `billing_suburb`, `billing_city`, `billing_postcode`, `billing_state`, `billing_country`, `billing_address_format_id`, `payment_method`, `payment_method_email`, `payment_id`, `cc_type`, `cc_owner`, `cc_number`, `cc_expires`, `last_modified`, `date_purchased`, `orders_status`, `orders_date_finished`, `currency`, `currency_value`, `orders_cambios`, `certificado`, `f_reclamacion`, `n_reclamacion`, `proveedor_id`, `porcentage_tienda`, `publicar_order`, `orders_cuenta_dev`, `orders_titular_dev`, `orders_observaciones_dev`, `orders_fecha_dev`, `orders_medas`, `orders_cambio_dev`, `admin_level_price`, `admin_level_borrar`, `admin_level_usuario`) VALUES
-(1, 1, 3, 1, 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:49:26', '2022-11-29 01:29:44', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '-20.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
-(2, 1, 3, 0, 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:34:56', '2022-11-30 15:34:45', 38, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
-(3, 1, 3, 2, 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:50:17', '2022-11-30 15:49:40', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda');
+INSERT INTO `orders` (`orders_id`, `sel_iten_max`, `customers_id`, `factura_id`, `total_beneficio`, `customers_name`, `customers_dni`, `customers_company`, `customers_street_address`, `customers_suburb`, `customers_city`, `customers_postcode`, `customers_state`, `customers_country`, `customers_telephone`, `customers_email_address`, `customers_address_format_id`, `delivery_name`, `delivery_company`, `delivery_street_address`, `delivery_suburb`, `delivery_city`, `delivery_postcode`, `delivery_state`, `delivery_country`, `delivery_address_format_id`, `billing_name`, `billing_company`, `billing_street_address`, `billing_suburb`, `billing_city`, `billing_postcode`, `billing_state`, `billing_country`, `billing_address_format_id`, `payment_method`, `payment_method_email`, `payment_id`, `cc_type`, `cc_owner`, `cc_number`, `cc_expires`, `last_modified`, `date_purchased`, `orders_status`, `orders_date_finished`, `currency`, `currency_value`, `orders_cambios`, `certificado`, `f_reclamacion`, `n_reclamacion`, `proveedor_id`, `porcentage_tienda`, `publicar_order`, `orders_cuenta_dev`, `orders_titular_dev`, `orders_observaciones_dev`, `orders_fecha_dev`, `orders_medas`, `orders_cambio_dev`, `admin_level_price`, `admin_level_borrar`, `admin_level_usuario`) VALUES
+(1, 1, 3, 1, '8.00', 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:49:26', '2022-11-29 01:29:44', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '-20.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
+(2, 1, 3, 0, '0.00', 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:34:56', '2022-11-30 15:34:45', 38, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda'),
+(3, 1, 3, 2, '0.00', 'Tienda Cliente Contado', '', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '642602287', 'admin@admin.com', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', 1, 'Tienda Cliente Contado', '', '', '', 'santa cruz de tenerife', '', 'Santa Cruz de Tenerife', 'Spain', '1', 'Ventas Administraciï¿½n.', '', 1, '', '', '', '', '2022-11-30 14:50:17', '2022-11-30 15:49:40', 33, NULL, 'EUR', '1.000000', 1, '', '', '', 0, '0.00', 1, '', '', '', '', '', '0.00', 0, 0, 'tienda');
 
 -- --------------------------------------------------------
 
@@ -23804,12 +23866,14 @@ CREATE TABLE IF NOT EXISTS `orders_products` (
   `products_name` varchar(64) NOT NULL DEFAULT '',
   `products_price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `final_price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `final_beneficio` decimal(11,2) NOT NULL,
   `products_descuento` decimal(14,2) NOT NULL,
   `final_price_total` decimal(15,4) NOT NULL,
   `final_price_euro` decimal(11,2) NOT NULL DEFAULT '0.00',
   `final_price_tienda` decimal(11,2) NOT NULL DEFAULT '0.00',
   `products_tax` decimal(7,4) NOT NULL DEFAULT '0.0000',
   `products_quantity` decimal(11,2) NOT NULL DEFAULT '0.00',
+  `products_quantity_control` decimal(11,2) NOT NULL,
   `value_cliente` decimal(11,2) NOT NULL DEFAULT '0.00',
   `value_grupo1` decimal(11,2) NOT NULL DEFAULT '0.00',
   `value_grupo2` decimal(11,2) NOT NULL DEFAULT '0.00',
@@ -23836,10 +23900,10 @@ CREATE TABLE IF NOT EXISTS `orders_products` (
 -- Volcado de datos para la tabla `orders_products`
 --
 
-INSERT INTO `orders_products` (`orders_products_id`, `orders_id`, `products_id`, `products_model`, `products_name`, `products_price`, `final_price`, `products_descuento`, `final_price_total`, `final_price_euro`, `final_price_tienda`, `products_tax`, `products_quantity`, `value_cliente`, `value_grupo1`, `value_grupo2`, `value_grupo3`, `value_grupo4`, `value_grupo5`, `value_grupo6`, `value_grupo7`, `value_grupo8`, `value_grupo9`, `value_grupo10`, `value_afiliado_remoto`, `orders_cambios_quantity`, `orders_cambios`, `pagado`, `products_inventario`, `donde_esta`, `lista_prov`, `cambio_de_productos`) VALUES
-(2, 1, 1, 'P1', 'P1', '10.0000', '8.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
-(3, 2, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
-(4, 3, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0);
+INSERT INTO `orders_products` (`orders_products_id`, `orders_id`, `products_id`, `products_model`, `products_name`, `products_price`, `final_price`, `final_beneficio`, `products_descuento`, `final_price_total`, `final_price_euro`, `final_price_tienda`, `products_tax`, `products_quantity`, `products_quantity_control`, `value_cliente`, `value_grupo1`, `value_grupo2`, `value_grupo3`, `value_grupo4`, `value_grupo5`, `value_grupo6`, `value_grupo7`, `value_grupo8`, `value_grupo9`, `value_grupo10`, `value_afiliado_remoto`, `orders_cambios_quantity`, `orders_cambios`, `pagado`, `products_inventario`, `donde_esta`, `lista_prov`, `cambio_de_productos`) VALUES
+(2, 1, 1, 'P1', 'P1', '10.0000', '8.0000', '8.00', '0.00', '8.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
+(3, 2, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.00', '0.0000', '0.00', '0.00', '0.0000', '2.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0),
+(4, 3, 1, 'P1', 'P1', '10.0000', '10.0000', '0.00', '0.00', '0.0000', '0.00', '0.00', '0.0000', '1.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 1, 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -24079,7 +24143,7 @@ CREATE TABLE IF NOT EXISTS `orders_total` (
   `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`orders_total_id`),
   KEY `idx_orders_total_orders_id` (`orders_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `orders_total`
@@ -24100,7 +24164,8 @@ INSERT INTO `orders_total` (`orders_total_id`, `orders_id`, `title`, `text`, `va
 (12, 3, 'Descuento: ', '0.00€', '0.00', '0.00', 'ot_customer_discount', 2),
 (13, 3, 'Gastos Envï¿½o: ', '0.00€', '0.00', '0.00', 'ot_shipping', 3),
 (14, 3, 'Impuesto:', '0.00€', '0.00', '0.00', 'ot_tax', 4),
-(15, 3, 'Total:', '<b>10.00€</b>', '10.00', '0.00', 'ot_total', 5);
+(15, 3, 'Total:', '<b>10.00€</b>', '10.00', '0.00', 'ot_total', 5),
+(16, 17, 'Impuestos', '0', '0.00', '0.00', 'ot_tax', 2);
 
 -- --------------------------------------------------------
 
@@ -24124,7 +24189,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `products_twitter` varchar(125) NOT NULL,
   `part_number` varchar(128) NOT NULL,
   `manufacturers_name` varchar(255) NOT NULL DEFAULT '',
-  `products_image` varchar(255) DEFAULT NULL,
+  `products_image` varchar(255) DEFAULT 'imnd.svg',
   `products_price` decimal(15,2) NOT NULL DEFAULT '0.00',
   `products_porcentage` decimal(12,2) NOT NULL DEFAULT '0.00',
   `products_price_sin` decimal(14,2) NOT NULL,
@@ -24357,6 +24422,21 @@ CREATE TABLE IF NOT EXISTS `products_descuento_cantidad` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `products_descuento_especial`
+--
+
+DROP TABLE IF EXISTS `products_descuento_especial`;
+CREATE TABLE IF NOT EXISTS `products_descuento_especial` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `products_id` int(11) NOT NULL,
+  `precio_especial` decimal(11,2) NOT NULL,
+  `customers_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `products_donde_esta`
 --
 
@@ -24418,6 +24498,7 @@ DROP TABLE IF EXISTS `products_groups`;
 CREATE TABLE IF NOT EXISTS `products_groups` (
   `customers_group_id` int(11) NOT NULL DEFAULT '0',
   `customers_group_price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `group_price_total` decimal(11,4) NOT NULL,
   `products_id` int(11) NOT NULL DEFAULT '0',
   `products_price` decimal(15,4) NOT NULL DEFAULT '0.0000'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -24564,7 +24645,7 @@ CREATE TABLE IF NOT EXISTS `products_stock` (
 --
 
 INSERT INTO `products_stock` (`products_id`, `products_stock_real`, `products_stock_pendiente`, `products_stock_ultimaactualizacion`, `products_stock_min`) VALUES
-('1', '0.00', 0, '2023-03-09', 0);
+('1', '0.00', 0, '2023-06-09', 0);
 
 -- --------------------------------------------------------
 
@@ -24727,7 +24808,10 @@ INSERT INTO `sessions` (`sesskey`, `expiry`, `value`) VALUES
 ('ogmo9bhgspa24ogs1hull4qg94', 1678402293, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
 ('e1imocke0efebhhu6ehk1uqeu0', 1678397678, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
 ('12j78sogh69b26gg55ugq8b201', 1678403693, 'sessiontoken|s:32:\"eb46369ae4a2c091aca87d53578773be\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
-('h7elk6nbh02t46fhcace7sfkd2', 1678399062, 'sessiontoken|s:32:\"7a42034009648b1daac7bce757d6f927\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;');
+('h7elk6nbh02t46fhcace7sfkd2', 1678399062, 'sessiontoken|s:32:\"7a42034009648b1daac7bce757d6f927\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:9:\"index.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
+('uaid4rr51to4ohlht2890se583', 1686316189, 'language|s:7:\"english\";languages_id|s:1:\"1\";admin|a:2:{s:2:\"id\";s:1:\"1\";s:8:\"username\";s:6:\"tienda\";}'),
+('78vmg3vujpeuo346a8frtcj936', 1686317483, 'sessiontoken|s:32:\"94548afafa67b36d6671a8f38162bba6\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:3:{s:11:\"products_id\";s:3:\"107\";s:6:\"imagen\";s:3:\"big\";s:10:\"url_imagen\";s:53:\"https://vivelocripto.marketplace30.es/images/imnd.svg\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;'),
+('18kmvtqn6v38oagiv34n4fb9b5', 1686317574, 'sessiontoken|s:32:\"3be161619b4746e2340b61de6a3c6e89\";cart|O:12:\"shoppingCart\":4:{s:8:\"contents\";a:0:{}s:5:\"total\";i:0;s:6:\"weight\";i:0;s:12:\"content_type\";b:0;}language|s:7:\"english\";languages_id|s:1:\"1\";currency|s:3:\"EUR\";navigation|O:17:\"navigationHistory\":2:{s:4:\"path\";a:1:{i:0;a:4:{s:4:\"page\";s:16:\"product_info.php\";s:4:\"mode\";s:3:\"SSL\";s:3:\"get\";a:3:{s:11:\"products_id\";s:3:\"109\";s:6:\"imagen\";s:3:\"big\";s:10:\"url_imagen\";s:53:\"https://vivelocripto.marketplace30.es/images/imnd.svg\";}s:4:\"post\";a:0:{}}}s:8:\"snapshot\";a:0:{}}affiliate_ref|N;affiliate_clickthroughs_id|N;');
 
 -- --------------------------------------------------------
 
@@ -24898,7 +24982,9 @@ INSERT INTO `view_counter` (`ip_active`, `isbot`, `isadmin`, `ip_number`, `sessi
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=edit', 1, '2023-03-09 23:50:19', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=save', 1, '2023-03-09 23:50:24', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=edit', 1, '2023-03-09 23:50:34', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '', 908367146, '78vmg3vujpeuo346a8frtcj936', 'product_info.php', 'products_id=107&imagen=big&url_imagen=https://vivelocripto.marke', 1, '2023-06-09 15:07:23', '', '', '', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', 1),
+(1, 0, '', 908367021, '18kmvtqn6v38oagiv34n4fb9b5', 'product_info.php', 'products_id=109&imagen=big&url_imagen=https://vivelocripto.marke', 1, '2023-06-09 15:08:54', '', '', '', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', 1);
 
 -- --------------------------------------------------------
 
@@ -25118,7 +25204,9 @@ INSERT INTO `view_counter_storage` (`ip_active`, `isbot`, `isadmin`, `ip_number`
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=edit', 1, '2023-03-09 23:50:19', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=bm_login&action=save', 1, '2023-03-09 23:50:24', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=bm_login&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
 (1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=edit', 1, '2023-03-09 23:50:34', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
-(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1);
+(1, 0, '/admin/', 520417955, 'ogmo9bhgspa24ogs1hull4qg94', 'modules.php', 'set=boxes&module=az_categories&action=save', 1, '2023-03-09 23:50:39', '', 'https://thcan.es/admin/modules.php', 'set=boxes&module=az_categories&action=edit', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 1),
+(1, 0, '', 908367146, '78vmg3vujpeuo346a8frtcj936', 'product_info.php', 'products_id=107&imagen=big&url_imagen=https://vivelocripto.marke', 1, '2023-06-09 15:07:23', '', '', '', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', 1),
+(1, 0, '', 908367021, '18kmvtqn6v38oagiv34n4fb9b5', 'product_info.php', 'products_id=109&imagen=big&url_imagen=https://vivelocripto.marke', 1, '2023-06-09 15:08:54', '', '', '', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', 1);
 
 -- --------------------------------------------------------
 
@@ -25142,7 +25230,8 @@ CREATE TABLE IF NOT EXISTS `whos_online` (
 --
 
 INSERT INTO `whos_online` (`customer_id`, `full_name`, `session_id`, `ip_address`, `time_entry`, `time_last_click`, `last_page_url`) VALUES
-(0, 'Guest', '12j78sogh69b26gg55ugq8b201', '31.4.242.163', '1678402253', '1678402253', '/');
+(0, 'Guest', '78vmg3vujpeuo346a8frtcj936', '54.36.149.42', '1686316043', '1686316043', '/product_info.php?products_id=107&imagen=big&url_imagen=https://vivelocripto.marketplace30.es/images/imnd.svg'),
+(0, 'Guest', '18kmvtqn6v38oagiv34n4fb9b5', '54.36.148.173', '1686316133', '1686316133', '/product_info.php?products_id=109&imagen=big&url_imagen=https://vivelocripto.marketplace30.es/images/imnd.svg');
 
 -- --------------------------------------------------------
 

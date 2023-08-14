@@ -21,6 +21,7 @@
   //}
   $customer_id = tep_db_prepare_input($HTTP_POST_VARS['customers_id']);
   $gender = tep_db_prepare_input($HTTP_POST_VARS['gender']);
+  $dni = tep_db_prepare_input($HTTP_POST_VARS['dni']);
   $firstname = tep_db_prepare_input($HTTP_POST_VARS['firstname']);
   $lastname = tep_db_prepare_input($HTTP_POST_VARS['lastname']);
   $dob = tep_db_prepare_input($HTTP_POST_VARS['dob']);
@@ -44,7 +45,9 @@
   $size = "1";
   $payment_method = DEFAULT_PAYMENT_METHOD;
   
-  
+
+      $orden_status_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . $customer_id . "'");
+ 	$orden_ = tep_db_fetch_array($orden_status_query);
 
   
   
@@ -68,6 +71,7 @@
     $sql_data_array = array('customers_id' => $customer_id,
 							'customers_name' => $firstname . ' ' . $lastname,
 							'customers_company' => $company,
+                            'customers_dni' => $orden_['customers_dni'],
                             'customers_street_address' => $street_address,
 							'customers_suburb' => $suburb,
 							'customers_city' => $city,

@@ -1,4 +1,7 @@
-<?php
+
+
+
+ <?php
 /*
   $Id: stats_products_viewed.php,v 1.29 2003/06/29 22:50:52 hpdl Exp $
 
@@ -22,8 +25,12 @@ include(DIR_WS_CLASSES . 'order.php');
 
   $sonido = $_GET['sonido'];
  $palabraclave = $_POST['palabraclave'];
+ 
+ IF ($_GET['donde_esta_gloval']){
  $donde_esta_gloval = $_GET['donde_esta_gloval'];
-
+}ELSE{
+ $donde_esta_gloval = $_POST['donde_esta_gloval'];
+  }
 
   if ($login_id_remoto){
     $log_id =  $login_id_remoto;
@@ -53,6 +60,7 @@ if ($sonido){
  if (ereg ("^[A-Z]", $palabraclave, $mi_array)) {
    echo "OKS" . $sonido; // coincide. Lo mostramos en orden inverso porque somos asi : )
    
+
 
 
           $donde_esta_gloval = $palabraclave;
@@ -89,11 +97,10 @@ if ($sonido){
 
 
 
-    echo "Donde Esta "; // no coincide
+    echo "Donde Esta 2" ; // no coincide
 
-
-
-      if ($palabraclave){
+              echo  $palabraclave;
+      if ($_POST['palabraclave']){
 
 
                            //    $login_id        solo con cuenta especifica
@@ -102,13 +109,13 @@ if ($sonido){
 
          // Situacion donde esta el producto en el almacen
          // cada tienda tiene su propio sistame de codi         /(
-    $donde_esta_c_values = mysql_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $palabraclave . "' and login_id = '" . $log_id . "' or products_model = '" . $palabraclave . "' and login_id = '" . $log_id . "'");
-   if  ($donde_esta_c= mysql_fetch_array($donde_esta_c_values)){
+    $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_model = '" . $palabraclave . "' and login_id = '" . $log_id . "' or products_model = '" . $palabraclave . "' and login_id = '" . $log_id . "'");
+   if  ($donde_esta_c= tep_db_fetch_array($donde_esta_c_values)){
 
 
 
              $sql_status_update_array = array('donde_esta' => $donde_esta_gloval);
-            tep_db_perform('products_donde_esta', $sql_status_update_array, 'update', " products_id='" . $palabraclave . "' and login_id= '" . $log_id . "' or products_model = '" . $palabraclave . "' and login_id = '" . $log_id . "'");
+            tep_db_perform('products_donde_esta', $sql_status_update_array, 'update', " products_model='" . $palabraclave . "' and login_id= '" . $log_id . "' or products_model = '" . $palabraclave . "' and login_id = '" . $log_id . "'");
 
                    ECHO 'PRODUCTO ACTUALIZADO'.$log_id.'/'.$palabraclave;
 
@@ -116,7 +123,7 @@ if ($sonido){
 
 
   <head>
-<bgsound src="sonido/gunshot.mid" loop="1">
+<bgsound src="sonido/gum.mp3" loop="1">
 </head>
 
 
@@ -124,13 +131,13 @@ if ($sonido){
 
 }else{
                               // solo si el producto existe en la base de datos inserta el codigo.
-       $confirmar_producto_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $palabraclave . "'");
-    IF ($confirmar_producto = mysql_fetch_array($confirmar_producto_values)){
+       $confirmar_producto_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_model = '" . $palabraclave . "'");
+   $confirmar_producto = tep_db_fetch_array($confirmar_producto_values);
 
-    ECHO 'PRODUCTO INSERTADO';
+    ECHO 'PRODUCTO INSERTADO'.$palabraclave;
 
            $Query = "INSERT INTO " . 'products_donde_esta' . " set
-              products_id = '" . $palabraclave . "',
+              products_id = '" . $confirmar_producto["products_id"] . "',
               donde_esta = '" . $donde_esta_gloval . "',
               products_model = '" . $confirmar_producto["products_model"] . "',
               login_id = '" . $log_id . "'";
@@ -143,14 +150,14 @@ if ($sonido){
 
 
   <head>
-<bgsound src="sonido/gunshot.mid" loop="1">
+<bgsound src="sonido/gunshot.mp3" loop="1">
 </head>
 
-
+    <audio src="sonido/gunshot.mp3"></audio>
 <?php
 
 
-         }
+
 
 
 
@@ -254,12 +261,39 @@ function popupWindow(url) {
     </b></font>
   </p>
 </form>
+             <?php
+
+                 if ($_POST['palabraclave']){
+
+                 ?>
+
+<audio autoplay>
+    <source src="sonido/gum.mp3" type="audio/mp3">
+
+        Tu navegador no soporta audio HTML5.
+</audio>
 
 
+                 <?php
 
+                 }ELSE{
+                    ?>
+<audio autoplay>
+    <source src="sonido/COCKGN-1.mid" type="audio/mp3">
 
+        Tu navegador no soporta audio HTML5.
+</audio>
 
+    <?php
+}
 
+                      ?>
+                      
+                      
+                      
+
+                      
+                      
 
 <!-- body_text_eof //-->
   </tr>

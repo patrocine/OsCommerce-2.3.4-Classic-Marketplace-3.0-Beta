@@ -66,6 +66,10 @@ ob_start();
 //#### HEADER HTML #########
 ?>
  
+ 
+
+ 
+ 
 <div class="wrapper <?php echo ($tmpl['cfg']['main_page'] ? 'main_page' : 'default_page'); ?> " align="center">
 	  	
 	<div class="az_main_container">
@@ -78,8 +82,7 @@ ob_start();
 							<?php include(TMPL_BOXES . 'az_shopping_cart.php');?>
 							<div class="f_right header_box_lang"><?php require(TMPL_BOXES . 'az_languages.php'); ?></div>
 							<div class="f_right header_box_currencies"><?php require(TMPL_BOXES . 'az_currencies.php'); ?></div>
-							<div class="clear"></div>
-							<div class="space_1"></div>
+
 							<div class="f_right header_box_search"><?php include(TMPL_BOXES . 'az_search.php');?></div>
        
  <?php
@@ -117,7 +120,7 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
 			<!--categ-->
 			
 			<?php if ( $tmpl['cfg']['main_page'] ) { 
-	//		require(TMPL_BOXES . 'az_slider.php');
+			//require(TMPL_BOXES . 'az_slider.php');
 		require(TMPL_BOXES . 'az_slider_new_products.php');
 
 			 } ?>

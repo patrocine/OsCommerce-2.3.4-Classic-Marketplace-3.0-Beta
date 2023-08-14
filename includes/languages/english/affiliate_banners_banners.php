@@ -10,9 +10,9 @@
   Updated by Fimble (http://forums.oscommerce.com/user/15542-fimble/)
   http://www.linuxuk.co.uk
 */
-define('NAVBAR_TITLE', 'Affiliate Program');
-define('HEADING_TITLE', 'Affiliate Program - Banners');
+define('NAVBAR_TITLE', 'Programa de Afiliados');
+define('HEADING_TITLE', 'Programa de Afiliados - Lnk de Referidos');
 define('TEXT_AFFILIATE_NAME', 'Banner Name:');
-define('TEXT_INFORMATION', 'Choose the banner you want to display on your website from the choices below:');
-define('TEXT_AFFILIATE_INFO', 'Copy the code shown below and paste into your website');
+define('TEXT_INFORMATION', 'Envia a tus amigos tu link de referidos o que escaneen el codigo qr para registrarse y consegirás una comision por cada compra que realicen tus referidos.');
+define('TEXT_AFFILIATE_INFO', 'Copia y envia el codigo a tus usuarios y amigos.');
 ?>

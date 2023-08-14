@@ -10,76 +10,75 @@
   Updated by Fimble (http://forums.oscommerce.com/user/15542-fimble/)
   http://www.linuxuk.co.uk
 */
-define('NAVBAR_TITLE', 'Affiliate Program FAQ');
-define('HEADING_TITLE', 'Affiliate Program - Frequently Asked Questions');
+define('NAVBAR_TITLE', 'Programa de Afiliados - Preguntas Frecuentes');
+define('HEADING_TITLE', 'Programa de Afiliados - Preguntas Frecuentes');
 define('BOX_AFFILIATE_CONTACT', ' contact us ');
-define('TEXT_INFORMATION', '' . STORE_NAME . ' has compiled this info so that you may be better informed about our affiliate program.<br />
+
+
+ if (AFFILIATE_OPTION == 'true'){
+
+  $text_option = 'Cuando un cliente se registre con tu link de referidos tu id de afiliado queda vinculado con el del cliente y cada vez que este realice una compra se te sumara la comisión en tu zona de ventas, cuando los pedidos esten en pagado estarán preparados para el proximo cierre..';
+    $perpetuo =' Cliente Permanente Activado';
+}else{
+    $text_option = 'Cuando un cliente ae registra y hace un pedido dentro del tiempo que esta activo el referido conseguirás la comisión, con este metodo perderás la comisión si el cliente no compra en el momento.';
+    $perpetuo =' Cliente Ocasional Activado';
+}
+
+
+define('TEXT_INFORMATION', '' . STORE_NAME . ' ha compilado esta información para que pueda estar mejor informado sobre nuestro programa de afiliados.
+Si tiene alguna pregunta, póngase en contacto con nosotros para obtener más información.<br />
+
+
 <a name="0"> 
- If you have any questions please <a href="' . tep_href_link(FILENAME_AFFILIATE_CONTACT). '">' . BOX_AFFILIATE_CONTACT . '</a> for more information.<br />
 <ul>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Question 1?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#2">Question 2?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#3">Question 3?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#4">Question 4?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#5">Question 5?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#6">Question 6?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#7">Question 7?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#8">Question 8?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#9">Question 9?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#10">Question 10?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#11">Question 11?</a>
-<li><a href="' . tep_href_link('affiliate_faq.php') . '#12">Question 12?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#1">Cuando se cobran las comisiones?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#2">Como se calculan las comisiones? ' . $perpetuo . '</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#3">Como invito a mis a migos y familiares con mi referido?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#4">Cuanto es la Comisión de ' . STORE_NAME . ' ?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#5">Desde que se generá la comision cuanto tiempo tengo que esperar para cobrarla?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#6">De cuanto tiene que ser el importe minimo para cerrar los pagos?</a>
+<li><a href="' . tep_href_link('affiliate_faq.php') . '#7">Como recibo mis pagos?</a>
+
 </ul>
 <hr width ="90%">
 <br />
-<FONT COLOR="#000000" size="4"><B><U>Frequently Asked Questions</U></B></FONT>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 1?</font><a name="1"></a><br />
-Answer 1.</p>
+<FONT COLOR="#000000" size="4"><B><U>Preguntas y Respuestas</U></B></FONT>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Cuando se cobran las comisiones?</font><a name="1"></a><br />
+
+Las comisiones se van acumulando y cuando la empresa realice el cierre todos los pedidos que estan pagados ´se creará una orden única de pagos que podrás ver en la zona de pagos, no olvides configurar tus datos de pago para que la empresa pueda hacerte el ingreso.
+
+</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 2?</font><a name="2"></a><br />
-Answer 2.</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Como se calculan las comisiones? ' . $perpetuo . '</font><a name="2"></a><br />
+
+
+
+ ' . $text_option . '</p>
+
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 3?</font><a name="3"></a><br />
-Answer 3.</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Como invito a mis a migos y familiares con mi referido?</font><a name="3"></a><br />
+
+En tu panel de afiliado, dirigete a la zona de referidos y podrás copiar y enviar el link de referidos o usar el qr para que un amigo pueda escanearla desde tu movil.
+
+
+</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 4?</font><a name="4"></a><br />
-Answer 4.</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Cuanto es la Comisión de ' . STORE_NAME . ' ?</font><a name="4"></a><br />
+El porcentage es de  ' . AFFILIATE_PERCENT . '% por cada venta.</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 5?</font><a name="5"></a><br />
-Answer 5.</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Desde que se generá la comision cuanto tiempo tengo que esperar para cobrarla?</font><a name="5"></a><br />
+Desde que se genera la comision tienen que pasar ' . AFFILIATE_BILLING_TIME . ' Dia/s.</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 6?</font><a name="6"></a><br />
-Answer 6.</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">De cuanto tiene que ser el importe minimo para cerrar los pagos?</font><a name="6"></a><br />
+Tienen que acumularse '.AFFILIATE_THRESHOLD.'Eur para cerrar el pago mensual.</p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
 <p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 7?</font><a name="7"></a><br />
-Answer 7.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 8?</font><a name="8"></a><br />
-Answer 8.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 9?</font><a name="9"></a><br />
-Answer 9.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 10?</font><a name="10"></a><br />
-Answer 10.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 11?</font><a name="11"></a><br />
-Answer 11.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
-<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Question 12?</font><a name="12"></a><br />
-Answer 12.</p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><a href="' . tep_href_link('affiliate_faq.php') . '#0">top</a></p>
-<p align="right" style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0">&nbsp;</p>
+<p style="line-height: 100%; word-spacing: 0; text-indent: 0; margin: 0"><font color="maroon">Como recibo mis pagos?</font><a name="7"></a><br />
+Paypal, Transferencia Bancaria, o Dinero Digital Busd, Usdt, Usdc</p>
 ');
 ?>

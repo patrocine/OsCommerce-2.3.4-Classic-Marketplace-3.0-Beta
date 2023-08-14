@@ -1,6 +1,11 @@
           <?php if (PERMISO_FILENAME_LOGIN_REGISTRO == 'True'){ ?>
 <div class="f_left footer_width_1">
 	<ul class="list_footer">
+		<li><a href="<?php echo 'price_list.php' ?>"><?php echo 'Lista de Precios' ?></a></li>
+	</ul>
+</div>
+<div class="f_left footer_width_1">
+	<ul class="list_footer">
 		<li><a href="<?php echo $tmpl['url']['contact'] ?>"><?php echo $tmpl['txt']['contact'] ?></a></li>
 		<li><a href="<?php echo $tmpl['url']['addresses'] ?>"><?php echo $tmpl['txt']['addresses'] ?></a></li>
 	</ul>
@@ -22,7 +27,6 @@
 <div class="f_left footer_width_4">
 	<ul class="list_footer">
 		<li><a href="<?php echo $tmpl['url']['order_history'] ?>"><?php echo $tmpl['txt']['order_history'] ?></a></li>
-		<li><a href="<?php echo $tmpl['url']['specials'] ?>"><?php echo $tmpl['txt']['specials'] ?></a></li>
 	</ul>
 </div>
 <div class="f_left footer_width_5">

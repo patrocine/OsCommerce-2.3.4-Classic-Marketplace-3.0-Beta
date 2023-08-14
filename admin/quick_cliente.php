@@ -155,12 +155,336 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
 
     foreach($_POST['product_new_price'] as $id => $new_price) {
 
+
+
+
+
           $sql_status_update_array = array('products_price' => $new_price);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
 
 
      }
+     
+    foreach($_POST['customers_groupG1'] as $id => $new_g1) {
 
+
+      $e_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $id . "' and customers_group_id = 1");
+         if  ($e= tep_db_fetch_array($e_values)){
+
+          $sql_status_update_array = array('customers_group_price' => $new_g1);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id='" . $id . "' and customers_group_id = 1");
+
+                                         }else{
+
+
+
+                   $sql_data_array = array('customers_group_price' => $new_g1,
+                                          'products_id' => $id,
+                                          'customers_group_id' => 1,
+                                          'products_price' => $new_price,);
+          tep_db_perform('products_groups', $sql_data_array);
+
+                            }
+
+     }
+     
+    foreach($_POST['customers_groupG2'] as $id => $new_g2) {
+
+
+      $e_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $id . "' and customers_group_id = 2");
+         if  ($e= tep_db_fetch_array($e_values)){
+
+          $sql_status_update_array = array('customers_group_price' => $new_g2);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id='" . $id . "' and customers_group_id = 2");
+
+                                         }else{
+
+
+
+                   $sql_data_array = array('customers_group_price' => $new_g2,
+                                          'products_id' => $id,
+                                          'customers_group_id' => 2,
+                                          'products_price' => $new_price,);
+          tep_db_perform('products_groups', $sql_data_array);
+
+                            }
+                  }
+    
+
+
+    foreach($_POST['opcion_1'] as $id => $new_opcion_1) {
+          $sql_status_update_array = array('opcion_1' => $new_opcion_1);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+    foreach($_POST['opcion_2'] as $id => $new_opcion_2) {
+          $sql_status_update_array = array('opcion_2' => $new_opcion_2);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_3'] as $id => $new_opcion_3) {
+          $sql_status_update_array = array('opcion_3' => $new_opcion_3);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_4'] as $id => $new_opcion_4) {
+          $sql_status_update_array = array('opcion_4' => $new_opcion_4);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_5'] as $id => $new_opcion_5) {
+          $sql_status_update_array = array('opcion_5' => $new_opcion_5);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_6'] as $id => $new_opcion_6) {
+          $sql_status_update_array = array('opcion_6' => $new_opcion_6);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_7'] as $id => $new_opcion_7) {
+          $sql_status_update_array = array('opcion_7' => $new_opcion_7);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_8'] as $id => $new_opcion_8) {
+          $sql_status_update_array = array('opcion_8' => $new_opcion_8);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_9'] as $id => $new_opcion_9) {
+          $sql_status_update_array = array('opcion_9' => $new_opcion_9);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_10'] as $id => $new_opcion_10) {
+          $sql_status_update_array = array('opcion_10' => $new_opcion_10);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+
+    foreach($_POST['opcion_1_1'] as $id => $new_opcion_1_1) {
+          $sql_status_update_array = array('opcion_1_1' => $new_opcion_1_1);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+    foreach($_POST['opcion_2_2'] as $id => $new_opcion_2_2) {
+          $sql_status_update_array = array('opcion_2_2' => $new_opcion_2_2);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_3_3'] as $id => $new_opcion_3_3) {
+          $sql_status_update_array = array('opcion_3' => $new_opcion_3);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_4_4'] as $id => $new_opcion_4_4) {
+          $sql_status_update_array = array('opcion_4' => $new_opcion_4);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_5_5'] as $id => $new_opcion_5_) {
+          $sql_status_update_array = array('opcion_5_5' => $new_opcion_5_5);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_6_6'] as $id => $new_opcion_6_6) {
+          $sql_status_update_array = array('opcion_6_6' => $new_opcion_6_6);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_7_7'] as $id => $new_opcion_7_7) {
+          $sql_status_update_array = array('opcion_7_7' => $new_opcion_7_7);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_8_8'] as $id => $new_opcion_8_8) {
+          $sql_status_update_array = array('opcion_8_8' => $new_opcion_8_8);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_9_9'] as $id => $new_opcion_9_9) {
+          $sql_status_update_array = array('opcion_9_9' => $new_opcion_9_9);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_10_10'] as $id => $new_opcion_10_10) {
+          $sql_status_update_array = array('opcion_10_10' => $new_opcion_10_10);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+
+    foreach($_POST['opcion_11'] as $id => $new_opcion_11) {
+          $sql_status_update_array = array('opcion_11' => $new_opcion_11);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+    foreach($_POST['opcion_12'] as $id => $new_opcion_12) {
+          $sql_status_update_array = array('opcion_12' => $new_opcion_12);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_13'] as $id => $new_opcion_13) {
+          $sql_status_update_array = array('opcion_13' => $new_opcion_13);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_14'] as $id => $new_opcion_14) {
+          $sql_status_update_array = array('opcion_14' => $new_opcion_14);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_15'] as $id => $new_opcion_15) {
+          $sql_status_update_array = array('opcion_15' => $new_opcion_15);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_16'] as $id => $new_opcion_16) {
+          $sql_status_update_array = array('opcion_16' => $new_opcion_16);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_17'] as $id => $new_opcion_17) {
+          $sql_status_update_array = array('opcion_17' => $new_opcion_17);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_18'] as $id => $new_opcion_18) {
+          $sql_status_update_array = array('opcion_18' => $new_opcion_18);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_19'] as $id => $new_opcion_19) {
+          $sql_status_update_array = array('opcion_19' => $new_opcion_19);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_20'] as $id => $new_opcion_20) {
+          $sql_status_update_array = array('opcion_20' => $new_opcion_20);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+
+
+
+
+    foreach($_POST['opcion_11'] as $id => $new_opcion_11) {
+          $sql_status_update_array = array('opcion_11' => $new_opcion_11);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+    foreach($_POST['opcion_12'] as $id => $new_opcion_12) {
+          $sql_status_update_array = array('opcion_12' => $new_opcion_12);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_13'] as $id => $new_opcion_13) {
+          $sql_status_update_array = array('opcion_13' => $new_opcion_13);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_14'] as $id => $new_opcion_14) {
+          $sql_status_update_array = array('opcion_14' => $new_opcion_14);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_15_15'] as $id => $new_opcion_15_15) {
+          $sql_status_update_array = array('opcion_15_15' => $new_opcion_15_15);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_16_16'] as $id => $new_opcion_16_16) {
+          $sql_status_update_array = array('opcion_16_16' => $new_opcion_16_16);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_17_17'] as $id => $new_opcion_17_17) {
+          $sql_status_update_array = array('opcion_17_17' => $new_opcion_17_17);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_18_18'] as $id => $new_opcion_18_18) {
+          $sql_status_update_array = array('opcion_18_18' => $new_opcion_18_18);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_19'] as $id => $new_opcion_19) {
+          $sql_status_update_array = array('opcion_19_19' => $new_opcion_19_19);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+    foreach($_POST['opcion_20_20'] as $id => $new_opcion_20_20) {
+          $sql_status_update_array = array('opcion_20_20' => $new_opcion_20_20);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+     }
+
+
+
+
+
+
+
+
+
+
+    
+    foreach($_POST['opcion_1_1'] as $id => $new_opcion_1_1) {
+
+
+
+
+          $sql_status_update_array = array('opcion_1_1' => $new_opcion_1_1);
+            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
+
+
+
+     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
      foreach($_POST['product_new_weight'] as $id => $new_weight) {
 
@@ -906,7 +1230,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
-                                                      p.codigo_barras,
+                                                      p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.products_youtube_1,
                                                       p.products_twitter,
                                                       p.products_youtube_2,
@@ -954,7 +1317,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
-                                                      p.codigo_barras,
+                                                      p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.referencia_padre_g3,
                                                       p.referencia_padre_g2,
                                                       p.products_twitter,
@@ -1010,6 +1412,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.referencia_padre,
                                                       p.products_stock_min,
                                                       p.codigo_barras,
+                                                      p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.time_entradasysalidas,
                                                       p.time_ultimaactualizacion,
                                                       p.time_pendiente_entrada_total,
@@ -1039,7 +1481,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.codigo_barras,
-                                                      p.codigo_barras,
+                                                     p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.filtro,
                                                       p.products_rc,
                                                       p.products_cpe,
@@ -1082,6 +1563,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       pd.products_name,
                                                       p.filtro,
                                                       p.codigo_barras,
+                                                      p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.products_rc,
                                                       p.products_cpe,
                                                       p.products_cpf,
@@ -1130,7 +1651,46 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.codigo_barras,
-                                                      p.codigo_barras,
+                                                      p.opcion_1,
+                                                      p.opcion_1_1,
+                                                      p.opcion_2,
+                                                      p.opcion_2_2,
+                                                      p.opcion_3,
+                                                      p.opcion_3_3,
+                                                      p.opcion_4,
+                                                      p.opcion_4_4,
+                                                      p.opcion_5,
+                                                      p.opcion_5_5,
+                                                      p.opcion_6,
+                                                      p.opcion_6_6,
+                                                      p.opcion_7,
+                                                      p.opcion_7_7,
+                                                      p.opcion_8,
+                                                      p.opcion_8_8,
+                                                      p.opcion_9,
+                                                      p.opcion_9_9,
+                                                      p.opcion_10,
+                                                      p.opcion_10_10,
+                                                      p.opcion_11,
+                                                      p.opcion_11_11,
+                                                      p.opcion_12,
+                                                      p.opcion_12_12,
+                                                      p.opcion_13,
+                                                      p.opcion_13_13,
+                                                      p.opcion_14,
+                                                      p.opcion_14_14,
+                                                      p.opcion_15,
+                                                      p.opcion_15_15,
+                                                      p.opcion_16,
+                                                      p.opcion_16_16,
+                                                      p.opcion_17,
+                                                      p.opcion_17_17,
+                                                      p.opcion_18,
+                                                      p.opcion_18_18,
+                                                      p.opcion_19,
+                                                      p.opcion_19_19,
+                                                      p.opcion_20,
+                                                      p.opcion_20_20,
                                                       p.filtro,
                                                       p.products_rc,
                                                        p.products_cpe,
@@ -1455,10 +2015,22 @@ echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
 
         $image_product = DIR_WS_CATALOG_IMAGES . $products_images['products_image'];
 }
+         $customers_porcentage_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" . 	1 . "' and products_id = '" . 	$row['products_id'] . "' ");
+       $customers_groupG1 = tep_db_fetch_array($customers_porcentage_values);
+
+         $customers_porcentage_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" . 	2 . "' and products_id = '" . 	$row['products_id'] . "' ");
+       $customers_groupG2 = tep_db_fetch_array($customers_porcentage_values);
+
+         $customers_porcentage_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" . 	3 . "' and products_id = '" . 	$row['products_id'] . "' ");
+       $customers_groupG3 = tep_db_fetch_array($customers_porcentage_values);
+
 
                 echo"<td class=\"smallText\" valign=\"top\"><a target=\"_blank\" href=\"" . HTTP_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $row['products_id'] ."\"><img border=\"0\" src=\"" . $image_product ."\" width=\"46\" height=\"46\">"."</a></td>\n";
 
-          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"product_new_price[".$row['products_id']."]\" value={$row['products_price']}></td>\n";
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"product_new_price[".$row['products_id']."]\" value={$row['products_price']}>
+         <input type=\"text\" size=\"6\" name=\"customers_groupG1[".$row['products_id']."]\" value={$customers_groupG1['customers_group_price']}>
+         <input type=\"text\" size=\"6\" name=\"customers_groupG2[".$row['products_id']."]\" value={$customers_groupG2['customers_group_price']}>
+         <input type=\"text\" size=\"6\" name=\"customers_groupG3[".$row['products_id']."]\" value={$customers_groupG3['customers_group_price']}></td>\n";
 
 
 
@@ -1469,6 +2041,35 @@ echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
 
 
           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"2\" type=\"text\" name=\"products_new_regladeprecios[".$row['products_id']."]\" value={$row['products_regladeprecios']}></td>\n";
+
+
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"opcion_1[".$row['products_id']."]\" value={$row['opcion_1']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_2[".$row['products_id']."]\" value={$row['opcion_2']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_3[".$row['products_id']."]\" value={$row['opcion_3']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_4[".$row['products_id']."]\" value={$row['opcion_4']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_5[".$row['products_id']."]\" value={$row['opcion_5']}></td>\n";
+
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"opcion_1_1[".$row['products_id']."]\" value={$row['opcion_1_1']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_2_2[".$row['products_id']."]\" value={$row['opcion_2_2']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_3_3[".$row['products_id']."]\" value={$row['opcion_3_3']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_4_4[".$row['products_id']."]\" value={$row['opcion_4_4']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_5_4[".$row['products_id']."]\" value={$row['opcion_5_5']}></td>\n";
+
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"opcion_6[".$row['products_id']."]\" value={$row['opcion_6']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_7[".$row['products_id']."]\" value={$row['opcion_7']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_8[".$row['products_id']."]\" value={$row['opcion_8']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_9[".$row['products_id']."]\" value={$row['opcion_9']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_10[".$row['products_id']."]\" value={$row['opcion_10']}></td>\n";
+
+
+          echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"opcion_6_6[".$row['products_id']."]\" value={$row['opcion_6_6']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_7_7[".$row['products_id']."]\" value={$row['opcion_7_7']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_8_8[".$row['products_id']."]\" value={$row['opcion_8_8']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_9_9[".$row['products_id']."]\" value={$row['opcion_9_9']}>
+         <input type=\"text\" size=\"6\" name=\"opcion_10_10[".$row['products_id']."]\" value={$row['opcion_10_10']}></td>\n";
 
 
              if ($row['products_status_exel'] == 1){
