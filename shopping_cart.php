@@ -11,6 +11,11 @@
 */
 
   require("includes/application_top.php");
+  
+  
+  
+
+
 
   if ($cart->count_contents() > 0) {
     include(DIR_WS_CLASSES . 'payment.php');
@@ -22,6 +27,49 @@
   $breadcrumb->add(NAVBAR_TITLE, tep_href_link(FILENAME_SHOPPING_CART));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
+  
+      if(ereg("Android", $_SERVER["HTTP_USER_AGENT"])){
+            ?>
+            <script type="text/javascript">
+
+    var pagina = '<? echo  DIR_WS_HTTP_CATALOG . 'mobile_shopping_cart.php';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+      <?php
+
+} if(ereg("iPhone", $_SERVER["HTTP_USER_AGENT"])){
+            ?>
+            <script type="text/javascript">
+
+    var pagina = '<? echo  DIR_WS_HTTP_CATALOG . 'mobile_shopping_cart.php';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+      <?php;
+
+}
+  
+  
+  
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -38,6 +86,12 @@
   <div class="contentText">
 
 <?php
+
+
+
+
+
+
     $any_out_of_stock = 0;
     $products = $cart->get_products();
     for ($i=0, $n=sizeof($products); $i<$n; $i++) {

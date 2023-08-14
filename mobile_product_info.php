@@ -251,9 +251,9 @@ $products_name .=   '<br /><span class="smallText"> Visto: [' . $product_info['p
       if ($ref_fabricante['proveedor_ruta_images']){
 
 if (@getimagesize($ref_fabricante['proveedor_ruta_images']. $product_info['products_image'])) {
-echo '<a href="' . $ref_fabricante['proveedor_ruta_images'] . $product_info['products_image'] . '" target="_blank" rel="fancybox">' . tep_image($ref_fabricante['proveedor_ruta_images'] . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, null, 'hspace="5" vspace="5"') . '</a>';
+echo '<a href="' . $ref_fabricante['proveedor_ruta_images'] . $product_info['products_image'] . '" target="_blank" rel="fancybox">' . tep_image($ref_fabricante['proveedor_ruta_images'] . $product_info['products_image'], addslashes($product_info['products_name']), 450, null, 'hspace="5" vspace="5"') . '</a>';
 } else {
-  echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $product_info['products_image']) . '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, null, 'hspace="5" vspace="5"') . '</a>';
+  echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $product_info['products_image']) . '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), 450, null, 'hspace="5" vspace="5"') . '</a>';
  }
 
   }else{
@@ -296,7 +296,7 @@ title=" <?php echo $product_info['products_name'] ?> " height="" hspace="5" vspa
       if ($ref_fabricante['proveedor_ruta_images']){
 
 if (@getimagesize($ref_fabricante['proveedor_ruta_images']. $extra_images['products_extra_image'])) {
-echo '<a href="' . $ref_fabricante['proveedor_ruta_images'] . $extra_images['products_extra_image'] . '" target="_blank" rel="fancybox">' . tep_image($ref_fabricante['proveedor_ruta_images'] . $extra_images['products_extra_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, null, 'hspace="5" vspace="5"') . '</a>';
+echo '<a href="' . $ref_fabricante['proveedor_ruta_images'] . $extra_images['products_extra_image'] . '" target="_blank" rel="fancybox"  width="340">' . tep_image($ref_fabricante['proveedor_ruta_images'] . $extra_images['products_extra_image'], addslashes($product_info['products_name']), 350, null, 'hspace="5" vspace="5" ') . '</a>';
 } else {
   //echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $extra_images['products_extra_image']) . '" target="_blank" rel="fancybox">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, null, 'hspace="5" vspace="5"') . '</a>';
  }
@@ -396,8 +396,201 @@ $("#piGal a[rel^='fancybox']").fancybox({
 
 
 
+
+
+
+
+
+
+   <?php
+
+
+       $referpadre_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "'");
+      $referpadre = tep_db_fetch_array($referpadre_values);
+               if ($referpadre['referencia_padre']){
+   ECHO '<p><b><font size="2">Tallas, Medidas, Peso</font></b></p>';
+
+
+                                   ?>
+
+   <table border="0" width="60%" id="table1">
+
+
+          <?php
+
+                                                                                                                        }
+                                   //referencia padre
+       $referpadrep_values = tep_db_query("select *  from " . TABLE_PRODUCTS . " p,  " . TABLE_PRODUCTS_DESCRIPTION . " pd,  " . 'products_stock' . " ps  where p.products_id = pd.products_id and p.products_id = ps.products_id and ps.products_stock_real >= 0.01 and referencia_padre = '" . $referpadre['referencia_padre'] . "'and referencia_padre <> '" . '' . "'");
+     while ($referpadrep = tep_db_fetch_array($referpadrep_values)){
+
+               if (ereg("^https://", $referpadrep['products_image']) ) {
+
+                 $image_product = $referpadrep['products_image'];
+               }else{
+        $image_product = 'images/' . $referpadrep['products_image'];
+}
+
+
+
+ if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_WS_IMAGES. $products_imagen)) {
+                                          }else{
+
+
+               if (ereg("^https://", $referpadrep['products_image']) ) {
+
+                 $image_product = $referpadrep['products_image'];
+               }else{
+        $image_product = 'images/' . $referpadrep['products_image'];
+}                }
+
+                               //IMAGENES PRODUCTOS
+  $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $product_info['codigo_proveedor'] . "'");
+  $codigo_proveedor= tep_db_fetch_array($codigo_proveedor_values);
+
+
+ if (file($codigo_proveedor['proveedor_ruta_images'] . $referpadrep['products_image'])) {
+ $image_product = $codigo_proveedor['proveedor_ruta_images'] . $referpadrep['products_image'];
+}
+                                          //  echo  $order->products[$i]['codigo_proveedor'];
+if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'images/' . $referpadrep['products_image'])) {
+        $image_product = DIR_WS_IMAGES . $referpadrep['products_image'];
+}
+
+
+
+
+
+               $products_id_stock = $referpadrep['products_id'];
+         require('product_stock.php');
+
+
+
+
+
+
+
+
+
+
+        if ($referpadrep['products_id'] == $product_info['products_id']){
+
+           echo '<tr>';
+        echo '<td bgcolor="#F4F4F4"  width="80"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="'.$image_product.'" width="" height="80"></td>';
+       echo '<td bgcolor="#F4F4F4" >'.'<p><b><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].'</td>';
+         echo '<td bgcolor="#F4F4F4" width="60">'.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</b></td>';
+          echo '<td bgcolor="#F4F4F4" width="60">'.$texto_stock. '</a></b></td>';
+          echo '<td bgcolor="#F4F4F4" width="60"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="images/boton_marketplace.png" width="40">'.'</a></b></td>';
+           echo '</tr>';
+//   ECHO '<p><b><font size="2"><a href=product_info.php?products_id='.$referpadrep['products_id'].'>'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></b></p>';
+
+                                                                     }else{
+       echo '<tr>';
+       echo '<td width="80"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="'.$image_product.'" width="" height="80"></td>';
+        echo '<td>'.'<p><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].'</td>';
+         echo '<td width="60">'.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</td>';
+          echo '<td bgcolor="#F4F4F4" width="60">'.$texto_stock. '</a></b></td>';
+           echo '<td bgcolor="#F4F4F4" width="60"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="images/boton_marketplace.png" width="40">'.'</a></b></td>';
+             echo '</tr>';
+ //   ECHO '<p><font size="2"><a href=product_info.php?products_id='.$referpadrep['products_id'].'>'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></p>';
+
+                                                                 }
+
+}
+            ?>
+
+
+
+
+
+
+
+
+
+
   
 <div class="bouton">
+
+
+               <?php
+
+       $referpadre_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "'");
+      $referpadre = tep_db_fetch_array($referpadre_values);
+
+
+
+
+
+
+                   $referpadrep_values = tep_db_query("select *  from " . TABLE_PRODUCTS . " p,  " . TABLE_PRODUCTS_DESCRIPTION . " pd  where p.products_id = pd.products_id and p.referencia_padre_g2 = '" . $referpadre['referencia_padre_g2'] . "'  GROUP BY p.referencia_padre_g2 ORDER BY pd.products_name");
+     while ($referpadrepg1 = tep_db_fetch_array($referpadrep_values)){
+                                        $referpadrepg1['referencia_padre_g2'] = str_replace('_', ' ', $referpadrepg1['referencia_padre_g2']);
+ //  ECHO '<p>&nbsp;</p><p><b><font size="2">'.$referpadrepg1['referencia_padre_g2'].'</font></b></p>';
+                                                }
+
+                         ?>
+     </div>
+   <table border="0" width="60%" id="table1">
+
+
+          <?php
+                                   //referencia padre
+       $referpadrep_values = tep_db_query("select *  from " . TABLE_PRODUCTS . " p,  " . TABLE_PRODUCTS_DESCRIPTION . " pd  where p.products_id = pd.products_id and referencia_padre_g2 = '" . $referpadre['referencia_padre_g2'] . "'and referencia_padre_g2 <> '" . '' . "'");
+     while ($referpadrep = tep_db_fetch_array($referpadrep_values)){
+
+
+ if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_WS_IMAGES. $products_imagen)) {
+                                          }else{
+
+
+               if (ereg("^https://", $referpadrep['products_image']) ) {
+
+                 $image_product = $referpadrep['products_image'];
+               }else{
+        $image_product = 'images/' . $referpadrep['products_image'];
+}                }
+
+                               //IMAGENES PRODUCTOS
+  $codigo_proveedor_values = tep_db_query("select * from " . 'proveedor' . " where proveedor_id = '" . $product_info['codigo_proveedor'] . "'");
+  $codigo_proveedor= tep_db_fetch_array($codigo_proveedor_values);
+
+
+ if (file($codigo_proveedor['proveedor_ruta_images'] . $referpadrep['products_image'])) {
+ $image_product = $codigo_proveedor['proveedor_ruta_images'] . $referpadrep['products_image'];
+}
+                                          //  echo  $order->products[$i]['codigo_proveedor'];
+if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'images/' . $referpadrep['products_image'])) {
+        $image_product = DIR_WS_IMAGES . $referpadrep['products_image'];
+}
+
+
+
+
+        if ($referpadrep['products_id'] == $product_info['products_id']){
+
+           echo '<tr>';
+        echo '<td bgcolor="#F4F4F4"  width="80"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="'.$image_product.'" width="" height="80"></td>';
+       echo '<td bgcolor="#F4F4F4" >'.'<p><b><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].'</td>';
+         echo '<td bgcolor="#F4F4F4" width="60">'.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</b></td>';
+           echo '</tr>';
+//   ECHO '<p><b><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></b></p>';
+
+                                                                     }else{
+       echo '<tr>';
+       echo '<td width="80"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><img border="0" src="'.$image_product.'" width="" height="80"></td>';
+        echo '<td>'.'<p><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].'</td>';
+         echo '<td width="60">'.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</td>';
+           echo '</tr>';
+ //  ECHO '<p><font size="0"><a href=product_info.php?products_id='.$referpadrep['products_id'].'><font size="0">'.$referpadrep['products_name'].' - '.$currencies->display_price($referpadrep['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</a></font></p>';
+
+                                                                }
+
+}
+
+
+ ?>
+
+
+
     <?php
  // echo   '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . $listing['products_id']) . '"><img src="' . DIR_MOBILE_IMAGES . 'btn_mob_cart.png" alt="' . IMAGE_BUTTON_IN_CART . '" /></a>';
 
@@ -451,8 +644,17 @@ $("#piGal a[rel^='fancybox']").fancybox({
       <div id="ficheProdTop">
 <div class="bouton">
     <?php
+    
+    $stock_query = tep_db_query("select * from " . 'products_stock' . " where  products_id = '" . $product_info['products_id'] . "'");
+ $p_stock = tep_db_fetch_array($stock_query);
+     if ($p_stock['products_stock_real'] >= 1){
+    
  echo   tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_mobile_button(IMAGE_BUTTON_IN_CART). '<br></form>';
+ }
+
+
 ?>
+
 </div>
 </div>
 
@@ -731,11 +933,14 @@ $("#piGal a[rel^='fancybox']").fancybox({
   </div>
 
 
+      	</tr>
+</table>
+ <?php
 
 
 
 
-      <?php
+
 
               echo '<p>&nbsp;</p>';
 // Points/Rewards system V2.1beta BOF
@@ -775,11 +980,6 @@ $("#piGal a[rel^='fancybox']").fancybox({
 <?php
     }
        //patrocine
-
-
-
-
-
 
 
 
@@ -964,11 +1164,7 @@ $fecha = date("Y-m-d", $time1);
 
 
 
-                 								<form method="POST" action="">
 
-          <p style="margin-top: 0; margin-bottom: 0"><b>Deje su email y le avisamos cuando este producto cambie de precio (Solo se usa para la alerta)</b></p>
-<p style="margin-top: 0; margin-bottom: 0"><input type="text" name="email_address" size="30"><input type="submit" value="EMAIL" name="B1"></p>
-</form>
 
            <?php } ?>  </div>
 
@@ -995,4 +1191,9 @@ $fecha = date("Y-m-d", $time1);
 
 
 <?php require(DIR_MOBILE_INCLUDES . 'footer.php');
+
+
+
+
+
 ?>

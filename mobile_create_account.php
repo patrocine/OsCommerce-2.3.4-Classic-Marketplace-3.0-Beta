@@ -275,11 +275,11 @@ $headerTitle->write();
   }
 ?>
               <div class="form_line">
-			  <label for="firstname" class="float"><?php echo ENTRY_FIRST_NAME; ?> *</label>
+			  <label for="firstname" class="float"><?php echo ENTRY_FIRST_NAME; ?><font color="#FF0000"><b>Obligatorio</b></font></label>
 			  <?php echo tep_draw_input_field('firstname','','class="input"'); ?>
 			  </div>
 			  <div class="form_line">
-			  <label for="lastname" class="float"><?php echo ENTRY_LAST_NAME; ?> *</label>
+			  <label for="lastname" class="float"><?php echo ENTRY_LAST_NAME; ?> </label>
 			  <?php echo tep_draw_input_field('lastname'); ?>
 			  </div>
 			  
@@ -287,20 +287,20 @@ $headerTitle->write();
   if (ACCOUNT_DOB == 'true') {
 ?>	
 	<div class="form_line">
-              <label for="dob" class="float"><?php echo ENTRY_DATE_OF_BIRTH; ?> *</label>
+              <label for="dob" class="float"><?php echo ENTRY_DATE_OF_BIRTH; ?> </label>
 			  <?php echo tep_draw_input_field('dob'); ?>
   </div>
 <?php
   }
 ?>			<div class="form_line">
-              <label for="email" class="float"><?php echo ENTRY_EMAIL_ADDRESS; ?> *</label>
+              <label for="email" class="float"><?php echo ENTRY_EMAIL_ADDRESS; ?> <font color="#FF0000"><b>Obligatorio</b></font></label>
 			  <?php echo tep_draw_input_field('email_address')?>
 			 </div>
 <?php
   if (ACCOUNT_COMPANY == 'true') {
 ?><div class="form_line">
 			  <h1><?php echo CATEGORY_COMPANY; ?></h1>
-              <label for="company" class="float"><?php echo ENTRY_COMPANY; ?></label>
+              <label for="company" class="float"><?php echo ENTRY_COMPANY; ?> </label>
 			  <?php echo tep_draw_input_field('company'); ?>
 			  </div>
 <?php
@@ -308,30 +308,30 @@ $headerTitle->write();
 ?>
 			<div class="form_line">
 			  <h1><?php echo CATEGORY_ADDRESS; ?></h1>
-              <label for="street" class="float"><?php echo ENTRY_STREET_ADDRESS; ?> *</label>
+              <label for="street" class="float"><?php echo ENTRY_STREET_ADDRESS; ?> </label>
 			  <?php echo tep_draw_input_field('street_address'); ?>
 			  </div>
 <?php
   if (ACCOUNT_SUBURB == 'true') {
 ?>			<div class="form_line">
-              <label for="suburb" class="float"><?php echo ENTRY_SUBURB; ?></label>
+              <label for="suburb" class="float"><?php echo ENTRY_SUBURB; ?> </label>
 			  <?php echo tep_draw_input_field('suburb'); ?>
 			</div>
 <?php
   }
 ?>			<div class="form_line">
-              <label for="postcode" class="float"><?php echo ENTRY_POST_CODE; ?> *</label>
+              <label for="postcode" class="float"><?php echo ENTRY_POST_CODE; ?> </label>
 			  <?php echo tep_draw_input_field('postcode'); ?>
 			</div>
 			<div class="form_line">
-			  <label for="city" class="float"><?php echo ENTRY_CITY; ?> *</label>
+			  <label for="city" class="float"><?php echo ENTRY_CITY; ?> </label>
 			  <?php echo tep_draw_input_field('city'); ?>
 			</div>
 <?php
   if (ACCOUNT_STATE == 'true') {
 ?>
             <div class="form_line">  
-			  <label for="state" class="float"><?php echo ENTRY_STATE; ?> *</label>
+			  <label for="state" class="float"><?php echo ENTRY_STATE; ?> <font color="#FF0000">Obligatorio</b></font></label>
 <?php
     if ($process == true) {
       if ($entry_state_has_zones == true) {
@@ -351,29 +351,29 @@ $headerTitle->write();
   }
 ?>			
 			<div class="form_line">
-              <label for="country" class="float"><?php echo ENTRY_COUNTRY; ?> *</label>
+              <label for="country" class="float"><?php echo ENTRY_COUNTRY; ?> <font color="#FF0000"><b>Obligatorio</b></font></label>
 			  <?php echo tep_get_country_list('country'); ?>
 			</div>
 			<div class="form_line">
-			  <label for="telephone" class="float"><?php echo ENTRY_TELEPHONE_NUMBER; ?> *</label>
+			  <label for="telephone" class="float"><?php echo ENTRY_TELEPHONE_NUMBER; ?> </label>
 			  <?php echo tep_draw_input_field('telephone'); ?>
 			</div>
 			<div class="form_line">
-			  <label for="fax" class="float"><?php echo ENTRY_FAX_NUMBER; ?></label>
+			  <label for="fax" class="float"><?php echo ENTRY_FAX_NUMBER; ?> </label>
 			  <?php echo tep_draw_input_field('fax'); ?>
 			</div>
 			<div class="form_line">
 			  <h1><?php echo CATEGORY_PASSWORD; ?></h1>
-			  <label for="password" class="float"><?php echo ENTRY_PASSWORD; ?> *</label>
+			  <label for="password" class="float"><?php echo ENTRY_PASSWORD; ?> <font color="#FF0000"><b>Obligatorio</b></font></label>
 			  <?php echo tep_draw_password_field('password'); ?>
 			</div>
 			<div class="form_line">
-			  <label for="confirmation" class="float"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?> *</label>
+			  <label for="confirmation" class="float"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?> <font color="#FF0000"><b>Obligatorio</b></font></label>
 			  <?php echo tep_draw_password_field('confirmation')?>
 			</div>
 			<div class="form_line">
 			  <h1><?php echo CATEGORY_OPTIONS; ?></h1>
-			  <label for="newsletter" class="float"><?php echo ENTRY_NEWSLETTER; ?></label>
+			  <label for="newsletter" class="float"><?php echo ENTRY_NEWSLETTER; ?> </label>
 			  <?php echo tep_draw_checkbox_field('newsletter', '1'); ?>
 			</div>
 				<?php echo tep_mobile_button(IMAGE_BUTTON_CONTINUE,'id="TheSubmitButton"'); ?>

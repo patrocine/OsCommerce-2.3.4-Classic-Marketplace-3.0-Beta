@@ -61,12 +61,12 @@
 
 
 
-                  if  ($tree[$counter]['productos'] == 0){
+              //    if  ($tree[$counter]['productos'] == 0){
 
 
 
 
-}else{
+ //  }else{
 
 
 
@@ -93,7 +93,7 @@
 
 
 
-  }
+  //   }
 
 
 

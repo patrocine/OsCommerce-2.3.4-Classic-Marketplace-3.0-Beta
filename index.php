@@ -84,7 +84,7 @@
         }
       }
     } else {
-      $categories_query = tep_db_query("select c.categories_productos, c.categories_id, cd.categories_name, cd.categories_name_suple, cd.categories_name_http, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_status_visible='" . 1 ."'  order by sort_order, cd.categories_name");
+          $categories_query = tep_db_query("select c.categories_productos, c.categories_id, cd.categories_name, cd.categories_name_suple, cd.categories_name_http, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = '" . (int)$current_category_id . "' and c.categories_id = cd.categories_id and cd.language_id = '" . (int)$languages_id . "' and cd.categories_status_visible='" . 1 ."'  order by sort_order, cd.categories_name");
     }
 
     $number_of_categories = tep_db_num_rows($categories_query);
@@ -125,13 +125,19 @@
 
 }else{
 
-    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
 
+    if (ereg("^https://", $categories['categories_image']) ) {
+    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image($categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
+    }else{
+//    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br />' . $categories_a . '</a></td>' . "\n";
+    echo '        <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . $categories_http . '">' . '<img border="0" src="'. DIR_WS_IMAGES . $categories['categories_image'] .'" width="' . SUBCATEGORY_IMAGE_WIDTH . '" height="' . SUBCATEGORY_IMAGE_HEIGHT . '">' . '<br />' . $categories_a . '</a></td>' . "\n";
+
+     }
 
 
 
 }
-      
+
         if ((($rows / MAX_DISPLAY_CATEGORIES_PER_ROW) == floor($rows / MAX_DISPLAY_CATEGORIES_PER_ROW)) && ($rows != $number_of_categories)) {
         echo '      </tr>' . "\n";
         echo '      <tr>' . "\n";
@@ -235,7 +241,7 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
       for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
           $HTTP_GET_VARS['sort'] = $i+1 . 'a';
-          $listing_sql .= " order by p.products_price";
+          $listing_sql .= " order by pd.products_name";
           break;
         }
       }
@@ -290,12 +296,14 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
 
 
 
-    
+     $marketplace_values = tep_db_query("select * from " . 'marketplace' . " m, marketplace_description md where m.categories_id = md.categories_id and md.categories_id = '" .  $cPath. "'");
+  $marketplace = tep_db_fetch_array($marketplace_values);
+
     
     
 ?>
 
-<h1><?php echo $categories_a ; ?></h1>
+<h1><?php echo $marketplace['categories_name']?></h1>
 
 
 
@@ -341,22 +349,22 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
 	  
       echo '        <td align="center" class="smallText" width="' . $width . '" valign="top">
 	  <a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">';
-	  
+
 	  if (tep_not_null($categories['categories_image'])) {
 	  	  echo tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories_a, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) ;
 	  }
-	  
+
 	  echo  '<br />' . $categories['categories_name'] . '</a>
 	  </td>' . "\n";
       if ((($rows / MAX_DISPLAY_CATEGORIES_PER_ROW) == floor($rows / MAX_DISPLAY_CATEGORIES_PER_ROW)) && ($rows != $number_of_categories)) {
         echo '      </tr>' . "\n";
         echo '      <tr>' . "\n";
       }
-	  
+
 
     }
 	
-	  
+
 // needed for the new products module shown below
     $new_products_category_id = $current_category_id;
 ?>
@@ -408,8 +416,8 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
 
 
 
-
-
+  if ($cPath >= 99999999){
+      }else{
     ?>
 
 
@@ -419,15 +427,50 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
     <input type="radio" value="<?php echo (int)$current_category_id ?>" checked name="categories_id">
     <input type="radio" value="1" checked name="inc_subcat">     </p>
 
-	<?php echo tep_draw_button('Buscar en esta Categoría', 'key', null, 'primary'); ?></p>
+	<?php echo tep_draw_button('Buscar en esta Categoría', 'key', null, 'primary');
+   ?></p>
 </form>
 
+   <?php
+}
+
+   if ($cPath >= 99999999){
 
 
+    $marketplace_values = tep_db_query("select * from " . 'marketplace' . " m, marketplace_description md where m.categories_id = md.categories_id and parent_id = '" .  $cPath. "'");
+  while  ($marketplace = tep_db_fetch_array($marketplace_values)){
+
+
+
+?>
+
+
+<table border="0" width="100%" id="table1">
+	<tr>
+		<td>
+		<p align="center"><a href="<?php ECHO $marketplace['categories_name_http'] ?>">
+		<img border="0" src="<?php ECHO $marketplace['categories_image'] ?>" width="120" height=""></a></td>
+	</tr>
+	<tr>
+		<td> <a href="<?php ECHO $marketplace['categories_name_http'] ?>">
+		<p align="center"><b><font size="4"><?php ECHO $marketplace['categories_name'] ?></font></b></a></td>
+	</tr>
+</table>
+
+
+
+
+</body>
  <?php
+   }
+
+     }
 
 
+        if ($cPath >= 99999999){
+        }else{
     include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
+}
 ?>
 
 </div>

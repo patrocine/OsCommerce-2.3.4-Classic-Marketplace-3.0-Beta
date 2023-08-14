@@ -11,16 +11,16 @@
 
   Released under the GNU General Public License
 */
-define('NAVBAR_TITLE', 'Información de BitShop');
+define('NAVBAR_TITLE', 'Información de Credito o Abono');
 
-define('HEADING_TITLE', 'My información de BitShop');
+define('HEADING_TITLE', 'My información de Credito o Abono');
 
 define('HEADING_ORDER_DATE', 'Fecha');
 define('HEADING_ORDERS_NUMBER', 'Pedido No. & Status');
 define('HEADING_ORDERS_STATUS', 'Pedido Status');
 define('HEADING_POINTS_COMMENT', 'Comentarios');
-define('HEADING_POINTS_STATUS', 'BitShop Status');
-define('HEADING_POINTS_TOTAL', 'BitShop');
+define('HEADING_POINTS_STATUS', 'Credito Status');
+define('HEADING_POINTS_TOTAL', 'Credito');
 
 define('TEXT_DEFAULT_COMMENT', 'Shopping Points');
 define('TEXT_DEFAULT_REDEEMED', 'BitShop Canjeados');
@@ -41,7 +41,7 @@ define('TEXT_POINTS_CANCELLED', 'Cancelado');
 define('TEXT_POINTS_REDEEMED', 'Canjeado');
 
 define('MY_POINTS_EXPIRE', 'Expira en: ');
-define('MY_POINTS_CURRENT_BALANCE', '<b>Balanza de BitShop :</b> %s BitShop. <b>Valorado en :</b> %s .');
+define('MY_POINTS_CURRENT_BALANCE', '<b>Balanza de Credito :</b> %s Credito. <b>Valorado en :</b> %s .');
 
 define('MY_POINTS_HELP_LINK', ' Por favor chequee aqui <a href="' . tep_href_link(FILENAME_MY_POINTS_HELP) . '" title="Reward Point Program FAQ"><u>Ayuda</u></a> Programa de BitShop FAQ entrar para más información.');
 

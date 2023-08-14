@@ -17,10 +17,10 @@
 p.products_price, if(s.status, s.specials_new_products_price, null) as specials_new_products_price
         from
             " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id,
-            " . TABLE_PRODUCTS_DESCRIPTION . " pd
+            " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . 'products_stock' . " ps
         where
             p.products_status = '1'
-            and p.products_id = pd.products_id
+            and p.products_id = pd.products_id and p.products_id = ps.products_id and ps.products_stock_real >= 0.01
             and pd.language_id = '" . (int)$languages_id . "'
         order by
             p.products_date_added desc

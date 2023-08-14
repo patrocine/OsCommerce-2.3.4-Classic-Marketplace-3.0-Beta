@@ -62,15 +62,12 @@ $("#search").autocomplete({
 </script>
 <!-- header //-->
 <div id="header">
-<div id="headerLogo"><?php echo '<a href="' . tep_mobile_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . 'store_logo.png', STORE_OWNER, 0,70) . '</a>';?></div>
+<p align="center"><b><font size="7">MARKETPLACE</font></b></p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="headerNavigation">
   <tr class="headerNavigation">
 	<td class="headerNavigation"><a href="<?php echo tep_mobile_link('mobile_marketplace.php');?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "marketplace.png") . "<br>" . Marketplace; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link(FILENAME_DEFAULT);?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "home.png") . "<br>" . TEXT_HOME; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link(FILENAME_CATALOG);?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "boutique.png") . "<br>" . TEXT_SHOP; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link(FILENAME_MOBILE_ACCOUNT);?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "compte.png") . "<br>" . TEXT_ACCOUNT; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link(FILENAME_SEARCH);?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "search2.png") . "<br>" . IMAGE_BUTTON_SEARCH; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link(FILENAME_MOBILE_ABOUT);?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "help.png") . "<br>" . TEXT_ABOUT; ?></a></td>
+	<td class="headerNavigation"><a href="<?php echo 'https://CanariasToken.com';?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "islascanarias.png") . "<br>" . 'Canarias Token'; ?></a></td>
+	<td class="headerNavigation"><a href="<?php echo 'https://www.youtube.com/@vivelocriptocomunidad';?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "vcr.png") . "<br>" . 'Anyela Rios'; ?></a></td>
   </tr>
 </table>
 </div>
@@ -88,4 +85,4 @@ $("#search").autocomplete({
     if(sizeof($breadcrumb->_trail) > 0)
 		$headerTitleText = $breadcrumb->_trail[sizeof($breadcrumb->_trail) - 1]['title'];
 ?>
-</div><p align="center"><b><font size="6"><a href="<?php echo tep_mobile_link(FILENAME_CATALOG);?>">CATEGORIAS</a></font></b>
+</div><p align="center"><b><font size="6"><a href="<?php echo tep_mobile_link('mobile_marketplace.php');?>">CATEGORIAS</a></font></b>

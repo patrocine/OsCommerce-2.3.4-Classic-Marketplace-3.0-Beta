@@ -56,10 +56,19 @@ require_once('mobile/includes/application_top.php');
   }
 
   $payment_modules->update_status();
-
-  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-    tep_redirect(tep_mobile_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+  
+ ########  Points/Rewards Module V2.1beta BOF #################*/
+//if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+	  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
+########  Points/Rewards Module V2.1beta EOF #################*/
+  
+  
+
+//  if ( ($payment_modules->selected_module != $payment) || ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+  //  tep_redirect(tep_mobile_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
+ // }
 
   require(DIR_WS_CLASSES . 'order_total.php');
   $order_total_modules = new order_total;
@@ -119,6 +128,39 @@ require_once('mobile/includes/application_top.php');
                             'sort_order' => $order_totals[$i]['sort_order']);
     tep_db_perform(TABLE_ORDERS_TOTAL, $sql_data_array);
   }
+
+
+
+
+ #### Points/Rewards Module V2.1beta balance customer points BOF ####
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
+// customer pending points added
+      if ($order->info['total'] > 0) {
+	      $points_toadd = get_points_toadd($order);
+	      $points_comment = 'TEXT_DEFAULT_COMMENT';
+	      $points_type = 'SP';
+	      if ((get_redemption_awards($customer_shopping_points_spending) == true) && ($points_toadd >0)) {
+		      tep_add_pending_points($customer_id, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer referral points added
+      if ((tep_session_is_registered('customer_referral')) && (tep_not_null(USE_REFERRAL_SYSTEM))) {
+	      $referral_twice_query = tep_db_query("select unique_id from " . TABLE_CUSTOMERS_POINTS_PENDING . " where orders_id = '". (int)$insert_id ."' and points_type = 'RF' limit 1");
+	      if (!tep_db_num_rows($referral_twice_query)) {
+		      $points_toadd = USE_REFERRAL_SYSTEM;
+		      $points_comment = 'TEXT_DEFAULT_REFERRAL';
+		      $points_type = 'RF';
+		      tep_add_pending_points($customer_referral, $insert_id, $points_toadd, $points_comment, $points_type);
+	      }
+      }
+// customer shoppping points account balanced
+      if ($customer_shopping_points_spending) {
+	      tep_redeemed_points($customer_id, $insert_id, $customer_shopping_points_spending);
+      }
+  }
+#### Points/Rewards Module V2.1beta balance customer points EOF ####*/
+
+
 
   $customer_notification = (SEND_EMAILS == 'true') ? '1' : '0';
   $sql_data_array = array('orders_id' => $insert_id, 

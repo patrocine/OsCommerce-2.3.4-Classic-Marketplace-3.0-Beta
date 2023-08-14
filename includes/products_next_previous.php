@@ -21,8 +21,9 @@
     // previous next product
   define('PREV_NEXT_PRODUCT', 'Product ');
   define('PREV_NEXT_FROM', ' from ');
-   define('TEXT_ANTERIOR_INFO', 'Anterior ');
-  define('TEXT_SIGUIENTE_INFO', ' Siguiente ');
+   define('TEXT_ANTERIOR_INFO', '<img border="0" src="images/izquierda.png" >');
+  define('TEXT_SIGUIENTE_INFO', ' <img border="0" src="images/derecha.png" > ');
+
 
 
 				// calculate the previous and next
