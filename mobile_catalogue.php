@@ -7,7 +7,7 @@ require_once('mobile/includes/application_top.php');
     tep_redirect(tep_href_link('mobile_login.php', '', 'SSL'));
   }}
 
-
+  if (PERMISO_STOCK_NIVEL_6 == 'true'){
 	$listing_sql = 		"select     p.products_id, p.codigo_proveedor, p.products_porcentage, p.stock_nivel, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando,
     						pd.products_name, 
     						p.manufacturers_id, 
@@ -20,15 +20,47 @@ require_once('mobile/includes/application_top.php');
     						TABLE_PRODUCTS . " p left join " . 
     						TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . 
     						TABLE_SPECIALS . " s on p.products_id = s.products_id, " . 
-    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c 
+    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . 'products_stock' . " ps
     						where p.products_status = '1' 
-    						and p.products_id = p2c.products_id 
+    						and ps.products_id = p.products_id
+                            and ps.products_stock_real >= 0.01
+                            and p.products_id = p2c.products_id
     						and pd.products_id = p2c.products_id 
     						and pd.language_id = '" . (int)$languages_id . "'";
     if (isset($HTTP_GET_VARS['cPath']))
         $listing_sql .= " and p2c.categories_id = '" . (int)$current_category_id . "'";
     if (isset($HTTP_GET_VARS['manufacturers_id'])) 
         $listing_sql .= " and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";
+        
+}else{
+
+	$listing_sql = 		"select     p.products_id, p.codigo_proveedor, p.products_porcentage, p.stock_nivel, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando,
+    						pd.products_name,
+    						p.manufacturers_id,
+    						p.products_price,
+    						p.products_image,
+    						p.products_tax_class_id,
+    						IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price,
+    						IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " .
+    						TABLE_PRODUCTS_DESCRIPTION . " pd," .
+    						TABLE_PRODUCTS . " p left join " .
+    						TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " .
+    						TABLE_SPECIALS . " s on p.products_id = s.products_id, " .
+    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c
+    						where p.products_status = '1'
+    						and p.products_id = p2c.products_id
+    						and pd.products_id = p2c.products_id
+    						and pd.language_id = '" . (int)$languages_id . "'";
+    if (isset($HTTP_GET_VARS['cPath']))
+        $listing_sql .= " and p2c.categories_id = '" . (int)$current_category_id . "'";
+    if (isset($HTTP_GET_VARS['manufacturers_id']))
+        $listing_sql .= " and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";
+
+
+
+}
+        
+        
         
     $listing_sql .= " order by pd.products_name";
 
@@ -52,7 +84,7 @@ if (isset($cPath) && tep_not_null($cPath)) {
 
 $list = array();
 $parent_id = (tep_not_null($cPath) == true) ? (int)$cPath : 0;
-$categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_name_suple, categories_name_http_mobil, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = " . $parent_id . " and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id . $path_cond . "' order by sort_order, cd.categories_name");
+$categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_name_suple, categories_name_http_mobil, c.categories_image, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.parent_id = " . $parent_id . "  and cd.categories_status_visible = '" . 1 . "' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id . $path_cond . "' order by sort_order, cd.categories_name");
 while ($categories = tep_db_fetch_array($categories_query))  {
 	$list[] = $categories;
 }

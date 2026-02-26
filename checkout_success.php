@@ -60,13 +60,43 @@
                                 'text' => $products['products_name']);
     }
   }
+  
+  
+       $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . (int)$customer_id . "'");
+    $customers_porcentage2 = tep_db_fetch_array($customers_porcentage_values);
+
+ if ($_GET['wallet']){
+
+
+                      $sql_status_update_array = array('customers_billetera' => $_POST['hedera_hash'],  );
+             tep_db_perform('customers', $sql_status_update_array, 'update', " customers_id = '" . (int)$customer_id . "'");
+          ?>
+
+           <script type="text/javascript">
+    var pagina = '<?php echo $PHP_SELF; ?>';
+    var segundos = 999999999999999999999;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+   <?php
+}
+  
+  
 
   require(DIR_WS_INCLUDES . 'template_top.php');
 ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
 
-<?php echo tep_draw_form('order', tep_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')); ?>
+
 
 <div class="contentContainer">
   <div class="contentText">
@@ -105,14 +135,30 @@
   }
 ?>
 
-  <div class="buttonSet">
-    <span class="buttonAction"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'triangle-1-e', null, 'primary'); ?></span>
-  </div>
-</div>
+         <?php
 
-</form>
+            if ($customers_porcentage2['customers_billetera'] == ''){
 
-<?php
-  require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php');
-?>
+
+
+             ?>
+
+
+
+
+
+                               <?php
+                                  }
+                             ?>
+                             
+         <?php
+         
+     $orders_query = tep_db_query("select orders_id from " . TABLE_ORDERS . " where customers_id = '" . (int)$customer_id . "' order by date_purchased desc limit 1");
+    $orders = tep_db_fetch_array($orders_query);
+
+         
+
+
+    $orders_query = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $orders['orders_id'] . "'");
+    $orders2 = tep_db_fetch_array($orders_query);
+                                     ?>

@@ -18,7 +18,54 @@ if (!isset($HTTP_GET_VARS['products_id'])) {
              $pro_mo = $_GET['products_id'] ;
 
 
-             require('mobile_version_info.php');
+  if (PERMISO_FILENAME_LOGIN == 'True'){
+  if (!tep_session_is_registered('customer_id')) {
+    $navigation->set_snapshot();
+    tep_redirect(tep_href_link(FILENAME_LOGIN, '', 'SSL'));
+  }}
+
+
+
+      if(ereg("Android", $_SERVER["HTTP_USER_AGENT"])){
+            ?>
+            <script type="text/javascript">
+
+    var pagina = '<? echo  DIR_WS_HTTP_CATALOG . 'mobile_product_info.php?products_id='.(int)$HTTP_GET_VARS['products_id'];  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+      <?php
+
+} if(ereg("iPhone", $_SERVER["HTTP_USER_AGENT"])){
+            ?>
+            <script type="text/javascript">
+
+    var pagina = '<? echo  DIR_WS_HTTP_CATALOG . 'mobile_product_info.php?product_id='.(int)$HTTP_GET_VARS['products_id']; ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+      <?php;
+
+}
+
 require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
 
   $product_url="https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -71,7 +118,7 @@ require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_PRODUCT_INFO);
                                                opcion_8, opcion_8_8,
                                                opcion_9, opcion_9_9,
                                                opcion_10, opcion_10_10,
-                                               products_youtube_1, products_youtube_2, p.products_twitter, p.codigo_proveedor, p.part_number, p.modificar_categoria_rdc, p.stock_disponible_proveedor, p.products_cpe, p.products_cpf, p.products_id, p.manufacturers_name, referencia_fabricante, time_mercancia_entregado_procesando, p.products_status, pd.products_name, pd.products_description, pd.products_viewed, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_last_modified, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' or p.products_status = '1' and p.products_model = '" . $pro_mo . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
+                                               products_youtube_1, products_youtube_2, pdf, p.products_twitter, p.codigo_proveedor, p.part_number, p.modificar_categoria_rdc, p.stock_disponible_proveedor, p.products_cpe, p.products_cpf, p.products_id, p.manufacturers_name, referencia_fabricante, time_mercancia_entregado_procesando, p.products_status, pd.products_name, pd.products_description, pd.products_viewed, p.products_model, p.products_quantity, p.products_image, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_last_modified, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' or p.products_status = '1' and p.products_model = '" . $pro_mo . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
     $product_info = tep_db_fetch_array($product_info_query);
 
 
@@ -196,174 +243,328 @@ $lafechaalta = $mifechaalta[3] . "/" . $mifechaalta[2] . "/" . $mifechaalta[1];
 $products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
 
 
+
+   if (PERMISO_PORCENTAGE_PRECIO == 'True'){
+
+
+             if ($product_info['products_porcentage'] <= -0.1) {
+                 $porcentage = '<font color="#FF0000"  size="2">'.$product_info['products_porcentage']. '% '.'</font>';
+             }else if($product_info['products_porcentage'] >= 0.1){
+                     if (PERMISO_PORCENTAGE_PRECIO_MAS == 'True'){
+                  $porcentage = '<font color="#008000"  size="2">+'.$product_info['products_porcentage']. '% '.'</font>';
+                                          }else{
+                                      $porcentage = '';
+                                      }
+
+
+         }else{
+       $porcentage = '';
+
+     }
+
+
+           } // permiso porcentaje
+
+
+
+
+
+
+
+
+$customer_group_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id =  '" . $customer_id . "'");
+$customer_group = tep_db_fetch_array($customer_group_query);
+$customer_group_price_query = tep_db_query("select customers_group_price from " . TABLE_PRODUCTS_GROUPS . " where products_id = '" . $product_info['products_id'] . "' and customers_group_id =  '" . $customer_group['customers_group_id'] . "'");
+if ( $customer_group['customers_group_id'] != 0) {
+  if ($customer_group_price = tep_db_fetch_array($customer_group_price_query)) {
+    $products_price = ''.$currencies->display_price($customer_group_price['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '';
+  }
+}
+                $products_price = az_change_format($products_price);
+
+                       if ($customer_group['customers_group_id'] == '0'){
+              $customers_porcentage = $products_porcentage['products_descuento'].'%';
+                                                } if ($customer_group['customers_group_id'] == '1'){
+
+              $customers_porcentage = $products_porcentage['products_descuento_g1'].'%';
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g2'].'%';
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g3'].'%';
+                                                }
+
+
+
        $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
       if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
 
 
+                       if ($customer_group['customers_group_id'] == '0'){
               $customers_porcentage = $products_porcentage['products_descuento'].'%';
-  $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="6"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
-           $price_descpro = $product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'];
+                                                } if ($customer_group['customers_group_id'] == '1'){
+
+              $customers_porcentage = $products_porcentage['products_descuento_g1'].'%';
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g2'].'%';
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g3'].'%';
+                                                }
+            $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+            $price_descpro = $product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'];
 
             if ($price_descpro == $product_info['products_price']){
 
-$products_price = '<font color="#000000" size="6"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+$products_price = '<font color="#000000" size="3"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
         }
 
 }else{
 
-     $products_price = '<font color="#000000" size="6"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+  $products_price = '<font color="#000000" size="3"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
 
 }
 
 
-
-
-
-
                          // Total CON EL DESCUENTO DEL PRODUCTO
-                              if ($customer_id <> 0 OR DESCUENTO_CLIENTE <> 0){
-       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . (int)$HTTP_GET_VARS['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
+                                     if ($customer_id <> 0 OR DEFECT_GROUP_PRICE_WEB <> '0'){
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
       if ($products_porcentage = tep_db_fetch_array($products_porcentage_values)){
 
-                                      if ($customer_id){
-              $customers_porcentage = $products_porcentage['products_descuento'].'%';
+
+                       if ($customer_group['customers_group_id'] == '0'){
+              $customers_porcentage = $products_porcentage['products_descuento'];
+                                                } if ($customer_group['customers_group_id'] == '1'){
+
+              $customers_porcentage = $products_porcentage['products_descuento_g1'];
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g2'];
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g3'];
+                                                }
 
             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+              <font color="#FF0000" size="5"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+
+            if ($products_price <> $product_info['products_price']){
+
+//$products_price = '<font color="#000000" size="3"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+            }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                     }
       }else{
 
 
-        $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $customer_id  . "' and customers_porcentage <> '" . 0 . "'");
+        $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $customer_id  . "'");
        $customers_porcentage = tep_db_fetch_array($customers_porcentage_values);
-    if ( $customers_porcentage['customers_porcentage'] <> 0 ){
+    if ( $customers_porcentage['customers_porcentage'] == 0 or $customers_porcentage['customers_porcentage_g1'] == 0 or $customers_porcentage['customers_porcentage_g2'] == 0  or $customers_porcentage['customers_porcentage_g3'] == 0 ){
 
-      $customers_porcentage = $customers_porcentage['customers_porcentage'].'%';
+                       if ($customer_group['customers_group_id'] == '0'){
+              $customers_porcentage = $customers_porcentage['customers_porcentage'];
+                                                } if ($customer_group['customers_group_id'] == '1'){
 
-            $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+              $customers_porcentage = $customers_porcentage['customers_porcentage_g1'];
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $customers_porcentage['customers_porcentage_g2'];
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $customers_porcentage['customers_porcentage_g3'];
+                                                }
+
+
+
+
+    $pro_g1_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" .  $customer_id . "'");
+    $pro_g1 =tep_db_fetch_array($pro_g1_values);
+
+    $pro_g_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" .  $pro_g1['customers_group_id'] . "' and products_id = '" .  $product_info['products_id'] . "'");
+    $pro_g =tep_db_fetch_array($pro_g_values);
+                                               if ($customer_group['customers_group_id'] == '0'){
+                                              $pro_g['customers_group_price'] = $product_info['products_price'];
+                                           }
+
+    $pro_g_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" .  DEFECT_GROUP_PRICE_WEB . "' and products_id = '" .  $listing['products_id'] . "'");
+    $pro_g2 =tep_db_fetch_array($pro_g_values);
+
+
+
+
+          if ($customer_id){
+
+             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="4"><b>' . $currencies->display_price($pro_g['customers_group_price'] *$customers_porcentage/100+$pro_g['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+
+       }else{
+
+    $pro_g_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" .  DEFECT_GROUP_PRICE_WEB . "' and products_id = '" .  $product_info['products_id'] . "'");
+    $pro_g2 =tep_db_fetch_array($pro_g_values);
+
+           $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="3"><b>' . $currencies->display_price($pro_g2['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+                }
 
 
  }else{
 
-     $customers_porcentage = DESCUENTO_CLIENTE;
-              if (DESCUENTO_CLIENTE <> 0){
+     // $customers_porcentage = DESCUENTO_CLIENTE;
+              if (DEFECT_GROUP_PRICE_WEB <> '0'){
             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
-              <font color="#FF0000" size="3"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($listing['products_tax_class_id'])) . '</b></font></span>';
+              <font color="#FF0000" size="5"><b>' . $currencies->display_price($product_info['products_price'] *$customers_porcentage/100+$product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
 
 
 
+                                                                                     }
 
 
-                                  }
-
-
-
+}
 
 
   }
-
          } // Total CON EL DESCUENTO DEL PRODUCTO
 
-    $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .  (int)$HTTP_GET_VARS['products_id'] . "' and status = 1");
-    if ($pro_special =tep_db_fetch_array($pro_special_values)){
 
-         $products_price = ' <font color="#FF0000" size="3"><b><s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span>' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
-                                                           }
+
+    // if ($products_price == 0){
+     //$products_price = '';
+   // }
+
 
 if ($customers_porcentage == 0){
 
         $customers_porcentage = '';
 
-    }
+
+}
+if ($customers_porcentage){
+
+     }else{
+          //  $products_price =  '<font color="#000000" size="5"><b>'.$currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])).'</b></font>';
+              }
+
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $product_info['products_id'] . "' order by pdc_unidades asc");
+  while ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
+
+            $pdc_price_final .= ' <font color="#000000" size="0"><p style="margin-top: 0; margin-bottom: 0"> <font size="0">+'.$pdc_precio_final['pdc_unidades'].' Pcs ->></s>
+              <font color="#ff0000" size="0"><b>' . $pdc_precio_final['pdc_price_final'] . 'Eur .....</b></font></span></p>';
 
 
 
 }
 
 
-    $pro_special_values = tep_db_query("select * from " . 'specials' . " where products_id = '" .  (int)$HTTP_GET_VARS['products_id'] . "' and status = 1");
-    if ($pro_special =tep_db_fetch_array($pro_special_values)){
-
-         $products_price = ' <font color="#FF0000" size="3"><b><s>' . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s> <span>' . $currencies->display_price($new_price, tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
-                                                           }
 
 
 
+        if (tep_not_null($product_info['specials_new_products_price'])) {
+            $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+                <font color="#FF0000" size="6"><b>' . $currencies->display_price($product_info['specials_new_products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+        } else {
+          //  $products_price = $porcentage . $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+        }
 
-    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $product_info['products_id'] . "' order by pdc_unidades asc");
-    while ($pdc_precio_final =tep_db_fetch_array($pdc_precio_final_values)){
-
-            $pdc_price_final .= '<p style="margin-top: 0; margin-bottom: 0"> <font size="3">+'.$pdc_precio_final['pdc_unidades'].' Pcs ->></s>
-              <font color="#FF0000" size="3"><b>' . $pdc_precio_final['pdc_price_final'] . '€</b></font></span></p>';
-
-
-            if ($products_price <> $product_info['products_price']){
-
-$products_price = $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
-
-
-            }
+            $precio_permiso = $products_price;
 
 
 
+     if (tep_not_null($product_info['specials_new_products_price'])) {
 
-                                                           }
-?>
+          $customers_porcentage = '';
+ }
 
-<div>
 
-  <?php if (tep_session_is_registered('affiliate_id')) { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, 'individual_banner_id=' . $product_info['products_id']) .'" target="_self">' . tep_draw_button(MAKE_A_LINK,'folder-collapsed',null,'primary') . ' </a>'; } ?>
-  </form>
-</div>
-<?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
+        #Include template layout for the product box
+        #build variables map
+        $product['id']				= $product_info['products_id'];
+        $product['model']				= $product_info['products_model'];
+        $product['name']			= $product_info['products_name']  . ' ' .$product_info['products_model'] . '';
 
-<div>
-  <h1 style="float: right;"><?php
-  
-  
-  
+        if ($product_info['products_price'] <> 0 or $customer_group_price['customers_group_price'] <> 0){
+
+
     $pro_g1_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" .  $customer_id . "'");
     $pro_g1 =tep_db_fetch_array($pro_g1_values);
 
     $pro_g_values = tep_db_query("select * from " . 'products_groups' . " where customers_group_id = '" .  $pro_g1['customers_group_id'] . "' and products_id = '" .  $product_info['products_id'] . "'");
     if ($pro_g =tep_db_fetch_array($pro_g_values)){
 
-     $products_price = $currencies->display_price($pro_g['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id']));
+
+                       if ($customer_group['customers_group_id'] == '0'){
+              $customers_porcentage = $pro_g1['customers_porcentage'];
+                                                } if ($customer_group['customers_group_id'] == '1'){
+
+              $customers_porcentage = $pro_g1['customers_porcentage_g1'];
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $pro_g1['customers_porcentage_g2'];
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $pro_g1['customers_porcentage_g3'];
+                                                }
+
+       $products_porcentage_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "' and products_descuento_onoff = '" . 0 . "'");
+      if ($products_porcentage = tep_db_fetch_array($products_porcentage_values));
+
+
+                       if ($customer_group['customers_group_id'] == '0'){
+              $customers_porcentage = $products_porcentage['products_descuento'];
+                                                } if ($customer_group['customers_group_id'] == '1'){
+
+              $customers_porcentage = $products_porcentage['products_descuento_g1'];
+                                                 }if ($customer_group['customers_group_id'] == '2'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g2'];
+                                                }if ($customer_group['customers_group_id'] == '3'){
+
+               $customers_porcentage = $products_porcentage['products_descuento_g3'];
+                                                }
+
+
+
+
+   if ( $customers_porcentage['customers_porcentage'] == 0 or $customers_porcentage['customers_porcentage_g1'] == 0 or $customers_porcentage['customers_porcentage_g2'] == 0  or $customers_porcentage['customers_porcentage_g3'] == 0 ){
+
+    //  $products_price = '<p><b><font size="5" color="#000000">' .  $currencies->display_price($pro_g['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</font></b></p></b></p>';
+                             }else{
+             $products_price = '<s>' .  $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</s>&nbsp;
+              <font color="#FF0000" size="4"><b>' . $currencies->display_price($pro_g['customers_group_price'] *$customers_porcentage/100+$pro_g['customers_group_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '</b></font></span>';
+
+
+        $P .= $pro_g['customers_group_price'];
+                                }
+}
 
 }
+
+?>
+
+<div>
+
+  <?php if (tep_session_is_registered('affiliate_id')) { echo '<a href="' . tep_href_link(FILENAME_AFFILIATE_BANNERS_BUILD, 'individual_banner_id=' . $product_info['products_id']) .'" target="_self">' . tep_draw_button(MAKE_A_LINK,'folder-collapsed',null,'primary') . ' </a>'; } ?>
+
+<div>
+    </div>
+
+  </form>
+  
   
 
   
+  
 
-   if ($product_info['products_price'] <> 0 or $customer_group_price['customers_group_price'] <> 0){
-
-       //'<p><font style="font-size: 24pt; font-weight: 700">'.
-  echo ''.$products_price . '<p style="margin-top: 0; margin-bottom: 0">' . $pdc_price_final . '</p>';//.'</font><font color="#FF0000" size="6"><b> '.$customers_porcentage.'</b></font></p>';
+<?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
+        <h1 style="float: right;">
 
 
-                   }
-                   
+
+          <?php              }
+
  $stock_query = tep_db_query("select * from " . 'products_stock' . " where  products_id = '" . $product_info['products_id'] . "'");
  $p_stock = tep_db_fetch_array($stock_query);
 
@@ -372,7 +573,7 @@ $products_price = $currencies->display_price($product_info['products_price'], te
            if (BOTON_COMPRA == 'True' and $product_info['products_price'] <> 0 or BOTON_COMPRA == 'True' and $customer_group_price['customers_group_price'] <> 0){
 
 
-                 if ($p_stock['products_stock_real'] >= 1){
+                 if ($p_stock['products_stock_real'] >= 1 or PERMISO_BOTON_COMPRA == 'true'){
 
    echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'primary');
 
@@ -385,9 +586,96 @@ $products_price = $currencies->display_price($product_info['products_price'], te
   ?>
 
 
+      <h1 style="float: right;">
+                                      <h1 style="float: right;">
+
+
+
+    <?php
+// Token a mostrar
+$tokenId = "0.0.9370957";
+
+// 1) Obtener tipo de cambio USD -> EUR desde Frankfurter API
+$fxUrl = "https://api.frankfurter.app/latest?from=USD&to=EUR";
+$fxJson = @file_get_contents($fxUrl);
+$rateUsdToEur = false;
+if ($fxJson !== false) {
+    $fxData = json_decode($fxJson, true);
+    if (isset($fxData['rates']['EUR'])) {
+        $rateUsdToEur = $fxData['rates']['EUR'];
+    }
+}
+
+// 2) Obtener datos del token desde token.php
+$_GET['id'] = $tokenId;
+ob_start();
+include dirname(__FILE__) . "/token.php";
+$tokenJson = ob_get_clean();
+$tokenData = json_decode($tokenJson, true);
+
+// 3) Preparar valores
+$tokenName = "N/A";
+$priceEurFormatted = "N/A";
+
+if ($tokenData && isset($tokenData['name']) && isset($tokenData['priceUsd']) && $rateUsdToEur !== false) {
+    $tokenName = $tokenData['name'];
+    $priceEur = $tokenData['priceUsd'] * $rateUsdToEur;
+    $priceEurFormatted = number_format($priceEur, 8);
+}
+?>
+
+
+
+
+
+  <?php
+
+   if ($product_info['products_price'] <> 0 or $customer_group_price['customers_group_price'] <> 0){
+
+       //'<p><font style="font-size: 24pt; font-weight: 700">'.
+  echo ''.$products_price . '<p style="margin-top: 0; margin-bottom: 0">' . $pdc_price_final . '</p>';//.'</font><font color="#FF0000" size="6"><b> '.$customers_porcentage.'</b></font></p>';
+          ?>
+<button type="button" style="background-color: orange; color: white; border: none; padding: 3px 20px; border-radius: 5px;">
+    <?php echo htmlspecialchars($tokenName);
+   ?>
+</button>
+
+<button type="button" style="background-color: orange; color: white; border: none; padding: 3px 20px; border-radius: 5px;">
+    <?php
+
+      preg_match_all('/\d+(?:\.\d+)?/', $text, $matches);
+$precio = $matches[0][1]; // segundo número
+
+    $products_price = floatval(str_replace(',', '.', preg_replace('/[^0-9,\.]/', '', $products_price)));
+    $priceEurFormatted = floatval(str_replace(',', '.', preg_replace('/[^0-9,\.]/', '', $priceEurFormatted)));
+
+    if ($priceEurFormatted != 0) {
+        $result = $products_price / $priceEurFormatted;
+    } else {
+        $result = 0;
+    }
+
+    echo number_format($result, 2);
+    ?>
+</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  </h1>
   <h1><?php echo $products_name; ?></h1>
 </div>
+
 
 
 
@@ -752,7 +1040,7 @@ BORRAR */
                          $codigo_proveedor = $product_info['codigo_proveedor'];
                          require('require_images_cat.php');
 
-echo '<a target="_blank" href="'. 'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='.$image_product .'"><img src="'. $image_product  .'"  height="'. HEADING_IMAGE_HEIGHT .'" width="'. SMALL_IMAGE_WIDTH .'"></a>' . '</a>';
+echo '<a target="_blank" href="'. 'product_info.php?products_id='.$product_info['products_id'].'&imagen=big&url_imagen='.$image_product .'"><img src="'. $image_product  .'"  height="'. HEADING_IMAGE_HEIGHT .'" width="'. HEADING_IMAGE_WIDTH .'"></a>' . '</a>';
 
 
 
@@ -807,9 +1095,16 @@ echo '<a target="_blank" href="'. 'product_info.php?products_id='.$product_info[
 
                                         <div><img src="http://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo ' | ' . $product_info['products_model'] . ' | ' . $product_info['products_name'] . ' Por Solo ' . number_format($products_price_limpio, 2, '.', '').'Eur     ' . $product_url ; ?>" alt="QR:
 <?php $product_info['products_name']; ?>" title="<?php $product_info['products_name']; ?>"/></div>
+                  <p>&nbsp;</p>
+                  
+             <?php
+                 IF ($product_info['pdf']){
 
-
-
+             ?>
+                  
+                  
+  <a href="/images/<?php echo  $product_info['pdf']; ?>"><img border="0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/PDF_icon.svg/768px-PDF_icon.svg.png" width="100" height="" valign="top"></a></p>
+                             <?php } ?>
       <p>&nbsp;</p>
 
 
@@ -941,10 +1236,115 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
 } //manucfact
 
 
+               $comerciante_conf_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $customer_id . "'");
+               $comerciante_conf=tep_db_fetch_array($comerciante_conf_values);
+
+              $porcentaje_conf_values = tep_db_query("select * from " . 'products_comercio' . " where customers_id = '" . $customer_id . "' and products_id = '" . $product_info['products_id']. "'");
+               $porcentaje_conf=tep_db_fetch_array($porcentaje_conf_values);
+
+
+              if ($comerciante_conf['comerciante_permiso'] == 1){
+  if ($_POST['precio_etiqueta']){
+
+
+ $comprobar_query = tep_db_query("select * from " . 'products_comercio' . " where products_id = '" . $product_info['products_id'] . "' and customers_id = '" . $customer_id . "' ");
+ if ($comprobar = tep_db_fetch_array($comprobar_query)){
+
+            $sql_status_update_array = array('price_etiqueta' => $_POST['precio_etiqueta']);
+            tep_db_perform('products_comercio', $sql_status_update_array, 'update', " products_id = '" . $product_info['products_id'] . "' and customers_id = '" . $customer_id . "' ");
+                   echo   number_format($_POST['precio_etiqueta'], 2, '.', '') .'Eur Precio actualizado correctamente';
+
+}else{
+       $sql_data_array = array('products_id' => $product_info['products_id'],
+
+							'customers_id' => $customer_id,	//for 2.2
+							'price_etiqueta' => $_POST['precio_etiqueta']);
+     tep_db_perform('products_comercio', $sql_data_array);
+     echo   number_format($_POST['precio_etiqueta'], 2, '.', '') . 'Eur Precio insertado correctamente';
+}
 
 
 
 
+       
+}
+        if ($_POST['precio_porcentaje']){
+
+            $sql_status_update_array = array('comerciante_porcentaje' => $_POST['precio_porcentaje']);
+            tep_db_perform('customers', $sql_status_update_array, 'update', " customers_id = '" . $customer_id . "' ");
+                                     }
+
+if ($_POST['borrar_etiqueta'] == 'true'){
+
+                   	$Query = "DELETE from " . 'products_comercio' . "
+					WHERE products_id = '" . $product_info['products_id'] . "'
+					AND customers_id = '" . $customer_id . "'";
+					tep_db_query($Query);
+}
+
+
+
+
+
+ if ($_POST['precio_porcentaje']){
+
+    $ss = number_format($_POST['precio_porcentaje'], 2, '.', '');
+}else{
+ $ss =  $comerciante_conf['comerciante_porcentaje'];
+}
+
+ if ($_POST['precio_etiqueta']){
+
+    $hh = number_format($_POST['precio_etiqueta'], 2, '.', '');
+}else{
+ $hh =  $porcentaje_conf['price_etiqueta'];
+}
+
+if ($porcentaje_conf['price_etiqueta']){
+        $yy = $porcentaje_conf['price_etiqueta'];
+}else{
+
+ $yy = $product_info['products_price'] * $comerciante_conf['comerciante_porcentaje'] / 100 + $product_info['products_price'];
+  }
+              if ( $_GET['formp']){
+                          ?>
+
+                      <script type="text/javascript">
+
+    var pagina = '<?php echo $PHP_SELF . '?products_id=' . $product_info['products_id']; ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+              <?php
+              }
+        ?>
+  </form>
+<form method="POST" action="<?php echo 'product_info.php?formp=true&products_id=' . $product_info['products_id'] ?>">
+	<!--webbot bot="SaveResults" U-File="fpweb:///_private/form_results.csv" S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
+	<p>Fijo<input type="checkbox" name="borrar_etiqueta" value="true"><input type="text" name="precio_etiqueta" size="5" value="<?php echo $hh ?>"></p>
+	<p>%<input type="checkbox" name="borrar_porcentaje" value="true"><input type="text" name="precio_porcentaje" size="5" value="<?php echo $ss ?>">
+
+<?php echo ' ' . number_format($yy, 2, '.', '') ?>Eur. </p>
+
+	<p><input type="submit" value="Mi Etiqueta" name="B1"></p>
+</form>
+
+Aqui puedes configurar el precio que quieres que te aparezca en la etiqueta que se te entregara junto con el pedido, este precio prevalece sobre el porcentaje que tengas configurado.
+
+     </p>
+
+
+ <?php
+    }
 
   $fabricantes_eliminar_query = tep_db_query("select * from " . 'products_fabricantes' . " where  concepto = '" . 'eliminar' . "' and products_reemplazar_este = '" . $product_info['manufacturers_name'] . "'");
  if ($fabricantes_eliminar = tep_db_fetch_array($fabricantes_eliminar_query)){
@@ -978,7 +1378,7 @@ while ($manufact = tep_db_fetch_array($manufact_query)){
           $product_info['products_model'] = ereg_replace("[[:blank:]]", '', $product_info['products_model']);
           
           
-                                     if ($p_stock['products_stock_real'] <= 0){
+                                     if ($p_stock['products_stock_real'] <= 0 or PERMISO_BOTON_COMPRA == 'true'){
 
                                                                       }else{
                                                                        
@@ -997,14 +1397,14 @@ $products_parametros .= '<span class="smallText"><font color="#008000" >Stock en
 
                                      if ($product_info['products_quantity']){
 
-$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
-$products_parametros .= '<br /><span class="smallText"><font color="#008000" > Stock en Almacen: [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
+//$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
+//$products_parametros .= '<br /><span class="smallText"><font color="#008000" > Stock en Almacen: [' . $product_info['products_quantity'] . 'Pcs]</font></b></span> ';
 
                                                                        
 
 
 
-$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
+//$products_parametros .= '<br /><span class="smallText"><font color="#008000" ></font></b></span> ';
 
 
 
@@ -1080,11 +1480,22 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
 }
 
 
+                                 ?>
 
+
+
+
+
+ <?php echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action')) . 'action=add_product')); ?>
+
+
+
+
+                   <?php
 
 
            if (BOTON_COMPRA == 'True' and $product_info['products_price'] <> 0 or BOTON_COMPRA == 'True' and $customer_group_price['customers_group_price'] <> 0){
-                       if ($p_stock['products_stock_real'] >= 1){
+                       if ($p_stock['products_stock_real'] >= 1 or PERMISO_BOTON_COMPRA == 'true'){
   $products_parametros .=  '</p>'.tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'primary') . '</p>';
                                 }
                              }
@@ -1092,7 +1503,9 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
                              echo $products_parametros;
 
                          ?>
-                         
+
+
+                              
                    <?php
 
  if  ($_GET['imagen']){
@@ -1100,17 +1513,30 @@ $products_parametros .=   '<br /><span class="smallText"> Visto: [' . $product_i
 '<img border="0" src="'.$_GET['url_imagen'].'" width="430" height=""></a></p>';
 }
 
+                  if ($product_info['opcion_1_1']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_1'] . ' ' . $product_info['opcion_1_1'] . ' ' . OPCION_1_2 . '</p>';
+            } if ($product_info['opcion_2_2']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_2'] . ' ' . $product_info['opcion_2_2'] . ' ' . OPCION_2_2 . '</p>';
+             } if ($product_info['opcion_3_3']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_3'] . ' ' . $product_info['opcion_3_3'] . ' ' . OPCION_3_2 . '</p>';
+              } if ($product_info['opcion_4_4']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_4'] . ' ' . $product_info['opcion_4_4'] . ' ' . OPCION_4_2 . '</p>';
+               } if ($product_info['opcion_5_5']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_5'] . ' ' . $product_info['opcion_5_5'] . ' ' . OPCION_5_2 . '</p>';
+                } if ($product_info['opcion_6_6']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_6'] . ' ' . $product_info['opcion_6_6'] . ' ' . OPCION_6_2 . '</p>';
+                 } if ($product_info['opcion_7_7']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_7'] . ' ' . $product_info['opcion_7_7'] . ' ' . OPCION_7_2 . '</p>';
+                  } if ($product_info['opcion_8_8']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_8'] . ' ' . $product_info['opcion_8_8'] . ' ' . OPCION_8_2 . '</p>';
+                    } if ($product_info['opcion_9_9']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_9'] . ' ' . $product_info['opcion_9_9'] . ' ' . OPCION_9_2 . '</p>';
+                     } if ($product_info['opcion_10_10']){
+ ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_10'] . ' ' . $product_info['opcion_10_10'] . ' ' . OPCION_10_2 . '</p>';
 
- ECHO '<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_1'] . ' ' . $product_info['opcion_1_1'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_2'] . ' ' . $product_info['opcion_2_2'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_3'] . ' ' . $product_info['opcion_3_3'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_4'] . ' ' . $product_info['opcion_4_4'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_5'] . ' ' . $product_info['opcion_5_5'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_6'] . ' ' . $product_info['opcion_6_6'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_7'] . ' ' . $product_info['opcion_7_7'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_8'] . ' ' . $product_info['opcion_8_8'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_9'] . ' ' . $product_info['opcion_9_9'] . '</p>
-<p style="margin-top: 0; margin-bottom: 0">' .$product_info['opcion_10'] . ' ' . $product_info['opcion_10_10'] . '</p>';
+                                   }
+
+
 
 
        $referpadre_values = tep_db_query("select * from " . 'products' . " where products_id = '" . $product_info['products_id'] . "'");
@@ -1405,11 +1831,131 @@ if (@getimagesize(HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'images/' . $referpadrep
  }
 
 
+?>
+</button>
+
+   <?php
+
+
+    ?>
+
+        <?php
+
+
+
+
+
+
+
 echo '<div id="fb-root"></div> <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v16.0" nonce="QaiNZVUZ"></script>';
 
 echo '<div class="fb-like" data-href="https://qic.es" data-width="Esto es una prueba" data-layout="" data-action="" data-size="" data-share="true"></div>';
 
-   echo '<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="'.$product_info['products_name'].'  '. $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) .'" data-via=" '  . $product_info['products_twitter'] . ' @correos registrese y reciba de regalo nuestra criptomoneda Islas Canarias Token Oficial" data-hashtags="Compra con #busd #usdt #usdc #bnb #binance ENVIO A TODA ESPAÑA DESDE #CANARIAS SIN GASTOS DE ADUANA" data-related="canariastoken" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+  echo '<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="'.$product_info['products_name'].'  '. $currencies->display_price($product_info['products_price'], tep_get_tax_rate($product_info['products_tax_class_id'])) . '/' .  number_format($result, 2)  . htmlspecialchars($tokenName) . '" data-via=" '  . $product_info['products_twitter'] . ' '  . MENSAJE_TWITTER . '" data-hashtags="Compra con #usdt #usdc #hbar #hedera" data-related="canariastoken" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+
+
+
+
+
+                                                                 if ($customer_id) {
+
+                                                   if ($_GET['active_favorito'] == 1 and $product_info['products_id'] == $_GET['active_producto']){
+
+        $comprobar_producto_values = tep_db_query("select * from " . 'products_favorites' . " where id_customers = '" . $customer_id  . "' and id_products = '" . $_GET['active_producto']  . "'");
+     if   ($comprobar_producto = tep_db_fetch_array($comprobar_producto_values)){
+
+
+
+                                                                  }else{
+
+             $Query = "INSERT INTO " . 'products_favorites' . " set
+              id_customers = '" . $customer_id . "',
+              id_products = '" . $_GET['active_producto'] . "'";
+              tep_db_query($Query);
+              $new_product_id = tep_db_insert_id();
+                                                                             }
+
+                                                                           }
+
+                                                                         }
+
+
+
+
+
+
+                                                   if ($_GET['delete_favorito'] == 1 and $listing['products_id'] == $_GET['active_producto']){
+
+
+
+        $comprobar_producto_values = tep_db_query("select * from " . 'products_favorites' . " where id_customers = '" . $customer_id  . "' and id_products = '" . $_GET['active_producto']  . "'");
+     if   ($comprobar_producto = tep_db_fetch_array($comprobar_producto_values)){
+
+
+                   	$Query = "DELETE from " . 'products_favorites' . "
+					WHERE id_products = '" . $_GET['active_producto'] . "'
+					AND id_customers = '" . $customer_id  . "'";
+					tep_db_query($Query);
+
+
+
+
+                                                                             }
+
+
+                                                          }
+
+
+
+
+
+
+
+                                                   if ($_GET['delete_favorito'] == 1 and $product_info['products_id'] == $_GET['active_producto']){
+
+
+
+        $comprobar_producto_values = tep_db_query("select * from " . 'products_favorites' . " where id_customers = '" . $customer_id  . "' and id_products = '" . $_GET['active_producto']  . "'");
+     if   ($comprobar_producto = tep_db_fetch_array($comprobar_producto_values)){
+
+
+                   	$Query = "DELETE from " . 'products_favorites' . "
+					WHERE id_products = '" . $_GET['active_producto'] . "'
+					AND id_customers = '" . $customer_id  . "'";
+					tep_db_query($Query);
+
+
+
+
+                                                                             }
+
+
+                                                          }
+
+
+
+
+
+
+
+
+
+
+                      if ($_GET['favoritos']){
+
+         $favoritos_edit = '&favoritos=edit';
+     }
+          $comprobar_producto_values = tep_db_query("select * from " . 'products_favorites' . " where id_customers = '" . $customer_id  . "' and id_products = '" . $product_info['products_id']  . "'");
+      if ($comprobar_producto = tep_db_fetch_array($comprobar_producto_values)){
+
+
+                echo  ' <a href="' .  $PHP_SELF . '?products_id=' . $product_info['products_id'] . '&active_producto=' . $product_info['products_id'] . '&delete_favorito=' . 1 . $favoritos_edit . '"><img border="0" src="images/favoritosA.png" width="25" ></a> ';
+
+                                                                         }else{
+              echo       ' <a href="' .  $PHP_SELF . '?products_id=' . $product_info['products_id'] . '&active_producto=' . $product_info['products_id'] . '&active_favorito=' . 1 . $favoritos_edit . '"><img border="0" src="images/favoritosB.png" width="25" ></a>';
+                                                                       }
+
+
 
 
 
@@ -2438,10 +2984,10 @@ if ($interval->format('%R%a') <= 30){
 
 
  if ($precio_diferencia_porcent <= -0.01){
- $twitter_text =  $novedad_text . number_format($precio_diferencia_porcent, 2, '.', '') . '% ' . number_format($product_info['products_price'], 2, '.', '') . '€ ' . $product_info['products_name'] . ' ' . HASTAG_TWITTER . ' ' . $product_descripcion_twitter . ' ' . $pi_twiiter_image;
+ $twitter_text =  $novedad_text . number_format($precio_diferencia_porcent, 2, '.', '') . '% ' . number_format($product_info['products_price'], 2, '.', '') . 'Eur ' . $product_info['products_name'] . ' ' . HASTAG_TWITTER . ' ' . $product_descripcion_twitter . ' ' . $pi_twiiter_image;
 
  }else if ($precio_diferencia_porcent >= 0.01){
- $twitter_text =  $novedad_text . '+' . number_format($precio_diferencia_porcent, 2, '.', '') . '% ' . number_format($product_info['products_price'], 2, '.', '') . '€ ' . $product_info['products_name'] . ' ' . HASTAG_TWITTER . ' ' . $product_descripcion_twitter . ' ' . $pi_twiiter_image;
+ $twitter_text =  $novedad_text . '+' . number_format($precio_diferencia_porcent, 2, '.', '') . '% ' . number_format($product_info['products_price'], 2, '.', '') . 'Eur ' . $product_info['products_name'] . ' ' . HASTAG_TWITTER . ' ' . $product_descripcion_twitter . ' ' . $pi_twiiter_image;
 
 
  }else{
@@ -2498,7 +3044,7 @@ if ($interval->format('%R%a') <= 30){
 
 
            if (BOTON_COMPRA == 'True' and $product_info['products_price'] <> 0 or BOTON_COMPRA == 'True' and $customer_group_price['customers_group_price'] <> 0){
-                    if ($p_stock['products_stock_real'] >= 1){
+                    if ($p_stock['products_stock_real'] >= 1 or PERMISO_BOTON_COMPRA == 'true'){
    echo tep_draw_hidden_field('products_id', $product_info['products_id']) . tep_draw_button(IMAGE_BUTTON_IN_CART, 'cart', null, 'primary');
                           }
 

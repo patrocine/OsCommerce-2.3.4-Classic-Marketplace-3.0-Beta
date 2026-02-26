@@ -124,11 +124,12 @@
                           'billing_address_format_id' => $order->billing['format_id'], 
                           'payment_method' => $order->info['payment_method'], 
                           'cc_type' => $order->info['cc_type'], 
-                          'cc_owner' => $order->info['cc_owner'], 
+                          'admin_level_usuario' => 'Cliente',
+                          'cc_owner' => $order->info['cc_owner'],
                           'cc_number' => $order->info['cc_number'], 
                           'cc_expires' => $order->info['cc_expires'], 
-                          'date_purchased' => 'now()', 
-                          'orders_status' => $order->info['order_status'], 
+                           'date_purchased' => 'now()',
+                           'orders_status' => $order->info['order_status'],
                           'currency' => $order->info['currency'], 
                           'currency_value' => $order->info['currency_value']);
   tep_db_perform(TABLE_ORDERS, $sql_data_array);
@@ -138,7 +139,7 @@
 
 
   
-  for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
+    for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
 
 
 
@@ -156,6 +157,9 @@
                      $order_totals[$i]['text'] = number_format($order_totals[$i]['value'], 2, '.', '').'€';
 
 
+                    $r = POINTS_PER_AMOUNT_PURCHASE;
+            $sql_status_update_array = array('hedera' => $order_totals[$i]['value']/100*$r,);
+            tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id = '" . $insert_id . "'");
 
 
     $sql_data_array = array('orders_id' => $insert_id,
@@ -346,6 +350,15 @@ $attributes_query = "select popt.products_options_name, poval.products_options_v
                   EMAIL_SEPARATOR . "\n" . 
                   $products_ordered . 
                   EMAIL_SEPARATOR . "\n";
+                  
+  $email_order .= 'OPORTUNIDAD: Tienes un descuento exclusivo en criptomoneda HBAR, si no aceptas se lo regalaremos a otro cliente y si lo aceptas te regalaremos el que otros clientes no reclamen.'. "\n";
+        $r = POINTS_PER_AMOUNT_PURCHASE * 100;
+        
+    $orders_query = tep_db_query("select * from " . TABLE_ORDERS . " where orders_id = '" . $insert_id . "'");
+    $orders2 = tep_db_fetch_array($orders_query);
+
+        
+    $email_order .= 'Descuento: '. $orders2['hedera'] . '$ en hbar'."\n\n\n";
 
   for ($i=0, $n=sizeof($order_totals); $i<$n; $i++) {
     $email_order .= strip_tags($order_totals[$i]['title']) . ' ' . strip_tags($order_totals[$i]['text']) . "\n";

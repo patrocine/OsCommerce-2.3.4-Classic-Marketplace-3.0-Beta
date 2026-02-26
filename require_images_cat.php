@@ -10,11 +10,12 @@
 
                  $image_product = $products_imagen;
                }else{
+                 if ( $products_imagen){
+         $image_product = $codigo_proveedor['proveedor_ruta_images'] . $products_imagen;
 
-      //  $image_product = 'images/' . 'imnd.svg';
-        
-       $image_product = $codigo_proveedor['proveedor_ruta_images'] . $products_imagen;
-        
+                                    }else{
+          $image_product = 'images/' . 'imnd.svg';
+                                      }
 }                }
 
                                //IMAGENES PRODUCTOS

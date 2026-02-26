@@ -149,6 +149,8 @@
     $new_products_category_id = $current_category_id;
 ?>
 
+
+
  <form method="GET" action="advanced_search_result.php">
 	<p style="margin-top: 0; margin-bottom: 0">
 	<input type="text" name="keywords" size="30" style="font-family: Verdana; font-size: 10pt; font-weight: bold">
@@ -167,7 +169,12 @@
 
     <br />
 
-<?php include(DIR_WS_MODULES . FILENAME_NEW_PRODUCTS); ?>
+<?php
+
+                echo¡33333333333333333333333333333333333¡;
+
+ include(DIR_WS_MODULES . FILENAME_NEW_PRODUCTS); ?>
+
 
   </div>
 </div>
@@ -221,21 +228,52 @@
 if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufacturers_id'])) {
       if (isset($HTTP_GET_VARS['filter_id']) && tep_not_null($HTTP_GET_VARS['filter_id'])) {
 // We are asked to show only a specific category
+ if (PERMISO_STOCK_NIVEL_6 == 'true'){
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.stock_nivel, p.products_model, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . 'products_stock' . " ps where ps.products_id = p.products_id and ps.products_stock_real >= 0.01 and p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "'";
+                                  }else{
         $listing_sql = "select " . $select_column_list . " p.products_id, p.stock_nivel, p.products_model, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "'";
+                                  }
       } else {
 // We show them all
+
+          if (PERMISO_STOCK_NIVEL_6 == 'true'){
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.stock_nivel, p.products_model, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . 'products_stock' . " ps where  ps.products_id = p.products_id and ps.products_stock_real >= 0.01 and p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";
+                                   }else{
         $listing_sql = "select " . $select_column_list . " p.products_id, p.stock_nivel, p.products_model, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m where p.products_status = '1' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";
+                                   }
+
+
       }
     } else {
 // show the products in a given categorie
       if (isset($HTTP_GET_VARS['filter_id']) && tep_not_null($HTTP_GET_VARS['filter_id'])) {
 // We are asked to show only specific catgeory
+            if (PERMISO_STOCK_NIVEL_6 == 'true'){
+        $listing_sql = "select " . $select_column_list . " p.products_id, p.products_model, p.stock_nivel, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . 'products_stock' . " ps where  ps.products_id = p.products_id and ps.products_stock_real >= 0.01 and p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "'
+        and p2c.categories_id = '" . (int)$current_category_id . "'";
+                                            }else{
         $listing_sql = "select " . $select_column_list . " p.products_id, p.products_model, p.stock_nivel, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS . " p left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_MANUFACTURERS . " m, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.manufacturers_id = m.manufacturers_id and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['filter_id'] . "' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+                                             }
+
       } else {
 // We show them all
+              if (PERMISO_STOCK_NIVEL_6 == 'true'){
+        $listing_sql = "select " . $select_column_list . " p.codigo_proveedor, p.products_model, p.products_id, p.stock_nivel, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . 'products_stock' . " ps where  ps.products_id = p.products_id and ps.products_stock_real >= 0.01 and p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+                                                   }else{
         $listing_sql = "select " . $select_column_list . " p.codigo_proveedor, p.products_model, p.products_id, p.stock_nivel, p.products_porcentage, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando, p.manufacturers_id, p.products_price, p.products_tax_class_id, IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price, IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " . TABLE_PRODUCTS_DESCRIPTION . " pd, " . TABLE_PRODUCTS . " p left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_status = '1' and p.products_id = p2c.products_id and pd.products_id = p2c.products_id and pd.language_id = '" . (int)$languages_id . "' and p2c.categories_id = '" . (int)$current_category_id . "'";
+                                                    }
       }
     }
+
+
+
+
+
+
+
+
+
+
     
     if ( (!isset($HTTP_GET_VARS['sort'])) || (!preg_match('/^[1-8][ad]$/', $HTTP_GET_VARS['sort'])) || (substr($HTTP_GET_VARS['sort'], 0, 1) > sizeof($column_list)) ) {
       for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
@@ -419,6 +457,12 @@ if (isset($HTTP_GET_VARS['manufacturers_id']) && !empty($HTTP_GET_VARS['manufact
   if ($cPath >= 99999999){
       }else{
     ?>
+
+
+<body>
+
+
+</body>
 
 
  <form method="GET" action="advanced_search_result.php">

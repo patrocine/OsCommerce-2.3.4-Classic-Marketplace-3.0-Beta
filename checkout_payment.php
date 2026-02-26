@@ -84,8 +84,8 @@
   $breadcrumb->add(NAVBAR_TITLE_2, tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
   require(DIR_WS_INCLUDES . 'template_top.php');
-?>
 
+          ?>
 <script type="text/javascript"><!--
 var selected;
 
@@ -128,6 +128,9 @@ function rowOutEffect(object) {
   if (object.className == 'moduleRowOver') object.className = 'moduleRow';
 }
 //--></script>
+
+
+
 <?php echo $payment_modules->javascript_validation(); ?>
 
 <h1><?php echo HEADING_TITLE; ?></h1>
@@ -269,7 +272,7 @@ function rowOutEffect(object) {
 
   <!-- Points/Rewards Module V2.1beta Redeemption box bof -->
 <?php
-  if ((USE_POINTS_SYSTEM == 'false') && (USE_REDEEM_SYSTEM == 'true')) {
+  if ((USE_POINTS_SYSTEM == 'true') && (USE_REDEEM_SYSTEM == 'true')) {
 	  echo points_selection();
 	  $cart_show_total= $cart->show_total();
 	  echo points_selection($cart_show_total);
@@ -280,6 +283,14 @@ function rowOutEffect(object) {
 ?>
 <!-- Points/Rewards Module V2.1beta Redeemption box eof -->
 
+<h2><?php echo TABLE_HEADING_COUPON; ?></h2>
+
+  <div class="contentText">
+  	 </div>
+
+        <div class="contentText">
+        <?php echo ENTRY_DISCOUNT_COUPON.' '.tep_draw_input_field('coupon', '', 'size="32"', $coupon); ?>
+  	 </div>
 
 
   </div>
@@ -294,14 +305,6 @@ function rowOutEffect(object) {
 /* kgt - discount coupons */
 	//if( MODULE_ORDER_TOTAL_DISCOUNT_COUPON_STATUS == 'true' ) {
 ?>
-<h2><?php echo TABLE_HEADING_COUPON; ?></h2>
-
-  <div class="contentText">
-  	 </div>
-
-        <div class="contentText">
-        <?php echo ENTRY_DISCOUNT_COUPON.' '.tep_draw_input_field('coupon', '', 'size="32"', $coupon); ?>
-  	 </div>
 
 <?php
 	//}

@@ -1,6 +1,6 @@
 <?php
 //require_once('mobile/includes/application_top.php');
-
+                if (PERMISO_STOCK_NIVEL_6 == 'true'){
     $listing_sql = 	"select distinct p.products_id, p.codigo_proveedor, p.products_porcentage, p.stock_nivel, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando,
     						pd.products_name, 
     						p.manufacturers_id, 
@@ -14,13 +14,44 @@
     						TABLE_PRODUCTS . " p left join " . 
     						TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " . 
     						TABLE_SPECIALS . " s on p.products_id = s.products_id, " . 
-    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c 
+    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c, " . 'products_stock' . " ps
     						where p.products_status = '1' 
-    						and p.products_id = p2c.products_id 
+    						and ps.products_id = p.products_id
+                            and ps.products_stock_real >= 0.01
+                            and p.products_id = p2c.products_id
     						and pd.products_id = p2c.products_id 
     						and pd.language_id = '" . (int)$languages_id . "' 
-    						";    						
+    						";
+
+                        }else{
+
+    $listing_sql = 	"select distinct p.products_id, p.codigo_proveedor, p.products_porcentage, p.stock_nivel, p.products_status, time_entradasysalidas, p.time_mercancia_entregado_procesando,
+    						pd.products_name,
+    						p.manufacturers_id,
+    						p.products_price,
+    						p.products_image,
+    						p.products_tax_class_id,
+    						p.products_date_added,
+   						IF(s.status, s.specials_new_products_price, NULL) as specials_new_products_price,
+    						IF(s.status, s.specials_new_products_price, p.products_price) as final_price from " .
+    						TABLE_PRODUCTS_DESCRIPTION . " pd," .
+    						TABLE_PRODUCTS . " p left join " .
+    						TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id left join " .
+    						TABLE_SPECIALS . " s on p.products_id = s.products_id, " .
+    						TABLE_PRODUCTS_TO_CATEGORIES . " p2c
+    						where p.products_status = '1'
+    						and p.products_id = p2c.products_id
+    						and pd.products_id = p2c.products_id
+    						and pd.language_id = '" . (int)$languages_id . "'
+    						";
+
+                           }
+
+
   $listing_sql .= " order by p.products_date_added DESC, pd.products_name";	
+ 
+ 
+ 
  
     if (isset($HTTP_GET_VARS['manufacturers_id'])) 
         $listing_sql .= " and m.manufacturers_id = '" . (int)$HTTP_GET_VARS['manufacturers_id'] . "'";

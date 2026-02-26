@@ -52,7 +52,7 @@ if (isset($cPath) && tep_not_null($cPath)) {
 
 $list = array();
 $parent_id = (tep_not_null($cPath) == true) ? (int)$cPath : 0;
-$categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_name_suple,cd.categories_name_http, categories_name_http_mobil, c.categories_image, c.parent_id from " . 'marketplace' . " c, " . 'marketplace_description' . " cd where c.parent_id = " . $parent_id . " and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id . $path_cond . "' order by sort_order, cd.categories_name");
+$categories_query = tep_db_query("select c.categories_id, cd.categories_name, cd.categories_name_suple,cd.categories_name_http, categories_name_http_mobil, c.categories_image, c.parent_id from " . 'marketplace' . " c, " . 'marketplace_description' . " cd where c.parent_id = " . $parent_id . " and c.categories_id <> '" . EPIGRAFE_SECTOR ."' and c.categories_id = cd.categories_id and cd.language_id='" . (int)$languages_id . $path_cond . "' order by sort_order, cd.categories_name");
 while ($categories = tep_db_fetch_array($categories_query))  {
 	$list[] = $categories;
 }
@@ -139,62 +139,9 @@ if ($HTTP_GET_VARS['manufacturers_id'] == '' ) {
 
 
 
-
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-<?php
-
-		echo tep_mobile_selection('https://binance.com', array(tep_image(DIR_MOBILE_IMAGES . 'new.png'), 'Registrarse en Binance')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-		echo tep_mobile_selection('https://binance.com', array('', 'Registrese en Binance.com donde podrá comprar criptomonedas y dinero digital de forma segura y mantenerlas siempre asalvo, Binance es uno de los Banco de Criptomonedas mas seguro y actualmente cumple con todas las regulaciones del banco de España.')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-
-		?></table><?php
-
-?>
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-
-
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-<?php
-
-		echo tep_mobile_selection('https://www.bitget.com/es/expressly?channelCode=qesa&vipCode=iqpz&languageType=7', array(tep_image(DIR_MOBILE_IMAGES . 'new.png'), 'Registrarse en Bitget')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-		echo tep_mobile_selection('https://www.bitget.com/es/expressly?channelCode=qesa&vipCode=iqpz&languageType=7', array('', 'Registrese en BitGet.com donde podrá comprar criptomonedas y dinero digital de forma segura y mantenerlas siempre asalvo, Bitget es uno de los Bancos de Criptomonedas mas seguros, actualmente no esta regulado por el banco de España')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-
-		?></table><?php
-
-?>
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-
-
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-<?php
-
-		echo tep_mobile_selection('https://tradingdifferent.com/code/7Pv', array(tep_image(DIR_MOBILE_IMAGES . 'new.png'), 'Registrarse en Trading Different')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-		echo tep_mobile_selection('https://tradingdifferent.com/code/7Pv', array('', 'Trading Different es una herramienta con muchas funcionalidades que le permite tener mucha informacion en tiempo real para poder tomar la mejor Decision en la compra de Bitcoin, Anyela Rios lo utiliza en sus envivos para explicar sus analisis.')).'<div class="fleche"><img src="' . DIR_MOBILE_IMAGES . 'arrow_select.png" /></div></p>';
-
-
-		?></table><?php
-
-?>
-<table id="categoriesTable" class="categories" width="100%" cellpadding="0" cellspacing="0">
-
-
-
-
-
-
-
-
-
-<table id="productListing" class="categories" width="100%" cellpadding="0" cellspacing="0">
 <?php 
     if ($cateqories_products['total'] > 0 || isset($HTTP_GET_VARS['manufacturers_id'])) {
 		include(DIR_MOBILE_MODULES . 'products.php');
 	}
 ?>
-</table>
-<?php require(DIR_MOBILE_INCLUDES . 'footer.php');
-?>
+

@@ -153,6 +153,9 @@
   </div>
 </div>
 
+  <?php include(DIR_WS_MODULES . FILENAME_NEW_PRODUCTS); ?>
+
+
 <?php
   require(DIR_WS_INCLUDES . 'template_bottom.php');
   require(DIR_WS_INCLUDES . 'application_bottom.php');

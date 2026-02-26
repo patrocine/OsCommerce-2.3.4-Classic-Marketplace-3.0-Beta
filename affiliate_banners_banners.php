@@ -46,7 +46,7 @@
 			}
           break;
       }
-        if ($prod_id < 1) {
+
 ?>
   <div class="contentText">
       <p><?php echo TEXT_AFFILIATE_NAME; ?>&nbsp;<?php echo $affiliate_banners['affiliate_banners_title']; ?></p>
@@ -54,10 +54,18 @@
       <p><?php echo TEXT_AFFILIATE_INFO; ?></p>
  </div>
  <div class="contentText">
-     <textarea cols="60" rows="4" class="boxText"><?php echo $link1; ?></textarea>
+     <textarea cols="60" rows="4" class="boxText"><?php echo HTTP_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id; ?></textarea>
   </div>
+  
+  
+        <div><img src="http://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo HTTP_SERVER . DIR_WS_HTTP_CATALOG . FILENAME_DEFAULT . '?ref=' . $affiliate_id ; ?>" alt="QR:
+" title=""/></div>
+  
+  
+  
+  
 <?
-     }
+
   }
 }
 ?>

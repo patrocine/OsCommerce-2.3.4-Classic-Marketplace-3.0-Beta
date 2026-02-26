@@ -4,9 +4,9 @@ if (file_exists('includes/local/configure.php')) include('includes/local/configu
   require('includes/configure.php');
    require(DIR_WS_FUNCTIONS . 'database.php');
   tep_db_connect() or die('Unable to connect to database server!');
-  
-  
-  
+
+
+
    $products_model_stock = $_GET['products_model_stock'];
 $almacen = $_GET['almacen'];
 $web = $_GET['web'];
@@ -14,8 +14,8 @@ $status_agotado = $_GET['status_agotado'];
 $status_stock = $_GET['status_stock'];
 $status_pendiente = $_GET['status_pendiente'];
 
- $query = mysql_query("SELECT ps.products_stock_real, ps.products_stock_pendiente, ps.products_stock_min FROM `products` p,  " . 'products_stock' . " ps WHERE  p.products_id = ps.products_id and products_model='" . $products_model_stock . "' and stock_nivel = 6");
-if ($products = mysql_fetch_array($query)){
+ $query = tep_db_query("SELECT ps.products_stock_real, ps.products_stock_pendiente, ps.products_stock_min FROM `products` p,  " . 'products_stock' . " ps WHERE  p.products_id = ps.products_id and products_model='" . $products_model_stock . "' and stock_nivel = 6");
+if ($products = tep_db_fetch_array($query)){
 
    if ($products['products_stock_real'] <=0){
    //  $imagen_stock = ' </p> <p style=margin-top: 0; margin-bottom: 0><img border=0 src=images/otros/pagotado.png> ';
@@ -31,9 +31,7 @@ if ($products = mysql_fetch_array($query)){
 
 
 
-?>"+
- 
-"<?php
+
 
     if (PERMISO_INFO_STOCK == 'True'){
 
@@ -55,9 +53,9 @@ echo $imagen_stock . $almacen . $text_stock . ' ('.$products['products_stock_rea
 
 ?>"+
 
-    
 
-    
+
+
 "<?php } ?></font>";
 
 document.write(saludo);

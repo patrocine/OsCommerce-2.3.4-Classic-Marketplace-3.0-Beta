@@ -7,7 +7,7 @@
 
   Copyright (c) 2010 osCommerce
 
-  Released under the GNU General Public License
+  Released under the GNU General Public Lic ense
 */
 
   require('includes/application_top.php');
@@ -25,7 +25,7 @@ $password_reset_initiated = false;
 
       $actionRecorder = new actionRecorder('ar_reset_password', $check_customer['customers_id'], $email_address);
 
-      if ($actionRecorder->canPerform()) {
+      if ($password_reset_initiated == false) {
         $actionRecorder->record();
 
         $reset_key = tep_create_random_value(40);
@@ -43,6 +43,10 @@ $password_reset_initiated = false;
         $password_reset_initiated = true;
       } else {
         $actionRecorder->record(false);
+
+
+
+
 
         $messageStack->add('password_forgotten', sprintf(ERROR_ACTION_RECORDER, (defined('MODULE_ACTION_RECORDER_RESET_PASSWORD_MINUTES') ? (int)MODULE_ACTION_RECORDER_RESET_PASSWORD_MINUTES : 5)));
       }

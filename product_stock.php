@@ -2,10 +2,10 @@
 
 
 
-              $stock_nivel_values = mysql_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id_stock . "'");
-             $stock_nivel= mysql_fetch_array($stock_nivel_values);
-             $stock_nivel2_values = mysql_query("select * from " . 'products_stock' . " where products_id = '" . $products_id_stock . "'");
-             $stock_nivel2= mysql_fetch_array($stock_nivel2_values);
+              $stock_nivel_values = tep_db_query("select * from " . TABLE_PRODUCTS . " where products_id = '" . $products_id_stock . "'");
+             $stock_nivel= tep_db_fetch_array($stock_nivel_values);
+             $stock_nivel2_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $products_id_stock . "'");
+             $stock_nivel2= tep_db_fetch_array($stock_nivel2_values);
 
 
 
@@ -116,6 +116,9 @@ if ($stock_nivel['stock_nivel'] == 6){
     $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
     $sumar_entregado_total= tep_db_fetch_array($sumar_entregado_total_sales_query);
 
+    $sumar_entregado_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from orders_products op,  orders o where o.orders_id = op.orders_id and op.products_id ='" . $products_id_stock . "'and o.orders_status =139";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $prepago_procesando= tep_db_fetch_array($sumar_entregado_total_sales_query);
 
     $sumar_abono_total_sales_raw = "select sum(products_quantity) as value, count(*) as products_quantity from " . TABLE_ORDERS_PRODUCTS . " op,  " . TABLE_ORDERS . " o, administrators a where o.orders_id = op.orders_id and op.products_id ='" . $products_id_stock . "'and o.orders_status =a.abono_true and a.admin_groups_id=6";
     $sumar_abono_total_sales_query = tep_db_query($sumar_abono_total_sales_raw);
@@ -175,7 +178,7 @@ if ($stock_nivel['stock_nivel'] == 6){
     $sumar_pagos_procesando= tep_db_fetch_array($sumar_pagos_procesando_sales_query);
 
     $entradas_os = $sumar_entregado_total['value']+$sumar_abono_total['value'];
-    $salidas_os = $sumar_pagos_procesando['value'] + $sumar_credito['value'] + $sumar_albaran['value'] + $sumar_albaran_cobrar['value'] + $sumar_retirado['value'] + $sumar_cobrados_total['value'] + $sumar_pagado_total['value'] + $sumar_pagado_transferencia['value'] + $sumar_paypal_enviado['value'];
+    $salidas_os = $sumar_pagos_procesando['value'] + $sumar_credito['value'] + $sumar_albaran['value'] + $sumar_albaran_cobrar['value'] + $sumar_retirado['value'] + $sumar_cobrados_total['value'] + $sumar_pagado_total['value'] + $sumar_pagado_transferencia['value'] + $sumar_paypal_enviado['value']+$prepago_procesando['value'];
 
 
 
@@ -219,7 +222,7 @@ if ($stock_nivel['stock_nivel'] == 6){
                                 }
 
                         if (PERMISO_PENDIENTE_UNIDADES == 'true'){
-        $ppendiente = ' Pendiente: '.number_format($stock_nivel2['products_stock_pendiente'], 0, '.', '') . ' Pcs.';
+        $ppendiente = ' Pendienteeeee: '.number_format($stock_nivel2['products_stock_pendiente'], 0, '.', '') . ' Pcs.';
         $ppendiente2 = '  </p> <p style="margin-top: 0; margin-bottom: 0"><img border="0" src="images/otros/pagotado.png"> '. ' Pendiente: '.number_format($stock_nivel2['products_stock_pendiente'], 0, '.', '') . ' Pcs.';
                                      }
 
@@ -289,11 +292,11 @@ if ($stock_nivel['stock_nivel'] == 6){
      
      
      
-        $products_stock_values = mysql_query("select * from products_stock pd where products_id = '" . $products_id_stock . "'");
-    if ($products_stock = mysql_fetch_array($products_stock_values)){
+        $products_stock_values = tep_db_query("select * from products_stock pd where products_id = '" . $products_id_stock . "'");
+    if ($products_stock = tep_db_fetch_array($products_stock_values)){
 
 
-             $sql_data_array = array('products_stock_pendiente' => $sumar_mercancia_entregado_procesando['value'],
+             $sql_data_array = array('products_stock_pendiente' => $sumar_mercancia_entregado_procesando['value']-$sumar_pendiente_entrada_total['value'],
                                    'products_stock_ultimaactualizacion' => $oldday1,
                                   // 'products_stock_min' => $ayuda_producto['products_stock_min'],
                                    'products_stock_real' => $stock_disponible,);

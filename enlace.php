@@ -62,25 +62,25 @@ var s=""+
 
 
                                     }
-       
-       
-       
+
+
+
           }else{
              $link = ' <img border=0 src='.$_GET['url_web'].'images/rojo.jpg width=26 height=24>';
-         
+
            $Query = "INSERT INTO " . 'affiliate_compartir_empresas' . " set
               url_enlace = '" . $_GET['linkenlace'] . "',
               url_empresa_catalog = '" . $_GET['linkbaner']. "'";
               tep_db_query($Query);
               $new_id = tep_db_insert_id();
 
-         
-         
+
+
       }
 
-              
-              
-                       
+
+
+
 ?>"+
 
 

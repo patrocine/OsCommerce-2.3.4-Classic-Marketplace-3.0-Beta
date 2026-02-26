@@ -99,10 +99,14 @@ if (isset($HTTP_POST_VARS['comments']) && tep_not_null($HTTP_POST_VARS['comments
 		  }
 	  }
   }
-//if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
-  if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+ //if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) || (is_object($$payment) && ($$payment->enabled == false)) ) {
+ if ( ( is_array($payment_modules->modules) && (sizeof($payment_modules->modules) > 1) && !is_object($$payment) ) && (!$customer_shopping_points_spending) || (is_object($$payment) && ($$payment->enabled == false)) ) {
 	  tep_redirect(tep_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
+  
+  
+  
+  
 ########  Points/Rewards Module V2.1beta EOF #################*/
   
 
@@ -287,7 +291,10 @@ if (isset($$payment->form_action_url)) {
             <td><?php echo '<strong>' . HEADING_PAYMENT_METHOD . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></td>
           </tr>
           <tr>
-            <td><?php echo $order->info['payment_method']; ?></td>
+            <td><?php echo $order->info['payment_method'];
+
+
+            ?></td>
           </tr>
         </table></td>
         <td width="70%" valign="top" align="right"><table border="0" cellspacing="0" cellpadding="2">
@@ -345,6 +352,11 @@ if (isset($$payment->form_action_url)) {
 
   <h2><?php echo '<strong>' . HEADING_ORDER_COMMENTS . '</strong> <a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>'; ?></h2>
 
+
+
+
+
+
   <div class="contentText">
     <?php echo nl2br(tep_output_string_protected($order->info['comments'])) . tep_draw_hidden_field('comments', $order->info['comments']); ?>
   </div>
@@ -352,7 +364,29 @@ if (isset($$payment->form_action_url)) {
 <?php
   }
 ?>
-
+        <div class="contentText">
+    <div style="float: left; width: 60%; padding-top: 5px; padding-left: 15%;">
+      <div id="coProgressBar" style="height: 5px;"></div>
+      
+<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="91">
+		<img border="0" src="https://deliciaitaliana.com/images/hedera.png" width="31" height="31"></td>
+		<td>Reclama tus <b>Hbar</b> mas info y descarga de billetera en <b>
+		<a href="https://canariastoken.com"><font size="4">CanariasToken.com </font></a>
+		</b></td>
+	</tr>
+	<tr>
+		<td width="91">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td width="91"><i><b> </b></i></td>
+		<td>Si no reclamas tus HBAR a la entrega del pedido no podrás reclamarlo posteriormente</td>
+	</tr>
+       </div>
+ 
+ 
   <div class="contentText">
     <div style="float: left; width: 60%; padding-top: 5px; padding-left: 15%;">
       <div id="coProgressBar" style="height: 5px;"></div>
@@ -375,6 +409,10 @@ if (isset($$payment->form_action_url)) {
 
   echo tep_draw_button(IMAGE_BUTTON_CONFIRM_ORDER, 'check', null, 'primary');
 ?>
+
+
+
+
 
     </div>
   </div>

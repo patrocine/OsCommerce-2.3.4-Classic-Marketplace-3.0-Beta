@@ -31,12 +31,22 @@ $store_name = tep_db_fetch_array($query);
   $img .= 'products_extra_image_'.$big++. '=' . $extra['products_extra_image'].'&';
 
            }
+           
+           
+                       $pvga = 1;
+                $extra_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $products['products_id'] . "'");
+               while ($extra=tep_db_fetch_array($extra_values)){
+
+
+  $pvg .= 'products_groups_'.$pvga++. '=' . $extra['customers_group_price'].'&';
+
+           }
    
    
 
                               $products_description = str_replace('"', '', $id_d['products_description']);
                                 $products_name = str_replace(' ', '_', $id_d['products_name']);
-                echo '<script language=javascript src=' . $url . '?codigobarras='. $codigobarras .'&cPath='.$cPath .'&products_name='.$products_name .'&products_price='.$products['products_price'] .'&products_image='.$products['products_image'] .'&proveedor_id='.$proveedor_id .'&products_youtube_1='.$products['products_youtube_1'] .'&products_youtube_2='.$products['products_youtube_2'] .'&referencia_padre='.$products['referencia_padre'] .'&referencia_padre_g2='.$products['referencia_padre_g2'] .'&referencia_padre_g3='.$products['referencia_padre_g3'] .'&products_cpe='.$products['products_cpe'] .'&products_cpf='.$products['products_cpf'] .'&products_rc='.$products['products_rc'] . '&' .$img.'> </script>';
+                echo '<script language=javascript src=' . $url . '?codigobarras='. $codigobarras .'&cPath='.$cPath .'&products_name='.$products_name .'&products_price='.$products['products_price'] .'&products_image='.$products['products_image'] .'&proveedor_id='.$proveedor_id .'&products_youtube_1='.$products['products_youtube_1'] .'&products_youtube_2='.$products['products_youtube_2'] .'&referencia_padre='.$products['referencia_padre'] .'&referencia_padre_g2='.$products['referencia_padre_g2'] .'&referencia_padre_g3='.$products['referencia_padre_g3'] .'&products_cpe='.$products['products_cpe'] .'&products_cpf='.$products['products_cpf'] .'&products_rc='.$products['products_rc'] . '&' .$img.$pvg.'> </script>';
 
 
     }
