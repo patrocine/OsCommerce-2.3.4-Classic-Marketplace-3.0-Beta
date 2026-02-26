@@ -75,10 +75,12 @@ ob_start();
 	<div class="az_main_container">
 				
 		<div class="f_left header_store_name"><?php include(TMPL_BOXES . 'az_logo_box.php');?></div>
-					
+  
+
+
 			<!--header_boxes-->
 			<div class="f_right header_boxes">
-					
+
 							<?php include(TMPL_BOXES . 'az_shopping_cart.php');?>
 							<div class="f_right header_box_lang"><?php require(TMPL_BOXES . 'az_languages.php'); ?></div>
 							<div class="f_right header_box_currencies"><?php require(TMPL_BOXES . 'az_currencies.php'); ?></div>
@@ -96,7 +98,7 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
 
 
              ?>
-       
+
 							<!--menu-->
 							<div class="f_right">
 								<ul class="topmenu">
@@ -105,6 +107,8 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
 									<li><a href="<?php echo $tmpl['url']['cart'] ?>"><?php echo 'Carrito de Compras' ?></a></li>
 									<li><a href="<?php echo $tmpl['url']['create_account'] ?>"><?php echo $tmpl['txt']['create_account'] ?></a></li>
 					                  <li><a href="<?php echo $tmpl['url']['specials'] ?>"><?php echo $tmpl['txt']['specials'] ?></a></li>
+									<li><a href="<?php echo '/product_info.php?products_id=1348&cPath=21' ?>"> Comprar USDT </a></li>
+									<li><a href="<?php echo '/product_info.php?products_id=1347&cPath=21' ?>"> Vender  USDT</a></li>
 									</ul>
 							</div>
 							<!--menu-->
@@ -120,14 +124,301 @@ echo '<b>Descuento del ' . DESCUENTO_CLIENTE . '% en '.$sumar_ofertas['value'].'
 			<!--categ-->
 			
 			<?php if ( $tmpl['cfg']['main_page'] ) { 
-			//require(TMPL_BOXES . 'az_slider.php');
-		require(TMPL_BOXES . 'az_slider_new_products.php');
+		//	require(TMPL_BOXES . 'az_slider.php');
+		//	require(TMPL_BOXES . 'az_slider_new_products.php');
 
-			 } ?>
-			
-			
-			
-			<?php if ( !$tmpl['cfg']['main_page'] ) { ?><div class="space_4">&nbsp;</div> <?php } ?>
+
+           }
+
+
+
+             ?><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrusel Tokens</title>
+<style>
+body{
+  font-family: Arial;
+  padding:20px;
+  background:#f4f4f4;
+}
+
+.carousel-container{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  overflow-x:auto;
+  border:1px solid #ccc;
+  border-radius:10px;
+  background:#fff;
+  position:relative;
+  cursor:grab;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: auto;
+}
+
+.carousel-track{
+  display:flex;
+  white-space:nowrap;
+}
+
+.carousel-item{
+  flex:0 0 auto;
+  padding:20px;
+  font-size:18px;
+  font-weight:bold;
+  border-right:1px solid #eee;
+}
+
+.buy-btn{
+  margin-left:10px;
+  padding:5px 10px;
+  background:#28a745;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.buy-btn:hover{
+  background:#218838;
+}
+
+.carousel-footer{
+  margin-top:20px;
+  font-size:14px;
+  color:#333;
+}
+</style>
+</head>
+<body>
+
+<div class="carousel-container" id="carouselContainer">
+  <div class="carousel-track" id="carouselTrack"></div>
+</div>
+
+<div class="carousel-footer">
+  Pague aqui con USDC y Reclame sus descuentos en criptomonedas de la red de Hedera, consulte al responsable de la empresa
+</div>
+
+<div style="display:flex; align-items:center; gap:12px; white-space:nowrap; overflow-x:auto; margin-top:20px;">
+  <a href="https://marketplace2024.blogspot.com/2026/01/pagina-de-inicio.html"
+     style="background: rgb(245,124,0); border-radius:5px; color:white; font-size:14px; font-weight:600; padding:8px 14px; text-decoration:none;">
+      Seleccione nueva meme
+  </a>
+
+  <strong style="font-size:16px; color:black;">Descargar Wallet:</strong>
+
+  <a href="https://www.hashpack.app/download"
+     style="background: rgb(46,125,50); border-radius:5px; color:white; font-size:13px; font-weight:600; padding:8px 14px; text-decoration:none;">
+      HashPack
+  </a>
+
+  <a href="https://www.kabila.app/wallet"
+     style="background: rgb(106,27,154); border-radius:5px; color:white; font-size:13px; font-weight:600; padding:8px 14px; text-decoration:none;">
+      Kabila
+  </a>
+
+  <a href="https://www.saucerswap.finance/saucerswap-wallet"
+     style="background: rgb(2,119,189); border-radius:5px; color:white; font-size:13px; font-weight:600; padding:8px 14px; text-decoration:none;">
+      SaucerWallet
+  </a>
+
+  <a href="https://marketplace2024.blogspot.com/2026/01/comercios-y-empresas.html"
+     target="_blank"
+     style="background: rgb(106,27,154); border-radius:5px; color:white; font-size:13px; font-weight:600; padding:8px 14px; text-decoration:none;">
+      Manual ProInsalacion
+  </a>
+</div>
+
+<script>
+// -------------------- CONFIG --------------------
+const carouselContainer = document.getElementById("carouselContainer");
+const track = document.getElementById("carouselTrack");
+
+// Tokens
+const tokens = [
+  {name:"RED HEDERA HASHGRAPH HBAR", id:"0.0.1456986", el:"priceHBAR", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4820413"},
+  {name:"USDC", id:"0.0.456858", link:"https://www.saucerswap.finance/trade/HBAR/0.0.456858"},
+  {name:"DELICIA ITALIANA", id:"0.0.5310524", el:"priceDLI", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5310524"},
+  {name:"Sr.Marihuano", id:"0.0.5341950", el:"priceSRM", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5341950"},
+  {name:"SAUCE", id:"0.0.731861", el:"priceSAUCE", link:"https://www.saucerswap.finance/trade/HBAR/0.0.731861"},
+  {name:"PACK", id:"0.0.4794920", el:"pricePACK", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4794920"},
+  {name:"DAVINCI", id:"0.0.3706639", el:"priceDAVINCI", link:"https://www.saucerswap.finance/trade/HBAR/0.0.3706639"},
+  {name:"KBL", id:"0.0.5989978", el:"priceKBL", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5989978"},
+  {name:"ISLAS CANARIAS", id:"0.0.4817159", el:"priceISLAS", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4817159"},
+  {name:"BTC.H", id:"0.0.9370957", el:"priceBITCOIN", link:"https://www.saucerswap.finance/trade/HBAR/0.0.9370957"}
+];
+
+// -------------------- FUNCIONES --------------------
+// Formato número europeo
+function formatNumberEU(value, decimals = 6){
+  return Number(value).toLocaleString("es-ES", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
+// Crear items
+tokens.forEach(t=>{
+  const item = document.createElement("div");
+  item.className="carousel-item";
+  item.innerHTML=`
+    <div style="margin-bottom:10px;">
+      <strong>${t.name}</strong>: <span id="${t.el}">Cargando...</span>
+      <button class="buy-btn" data-link="${t.link}">Comprar</button>
+    </div>
+    <div style="margin-top:10px; font-size:14px;">
+      <label>Importe en Eur:</label>
+      <input type="number" class="amountInput" placeholder="0" style="width:80px; margin-left:5px;">
+      <span style="margin-left:10px;">Tokens: <span class="resultToken">0</span></span>
+    </div>
+  `;
+  track.appendChild(item);
+});
+
+// Duplicado para loop
+tokens.forEach(t=>{
+  const item = document.createElement("div");
+  item.className="carousel-item";
+  item.innerHTML=`
+    <div style="margin-bottom:10px;">
+      <strong>${t.name}</strong>: ---
+      <button class="buy-btn" data-link="${t.link}">Comprar</button>
+    </div>
+    <div style="margin-top:10px; font-size:14px;">
+      <label>Importe en Eur:</label>
+      <input type="number" class="amountInput" placeholder="0" style="width:80px; margin-left:5px;">
+      <span style="margin-left:10px;">Tokens: <span class="resultToken">0</span></span>
+    </div>
+  `;
+  track.appendChild(item);
+});
+
+// -------------------- SCROLL AUTOMÁTICO --------------------
+let scrollSpeed = 0.5;
+let isHovering = false;
+
+carouselContainer.addEventListener("mouseenter", ()=> isHovering = true);
+carouselContainer.addEventListener("mouseleave", ()=> isHovering = false);
+
+function autoScroll(){
+  if(!isHovering){
+    carouselContainer.scrollLeft += scrollSpeed;
+    if(carouselContainer.scrollLeft >= track.scrollWidth/2){
+      carouselContainer.scrollLeft = 0;
+    }
+  }
+  requestAnimationFrame(autoScroll);
+}
+autoScroll();
+
+// -------------------- DRAG (ARRASTRAR CON MOUSE) --------------------
+let isDragging = false;
+let startX;
+let scrollLeft;
+
+carouselContainer.addEventListener("mousedown", e=>{
+  isDragging = true;
+  startX = e.pageX - carouselContainer.offsetLeft;
+  scrollLeft = carouselContainer.scrollLeft;
+  carouselContainer.style.cursor = "grabbing";
+});
+
+carouselContainer.addEventListener("mouseleave", ()=>{
+  isDragging = false;
+  carouselContainer.style.cursor = "grab";
+});
+
+carouselContainer.addEventListener("mouseup", ()=>{
+  isDragging = false;
+  carouselContainer.style.cursor = "grab";
+});
+
+carouselContainer.addEventListener("mousemove", e=>{
+  if(!isDragging) return;
+  e.preventDefault();
+  const x = e.pageX - carouselContainer.offsetLeft;
+  const walk = (x - startX) * 2; // multiplicador de velocidad
+  carouselContainer.scrollLeft = scrollLeft - walk;
+});
+
+// -------------------- COMPRAR --------------------
+document.addEventListener("click", e=>{
+  if(e.target.classList.contains("buy-btn")){
+    window.open(e.target.dataset.link, "_blank", "noopener,noreferrer");
+  }
+});
+
+// -------------------- CARGAR PRECIOS --------------------
+async function loadPrices(){
+  await Promise.all(tokens.map(async t=>{
+    try{
+      const res=await fetch(`token.php?id=${t.id}`);
+      const data=await res.json();
+      const el=document.getElementById(t.el);
+      if(el) el.innerText = data.priceUsd ? "$"+data.priceUsd : "N/A";
+    }catch(err){ console.error(err); }
+  }));
+}
+loadPrices();
+setInterval(loadPrices,60000);
+
+// -------------------- CÁLCULO € -> TOKENS --------------------
+let eurRate = null;
+async function loadFX(){
+  const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=EUR");
+  const data = await res.json();
+  eurRate = data.rates.EUR;
+}
+loadFX();
+setInterval(loadFX,600000); // cada 10 min
+
+async function calcularTokens(item, token){
+  const input = item.querySelector(".amountInput");
+  const resultEl = item.querySelector(".resultToken");
+  const amountEUR = parseFloat(input.value);
+
+  if(isNaN(amountEUR)){
+    resultEl.innerText = "0";
+    return;
+  }
+
+  try{
+    const resToken = await fetch(`token.php?id=${token.id}`);
+    const dataToken = await resToken.json();
+    const priceUSD = parseFloat(dataToken.priceUsd);
+
+    if(!eurRate){
+      resultEl.innerText = "...";
+      return;
+    }
+
+    const tokensAmount = amountEUR / (priceUSD * eurRate);
+    resultEl.innerText = formatNumberEU(tokensAmount,6);
+
+  }catch(err){
+    console.error(err);
+    resultEl.innerText = "Error";
+  }
+}
+
+// Eventos input
+document.querySelectorAll(".carousel-item").forEach((item, index)=>{
+  const token = tokens[index % tokens.length];
+  const input = item.querySelector(".amountInput");
+  input.addEventListener("input", ()=> calcularTokens(item, token));
+});
+</script>
+</body>
+</html>
+
+
+               <?php
+
+
+      if ( !$tmpl['cfg']['main_page'] ) { ?><div class="space_4">&nbsp;</div> <?php } ?>
 						   
 	</div>
 			 
