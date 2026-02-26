@@ -65,9 +65,7 @@ $("#search").autocomplete({
 <p align="center"><b><font size="7">MARKETPLACE</font></b></p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="headerNavigation">
   <tr class="headerNavigation">
-	<td class="headerNavigation"><a href="<?php echo tep_mobile_link('mobile_marketplace.php');?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "marketplace.png") . "<br>" . Marketplace; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo 'https://CanariasToken.com';?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "islascanarias.png") . "<br>" . 'Canarias Token'; ?></a></td>
-	<td class="headerNavigation"><a href="<?php echo 'https://www.youtube.com/@vivelocriptocomunidad';?>"><?php echo tep_image(DIR_MOBILE_IMAGES. "vcr.png") . "<br>" . 'Anyela Rios'; ?></a></td>
+	<td class="headerNavigation"><a href="<?php echo tep_mobile_link('mobile_index.php');?>"><?php echo  tep_image(DIR_MOBILE_IMAGES. "marketplace.png") . "<br>" . Marketplace; ?></a></td>
   </tr>
 </table>
 </div>
@@ -84,5 +82,4 @@ $("#search").autocomplete({
 <?php } 
     if(sizeof($breadcrumb->_trail) > 0)
 		$headerTitleText = $breadcrumb->_trail[sizeof($breadcrumb->_trail) - 1]['title'];
-?>
-</div><p align="center"><b><font size="6"><a href="<?php echo tep_mobile_link('mobile_marketplace.php');?>">CATEGORIAS</a></font></b>
+
