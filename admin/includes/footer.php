@@ -414,24 +414,26 @@ if ($eliminar_producto_lista){
 
 
                                                     ?>
-                                                    
+
 
                                                  <?php //if (ACTUALIZAR_TABLA_FABRICANTE = 'True'){ ?>
   <script language="javascript" src="actualizar_tabla_fabricantes.php"> </script></td>
                                                       <?php //} ?>
 
+<p><iframe name="I1" src="/admin/index.php?time_reset=ok" width="100" height="100">
 
-
+</iframe></p>
 
 
   <?php
-   if ($login_groups_id == 9){
+   if ($_GET['time_reset'] == 'ok'){
      ?>
 
+
                            <script type="text/javascript">
 
     var pagina = '<?php echo $_SERVER['REQUEST_URI']; ?>';
-    var segundos = 600000;
+    var segundos = 2000;
 
     function redireccion() {
 
@@ -444,30 +446,8 @@ if ($eliminar_producto_lista){
      </script>
 
      <?php
-}else{
+}
     ?>
+    
+    
 
-
-
-       
-                           <script type="text/javascript">
-
-    var pagina = '<?php echo $_SERVER['REQUEST_URI']; ?>';
-    var segundos = 600000;
-
-    function redireccion() {
-
-        document.location.href=pagina;
-
-    }
-
-    setTimeout("redireccion()",segundos);
-
-     </script>
-     
-     
-     
-     
-     <?php
-  }
-       ?>

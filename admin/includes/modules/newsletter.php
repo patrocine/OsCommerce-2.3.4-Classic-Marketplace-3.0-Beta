@@ -162,9 +162,10 @@
 
 
 
-      echo '<p>' .  $mail['entry_postcode'] . '-' . $mail['customers_email_address'] . ' Cuenta' . $mail['customers_newsletter'] . '</p>33333333';
+      echo '<p>' .  $mail['entry_postcode'] . '-' . $mail['customers_email_address'] . ' Cuenta' . $mail['customers_newsletter'] . '</p>Cñoemte regostradp';
 
-         $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'] . ' ' . $mail['customers_email_address'], 	$mail['customers_email_address'], '', EMAIL_FROM, $this->title,'');
+        //$mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'] . ' ' . $mail['customers_email_address'], 	$mail['customers_email_address'], '', EMAIL_FROM, $this->title,'');
+              tep_mail($mail['customers_firstname'] . ' ' . $mail['customers_lastname'] . ' ' . $mail['customers_email_address'], STORE_OWNER_EMAIL_ADDRESS, '', EMAIL_FROM, $this->title,'');
 
            	}
 
@@ -176,13 +177,25 @@
 
 
 
-         echo '<p>' .  $mail['abonnement_addresse_email'] . ' NEWSLETTERS' . '</p>22222222';
+         echo '<p>' .  $mail['abonnement_addresse_email'] . ' NEWSLETTERS' . '</p> Lista de Correo';
          
          
          
         //todas españa conectar // canarias desconectar
-      $mimemessage->send(STORE_NAME, 	$mail['abonnement_addresse_email'], '', EMAIL_FROM, $this->title,'');
+    //  $mimemessage->send(STORE_NAME, 	$mail['abonnement_addresse_email'], '', EMAIL_FROM, $this->title,'');
+              tep_mail(STORE_NAME . ' ' . $mail['abonnement_addresse_email'], STORE_OWNER_EMAIL_ADDRESS, '', EMAIL_FROM, $this->title,'');
+
+      
+         //     tep_mail(STORE_NAME . ' ' . $mail['abonnement_addresse_email'], $mail['abonnement_addresse_email'], '', EMAIL_FROM, $this->title,'');
+
+      
+      
+      
       	}
+       
+       
+       
+       
 
 
 
