@@ -48,6 +48,16 @@
 
 
 
+     $sumar_entregado_total_sales_raw = "select sum(final_price_total) as value, count(*) as final_price_total from orders_products where orders_id ='" . tep_db_input($oID) . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_pvp= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+
+     $sumar_entregado_total_sales_raw = "select sum(final_beneficio) as value, count(*) as final_beneficio from orders_products where orders_id ='" . tep_db_input($oID) . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_beneficio= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+
 
 
 
@@ -72,9 +82,7 @@
   $factura_price_query = tep_db_query($factura_price_raw);
   $factura_price= tep_db_fetch_array($factura_price_query);
 
-          $factura_recom_raw = "select sum(hedera) as value, sum(hedera) as price, count(*) as count from " . TABLE_ORDERS . " where customers_id ='" . $factura_orders['customers_id'] . "'";
-  $factura_recom_query = tep_db_query($factura_recom_raw);
-  $factura_recom= tep_db_fetch_array($factura_recom_query);
+
 
  $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
               $factura_shipping = tep_db_fetch_array($factura_shipping_values);
@@ -440,7 +448,7 @@
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
                   <td width="100%" height="13">&nbsp;
-<?php ECHO $currencies->format(($factura_products['final_price']*$factura_products['products_quantity']) * OT_TAX_IVA / 100); ?></td>
+<?php ECHO $factura_products['final_beneficio']; ?></td>
                 </tr>
               </table>
                      <?php   } ?>
@@ -514,26 +522,35 @@
           <td width="100%" height="19">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
             <tr>
-                            <td width="62%"><p><b><font face="Calibri" size="1">En este establecimiento puedes pagar tus compras en USDT.</font></b></td><td width="38%">
+              <td width="62%">&nbsp;</td>
+              <td width="38%">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="24">
                 <tr>
                   <td width="100%" height="48">
-                  <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO IMPUESTOS ?></p>
+                  <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO BENEFICIOS ?></p>
                   <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
                   <p style="margin-top: 0; margin-bottom: 0" align="right">
-                  <?php echo $factura_tax['text'] ?></td>
+                  <?php
+
+  echo $sumar_beneficio['value'] . 'Ben / Costo' . ($sumar_beneficio['value']-$sumar_pvp['value']) ;
+
+
+
+
+
+                          ?></td>
                 </tr>
               </table>
               </td>
             </tr>
-          </table>                                                                        <?php  $r = POINTS_PER_AMOUNT_PURCHASE * 100; ?>
+          </table>
           </td>
         </tr>
         <tr>
           <td width="100%" height="19">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
             <tr>
-              <td width="62%">Reclamar en BITCOIN: <?php ECHO number_format($factura_total['value']/100*POINTS_PER_AMOUNT_PURCHASE, 2, '.', '') ?>$BTC</td>
+              <td width="62%">&nbsp;</td>
               <td width="38%">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="48">
                 <tr>
@@ -553,26 +570,14 @@
           <td width="100%" height="18">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="50">
             <tr>
-              <td width="62%" height="50"> BITCOIN OLVIDADOS/COBRADOS: <?php echo $factura_recom['value'] ?>$BTC
+              <td width="62%" height="50">&nbsp;</td>
               <td width="38%" height="50">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%">
                 <tr>
                   <td width="100%">
                   <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO TEXT_TOTAL_FACTURA_M ?></p>
-                                    <p style="margin-top: 0; margin-bottom: 0">BILLETERA: <?php
-
-
-
-                           if ($admin_lof['customers_billetera']){
-                          $w = $admin_lof['customers_billetera'];
-                       }else{
-                               $w = 'Configure su billetera';
-                                   }
-
-                                         echo $w;
-
-
-                        ?></p><p style="margin-top: 0; margin-bottom: 0" align="right">
+                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+                  <p style="margin-top: 0; margin-bottom: 0" align="right">
                   <?php echo $factura_total['text'] ?></td>
                 </tr>
               </table>

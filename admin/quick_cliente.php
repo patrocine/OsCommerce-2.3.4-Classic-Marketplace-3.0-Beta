@@ -212,61 +212,10 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
     
 
 
-    foreach($_POST['opcion_1'] as $id => $new_opcion_1) {
-          $sql_status_update_array = array('opcion_1' => $new_opcion_1);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-    foreach($_POST['opcion_2'] as $id => $new_opcion_2) {
-          $sql_status_update_array = array('opcion_2' => $new_opcion_2);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
 
 
-    foreach($_POST['opcion_3'] as $id => $new_opcion_3) {
-          $sql_status_update_array = array('opcion_3' => $new_opcion_3);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_4'] as $id => $new_opcion_4) {
-          $sql_status_update_array = array('opcion_4' => $new_opcion_4);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_5'] as $id => $new_opcion_5) {
-          $sql_status_update_array = array('opcion_5' => $new_opcion_5);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_6'] as $id => $new_opcion_6) {
-          $sql_status_update_array = array('opcion_6' => $new_opcion_6);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_7'] as $id => $new_opcion_7) {
-          $sql_status_update_array = array('opcion_7' => $new_opcion_7);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_8'] as $id => $new_opcion_8) {
-          $sql_status_update_array = array('opcion_8' => $new_opcion_8);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_9'] as $id => $new_opcion_9) {
-          $sql_status_update_array = array('opcion_9' => $new_opcion_9);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_10'] as $id => $new_opcion_10) {
-          $sql_status_update_array = array('opcion_10' => $new_opcion_10);
+    foreach($_POST['products_new_pdf'] as $id => $new_pdf) {
+          $sql_status_update_array = array('pdf' => $new_pdf);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
      }
 
@@ -284,18 +233,18 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
 
 
     foreach($_POST['opcion_3_3'] as $id => $new_opcion_3_3) {
-          $sql_status_update_array = array('opcion_3' => $new_opcion_3);
+          $sql_status_update_array = array('opcion_3_3' => $new_opcion_3_3);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
      }
 
 
     foreach($_POST['opcion_4_4'] as $id => $new_opcion_4_4) {
-          $sql_status_update_array = array('opcion_4' => $new_opcion_4);
+          $sql_status_update_array = array('opcion_4_4' => $new_opcion_4_4);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
      }
 
 
-    foreach($_POST['opcion_5_5'] as $id => $new_opcion_5_) {
+    foreach($_POST['opcion_5_5'] as $id => $new_opcion_5_5) {
           $sql_status_update_array = array('opcion_5_5' => $new_opcion_5_5);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
      }
@@ -327,66 +276,6 @@ $codigo_proveedor_description_up = $_GET['codigo_proveedor_description_up'];
 
     foreach($_POST['opcion_10_10'] as $id => $new_opcion_10_10) {
           $sql_status_update_array = array('opcion_10_10' => $new_opcion_10_10);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-
-    foreach($_POST['opcion_11'] as $id => $new_opcion_11) {
-          $sql_status_update_array = array('opcion_11' => $new_opcion_11);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-    foreach($_POST['opcion_12'] as $id => $new_opcion_12) {
-          $sql_status_update_array = array('opcion_12' => $new_opcion_12);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_13'] as $id => $new_opcion_13) {
-          $sql_status_update_array = array('opcion_13' => $new_opcion_13);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_14'] as $id => $new_opcion_14) {
-          $sql_status_update_array = array('opcion_14' => $new_opcion_14);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_15'] as $id => $new_opcion_15) {
-          $sql_status_update_array = array('opcion_15' => $new_opcion_15);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_16'] as $id => $new_opcion_16) {
-          $sql_status_update_array = array('opcion_16' => $new_opcion_16);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_17'] as $id => $new_opcion_17) {
-          $sql_status_update_array = array('opcion_17' => $new_opcion_17);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_18'] as $id => $new_opcion_18) {
-          $sql_status_update_array = array('opcion_18' => $new_opcion_18);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_19'] as $id => $new_opcion_19) {
-          $sql_status_update_array = array('opcion_19' => $new_opcion_19);
-            tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
-     }
-
-
-    foreach($_POST['opcion_20'] as $id => $new_opcion_20) {
-          $sql_status_update_array = array('opcion_20' => $new_opcion_20);
             tep_db_perform('products', $sql_status_update_array, 'update', " products_id='" . $id . "'");
      }
 
@@ -1230,6 +1119,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.pdf,
                                                       p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
@@ -1317,6 +1207,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.products_regladeprecios,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.pdf,
                                                       p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
@@ -1412,6 +1303,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.referencia_padre,
                                                       p.products_stock_min,
                                                       p.codigo_barras,
+                                                      p.pdf,
                                                       p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
@@ -1481,7 +1373,8 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.codigo_barras,
-                                                     p.opcion_1,
+                                                      p.pdf,
+                                                      p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
                                                       p.opcion_2_2,
@@ -1563,6 +1456,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       pd.products_name,
                                                       p.filtro,
                                                       p.codigo_barras,
+                                                      p.pdf,
                                                       p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
@@ -1651,6 +1545,7 @@ $ayuda_refer_exterior = '<p></a> '.'<a class="hastip"  title="' . AYUDA_TEXT_REF
                                                       p.proveedor_price_general,
                                                       pd.products_name,
                                                       p.codigo_barras,
+                                                      p.pdf,
                                                       p.opcion_1,
                                                       p.opcion_1_1,
                                                       p.opcion_2,
@@ -1997,6 +1892,8 @@ echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
 
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_dondeesta[".$row['products_id']."]\" value={$dondeesta['donde_esta']}></td>\n";
 
+           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_pdf[".$row['products_id']."]\" value={$row['pdf']}></td>\n";
+
 
 
            echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input size=\"8\" type=\"text\" name=\"products_new_manufacturers_id[".$row['products_id']."]\" value={$products_images['manufacturers_id']}></td>\n";
@@ -2055,7 +1952,7 @@ echo "<td class=\"smallText\" valign=\"top\">".$text_ext."</td>\n";
          <input type=\"text\" size=\"6\" name=\"opcion_2_2[".$row['products_id']."]\" value={$row['opcion_2_2']}>
          <input type=\"text\" size=\"6\" name=\"opcion_3_3[".$row['products_id']."]\" value={$row['opcion_3_3']}>
          <input type=\"text\" size=\"6\" name=\"opcion_4_4[".$row['products_id']."]\" value={$row['opcion_4_4']}>
-         <input type=\"text\" size=\"6\" name=\"opcion_5_4[".$row['products_id']."]\" value={$row['opcion_5_5']}></td>\n";
+         <input type=\"text\" size=\"6\" name=\"opcion_5_5[".$row['products_id']."]\" value={$row['opcion_5_5']}></td>\n";
 
 
           echo "<td class=\"smallText\" valign=\"top\" align=\"right\"><input type=\"text\" size=\"6\" name=\"opcion_6[".$row['products_id']."]\" value={$row['opcion_6']}>

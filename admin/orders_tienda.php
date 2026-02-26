@@ -2245,13 +2245,56 @@ function uncheckAll(){
 
          // fin admin level
 
+            $consulta2_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $orders['orders_id'] . "'");
+              $consulta6 = tep_db_fetch_array($consulta2_values);
+            $consulta2_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $consulta6['customers_id'] . "'");
+              $consulta7 = tep_db_fetch_array($consulta2_values);
 
 
                       ?>
                <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo  $orders['factura_id']; ?></td>
                   <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo 'Atcion: ' . $orders['admin_level_usuario'] ; ?></td>
 
-                    <?php
+       <?php
+
+           if ($consulta7['customers_billetera'] <> '' and $consulta6['orders_status'] == $pagado or $consulta7['customers_billetera'] <> '' and $consulta6['orders_status'] == $cobrado){
+          ?>
+
+        <td class="dataTableContent" align="right" <?php echo $onclick; ?>>
+
+
+ <p>
+        <?php
+
+           if ($consulta6['hedera_autorice'] == 1){
+
+            echo '<img border="0" src="images/verde.png" width="10" height="10">';
+
+       }else{
+        echo '<img border="0" src="images/rojo.png" width="10" height="10">';
+
+   }
+
+          ?>
+
+
+
+
+
+ <?php echo $consulta6['hedera'] ?>$hbar</p>      </td>
+
+                                      <?php
+                                           }
+                                    ?>
+
+
+
+        <?php
+
+
+
+
+
 
                      if  ($orders['orders_medas'] == 'tarjeta'){
 
@@ -2260,8 +2303,6 @@ function uncheckAll(){
              <td class="dataTableContent" align="right" <?php echo $onclick; ?>><?php echo 'Pago con ' . $orders['orders_medas'] ; ?></td>
 
    <?php
-
-
 
 
 

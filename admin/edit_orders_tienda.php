@@ -70,6 +70,28 @@
 
 
 }
+   if( $_POST['descuento_hbar'] >= 1 ){
+
+
+
+                      $sql_status_update_array = array('hedera_autorice' => $_POST['descuento_hbar'],  );
+             tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id = '" . $oID . "'");
+
+
+
+}
+
+   if( $_POST['billetera_hbar'] ){
+
+                             $porcentage_tienda_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
+   $porcentage_tienda = tep_db_fetch_array($porcentage_tienda_values);
+
+
+                       $sql_status_update_array = array('customers_billetera' => $_POST['billetera_hbar'],  );
+             tep_db_perform('customers', $sql_status_update_array, 'update', " customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+
+
+                 }
 
          $ortotal_group_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $oID . "' and class = '" . 'ot_tax' . "'");
       if ($ortotal_group = tep_db_fetch_array($ortotal_group_values)){
@@ -160,19 +182,7 @@ $codigobarras_in = $_GET['codigobarras_in'];
 
          ?>
 
-           <script type="text/javascript">
-    var pagina = '<?php echo $PHP_SELF.'?codigobarras_in=' . $codigobarras . '&oID='.$oID.'&action=edit&action_in=true'; ?>';
-    var segundos = 999999999999999999999;
 
-    function redireccion() {
-
-        document.location.href=pagina;
-
-    }
-
-    setTimeout("redireccion()",segundos);
-
-     </script>
 
    <?php
     }
@@ -589,7 +599,8 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
 
     $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras_inv . "' or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras_inv . "'
                                                                                                                                                                                                               or  p.products_id = pd.products_id and p.products_model_2 = '" . $codigobarras_inv . "'
-                                                                                                                                                                                                              or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras_inv . "'");
+                                                                                                                                                                                                              or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras_inv . "'
+                                                                                                                                                                                                              or  p.products_id = pd.products_id and p.products_model_4 = '" . $codigobarras_inv . "'");
    if ($codigobarras_cd = tep_db_fetch_array($codigobarras_values)){
 
 
@@ -1007,7 +1018,8 @@ $mail_notif .= "Responda a este mail si tiene alguna consulta que hacernos.". "\
                
 	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
 					products_model_2 = '" . $products_details['model_2'] . "',
-					products_model_3 = '" . $products_details['model_3'] . "'
+					products_model_3 = '" . $products_details['model_3'] . "',
+					products_model_4 = '" . $products_details['model_4'] . "'
 					WHERE products_id = '" . (int)$order['products_id'] . "' ");
 
 
@@ -1021,8 +1033,12 @@ $oldday1 = date("Y-m-d", $time1);
          if (isset($products_details["products_aut_referencia1"])){
 
 	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-					products_model = '" . $products_details['model'] . "'
-					WHERE products_id = '" . (int)$order['products_id'] . "' ");
+					products_model = '" . $products_details['model'] . "',
+                    products_model_2 = '" . $products_details['model_2'] . "',
+                    products_model_3 = '" . $products_details['model_3'] . "',
+                    products_model_4 = '" . $products_details['model_4'] . "'
+
+                    WHERE products_id = '" . (int)$order['products_id'] . "' ");
 
                         }
                         
@@ -1444,20 +1460,24 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-
+                                  /*
 
  if (isset($products_details['products_aut_referencia2'])){
 	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-                          products_model_2 = '" . $products_details['model_2'] . "'
+                          products_model_2 = '" . $products_details['model_2'] . "',
+					      products_model_3 = '" . $products_details['model_3'] . "',
+					      products_model_4 = '" . $products_details['model_4'] . "'
 					WHERE products_id = '" . (int)$order['products_id'] . "' ");
                                          }
  if (isset($products_details['products_aut_referencia3'])){
 	tep_db_query ("UPDATE " . TABLE_PRODUCTS . " SET
-                          products_model_3 = '" . $products_details['model_3'] . "'
+                          products_model_2 = '" . $products_details['model_2'] . "',
+					      products_model_3 = '" . $products_details['model_3'] . "',
+					      products_model_4 = '" . $products_details['model_4'] . "'
 					WHERE products_id = '" . (int)$order['products_id'] . "' ");
                                          }
 
-                                         
+                                        */
            //quitar producto de la lista del proveedor
    if (isset($products_details['lista_prov_poner'])){
 
@@ -1537,14 +1557,17 @@ $oldday1 = date("Y-m-d", $time1);
                 echo '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_codigo.php?products_id=' . (int)$order['products_id'] . '&referencia2='. $products_details["model_2"] .'"> </script>';
 
 
-    }
+    }     }
 
 
 
-                                  }
-                                  
-                                  
-                                  
+ 		   if (isset($products_details['price_g2'])){
+
+             tep_db_query ("UPDATE " . TABLE_ORDERS_PRODUCTS . " SET
+					final_price_g2 =' ".$products_details['price_g2']."'
+					WHERE products_id = '" . (int)$order['products_id'] . "' and orders_id = '" . (int)$oID . "'");
+
+                                      }
                                   
 
 
@@ -2695,24 +2718,28 @@ $oldday1 = date("Y-m-d", $time1);
 
   }
 
+ 					$Query = "DELETE from " . 'orders_products' . "
+					WHERE orders_id = '" . 0 . "'";
+					tep_db_query($Query);
+
+
+
+
+
+
 
       if ($products_details['deson_detail']){
    $products_details["final_price"] = $products_details["price"] *$descuento_insert/100+$products_details["price"] ;
                                          }
+
+
                   if ($products_details['products_descuento'] <> 0){
   $products_details["final_price"] = $products_details["price"] * $products_details["products_descuento"]/100+$products_details["price"] ;
                                             }
                                       //descuento
 
 
-    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
-    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
-
-          $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
-
-
-                                                     }
         $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
        $customers_ppe = tep_db_fetch_array($customers_ppe_values);
 
@@ -2729,13 +2756,19 @@ $oldday1 = date("Y-m-d", $time1);
                                                      }
 
 
+    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
+                                      if ($customers_porcentage['customers_group_id'] == 2){
+                                       }else{
+          $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
+                                          }
+
+                                                     }
                                                                
 
-                                if ($products_details["name"]){
+                                         
 
-                                    }
-                          
 				$Query = "UPDATE " . TABLE_ORDERS_PRODUCTS . " set
 					products_model = '" . $products_details["model"] . "',
 					products_name = '" . $products_details["name"] . "',
@@ -2880,6 +2913,10 @@ $oldday1 = date("Y-m-d", $time1);
                                             'text' => $precioactual_subtotal['value']+$importe.'€', );
             tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
 
+                  // ot_subtotal
+           $sql_status_update_array = array('value' => (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) ,
+                                            'text' => (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) .'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_tax' . "'");
 
 
          // fin
@@ -2955,14 +2992,7 @@ $oldday1 = date("Y-m-d", $time1);
                                       //descuento
 
 
-    $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
-    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
-
-          $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
-
-
-                                                     }
                                                      
                                                      
         $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
@@ -2999,7 +3029,18 @@ $oldday1 = date("Y-m-d", $time1);
    $products_details["final_price"] =  $groups_['customers_group_price'];
 }
 
+     $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  (int)$order['products_id'] . "' and pdc_unidades <= '" .  $entregas_unidades. "' order by pdc_unidades desc");
+    if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
+
+
+                                      if ($customers_porcentage['customers_group_id'] == 2){
+                                   }else{
+          $products_details["final_price"] = $pdc_precio_final['pdc_price_final'];
+                                          }
+
+
+                                                     }
 
 
            $Query = "INSERT INTO " . TABLE_ORDERS_PRODUCTS . " set
@@ -3076,6 +3117,10 @@ $oldday1 = date("Y-m-d", $time1);
                                             'text' => $precioactual_subtotal['value']+$importe.'€', );
             tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_subtotal' . "'");
 
+                  // ot_subtotal
+           $sql_status_update_array = array('value' => (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) ,
+                                            'text' => (($precioactual_subtotal['value']+$importe) * OT_TAX_IVA /100) .'€', );
+            tep_db_perform(TABLE_ORDERS_TOTAL, $sql_status_update_array, 'update', " orders_id = '" . $numero_pedido . "' and class = '" . 'ot_tax' . "'");
 
          // fin
               
@@ -3703,7 +3748,8 @@ $oldday1 = date("Y-m-d", $time1);
    $codigobarras_values = tep_db_query("select * from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where  p.products_id = pd.products_id and p.products_id = '" . $codigobarrasID . "' or p.products_id = pd.products_id and p.codigo_barras = '" . $codigobarras . "'
                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model = '" . $codigobarras . "'
                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model_2 = '" . $codigobarras . "'
-                                                                                                                                                                                                         or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras . "'");
+                                                                                                                                                                                                         or  p.products_id = pd.products_id and p.products_model_3 = '" . $codigobarras . "'
+                                                                                                                                                                                                          or  p.products_id = pd.products_id and p.products_model_4 = '" . $codigobarras . "'");
 
 
 
@@ -3753,6 +3799,13 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
+                                             
+                                             
+    $customers_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" .  $codigobarras_a ['customers_id'] . "'");
+    $customers_final = tep_db_fetch_array($customers_values);
+
+                                             
+                                             
 
 
                            $entregas_unidades  =  $unidades + $codigobarras_a['products_quantity'];
@@ -3761,7 +3814,16 @@ $oldday1 = date("Y-m-d", $time1);
     if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
 
-          $products_precio = $pdc_precio_final['pdc_price_final'];
+
+          
+          
+                                      if ($customers_final['customers_group_id'] == 2){
+                                   }else{
+           $products_precio = $pdc_precio_final['pdc_price_final'];
+                                          }
+          
+          
+          
           
           
                       $sql_status_update_array = array('products_quantity' => $unidades + $codigobarras_a['products_quantity'],
@@ -3868,18 +3930,26 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
 }
 
+    $customers_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" .  $porcentage_tienda['customers_id'] . "'");
+    $customers_final = tep_db_fetch_array($customers_values);
 
 
     $pdc_precio_final_values = tep_db_query("select * from " . 'products_descuento_cantidad' . " where pdc_products_id = '" .  $codigobarras_c['products_id'] . "' and pdc_unidades <= '" .  $unidades. "' order by pdc_unidades desc");
     if ($pdc_precio_final = tep_db_fetch_array($pdc_precio_final_values)){
 
 
-              $producto_precio_final = $pdc_precio_final['pdc_price_final'];
+
 
                                     // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
 
-                                                                  }
-                                                                  
+
+                                      if ($customers_final['customers_group_id'] == 2){
+                                   }else{
+            $producto_precio_final = $pdc_precio_final['pdc_price_final'];
+                                          }
+
+                                                                            }
+
                                                                   
         $customers_ppe_values = tep_db_query("select * from " . 'orders' . " where orders_id = '" . $oID . "'");
        $customers_ppe = tep_db_fetch_array($customers_ppe_values);
@@ -3891,14 +3961,23 @@ $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
 
 
+
+
+
+
+
+
+
+
+                                      if ($customers_porcentage['customers_group_id'] == 2){
+                                       }else{
          $producto_precio_final = $ppe['precio_especial'];
-
-
+                                          }
                                                      }
                                                                   
                                                                   
                                                                   
-                                                                  
+                                            //descuento
                                                                   
                                      // enviar solicitud para comprobar si existe el codigo de barras en otras tiendas.
                              // inserta desde el formulario principal.
@@ -4197,6 +4276,7 @@ if (($action == 'edit') && ($order_exists == true)) {
              <a target="_blank" href="invoice_factura_alb.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/albaran.png" onmouseover="this.src='images/albaran2.png';" onmouseout="this.src='images/albaran.png';"/>
              <a target="_blank" href="invoice_factura_control.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/control.png" onmouseover="this.src='images/control2.png';" onmouseout="this.src='images/control.png';"/>
              <a target="_blank" href="invoice_factura_abono.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/abono.png" onmouseover="this.src='images/abono2.png';" onmouseout="this.src='images/abono2.png';"/>
+             <a target="_blank" href="invoice_factura_beneficios.php<?php ECHO  '?oID=' . $_GET['oID']; ?>"><img src="images/beneficios.png" onmouseover="this.src='images/beneficios2.png';" onmouseout="this.src='images/beneficios2.png';"/>
 
 
                              <?php
@@ -4646,6 +4726,7 @@ $selitem_0 = 'checked';
    or p.products_model like '%" . $palabraclave . "%'
    or p.products_model_2 like '%" . $palabraclave . "%'
    or p.products_model_3 like '%" . $palabraclave . "%'
+   or p.products_model_4 like '%" . $palabraclave . "%'
    or p.codigo_barras like '%" . $palabraclave . "%' group by p.products_id ";
    
  $orders_query = tep_db_query($orders_query_raw);
@@ -4966,6 +5047,8 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
     $customers_porcentage = tep_db_fetch_array($customers_porcentage_values);
 
 
+       $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+    $customers_porcentage2 = tep_db_fetch_array($customers_porcentage_values);
 
 
           if ($customers_porcentage['customers_porcentage']){
@@ -5011,10 +5094,210 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
               $descuento_busd    =  ' / ' . number_format($descuento, 2, '.', '').'b$';
             }
              
+             
+                     $r = POINTS_PER_AMOUNT_PURCHASE * 100;
+                     
+                     
+                     
+      $sumar_entregado_total_sales_raw = "select sum(hedera) as value, count(*) as hedera from orders where customers_id ='" . $porcentage_tienda['customers_id'] . "'and hedera_autorice = 2 and orders_status='" . $pagado . "' or customers_id ='" . $porcentage_tienda['customers_id'] . "'and hedera_autorice = 2 and orders_status='" . $cobrado . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_hbar_descuentos= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+
+                     
+                     
                ?>
-      <p><font size="4">LINEAS: <b><font color="#FF0000"><?php echo $contar['value']; ?></font></b> TOTAL: <b>
-	<font color="#FF0000"><?php echo $currencies->format($total_condes) . $descuento_value2 ; ?></font> Busd: <b>
- <font color="#FF0000"><?php echo number_format($busdtotal, 2, '.', '').'b$ ' .$descuento_busd ; ?></font></b></font></p>
+
+ 
+ 
+
+
+
+<style>
+body{
+  font-family: Arial;
+  padding:20px;
+  background:#f4f4f4;
+}
+
+.token-container{
+  max-width:500px;
+  margin-left:0;
+  padding:20px;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:10px;
+}
+
+.top-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+label{
+  font-weight:bold;
+}
+
+.amountInput{
+  width:100px;
+  margin-left:10px;
+}
+
+.buy-btn{
+  padding:5px 10px;
+  background:#28a745;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  display:none;
+}
+
+.buy-btn:hover{
+  background:#218838;
+}
+
+.resultToken{
+  margin-left:10px;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="token-container">
+
+  <div class="top-row">
+    <label for="tokenSelect">Seleccione Token:</label>
+    <select id="tokenSelect">
+      <option value="">--Seleccione--</option>
+    </select>
+    <button class="buy-btn" id="buyBtn">Comprar</button>
+  </div>
+
+  <div style="margin-top:20px;">
+    <label>Importe en EUR:</label>
+    <input type="number" class="amountInput" value="<?php ECHO $sumar_hbar_descuentos['value'] ?>">
+    <span>Tokens: <span class="resultToken">0</span></span>
+  </div>
+
+</div>
+
+<script>
+// -------------------- TOKENS --------------------
+const tokens = [
+  {name:"HBAR", id:"0.0.1456986", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4820413"},
+  {name:"DELICIA ITALIANA", id:"0.0.5310524", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5310524"},
+  {name:"Sr.Marihuano", id:"0.0.5341950", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5341950"},
+  {name:"SAUCE", id:"0.0.731861", link:"https://www.saucerswap.finance/trade/HBAR/0.0.731861"},
+  {name:"PACK", id:"0.0.4794920", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4794920"},
+  {name:"DAVINCI", id:"0.0.3706639", link:"https://www.saucerswap.finance/trade/HBAR/0.0.3706639"},
+  {name:"KBL", id:"0.0.5989978", link:"https://www.saucerswap.finance/trade/HBAR/0.0.5989978"},
+  {name:"ISLAS CANARIAS", id:"0.0.4817159", link:"https://www.saucerswap.finance/trade/HBAR/0.0.4817159"},
+  {name:"BTC.H", id:"0.0.9370957", link:"https://www.saucerswap.finance/trade/HBAR/0.0.9370957"}
+];
+
+// -------------------- FORMATO --------------------
+function formatNumberEU(value, decimals = 6){
+  return Number(value).toLocaleString("es-ES", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
+// -------------------- SELECT --------------------
+const select = document.getElementById("tokenSelect");
+
+tokens.forEach(t=>{
+  const option = document.createElement("option");
+  option.value = t.id;
+  option.textContent = t.name;
+  option.dataset.link = t.link;
+
+  // ?? seleccionar HBAR por defecto
+  if(t.name.includes("HBAR")){
+    option.selected = true;
+  }
+
+  select.appendChild(option);
+});
+
+// -------------------- FX --------------------
+let eurRate = null;
+
+async function loadFX(){
+  const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=EUR");
+  const data = await res.json();
+  eurRate = data.rates.EUR;
+}
+loadFX();
+
+// -------------------- PRECIO --------------------
+async function getTokenPrice(id){
+  try{
+    const res = await fetch(`/token.php?id=${id}`);
+    const data = await res.json();
+    return parseFloat(data.priceUsd);
+  }catch(err){
+    console.error(err);
+    return null;
+  }
+}
+
+// -------------------- ELEMENTOS --------------------
+const input = document.querySelector(".amountInput");
+const resultEl = document.querySelector(".resultToken");
+const buyBtn = document.getElementById("buyBtn");
+
+// -------------------- CALCULAR --------------------
+async function calcularTokens(){
+  const selectedId = select.value;
+  const eur = parseFloat(input.value);
+
+  if(!selectedId || isNaN(eur) || eur <= 0) {
+    resultEl.innerText = "0";
+    buyBtn.style.display = "none";
+    return;
+  }
+
+  const priceUSD = await getTokenPrice(selectedId);
+  if(!priceUSD || !eurRate){
+    resultEl.innerText = "...";
+    return;
+  }
+
+  const tokensAmount = eur / (priceUSD * eurRate);
+  resultEl.innerText = formatNumberEU(tokensAmount,6);
+
+  buyBtn.style.display = tokensAmount > 0 ? "inline-block" : "none";
+}
+
+// -------------------- EVENTOS --------------------
+input.addEventListener("input", calcularTokens);
+select.addEventListener("change", calcularTokens);
+
+// ?? calcular al cargar (HBAR + 5€)
+window.addEventListener("load", calcularTokens);
+
+buyBtn.addEventListener("click", ()=>{
+  const selectedOption = select.selectedOptions[0];
+  if(selectedOption){
+    window.open(selectedOption.dataset.link,"_blank","noopener,noreferrer");
+  }
+});
+</script>
+
+</body>
+</html>
+```
+
+ 
+        <p><font size="4">LINEAS: <b><font color="#FF0000"><?php echo $contar['value']; ?></font></b> TOTAL: <b>
+		<font color="#FF0000">Billetera: <?php echo $customers_porcentage2['customers_billetera'] . ' | ' ; ?></font></b></font></p>
+
+
+ 
 
              <?php                                                        //  and  $login_groups_id <> 1
  // SOLO STATUS SELECCIONADOS SE EJECUTARÁ ESTA PARTE DEL CODIG
@@ -5077,7 +5360,22 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
 
 
+           <?php
 
+         $customers_porcentage_values = tep_db_query("select * from " . 'orders_products' . " where orders_id ='" . $oID . "'");
+  $sumar_pvp = tep_db_fetch_array($customers_porcentage_values);
+
+     $sumar_entregado_total_sales_raw = "select sum(final_price_total) as value, count(*) as final_price_total from orders_products where orders_id ='" . $oID . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_pvp= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+
+     $sumar_entregado_total_sales_raw = "select sum(final_beneficio) as value, count(*) as final_beneficio from orders_products where orders_id ='" . $oID . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_beneficio= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+         // echo $sumar_beneficio['value'] . ' / ' . $sumar_pvp['value'];
+               ?>
  
  
 <!-- Begin Products Listing Block -->
@@ -5105,10 +5403,38 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
        $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "' and customers_porcentage <> '" . 0 . "'");
   $customers_porcentage = tep_db_fetch_array($customers_porcentage_values);
 
+       $customers_porcentage_values = tep_db_query("select * from " . 'customers' . " where customers_id = '" . $porcentage_tienda['customers_id'] . "'");
+  $customers_porcentage1 = tep_db_fetch_array($customers_porcentage_values);
+
+     echo $factura_pdf = $_POST['factura_pdf'];
+
+ if ($factura_pdf){
+
+                       $sql_status_update_array = array('factura_pdf' => $factura_pdf,  );
+             tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id= '" . $oID . "'");
 
 
+            ?>
 
 
+        <script type="text/javascript">
+
+       var pagina = 'edit_orders_tienda.php<? echo '?action=edit&oID=' . $oID.'&action=edit';  ?>';
+    var segundos = 0;
+
+    function redireccion() {
+
+        document.location.href=pagina;
+
+    }
+
+    setTimeout("redireccion()",segundos);
+
+     </script>
+
+
+              <?php
+}
 
 
 
@@ -5219,6 +5545,32 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
           <td class="main" bgcolor="#C9C9C9" width="10">
 
+          
+                                 <?php
+
+                       $sql_status_update_array = array('hedera' => ($total_condes / 100 * POINTS_PER_AMOUNT_PURCHASE),  );
+             tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id = '" . $oID . "'");
+
+    $sumar_entregado_total_sales_raw = "select sum(hedera) as value, count(*) as hedera from orders where customers_id ='" . $porcentage_tienda['customers_id'] . "'and hedera_autorice = 2 and orders_status='" . $pagado . "' or customers_id ='" . $porcentage_tienda['customers_id'] . "'and hedera_autorice = 2 and orders_status='" . $cobrado . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_hbar_descuentos= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+                                    echo  $sumar_hbar_descuentos['value'] .'/';
+                                      ?>
+
+                  <?php echo tep_draw_form('descuento_hbar', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
+           <?php echo 'Descuento en HBAR' .$ayuda_descuento_cliente.  ' $' . ($total_condes / 100 * POINTS_PER_AMOUNT_PURCHASE) . tep_draw_input_field('descuento_hbar', $porcentage_tienda['hedera_autorice'], 'size="12"'); ?>
+                                                 </form>
+
+
+                  <?php echo tep_draw_form('billetera_hbar', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
+           <?php echo tep_draw_input_field('billetera_hbar', $customers_porcentage1['customers_billetera'], 'size="12"'); ?>
+                                                 </form>
+
+
+
+          
+
              <td class="main" bgcolor="#C9C9C9" width="10">
 
               <td class="main" bgcolor="#C9C9C9" width="10">
@@ -5234,8 +5586,13 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
 
                    ?>
+                   
+                   
 
-                                       </form>
+                                          </form>
+
+                   
+
 
               <td class="main" bgcolor="#C9C9C9" width="10">
 
@@ -5258,12 +5615,46 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
 
 
               <td class="main" bgcolor="#C9C9C9" width="10">
-              
+                                             <?php  if ($porcentage_tienda['factura_pdf']){
+                                                   $pdf_dat = $porcentage_tienda['factura_pdf'];
+                                           }else{
+                                               $pdf_dat = 'f'.$oID.'.pdf';
+
+                                          }   ?>
+                                             
+                                             
+                                             
+                                             
+                                             
+                  <?php echo tep_draw_form('factura_pdf', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
+           <?php echo 'factura_pdf' . tep_draw_input_field('factura_pdf', $pdf_dat, 'size="6"'); ?>
+           
+                                                                        <?php
+
+                                                                   ?>
+           
+           
+                                                 </form>
+                             <?php
+                                                 
+                               if ($porcentage_tienda['factura_pdf']){
+ ?>
+               <a href="/images/<?php echo  $porcentage_tienda['factura_pdf']; ?>"><img border="0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/PDF_icon.svg/768px-PDF_icon.svg.png" width="20" height="" valign="top"></a></p>
+
+                                                     <?php
+
+                                                  } ?>
+
+
+                                  <td class="main" bgcolor="#C9C9C9" width="10">
+              <td class="main" bgcolor="#C9C9C9" width="10">
+
                   <?php echo tep_draw_form('descuento_pedido', 'edit_orders_tienda.php', 'oID='. $oID .'&action=edit', 'post'); ?>
            <?php echo 'Descuento en pedido' .$ayuda_descuento_pedido. ' ' . $porcentage_tienda['porcentage_tienda']. tep_draw_input_field('descuento_pedido', '', 'size="12"'); ?>
                                                  </form>
 
               <td class="main" bgcolor="#C9C9C9" width="10">
+
 
               <td class="main" bgcolor="#C9C9C9" width="10">
               
@@ -5383,7 +5774,8 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                                       op.products_model,
                                                       p.products_model_2,
                                                       p.products_model_3,
-                                                     pde.donde_esta,
+                                                      p.products_model_4,
+                                                    pde.donde_esta,
                                                       op.products_inventario,
                                                       op.final_price_euro,
                                                       op.lista_prov,
@@ -5434,6 +5826,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                                        op.products_tax,
                                                       op.products_price,
                                                       op.final_price,
+                                                      op.final_price_g2,
                                                       op.products_descuento,
                                                       p.products_descuento_onoff,
                                                       op.orders_products_id from " . TABLE_ORDERS_PRODUCTS .  " op, " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . 'products_donde_esta' . " pde on pde.login_id = '" . $log_id . "'  where op.products_quantity <> 0 and p.products_id = pd.products_id and op.products_id = p.products_id and op.orders_id = '" . (int)$oID . "' group by op.orders_products_id ORDER BY op.orders_products_id DESC LIMIT $sel_iten_max");
@@ -5497,6 +5890,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                      'model' => $orders_products['products_model'],
                                      'model_2' => $orders_products['products_model_2'],
                                      'model_3' => $orders_products['products_model_3'],
+                                     'model_4' => $orders_products['products_model_4'],
                                      'stock_min' => $orders_products['products_stock_min'],
                                      'stock_obs' => $orders_products['products_stock_obs'],
                                      'stock_nivel' => $orders_products['stock_nivel'],
@@ -5506,6 +5900,7 @@ if (@getimagesize(HTTPS_CATALOG_SERVER . DIR_WS_CATALOG_IMAGES . $products_image
                                      'price' => $orders_products['products_price'],
                                      'donde_esta' => $orders_products['donde_esta'],
                                      'final_price' => $orders_products['final_price'],
+                                     'final_price_g2' => $orders_products['final_price_g2'],
                                      'final_price_euro' => $orders_products['final_price_euro'],
                                      'final_price_tienda' => $orders_products['final_price_tienda'],
                                      'lista_prov' => $orders_products['lista_prov'],
@@ -6073,7 +6468,7 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' .  $order->products[$i]['
     $beneficio_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $oID . "' and products_id = '" . $order->products[$i]['products_id'] . "'");
 IF ($beneficio = tep_db_fetch_array($beneficio_values)){
 
-               $pvmtotal = $pr_grupos['customers_group_price'] * $order->products[$i]['qty'];
+               $pvmtotal = $order->products[$i]['final_price_g2'] * $order->products[$i]['qty'];
                $pvptotal =  $order->products[$i]['final_price'] * $order->products[$i]['qty'];
                
              $sql_status_update_array = array('final_beneficio' =>  $pvptotal- $pvmtotal,
@@ -6083,10 +6478,6 @@ IF ($beneficio = tep_db_fetch_array($beneficio_values)){
 
 
 }
-
-     
-     
-     
 
               if ($pvmver == 'true'){
               $beneficio =  $order->products[$i]['final_price'] -  $pr_grupos['customers_group_price'];
@@ -6130,8 +6521,23 @@ if (PERMISO_INSERTAR_PRODUCTO_EN_NUEVO_PEDIDO == 'True'){
  echo '	    </td>' . "\n" .
      '	    <td class="' . $RowStyle . '" valign="top"><div align="center">' . "<input name='update_products[$orders_products_id][products_aut_referencia1]' type='checkbox' /></div></td>\n </div></td>\n";
 
- 	echo '	    </td>' . "\n" .
+  	echo '	    </td>' . "\n" .
   '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][model]' size='13' value='" . $order->products[$i]['model'] . "'><p>" . "";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' .  "<input name='update_products[$orders_products_id][model_2]' size='13' value='" . $order->products[$i]['model_2'] . "'><p>" . "" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' .   "<input name='update_products[$orders_products_id][model_3]' size='13' value='" . $order->products[$i]['model_3'] . "'><p>" . "" . "\n";
+
+	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+		      '	  ' .   "<input name='update_products[$orders_products_id][model_4]' size='13' value='" . $order->products[$i]['model_4'] . "'><p>" . "" . "\n";
+
+
+
+
+
+
 
 
 
@@ -6157,6 +6563,17 @@ echo '	    </td>' . "\n" .
 
 
                             $retail =  '';
+                            
+                            
+                            if ($order->products[$i]['final_price_g2'] <> 0){
+                         $pvm_g2 = $order->products[$i]['final_price_g2'];
+                        }else{
+                         $pvm_g2 = $pr_grupos_g2['customers_group_price'];
+
+                    }
+
+                            
+                            
                           echo '	    </td>' . "\n" .   '	    <td class="' . $RowStyle . '" align="left" valign="top">';
 
                         if (PRECIO_VENTA_FACTURA == 'true'){
@@ -6172,7 +6589,7 @@ echo '	    </td>' . "\n" .
 		      '	  ' . " <input name='update_products[$orders_products_id][price_g1]' size='4' value='" . number_format($pr_grupos_g1['customers_group_price'], 2, '.', '') . "'>" . "\n";
                         }  if (PRECIO_VENTA_GRUP2 == 'true'){
 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
-		      '	  ' . "<input name='update_products[$orders_products_id][price_g2]' size='4' value='" . number_format($pr_grupos_g2['customers_group_price'], 2, '.', '') . "'>" . "\n";
+		      '	  ' . "<input name='update_products[$orders_products_id][price_g2]' size='4' value='" . number_format($pvm_g2, 2, '.', '') . "'>" . "\n";
                         }  if (PRECIO_VENTA_GRUP3 == 'true'){
 	echo   //  '	    <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='6' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
 		      '	  ' . "<input name='update_products[$orders_products_id][price_g3]' size='4' value='" . number_format($pr_grupos_g3['customers_group_price'], 2, '.', '') . "'>" . "\n";
@@ -6253,13 +6670,13 @@ echo    '	<td class="' . $RowStyle . '" valign="top">' . "Pcs<input name='update
    echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exterior . '/' . $products_stock['products_stock_pendiente'] . '</td>     ' . "\n";
 
                   // stock exterior
-                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo <> '" . 0 . "'");
+                $product_compartir_values = tep_db_query("select * from " . 'products_compartir' . " where activo = '" . 1 . "'");
         WHILE ($product_compartir = tep_db_fetch_array($product_compartir_values)){
 
 
 
-              $stock_exteriors = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_admin.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $order->products[$i]['model'] .'&almacen=' . $product_compartir['nombre_publico'] .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
- echo '	    <td class="' . $RowStyle . '" align="left" valign="top">' . $stock_exteriors . '/'  . '</td>     ' . "\n";
+           $stock_exteriors = '<script language="javascript" src="' . $product_compartir['ruta_url'] . 'products_stock_admin.php?web=' . $product_compartir['ruta_url'] . '&stock_nivel=6&products_model_stock='. $order->products[$i]['model'] .'&almacen=' . $product_compartir['nombre_publico'] .'&status_pendiente=' . $product_compartir['status_pendiente'] . '&status_agotado=' . $product_compartir['status_agotado'] . '&status_stock=' . $product_compartir['status_stock'] . ' "> </script>';
+ echo '	    <td class="' . $RowStyle . '" align="left" valign="top">4' . $stock_exteriors . '//'  . '</td>     ' . "\n";
 
 
     }
@@ -7545,7 +7962,7 @@ if($action == "add_product")
 
 
 <!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<?php //require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br />
 </body>
@@ -7612,18 +8029,18 @@ if ($pagado = tep_db_fetch_array($query)){
 
  $query = tep_db_query("SELECT * FROM `contabilidad_general` WHERE  orders_id='" . $oID . "'");
 if ($conta_general = tep_db_fetch_array($query)){
-
+                                /*
                       $sql_status_update_array = array('orders_id' => $oID,
                                                        'total_beneficio' => $sumar_beneficio['value'],
                                                        'total_bruto' => $sumar_total['value'],
                                                        'total_costo' => $sumar_total['value']-$sumar_beneficio['value'],
                                                        'concepto' => 1);
              tep_db_perform('contabilidad_general', $sql_status_update_array, 'update', " orders_id = '" . $oID . "'");
-
+                        */
 
 
 }else{
-
+           /*
        $sql_data_array = array(//Comment out line you don't need
 							'orders_id' => $oID,
 							'concepto' => 1,
@@ -7631,7 +8048,7 @@ if ($conta_general = tep_db_fetch_array($query)){
 							'total_bruto' => $sumar_total['value'],
                             'total_costo' => $sumar_total['value']-$sumar_beneficio['value']);
      tep_db_perform('contabilidad_general', $sql_data_array);
-
+      */
 }
 }
 
@@ -7640,12 +8057,12 @@ if ($conta_general = tep_db_fetch_array($query)){
 if ($borrar = tep_db_fetch_array($query)){
 
 }else{
-
+                            /*
 			$Query = "DELETE FROM " . 'contabilidad_general' . "
 			WHERE orders_id = '" . $oID . "';";
 				tep_db_query($Query);
+                         */
 }
-
 
 require(DIR_WS_INCLUDES . 'application_bottom.php');
 

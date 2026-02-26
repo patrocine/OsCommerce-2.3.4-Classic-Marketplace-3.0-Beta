@@ -24,6 +24,7 @@
   $seleccionar_formulario = $_GET['seleccionar_formulario'];
   $filtrar_palabraclave = $_GET['filtrar_palabraclave'];
   $filtrar_status = $_GET['filtrar_status'];
+ $idborrar = $_GET['idborrar'];
 
   
            $concepto = $_POST['concepto'];
@@ -203,17 +204,7 @@ $oldday1 = date("Y-m-d", $time1);
 -->
 </style>
 
-                    <?php
 
-                                       echo  'Mercancia: ' . $sumar_total['value'];
-                                         echo ' </p>Total Beneficios: '.$sumar_beneficio['value'];
-                                          echo ' </p>Sumar Gastos: '.$sumar_gastos['value'];
-                                          echo ' </p>Sumar Retiros: '.$sumar_retiros['value'];
-                                           echo ' </p>Sumar Iversion: '.$sumar_inversion['value'];
-
-
-
-                           ?>
 
   <table border="0" width="100%" id="table1" cellspacing="0">
 	<tr>
@@ -337,6 +328,36 @@ $oldday1 = date("Y-m-d", $time1);
 
              }
                   ?>
+                  
+                  
+
+                  
+<table border="0" width="31%" id="table1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="179">Nombre</td>
+		<td width="179">Importes Pendientes</td>
+	</tr>
+	<tr>
+            <?php
+       $concep_values = tep_db_query("select * from " . 'contabilidad_general' . " group by observaciones order by observaciones desc ");
+      while ($concep_nom = tep_db_fetch_array($concep_values)){
+
+        $sumar_entregado_total_sales_raw = "select sum(importe) as value, count(*) as importe from contabilidad_general where observaciones = '" . $concep_nom['observaciones'] . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_pvp= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+
+                 ?>
+		<td width="179"><?php  echo $concep_nom['observaciones']  ?></td>
+		<td width="179"><?php  echo $sumar_pvp['value']  ?></td>
+	</tr>
+ 
+      <?php
+                  }
+        ?>
+</table>
+                  
+                  
                                                                                                                                                                 
                   <?php if ($crear_parte){ }else{ ?>
                       <?php if ($seleccionar_formulario){ }else{ ?>
@@ -377,22 +398,11 @@ $oldday1 = date("Y-m-d", $time1);
 
 
 
-               //borra los registros de los pedidos que no se encuentren en cobrado o pagado.
-  $query = tep_db_query("SELECT * FROM `orders` WHERE  orders_id='" . $affiliate_sales['orders_id'] . "' and orders_status = '" . $cobrado . "' or orders_id='" . $affiliate_sales['orders_id'] . "' and orders_status = '" . $pagado . "'");
-if ($borrar = tep_db_fetch_array($query)){
-
-}else{
-
-              if ($affiliate_sales['status'] == 0){
-
-			$Query = "DELETE FROM " . 'contabilidad_general' . "
-			WHERE orders_id = '" . $affiliate_sales['orders_id'] . "';";
-				tep_db_query($Query);
-}      }
 
 
 
-                if ($borrar){
+
+                if ($idborrar){
 
  			$Query = "DELETE FROM " . 'contabilidad_general' . "
 			WHERE id = '" .  $_GET['idborrar'] . "';";
@@ -400,11 +410,7 @@ if ($borrar = tep_db_fetch_array($query)){
                       }
 ?>
 
-            <?php
 
-
-
-                 ?>
             <td class="dataTableContent"><?php echo $affiliate_sales['id']; ?></td>
             <td class="dataTableContent"><?php echo $affiliate_sales['fecha']; ?></td>
             <td class="dataTableContent"> <a href="<?php echo $PHP_SELF . '?borrar=ok&idborrar='.$affiliate_sales['id']; ?>">Borrar</a></p></td>
@@ -455,7 +461,7 @@ if ($borrar = tep_db_fetch_array($query)){
  
 while ($insertar = tep_db_fetch_array($query)){
 
-                 echo  $insertar['orders_id'];
+
 
      $sumar_beneficio_sales_raw = "select sum(final_beneficio) as value, count(*) as final_beneficio from orders_products where orders_id = '" . $insertar['orders_id'] . "'";
     $sumar_beneficio_sales_query = tep_db_query($sumar_beneficio_sales_raw);
@@ -476,67 +482,16 @@ while ($insertar = tep_db_fetch_array($query)){
 
 
 
-    $beneficio_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $insertar['orders_id'] . "'");
-while ($beneficio = tep_db_fetch_array($beneficio_values)){
 
 
-    $pr_grupos_values = tep_db_query("select * from " . 'products_groups' . " where products_id = '" . $beneficio['products_id'] . "' and customers_group_id = '" . 2 . "'");
-    $pr_grupos = tep_db_fetch_array($pr_grupos_values);
 
-               $pvmtotal = $pr_grupos['customers_group_price'] * $beneficio['products_quantity'];
-               $pvptotal =   $beneficio['final_price'] * $beneficio['products_quantity'];
 
-             $sql_status_update_array = array('final_beneficio' =>  $pvptotal- $pvmtotal,
-                                              'final_price_total' =>  $pvptotal,
-                                                                 );
-            tep_db_perform('orders_products', $sql_status_update_array, 'update', " orders_id = '" . $insertar['orders_id'] . "' and products_id = '" . $beneficio['products_id'] . "'");
+
+
+
 
 
 }
-
-
-
-
-
-
-
-
-
-             $sql_status_update_array = array('total_beneficio' =>  $sumar_beneficio['value']);
-            tep_db_perform('orders', $sql_status_update_array, 'update', " orders_id = '" . $insertar['orders_id'] . "'");
-
-
-     $donde_esta_c_values = tep_db_query("select * from " . 'orders' . " where orders_id='" . $insertar['orders_id'] . "' and orders_status='" . $cobrado . "' or orders_id='" . $insertar['orders_id'] . "' and orders_status='" . $pagado . "'");
-   if  ($pagado= tep_db_fetch_array($donde_esta_c_values)){
-
-     $donde_esta_c_values = tep_db_query("select * from " . 'contabilidad_general' . " where orders_id='" . $insertar['orders_id'] . "'");
-   if  ($conta_general= tep_db_fetch_array($donde_esta_c_values)){
-
-                       $sql_status_update_array = array('orders_id' => $insertar['orders_id'],
-                                                       'total_beneficio' => $sumar_beneficio['value'],
-                                                       'total_bruto' => $sumar_total['value'],
-                                                       'total_costo' => $sumar_total['value']-$sumar_beneficio['value'],
-                                                       'concepto' => 1);
-             tep_db_perform('contabilidad_general', $sql_status_update_array, 'update', " orders_id = '" . $insertar['orders_id'] . "'");
-
-
-}else{
-       $sql_data_array = array(//Comment out line you don't need
-							'orders_id' => $insertar['orders_id'],
-							'concepto' => 1,
-							'total_beneficio' => $sumar_beneficio['value'],
-							'total_bruto' => $sumar_total['value'],
-                            'total_costo' => $sumar_total['value']-$sumar_beneficio['value']);
-     tep_db_perform('contabilidad_general', $sql_data_array);
-
-}
-
-}
-
-}
-
-
-
 
 
 

@@ -50,9 +50,7 @@ include(DIR_WS_CLASSES . 'order.php');
 if ($sonido){
     ?>
     
-   <head>
-<bgsound src="sonido/COCKGN-1.mid" loop="1">
-</head>
+
 
     <?php
      }
@@ -122,9 +120,6 @@ if ($sonido){
 ?>
 
 
-  <head>
-<bgsound src="sonido/gum.mp3" loop="1">
-</head>
 
 
 <?php
@@ -149,11 +144,7 @@ if ($sonido){
 ?>
 
 
-  <head>
-<bgsound src="sonido/gunshot.mp3" loop="1">
-</head>
 
-    <audio src="sonido/gunshot.mp3"></audio>
 <?php
 
 
@@ -301,8 +292,8 @@ function popupWindow(url) {
 <!-- body_eof //-->
 
 <!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<?php// require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+<?php //require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -26,6 +26,11 @@ $proveedor_id = $_GET['proveedor_id'];
   $products_extra_image_6 = $_GET['products_extra_image_6'];
  $products_extra_image_7 = $_GET['products_extra_image_7'];
   $products_extra_image_8 = $_GET['products_extra_image_8'];
+  
+  $products_groups_1 = $_GET['products_groups_1'];
+  $products_groups_2 = $_GET['products_groups_2'];
+  $products_groups_3 = $_GET['products_groups_3'];
+
 $cPath = $_GET['cPath'];
 
 
@@ -76,6 +81,17 @@ $sql_status_update_array = array('products_description' => $products_description
             tep_db_perform('products_description', $sql_status_update_array, 'update', " products_id='" . $id['products_id'] . "'");
 
 
+$sql_status_update_array = array('customers_group_price' => $products_groups_1,
+                                 'products_price' => $products_price);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id='" . $id['products_id'] . "' and customers_group_id='" . 1 . "' ");
+
+$sql_status_update_array = array('customers_group_price' => $products_groups_2,
+                                 'products_price' => $products_price);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id='" . $id['products_id'] . "' and customers_group_id='" . 2 . "' ");
+
+$sql_status_update_array = array('customers_group_price' => $products_groups_3,
+                                 'products_price' => $products_price);
+            tep_db_perform('products_groups', $sql_status_update_array, 'update', " products_id='" . $id['products_id'] . "' and customers_group_id='" . 3 . "' ");
 
 
 
@@ -117,6 +133,32 @@ $oldday1 = date("Y-m-d", $time1);
 							'products_id' => $id['products_id'],
                             'categories_id' => $cPath);
      tep_db_perform('products_to_categories', $sql_data_array);
+
+
+       $sql_data_array = array(//Comment out line you don't need
+							'products_price' => $products_price,
+                            'products_id' => $id['products_id'],
+                            'customers_group_id' => 1,
+                            'products_price' => $products_price,
+                            'customers_group_price' => $products_groups_1);
+     tep_db_perform('products_groups', $sql_data_array);
+
+       $sql_data_array = array(//Comment out line you don't need
+							'products_price' => $products_price,
+                            'products_id' => $id['products_id'],
+                            'customers_group_id' => 2,
+                            'products_price' => $products_price,
+                            'customers_group_price' => $products_groups_2);
+     tep_db_perform('products_groups', $sql_data_array);
+
+       $sql_data_array = array(//Comment out line you don't need
+							'products_price' => $products_price,
+                            'products_id' => $id['products_id'],
+                            'customers_group_id' => 3,
+                            'products_price' => $products_price,
+                            'customers_group_price' => $products_groups_3);
+     tep_db_perform('products_groups', $sql_data_array);
+
 
 
 }

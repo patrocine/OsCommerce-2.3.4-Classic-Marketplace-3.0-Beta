@@ -11,7 +11,7 @@
 */
       //  $status_liquidacion = 37;
         
-     $invoice_status = $_GET['invoice_status'];
+     $invoice_status = 74;
         
   require('includes/application_top.php');
   require('includes/conf_status.php');
@@ -462,6 +462,19 @@
           $sds_raw = "select sum(final_price) as value, count(*) as count from " . TABLE_ORDERS_PRODUCTS . " op, " . TABLE_ORDERS . " o  where o.orders_id = op.orders_id and o.orders_status = '" . $invoice_status  . "'";
   $sds_query = tep_db_query($sds_raw);
   $sds= tep_db_fetch_array($sds_query);
+  
+  
+     $sumar_entregado_total_sales_raw = "select sum(final_beneficio) as value, count(*) as final_beneficio from orders_products op, orders o where o.orders_id = op.orders_id and o.orders_status = '" . 74 . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_beneficio= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+     $sumar_entregado_total_sales_raw = "select sum(final_price_total) as value, count(*) as final_beneficio from orders_products op, orders o where o.orders_id = op.orders_id and o.orders_status = '" . 74 . "'";
+    $sumar_entregado_total_sales_query = tep_db_query($sumar_entregado_total_sales_raw);
+    $sumar_beneficio4= tep_db_fetch_array($sumar_entregado_total_sales_query);
+
+  
+  
+  
 
                       ?>
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
@@ -492,8 +505,8 @@
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="48">
                 <tr>
                   <td width="100%" height="48">
-                  <p style="margin-top: 0; margin-bottom: 0" align="left"><?php //ECHO 'Administración' ?></p>
-                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+                  <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO 'BENEFICIO / PRECIO COSTO' ?></p>
+                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;&nbsp;&nbsp;<?php echo $sumar_beneficio['value'] . ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' . ($sumar_beneficio4['value']-$sumar_beneficio['value']).'Eur</td>'; ?></p>
                   <p style="margin-top: 0; margin-bottom: 0" align="right">
                   <?php
 

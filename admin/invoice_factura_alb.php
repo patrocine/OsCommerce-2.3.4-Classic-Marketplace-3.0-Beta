@@ -32,6 +32,11 @@
   $factura_price= tep_db_fetch_array($factura_price_query);
 
 
+          $factura_recom_raw = "select sum(hedera) as value, sum(hedera) as price, count(*) as count from " . TABLE_ORDERS . " where customers_id ='" . $factura_orders['customers_id'] . "'";
+  $factura_recom_query = tep_db_query($factura_recom_raw);
+  $factura_recom= tep_db_fetch_array($factura_recom_query);
+
+
 
  $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
               $factura_shipping = tep_db_fetch_array($factura_shipping_values);
@@ -451,13 +456,16 @@
           <td width="100%" height="19">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
             <tr>
-              <td width="62%">&nbsp;</td>
+                                          <td width="62%"><p><b><font face="Calibri" size="1">En este establecimiento puedes pagar tus compras en USDT.</font></b></td><td width="38%">
+
+            
+
               <td width="38%">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="24">
                 <tr>
                   <td width="100%" height="48">
                   <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO IMPUESTOS ?></p>
-                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+                  <p style="margin-top: 0; margin-bottom: 0"></p>
                   <p style="margin-top: 0; margin-bottom: 0" align="right">
                   <?php echo $factura_tax['text'] ?></td>
                 </tr>
@@ -465,13 +473,13 @@
               </td>
             </tr>
           </table>
-          </td>
+          </td>                                                                     <?php  $r = POINTS_PER_AMOUNT_PURCHASE * 100; ?>
         </tr>
         <tr>
           <td width="100%" height="19">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
             <tr>
-              <td width="62%">&nbsp;</td>
+              <td width="62%">Reclamar en BITCOIN:  <?php ECHO number_format($factura_total['value']/100*POINTS_PER_AMOUNT_PURCHASE, 2, '.', '') ?>$</td>
               <td width="38%">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%" height="48">
                 <tr>
@@ -491,13 +499,26 @@
           <td width="100%" height="18">
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="50">
             <tr>
-              <td width="62%" height="50">&nbsp;</td>
-              <td width="38%" height="50">
+                            <td width="62%" height="50"> BITCOIN OLVIDADOS/COBRADOS: <?php echo $factura_recom['value'] ?> $BTC
+<td width="38%" height="50">
               <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Verdana; font-size: 10pt" bordercolor="#111111" width="100%">
                 <tr>
                   <td width="100%">
                   <p style="margin-top: 0; margin-bottom: 0" align="left"><?php ECHO TEXT_TOTAL_FACTURA_M ?></p>
-                  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+                  <p style="margin-top: 0; margin-bottom: 0">BILLETERA: <?php
+
+
+
+                           if ($admin_lof['customers_billetera']){
+                          $w = $admin_lof['customers_billetera'];
+                       }else{
+                               $w = 'Configure su billetera';
+                                   }
+
+                                         echo $w;
+
+
+                        ?></p>
                   <p style="margin-top: 0; margin-bottom: 0" align="right">
                   <?php echo $factura_total['text'] ?></td>
                 </tr>

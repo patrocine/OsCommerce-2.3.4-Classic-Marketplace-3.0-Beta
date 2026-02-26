@@ -167,28 +167,7 @@ ECHO   $ean = $_POST['ean'];
 
 
 
- $factura_shipping_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_shipping' . "'");
-              $factura_shipping = tep_db_fetch_array($factura_shipping_values);
- $factura_tax_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_tax' . "'");
-              $factura_tax = tep_db_fetch_array($factura_tax_values);
 
- $factura_total_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_total' . "'");
-              $factura_total = tep_db_fetch_array($factura_total_values);
-
-
- $factura_subtotal_values = tep_db_query("select * from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $factura_orders['orders_id'] . "' and class =  '" . 'ot_subtotal' . "'");
-              $factura_subtotal = tep_db_fetch_array($factura_subtotal_values);
-
-     $admin_lof_values = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_id = '" . 3 . "'");
- $admin_lof = tep_db_fetch_array($admin_lof_values);
- 
-     $addbook_values = tep_db_query("select * from " . 'address_book' . " where customers_id = '" . 3 . "'");
- $addbook = tep_db_fetch_array($addbook_values);
-
-     $zone_values = tep_db_query("select * from " . 'zones' . " where zone_id = '" . $addbook['entry_zone_id'] . "'");
- $zone = tep_db_fetch_array($zone_values);
- 
- 
  
 
     ob_start();
@@ -277,10 +256,10 @@ ECHO   $ean = $_POST['ean'];
 
             <tr>
 
-              <td width="12%" height="305" valign="top" style="font-family: Verdana; font-size: 6pt">
+              <td width="40%" height="305" valign="top" style="font-family: Verdana; font-size: 6pt">
 
                              <?php
-         $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+         $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC LIMIT 100");
          while      ($factura_products = tep_db_fetch_array($factura_products_values)) {
 
 
@@ -307,11 +286,21 @@ ECHO   $ean = $_POST['ean'];
                 }
                     ?>
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
-             
+
 
                    <?php
+                   
+               $dondeesta_orders_values = tep_db_query("select * from " . 'products_donde_esta' . " where products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $log_id . "'");
+               $dondeesta = tep_db_fetch_array($dondeesta_orders_values);
 
-                        echo $factura_products['products_model'];
+               $stock_orders_values = tep_db_query("select * from " . 'products_stock' . " where products_id = '" . $factura_products['products_id'] . "'");
+               $stock = tep_db_fetch_array($stock_orders_values);
+
+                   
+
+
+
+                        echo $factura_products['products_quantity'] . ' | ' . $factura_products['products_quantity_control'] . ' | ' .  $stock['products_stock_real'] . ' | ' .$factura_products['products_model'] . ' | '  . $dondeesta['donde_esta'];
 
 
 
@@ -334,50 +323,17 @@ ECHO   $ean = $_POST['ean'];
               <td width="39%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
                  <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
+     //     $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+       ?>
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                
-                
-                <?php
-  $qty2_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $_GET['oID'] . "' and products_id ='" . $factura_products['products_id'] . "'");
-         $qty2 = tep_db_fetch_array($qty2_values);
-           if ($qty2['products_quantity_control'] == $qty2['products_quantity']){
-                $color = '#CCFF66';
-                        }else if ($qty2['products_quantity_control'] == 0){
-                $color = '';
-                        }else if ($qty2['products_quantity_control'] <= $qty2['products_quantity']){
-                      $color = '#00FFFF';
-                    }else{
-                    $color = '';
-                }
-                    ?>
+
+
+
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
  
  
-             <?php
 
-           $donde_esta_c_values = tep_db_query("select * from " . 'products_donde_esta' . " where  products_id = '" . $factura_products['products_id'] . "' and login_id = '" . $log_id . "'");
- $donde_esta_c= tep_db_fetch_array($donde_esta_c_values);
-
-
-              echo $donde_esta_c['donde_esta'];
-
-                  if ($featured_products_array[$i]['shortdescription'] != '') {
-
-  } else {
-   $bah = explode(" ", $factura_products['products_name']);
-   for($desc=0 ; $desc<4 ; $desc++)
-      {
-   echo  " $bah[$desc]" ;
-      }
- //     echo '...'.$donde_esta_c['donde_esta'];
-  }
-
-
-
- ?>
 
 
 
@@ -388,7 +344,7 @@ ECHO   $ean = $_POST['ean'];
 
               </table>
 
-               <?php   } ?>
+
 
               </td>
 
@@ -397,35 +353,19 @@ ECHO   $ean = $_POST['ean'];
 
 
                                 <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
+        //  $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+     ?>
 
 
 
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                <?php
-  $qty2_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $_GET['oID'] . "' and products_id ='" . $factura_products['products_id'] . "'");
-         $qty2 = tep_db_fetch_array($qty2_values);
-           if ($qty2['products_quantity_control'] == $qty2['products_quantity']){
-                $color = '#CCFF66';
-                        }else if ($qty2['products_quantity_control'] == 0){
-                $color = '';
-                        }else if ($qty2['products_quantity_control'] <= $qty2['products_quantity']){
-                      $color = '#00FFFF';
-                    }else{
-                    $color = '';
-                }
-                    ?>
+
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
 
 
 
-              <?php
-                             $precio =    $factura_products['final_price'];
-
-
-              echo $currencies->format($precio);?>  </p>
+ </p>
 
 
 
@@ -433,7 +373,7 @@ ECHO   $ean = $_POST['ean'];
                 </tr>
               </table>
 
-                     <?php   } ?>
+
 
 
 
@@ -448,31 +388,19 @@ ECHO   $ean = $_POST['ean'];
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
                             <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
+    //     $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+      //   while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
 
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                <?php
-  $qty2_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $_GET['oID'] . "' and products_id ='" . $factura_products['products_id'] . "'");
-         $qty2 = tep_db_fetch_array($qty2_values);
-           if ($qty2['products_quantity_control'] == $qty2['products_quantity']){
-                $color = '#CCFF66';
-                        }else if ($qty2['products_quantity_control'] == 0){
-                $color = '';
-                        }else if ($qty2['products_quantity_control'] <= $qty2['products_quantity']){
-                      $color = '#00FFFF';
-                    }else{
-                    $color = '';
-                }
-                    ?>
+
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
 
 
 
 
-                  <?php echo $factura_products['products_quantity'] ?>
+
 
 
 
@@ -488,62 +416,30 @@ ECHO   $ean = $_POST['ean'];
                   </td>
                 </tr>
               </table>
-               <?php   } ?>
+
               </td>
 
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
 
         <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
+       //      $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
+       ?>
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                <?php
-  $qty2_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $_GET['oID'] . "' and products_id ='" . $factura_products['products_id'] . "'");
-         $qty2 = tep_db_fetch_array($qty2_values);
-           if ($qty2['products_quantity_control'] == $qty2['products_quantity']){
-                $color = '#CCFF66';
-                        }else if ($qty2['products_quantity_control'] == 0){
-                $color = '';
-                        }else if ($qty2['products_quantity_control'] <= $qty2['products_quantity']){
-                      $color = '#00FFFF';
-                    }else{
-                    $color = '';
-                }
-                    ?>
+
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
-<?php  echo $factura_products['products_quantity_control']; ?></td>
                 </tr>
               </table>
-                     <?php   } ?>
+
               </td>
 
               <td width="7%" height="305" valign="top" style="font-family: Verdana; font-size: 7pt">
-                           <?php
-          $factura_products_values = tep_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $factura_orders['orders_id'] . "' order by donde_esta ASC");
-         while      ($factura_products = tep_db_fetch_array($factura_products_values)) {  ?>
 
               <table border="-1" cellpadding="-1" cellspacing="-1" style="border-collapse: collapse; font-family: Verdana; font-size: 7pt" bordercolor="#111111" width="100%" height="13">
                 <tr>
-                 <?php
-  $qty2_values = tep_db_query("select * from " . 'orders_products' . " where orders_id = '" . $_GET['oID'] . "' and products_id ='" . $factura_products['products_id'] . "'");
-         $qty2 = tep_db_fetch_array($qty2_values);
-           if ($qty2['products_quantity_control'] == $qty2['products_quantity']){
-                $color = '#CCFF66';
-                        }else if ($qty2['products_quantity_control'] == 0){
-                $color = '';
-                        }else if ($qty2['products_quantity_control'] <= $qty2['products_quantity']){
-                      $color = '#00FFFF';
-                    }else{
-                    $color = '';
-                }
-                    ?>
+
  <td width="100%" height="13" bgcolor="<?php echo $color; ?>">&nbsp;
 
-
-
-
-                  <?php echo $currencies->format(($factura_products['final_price']*$factura_products['products_quantity']) * OT_TAX_IVA / 100 + ($factura_products['final_price']*$factura_products['products_quantity']) );?>
 
 
 
@@ -558,7 +454,7 @@ ECHO   $ean = $_POST['ean'];
 
 
               </table>
-              <?php   } ?>
+
                               </td>
             </tr>
 

@@ -28,7 +28,11 @@
         $customers_email_address = tep_db_prepare_input($HTTP_POST_VARS['customers_email_address']);
         $customers_telephone = tep_db_prepare_input($HTTP_POST_VARS['customers_telephone']);
         $customers_observaciones = tep_db_prepare_input($HTTP_POST_VARS['customers_observaciones']);
+        $customers_billetera = tep_db_prepare_input($HTTP_POST_VARS['customers_billetera']);
         $customers_porcentage = tep_db_prepare_input($HTTP_POST_VARS['customers_porcentage']);
+        $customers_porcentage_g1 = tep_db_prepare_input($HTTP_POST_VARS['customers_porcentage_g1']);
+        $customers_porcentage_g2 = tep_db_prepare_input($HTTP_POST_VARS['customers_porcentage_g2']);
+        $customers_porcentage_g3 = tep_db_prepare_input($HTTP_POST_VARS['customers_porcentage_g3']);
         $customers_fax = tep_db_prepare_input($HTTP_POST_VARS['customers_fax']);
         $customers_newsletter = tep_db_prepare_input($HTTP_POST_VARS['customers_newsletter']);
 
@@ -194,7 +198,11 @@ if ($assigned == 0) {
                                 'customers_email_address' => $customers_email_address,
                                 'customers_telephone' => $customers_telephone,
                                 'customers_observaciones' => $customers_observaciones,
+                                'customers_billetera' => $customers_billetera,
                                 'customers_porcentage' => $customers_porcentage,
+                                'customers_porcentage_g1' => $customers_porcentage_g1,
+                                'customers_porcentage_g2' => $customers_porcentage_g2,
+                                'customers_porcentage_g3' => $customers_porcentage_g3,
                                 'comerciante_permiso' => $comerciante_permiso,
                                 'customers_fax' => $customers_fax,
                                 'customers_newsletter' => $customers_newsletter,
@@ -280,7 +288,7 @@ while ($group_ids = tep_db_fetch_array($multiple_groups_query)) {
         tep_redirect(tep_href_link(FILENAME_CUSTOMERS, tep_get_all_get_params(array('cID', 'action'))));
         break;
       default:
-        $customers_query = tep_db_query("select c.customers_id, c.customers_dni, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_observaciones, c.customers_porcentage, c.comerciante_permiso, c.customers_newsletter, c.customers_group_name, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . $HTTP_GET_VARS['cID'] . "'");
+        $customers_query = tep_db_query("select c.customers_id, c.customers_dni, c.customers_gender, c.customers_firstname, c.customers_lastname, c.customers_dob, c.customers_email_address, a.entry_company, a.entry_street_address, a.entry_suburb, a.entry_postcode, a.entry_city, a.entry_state, a.entry_zone_id, a.entry_country_id, c.customers_telephone, c.customers_fax, c.customers_observaciones, c.customers_billetera, c.customers_porcentage_g1, c.customers_porcentage_g2, c.customers_porcentage_g3, c.customers_porcentage, c.comerciante_permiso, c.customers_newsletter, c.customers_group_name, c.customers_default_address_id from " . TABLE_CUSTOMERS . " c left join " . TABLE_ADDRESS_BOOK . " a on c.customers_default_address_id = a.address_book_id where a.customers_id = c.customers_id and c.customers_id = '" . $HTTP_GET_VARS['cID'] . "'");
         $customers = tep_db_fetch_array($customers_query);
         $cInfo = new objectInfo($customers);
 
@@ -742,7 +750,19 @@ function check_form() {
 ?></td>
           </tr>
 
-
+</td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'Billetera'; ?></td>
+            <td class="main">
+<?php
+  if ($processed == true) {
+    echo $cInfo->customers_billetera . tep_draw_hidden_field('customers_billetera');
+  } else {
+    echo tep_draw_input_field('customers_billetera', $cInfo->customers_billetera, 'maxlength="100"');
+  }
+?></td>
+          </tr>
 </td>
           </tr>
           <tr>
@@ -756,7 +776,56 @@ function check_form() {
   }
 ?></td>
           </tr>
-          
+
+
+
+
+</td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'Porcentaje Descuento g1'; ?></td>
+            <td class="main">
+<?php
+  if ($processed == true) {
+    echo $cInfo->customers_porcentage_g1 . tep_draw_hidden_field('customers_porcentage_g1');
+  } else {
+    echo tep_draw_input_field('customers_porcentage_g1', $cInfo->customers_porcentage_g1, 'maxlength="5"');
+  }
+?></td>
+          </tr>
+
+</td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'Porcentaje Descuento g2'; ?></td>
+            <td class="main">
+<?php
+  if ($processed == true) {
+    echo $cInfo->customers_porcentage_g2 . tep_draw_hidden_field('customers_porcentage_g2');
+  } else {
+    echo tep_draw_input_field('customers_porcentage_g2', $cInfo->customers_porcentage_g2, 'maxlength="5"');
+  }
+?></td>
+          </tr>
+
+</td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo 'Porcentaje Descuento g3'; ?></td>
+            <td class="main">
+<?php
+  if ($processed == true) {
+    echo $cInfo->customers_porcentage_g3 . tep_draw_hidden_field('customers_porcentage_g3');
+  } else {
+    echo tep_draw_input_field('customers_porcentage_g3', $cInfo->customers_porcentage_g3, 'maxlength="5"');
+  }
+?></td>
+          </tr>
+
+
+
+
+                        
 </td>
           </tr>
           <tr>

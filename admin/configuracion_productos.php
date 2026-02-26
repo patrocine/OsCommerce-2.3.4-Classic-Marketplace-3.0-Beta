@@ -310,7 +310,45 @@ $borrar_spacio_image = $_GET['borrar_spacio_image'];
    $admin_c = tep_db_fetch_array($admin_values);
 
 
+
+
+
+
+
+          if ($hedera){
+
+         $admin_values = tep_db_query("select * from " . 'orders' . " where orders_status = '" . 15 . "'");
+    if  ($ca_c = tep_db_fetch_array($admin_values)){
+
+
+
+         $sql_status_update_array = array('hedera_autorice' => '1');
+            tep_db_perform('orders', $sql_status_update_array, 'update', " orders_status = '" . 15  . "' and hedera_autorice = '2'");
+
+
+            }
+             }
+
+
+
+       //  $sql_status_update_array = array('customers_billetera' => '0.0.4312791');
+    Ç//        tep_db_perform('customers', $sql_status_update_array, 'update', " customers_id <> '" . 1  . "'");
+
+
+
                      ?>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

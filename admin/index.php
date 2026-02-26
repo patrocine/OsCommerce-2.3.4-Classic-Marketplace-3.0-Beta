@@ -33,7 +33,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="2" height="40">
           <tr>
-            <td class="pageHeading"><?php echo STORE_NAME; ?></td>
+            <td class="pageHeading"><?php echo $admin['username']; ?></td>
 
 <?php
   if (sizeof($languages_array) > 1) {
@@ -154,7 +154,8 @@ startTime=new Date();
                                                     <?php echo ''; ?>
         <script language="javascript" src="actualizar_tabla_fabricantes.php"> </script></td>
         
-        
+
+
 <?php
   require(DIR_WS_INCLUDES . 'template_bottom.php');
   require(DIR_WS_INCLUDES . 'application_bottom.php');
