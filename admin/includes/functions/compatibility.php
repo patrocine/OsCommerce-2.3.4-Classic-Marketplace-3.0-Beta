@@ -18,15 +18,13 @@
   function do_magic_quotes_gpc(&$ar) {
     if (!is_array($ar)) return false;
 
-    reset($ar);
-    while (list($key, $value) = each($ar)) {
-      if (is_array($ar[$key])) {
+    foreach ($ar as $key => $value) {
+      if (is_array($value)) {
         do_magic_quotes_gpc($ar[$key]);
       } else {
         $ar[$key] = addslashes($value);
       }
     }
-    reset($ar);
   }
 
   if (PHP_VERSION >= 4.1) {
@@ -43,7 +41,7 @@
   }
 
 // handle magic_quotes_gpc turned off.
-  if (!get_magic_quotes_gpc()) {
+  if (!function_exists('get_magic_quotes_gpc') || !get_magic_quotes_gpc()) {
     do_magic_quotes_gpc($HTTP_GET_VARS);
     do_magic_quotes_gpc($HTTP_POST_VARS);
     do_magic_quotes_gpc($HTTP_COOKIE_VARS);
@@ -58,7 +56,7 @@ if (PHP_VERSION >= '5.2') {
     function checkdnsrr($host, $type) {
       if(tep_not_null($host) && tep_not_null($type)) {
         @exec("nslookup -type=" . escapeshellarg($type) . " " . escapeshellarg($host), $output);
-        while(list($k, $line) = each($output)) {
+        foreach ($output as $line) {
           if(preg_match("/^$host/i", $line)) {
             return true;
           }
